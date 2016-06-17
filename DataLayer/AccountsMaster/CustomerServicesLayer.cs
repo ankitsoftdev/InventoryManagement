@@ -23,7 +23,7 @@ namespace ServiceLayer.AccountMaster
       {
           objCustomerDbLayer = new CustomerDbLayer(ConnectionString);
           objCityDbLayer = new CityDbLayer(ConnectionString);
-          //objCustomerDbLayer = new CustomerDbLayer("data source=52.24.116.86;initial catalog=INVENTORY_DB;persist security info=True;user id=sa;password=general@1234;MultipleActiveResultSets=True;App=EntityFramework");
+        
       }
       public List<ViewModel.Ledger.Supplier> GetCustomer(string Tagname = "")
       {

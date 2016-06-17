@@ -21,26 +21,21 @@ namespace ServiceLayer.InventoryMaster
         }
         public List<ViewModel.Common.List_Common> List()
         {
-            var lst = _db.List().ToList().Select(x => new ViewModel.Common.List_Common { Id = x.Id, Name = x.Name, Alias_Name = x.Alias_Name, Under_Name = x.Under_Name, Remarks = x.Remarks }).ToList();
+            var lst = _db.List().Select(x => new ViewModel.Common.List_Common { Id = x.Id, Name = x.Name, Alias_Name = x.Alias_Name, Under_Name = x.Under_Name, Remarks = x.Remarks }).ToList();
             return lst;
         }
 
         public bool Create(StockGroup modlGroup)
         {
-
-
             return _db.Create(modlGroup);
         }
         public bool Update(StockGroup modlGroup)
         {
 
-
             return _db.Update(modlGroup);
         }
         public StockGroup Find(long Id)
         {
-
-
             return _db.Find(Id);
         }
         public List<ViewModel.Common.DDLBind> DDLlBind()
