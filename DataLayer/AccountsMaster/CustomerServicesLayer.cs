@@ -67,6 +67,7 @@ namespace ServiceLayer.AccountMaster
           return objCustomerDbLayer.Delete(Id, Tagname); 
           
       }
+      [Obsolete("Unable to Use in This Project",true)]
       public List<ViewModel.Common.DDLBind> DDLBind(string Tag, string searchText)
       {
           return objCustomerDbLayer.DDLBind(Tag, searchText);

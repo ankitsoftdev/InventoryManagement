@@ -40,7 +40,7 @@ namespace InventoryManagement.Areas.Transactions.Controllers
             _db = new PaymentServiceLayer(_dashboardData.DbConnectionString);
              PaymentInfo modelPayment;
              ViewBag.Tag = Tag;
-             var lst = new ServiceLayer.AccountMaster.CustomerServicesLayer(_dashboardData.DbConnectionString).DDLBind(Tag, "").ToList();
+             var lst = new ServiceLayer.Common.CommonServiceLayer(_dashboardData.DbConnectionString).DDLBind(Tag, "").ToList();
             if (Id != 0)
             {
                 modelPayment = _db.Find(Id);

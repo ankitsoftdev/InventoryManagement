@@ -32,7 +32,8 @@ namespace InventoryManagement.Areas.Transactions.Controllers
             _db = new ReceiptServiceLayer(_dashboardData.DbConnectionString);
            ReceiptInfo modelReceipt;
             ViewBag.Tag = Tag;
-            var lst = new ServiceLayer.AccountMaster.CustomerServicesLayer(_dashboardData.DbConnectionString).DDLBind(Tag, "").ToList();
+
+            var lst = new ServiceLayer.Common.CommonServiceLayer(_dashboardData.DbConnectionString).DDLBind(Tag, "").ToList();
             if (Id != 0)
             {
                 modelReceipt = _db.Find(Id);

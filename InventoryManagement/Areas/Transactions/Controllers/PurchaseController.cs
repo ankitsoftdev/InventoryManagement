@@ -137,9 +137,10 @@ namespace InventoryManagement.Areas.Transactions.Controllers
         }
         public ActionResult GetSupplier(string searchText = "")
         {
+            var _dashboardData = ViewBag.LoginInfo as HDMEntity.DashBoard;
             _db = new PurchaseServiceLayer();
 
-            var data = new ServiceLayer.AccountMaster.CustomerServicesLayer().DDLBind("SUPPLIER", searchText);
+            var data = new ServiceLayer.Common.CommonServiceLayer(_dashboardData.DbConnectionString).DDLBind("SUPPLIER", searchText);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

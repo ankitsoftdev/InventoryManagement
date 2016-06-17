@@ -130,9 +130,10 @@ namespace InventoryManagement.Areas.Transactions.Controllers
         }
         public ActionResult GetCustomer(string searchText = "")
         {
+            var _dashboardData = ViewBag.LoginInfo as HDMEntity.DashBoard;
             _db = new SalesServiceLayer();
 
-            var data = new ServiceLayer.AccountMaster.CustomerServicesLayer().DDLBind("CUSTOMER", searchText);
+            var data = new ServiceLayer.Common.CommonServiceLayer(_dashboardData.DbConnectionString).DDLBind("CUSTOMER", searchText);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

@@ -38,7 +38,7 @@ namespace InventoryManagement.Areas.InventoryMaster.Controllers
             var _dashboardData = ViewBag.LoginInfo as HDMEntity.DashBoard;
             _db = new StockGroupServicelayer(_dashboardData.DbConnectionString);
             //ViewBag.House = new SelectList(house.List(), "Id", "House_Name");
-            ViewBag.Grp = new SelectList(new ServiceLayer.AccountMaster.CustomerServicesLayer(_dashboardData.DbConnectionString).DDLBind("STOCKGROUP", ""), "Id", "Name");
+            ViewBag.Grp = new SelectList(new ServiceLayer.Common.CommonServiceLayer(_dashboardData.DbConnectionString).DDLBind("STOCKGROUP", "").ToList(), "Id", "Name");
             ViewModel.Category.StockGroup modelgroup;
             if (Id != 0)
             {
@@ -56,7 +56,7 @@ namespace InventoryManagement.Areas.InventoryMaster.Controllers
             var _dashboardData = ViewBag.LoginInfo as HDMEntity.DashBoard;
             _db = new StockGroupServicelayer(_dashboardData.DbConnectionString);
 
-            var data = new ServiceLayer.AccountMaster.CustomerServicesLayer().DDLBind("STOCKGROUP", searchText);
+            var data = new ServiceLayer.Common.CommonServiceLayer(_dashboardData.DbConnectionString).DDLBind("STOCKGROUP", searchText);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -80,7 +80,7 @@ namespace InventoryManagement.Areas.InventoryMaster.Controllers
             }
             else
             {
-                ViewBag.Grp = new SelectList(new ServiceLayer.AccountMaster.CustomerServicesLayer().DDLBind("STOCKGROUP", ""), "Id", "Name");
+                ViewBag.Grp = new SelectList(new ServiceLayer.Common.CommonServiceLayer(_dashboardData.DbConnectionString).DDLBind("STOCKGROUP", ""), "Id", "Name");
                 return View(modelgroup);
             }
            

@@ -126,78 +126,60 @@ namespace DataLayer.AccountMaster
      
        public List<ViewModel.Ledger.Supplier> GetCustomer(string Tagname = "")
        {
-           List<ViewModel.Ledger.Supplier> lst = new List<ViewModel.Ledger.Supplier>();
 
            Tagname = !String.IsNullOrWhiteSpace(Tagname) && Tagname == "Supplier" ? "Sundry Creditors" : "Sundry Debtors";
-              var l=_db.Sp_Supplierinfo(Tagname,1).ToList();
+       return _db.Sp_Supplierinfo(Tagname, 1).Select(x => new ViewModel.Ledger.Supplier
+           {
+               Id = x.Id,
+               Name = x.Name,
+               Image_Path = x.Image_Url,
+               Code = x.Code,
+               Alias_Name = x.Alias_Name,
+               Group_Id = x.Group_Id,
+               GroupName = x.GroupName,
+               Opening_Balance = Convert.ToDecimal(x.Opeaning_Bal),
+               MaintainRecord_BillbyBill = x.Mnt_Bill_By_Bill,
+               CreditPeriodTime = Convert.ToInt32(x.Credit_Period_Time),
+               Address = new ViewModel.Common.Address
+               {
+                   address = x.Address,
+                   CountryName = x.CountryName,
+                   StateName = x.StateName,
+                   CityName = x.CityName,
+                   Pin_Code = x.Pin_Code,
+                   ContactInfo = new ViewModel.Common.Contact
+                   {
+                       Mobile = x.Contact_No,
+                       Email_Id = x.Email_Id,
+                   }
+
+               },
+               Account_Detail = new ViewModel.Common.PersonAccountDetails
+               {
+                   PANNumber = x.Pan_No,
+               }
+
+
+           }).ToList();
                       
-          
-               
-               l.ForEach(x=>lst.Add(new ViewModel.Ledger.Supplier
-                    {
-                        Id = x.Id,
-                        Name = x.Name,
-                        Image_Path = x.Image_Url,
-                        Code = x.Code,
-                        Alias_Name = x.Alias_Name,
-                        Group_Id = x.Group_Id,
-                        GroupName = x.GroupName,
-                        Opening_Balance = Convert.ToDecimal(x.Opeaning_Bal),
-                        MaintainRecord_BillbyBill = x.Mnt_Bill_By_Bill,
-                        CreditPeriodTime = Convert.ToInt32(x.Credit_Period_Time),
-                        Address = new ViewModel.Common.Address
-                        {
-                            address = x.Address,
-                            CountryName = x.CountryName,
-                            StateName = x.StateName,
-                            CityName = x.CityName,
-                            Pin_Code = x.Pin_Code,
-                            ContactInfo = new ViewModel.Common.Contact
-                            {
-                                Mobile = x.Contact_No,
-                                Email_Id = x.Email_Id,
-                            }
-
-                        },
-                        Account_Detail = new ViewModel.Common.PersonAccountDetails
-                        {
-                            PANNumber = x.Pan_No,
-                        }
-
-                    
-                }));
-          
-           return lst;
+      
        }
 
 
        public IEnumerable<ViewModel.Common.DDLBind> DDlGroupLList(string Tag="")
-       {
-           List<ViewModel.Common.DDLBind> lst = new List<DDLBind>();
-
-           var list = String.Compare(Tag, "Supplier", true) == 0 ? _db.Ledger_Group.Where(x => x.Name.ToUpper() == "Sundry Creditors").ToList() : _db.Ledger_Group.Where(x => x.Name.ToUpper() == "Sundry Debtors").ToList();
-           list.ForEach( x => lst.Add(new ViewModel.Common.DDLBind
-           {
-               Id = x.Id,
-               Name = x.Name
-           }));
-           return lst;
+       {  
+           String TagValue = String.Compare(Tag, "Supplier", true) == 0 ? "Sundry Creditors" : "Sundry Debtors";
+           return _db.Ledger_Group
+               .Where(x => x.Name.ToUpper() == TagValue).
+               Select(x => new ViewModel.Common.DDLBind
+                  {
+                      Id = x.Id,
+                      Name = x.Name
+                  });
+          
        }
 
-       //public IEnumerable<ViewModel.Common.DDLBind> DDlGroupLList()
-       //{
-       //    List<ViewModel.Common.DDLBind> ddllist = new List<ViewModel.Common.DDLBind>();
-       //    objCustomerDbLayer.GetLedgerGroup().ToList().ForEach(x =>
-       //    {
-       //        ddllist.Add(new ViewModel.Common.DDLBind
-       //        {
-       //            Id = x.Id,
-       //            Name = x.Name
-       //        });
-       //    });
-
-       //    return ddllist;
-       //}
+      
        public Customer Find(long CusId=0)
        {
            return _db.Customers.Find(CusId);
@@ -222,9 +204,12 @@ namespace DataLayer.AccountMaster
            }
            return Status;
        }
-
+       [Obsolete("This Function is unable to use in this Project. Use Common Layer DDl Find Function For This Place  ",true)]
        public List<ViewModel.Common.DDLBind> DDLBind(string Tag, string searchText)
        {
+
+
+
            List<ViewModel.Common.DDLBind> list = new List<ViewModel.Common.DDLBind>();
            if (Tag.Trim().ToUpper() == "SUPPLIER")
            {
@@ -245,6 +230,11 @@ namespace DataLayer.AccountMaster
                // return _db.Stock_Group.Select(x => new DDLBind { Id = x.Id, Name = x.Name }).ToList();
            }
            return list;
+
+
+
+
+
        }
 
        public ViewModel.Ledger.Supplier FindCUSTOMER_SUPPLIER(long Id = 0, string Tagname = "")
@@ -284,55 +274,11 @@ namespace DataLayer.AccountMaster
            return objSupplier;
        }
 
-       //private static void BindCustomer_SupplierData(ref ViewModel.Ledger.Supplier objSupplier, dynamic FindData)
-       //{
-
-       //    objSupplier.Id = FindData.Id;
-       //    objSupplier.Name = FindData.Name;
-       //    objSupplier.Code = FindData.Code;
-       //    objSupplier.Image_Path = FindData.Image_Url;
-       //    objSupplier.Alias_Name = FindData.Alias_Name;
-       //    objSupplier.Group_Id = FindData.Group_Id;
-       //    objSupplier.Opening_Balance = Convert.ToDecimal(FindData.Opeaning_Bal);
-       //    objSupplier.MaintainRecord_BillbyBill = FindData.Mnt_Bill_By_Bill;
-       //    objSupplier.CreditPeriodTime = Convert.ToInt32(FindData.Credit_Period_Time);
-       //    objSupplier.Address = new Address
-       //    {
-       //        address = FindData.Address,
-       //        Country_Id = FindData.Country_Id,
-       //        State_Id = FindData.State_Id,
-       //        City_Id = FindData.City_Id,
-       //        Pin_Code = FindData.Pin_Code,
-       //        ContactInfo = new Contact
-       //        {
-       //            Mobile = FindData.Contact_No,
-       //            Email_Id = FindData.Email_Id
-       //        }
-
-       //    };
-       //    objSupplier.Account_Detail = new PersonAccountDetails
-       //    {
-       //        PANNumber = FindData.Pan_No
-       //    };
-       //}
+     
        public String GEN_AccountsCode(string Tag)
        {
            string Challan_No = "";
-           // Here Find That Actually What type of Transactional User
-           //ViewModel.Transactions.AccountUserType _aUserType = !string.IsNullOrWhiteSpace(Tag) && Tag.Trim().ToUpper() == "SUPPLIER" ? 
-           //    ViewModel.Transactions.AccountUserType.Supplier : 
-           //    ViewModel.Transactions.AccountUserType.Customer;
-
-           //// Get the Use Counts
-           //int cnt = ViewModel.Transactions.AccountUserType.Supplier==_aUserType ? 
-           //    _db.Suppliers.AsNoTracking().Where(x => x.Company_Id == 1).Count() : 
-           //    _db.Customers.AsNoTracking().Where(x => x.Company_Id == 1).Count();
-          
-           //if (cnt != 0)
-           //    Challan_No = ViewModel.Transactions.AccountUserType.Supplier==_aUserType   ? 
-           //        _db.Suppliers.Where(x => x.Company_Id == 1).OrderByDescending(x=>x.Id).FirstOrDefault().Code :
-           //        _db.Customers.Where(x => x.Company_Id == 1).OrderByDescending(x => x.Id).FirstOrDefault().Code;
-
+      
            int cnt = _db.Ledger_Master.AsNoTracking().Where(x => x.Company_Id == 1).Count();
            if (cnt != 0)
                Challan_No = _db.Ledger_Master.Where(x => x.Company_Id == 1).OrderByDescending(x => x.Id).FirstOrDefault().Code;
