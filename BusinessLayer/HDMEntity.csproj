@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{449D409A-E245-47C0-8755-BC037FAE2EAF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataLayer</RootNamespace>
+    <AssemblyName>DataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountsMaster\CustomerDbLayer.cs" />
+    <Compile Include="Advance_Info.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Billing_Info.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Branch_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="City_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\CommonDbLayer.cs" />
+    <Compile Include="Company_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contact_Info.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country_State.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DashBoard.cs" />
+    <Compile Include="Dashboard\DashboardDbLayer.cs" />
+    <Compile Include="DatabaseConfiguration\DbConfiguration.cs" />
+    <Compile Include="Delegates\RepositoryDelegate.cs" />
+    <Compile Include="Delivery_Note.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Delivery_Note_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Emp_Common_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnventoryManager.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnventoryManager.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnventoryManager.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EnventoryManager.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnventoryManager.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="FinancialYear.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetdatafromPurchaseTra_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetIItemlist_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPurchaseTra_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetUnitNameAndAmount_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GoDown_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GoDown_Region.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryMaster\StockCategoryDbLayer.cs" />
+    <Compile Include="InventoryMaster\StockDbLayer.cs" />
+    <Compile Include="InventoryMaster\StockGroupDbLayer.cs" />
+    <Compile Include="LedgerGroupTemp1.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ledger_Group.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ledger_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Login_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Masters\CityDbLayer.cs" />
+    <Compile Include="Masters\FinancialYearDbLayer.cs" />
+    <Compile Include="Masters\GoDownDbLayer.cs" />
+    <Compile Include="Masters\LedgerGroupDbLayer.cs" />
+    <Compile Include="Masters\LedgerMasterDbLayer.cs" />
+    <Compile Include="Masters\RegionDbLayer.cs" />
+    <Compile Include="Masters\TaxDbLayer.cs" />
+    <Compile Include="Masters\UnitsDblayer.cs" />
+    <Compile Include="Payment_Info.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Payment_Info_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pr_CommonList_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_CreateDashBoardData_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_DashOrderQuats_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_DeliveryNoteList_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_Delivery_Note_Tra_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_GetPendingBal_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PR_GetPendingBillList_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_PurchaseList_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_Purchase_Order_List_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_QuationList_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_ReceiptNoteList_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_Receipt_Note_Tra_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_RegionList_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_SalesList_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_Sales_Order_List_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pr_StockMasterList_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Master_TaxDetails.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Master_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Order.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Order_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Return.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchase_Return_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Quation_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Quation_Master_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Receipt_Info.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Receipt_Info_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Receipt_Note.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Receipt_Note_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sales_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sales_Master_TaxDetails.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sales_Master_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sales_Order.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sales_Order_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sales_Return.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sales_Return_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_Customerinfo_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_DashSalePurc_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ManageStock_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sp_PurchaseData_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_Purchase_Order_List_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sp_StockItemInfo_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sp_Supplierinfo_Result.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Stock_Category.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Stock_Group.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Stock_Item.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Stock_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tagging_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tagging_Master_Assign.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tagging_Master_Assign_Tra.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tax_Deduction_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tax_Master.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transactions\DeliveryNoteDbLayer.cs" />
+    <Compile Include="Transactions\PaymentDbLayer.cs" />
+    <Compile Include="Transactions\PurchaseDbLayer.cs" />
+    <Compile Include="Transactions\PurchaseOrderDbLayer.cs" />
+    <Compile Include="Transactions\PurchaseReturnDbLayer.cs" />
+    <Compile Include="Transactions\QuationDbLayer.cs" />
+    <Compile Include="Transactions\ReceiptDbLayer.cs" />
+    <Compile Include="Transactions\ReceiptNoteDbLayer.cs" />
+    <Compile Include="Transactions\SalesDbLayer.cs" />
+    <Compile Include="Transactions\SalesOrderDbLayer.cs" />
+    <Compile Include="Transactions\SalesReturnDbLayer.cs" />
+    <Compile Include="Transactions\StockMasterDbLayer.cs" />
+    <Compile Include="UnitMaster.cs">
+      <DependentUpon>EnventoryManager.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="EnventoryManager.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EnventoryManager.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EnventoryManager.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EnventoryManager.edmx</DependentUpon>
+      <LastGenOutput>EnventoryManager.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EnventoryManager.edmx.diagram">
+      <DependentUpon>EnventoryManager.edmx</DependentUpon>
+    </None>
+    <None Include="EnventoryManager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EnventoryManager.edmx</DependentUpon>
+      <LastGenOutput>EnventoryManager.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Finance\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{aa53406f-8bbb-4027-a0f5-e39a8b018960}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

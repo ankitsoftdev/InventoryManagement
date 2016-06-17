@@ -1,0 +1,158 @@
+﻿@model List<ViewModel.Ledger.PurchaseList>
+
+
+
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+
+        <div class="row">
+
+            <div class="col-md-9">
+
+                <span>Sales Master</span>
+
+
+            </div>
+
+            <div class="col-md-3">
+                @Ajax.ActionLink("New", "Create", "Sales", new { area = "Transactions", Id = 0 }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default btn-xs btn-flat hgt", })
+              
+                <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                <input type="text" placeholder="Search Here" class="hgt" />
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+    <div class="panel-body">
+        <table class="table table-striped table-bordered table-hover table-responsive topmrgn5px">
+            <tr>
+                <td>
+                    Code Name
+                </td>
+                <td>
+                    Supplier Name
+                </td>
+                <td>
+                    Alias Name
+                </td>
+                <td>
+                    Challan No
+                </td>
+
+                <td>Address</td>
+                <td>Contact No</td>
+                <td>Email Id</td>
+                <td>Date</td>
+                <td>Total Amount</td>
+                <td>Discount</td>
+                <td>Action</td>
+
+            </tr>
+            @if (Model.Count != 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(x => item.Code)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Alias_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Challan_No)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Contact_No)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Email_Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Purchase_Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Discount)
+                        </td>
+                        <td>
+                            @if (item.Is_Challan_Gen == false)
+                            {
+                                @Ajax.ActionLink("Edit", "Create", "Sales", new { area = "Transactions", Id = item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-xs  btn-default pull-left btn-flat", })
+
+                                @Ajax.ActionLink("Delete", "Delete", "Sales", new { area = "Transactions", item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-xs  btn-default pull-left btn-flat", })
+
+                                @Ajax.ActionLink("Gen Challan", "GentChallanOfSales", "Sales", new { area = "Transactions", Id = item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-xs  btn-default pull-left btn-flat", })
+                            }
+                            else
+                            {
+                                @Ajax.ActionLink("View", "ViewDetails", "Sales", new { area = "Transactions", item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-xs  btn-default pull-left btn-flat", })
+                            }
+
+                        </td>
+                    </tr>
+                }
+
+            }
+            else
+            {
+                <tr>
+                    <td colspan="11">
+                        No Records found..
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+
+</div>
+

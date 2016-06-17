@@ -1,0 +1,51 @@
+﻿body { background: url('../img/login-bg.jpg') no-repeat center !important;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-attachment: fixed;}
+
+.login-main {    background: url('../img/login-bg.jpg') no-repeat center ;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-attachment: fixed;}
+li {
+list-style:none;}
+
+.login-frm{
+    background: rgba(0, 0, 0, .8);
+        margin: 40% 0 12% 0;}
+.frm-pogisn {float: right;
+    margin-right: 10%;
+}
+.frm-hdng {
+    font-size: 21px;
+    text-transform: uppercase;
+    background: #DA0773;
+    padding: 8px 0;
+    text-align: center;
+    color: #fff;}
+
+.frm-body {
+padding:15px;}
+
+.frm-grup {
+    color: #fff;}
+
+.logn-btn {float:left;
+    background: #DA0773;
+    border: 0;
+    color: #fff;
+    padding: 4px 34px;
+    font-size: 21px;}
+.subs-btn {
+float:right; color:#fff; text-decoration:none; font-size:16px; padding-top:5px;}
+.subs-btn:hover {
+color:#fff; text-decoration:underline;}
+
+.sub-pg-main {    width: 80%;
+    margin: 12% auto 6% auto;
+    float: none;
+}
+.btn-txt:hover { text-decoration:none; color:#fff;
+}

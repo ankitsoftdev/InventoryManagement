@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = ViewBag.layout;
+}
+
+@*<script>
+    $(function () {
+        ApplyFilterOnTable();
+    });
+</script>*@
+
+
+
+<div id="body" class="row">
+
+    <div id="content">
+        @{Html.RenderAction("List", "Payment", new {Tag=@ViewBag.Tag});}
+    </div>
+</div>
+
+

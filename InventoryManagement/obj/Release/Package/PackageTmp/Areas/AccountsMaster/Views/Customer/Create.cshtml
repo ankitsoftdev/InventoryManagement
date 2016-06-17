@@ -1,0 +1,574 @@
+﻿@model ViewModel.Ledger.Supplier
+@{
+
+    string src = null;
+    if (Model.Image_Path != null)
+    {
+        src = Model.Image_Path;
+    }
+    else
+    {
+        src = "/Themes/img/demo_img.gif";
+    }
+
+}
+
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(function () {
+        $(".decimal").on("keypress keyup blur", function (event) {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
+        $("#ddlCountry").change(function () {
+        
+            var CountryId = $("#ddlCountry").val();
+           // alert(CountryId)
+            $.ajax({
+                url: '@Url.Action("ddlBindState", "Customer")',
+                datatype: 'json',
+                type: 'Get',
+                contentType: "application/json; charset=utf-8",
+                data: { CountryId: CountryId },
+                success: function (data) {
+                   
+                    $('#ddlState').find('option').remove();
+
+                    $('#ddlState').append($('<option></option>').val(0).html('--State--'));
+                    $(data).each(function (index, item) { // GETTING ERROR HERE
+                        debugger;
+
+                        $('#ddlState').append($('<option></option>').val(item.Value).html(item.Text));
+                    });
+                   
+                },
+                error: function (ero) {
+
+                }
+            })
+        });
+
+
+        $("#ddlState").change(function () {
+            $.getJSON("@Url.Action("ddlBindCity", "Customer")", { StateId: $("#ddlState").val() }, function (data) {
+                var item;
+               
+                $("#ddlCity").empty();
+               
+                var items='<option>City</option>';
+                $.each(data, function (i, _city) {
+                    items += "<option value='" + _city.Value + "'>" + _city.Text + "</option>";
+                });
+                $('#ddlCity').html(items);
+            });
+        })
+    });
+
+    function validation()
+    {
+        var Res = true;
+        var txtCode = $("#txtCode").val().trim();
+        var txtaddress = $("#txtaddress").val().trim();
+        var txtPANNumber = $("#txtPANNumber").val().trim();
+        var txtPhone_Number = $("#txtPhone_Number").val().trim();
+        var TxtName = $("#TxtName").val().trim();
+        var ddlCountry = $("#ddlCountry").val();
+        var txtAccountNumber = $("#txtAccountNumber").val().trim();
+        var txtMobile = $("#txtMobile").val().trim();
+        var txtAlias_Name = $("#txtAlias_Name").val().trim();
+        var ddlState = $("#ddlState").val();
+        var txtBank_Name = $("#txtBank_Name").val().trim();
+        var txtEmail_Id = $("#txtEmail_Id").val().trim();
+        var ddlGroup_Id = $("#ddlGroup_Id").val();
+        var ddlCity = $("#ddlCity").val();
+        var txtIFSC_Code = $("#txtIFSC_Code").val().trim();
+        var txtOpening_Balance = $("#txtOpening_Balance").val().trim();
+        var txtPin_Code = $("#txtPin_Code").val().trim();
+        var txtBranchName = $("#txtBranchName").val().trim();
+        var ddlMaintainRecord_BillbyBill = $("#ddlMaintainRecord_BillbyBill").val();
+        var txtCreditPeriodTime = $("#txtCreditPeriodTime").val().trim();
+
+
+        $('#txtCode').parent().find('span').text("");
+        $('#txtaddress').parent().find('span').text("");
+        $('#txtPANNumber').parent().find('span').text("");
+        $('#txtPhone_Number').parent().find('span').text("");
+        $('#TxtName').parent().find('span').text("");
+        $('#ddlCountry').parent().find('span').text("");
+        $('#txtAccountNumber').parent().find('span').text("");
+        $('#txtMobile').parent().find('span').text("");
+        $('#txtAlias_Name').parent().find('span').text("");
+        $('#ddlState').parent().find('span').text("");
+        $('#txtBank_Name').parent().find('span').text("");
+        $('#txtEmail_Id').parent().find('span').text("");
+        $('#ddlGroup_Id').parent().find('span').text("");
+        $('#ddlCity').parent().find('span').text("");
+        $('#txtIFSC_Code').parent().find('span').text("");
+        $('#txtOpening_Balance').parent().find('span').text("");
+        $('#txtPin_Code').parent().find('span').text("");
+        $('#txtBranchName').parent().find('span').text("");
+        $('#ddlMaintainRecord_BillbyBill').parent().find('span').text("");
+        $('#txtCreditPeriodTime').parent().find('span').text("");
+       
+        if (txtCode == "")
+        {
+           
+            $("#txtCode").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Enter the Code</span>');
+            Res = false;
+        }
+        if (txtCode != "" && txtCode.split("").length < 2) {
+            
+            $("#txtCode").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Customer Code Could not be less than 2 characters</span>');
+            Res = false;
+        }
+        if(txtaddress=="")
+        {
+            $("#txtaddress").after('<span style="color:red;background-repeat:no-repeat">Enter The Address</span>')
+            Res = false;
+        }
+        if (txtaddress != "" && txtaddress.split("").length <5) {
+
+            $("#txtaddress").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Address Could not be less than 5 characters</span>');
+            Res = false;
+        }
+        if (txtPANNumber == "") {
+            $("#txtPANNumber").after('<span style="color:red;background-repeat:no-repeat">Enter The Pan No</span>')
+            Res = false;
+        }
+        if (txtPANNumber != "" && txtPANNumber.split("").length <2) {
+
+            $("#txtPANNumber").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Pan No Could not be less than 2 characters</span>');
+            Res = false;
+        }
+      
+        if (TxtName == "") {
+            $("#TxtName").after('<span style="color:red;background-repeat:no-repeat">Enter The Name</span>')
+            Res = false;
+        }
+        if (TxtName != "" && TxtName.split("").length <2) {
+
+            $("#TxtName").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Name Could not be less than 2 characters</span>');
+            Res = false;
+        }
+        if (ddlCountry == "" || ddlCountry==0) {
+            $("#ddlCountry").after('<span style="color:red;background-repeat:no-repeat">Enter The Country</span>')
+            Res = false;
+        }
+       
+        if (txtMobile == "") {
+            $("#txtMobile").after('<span style="color:red;background-repeat:no-repeat">Enter The Mobile</span>')
+            Res = false;
+        }
+
+        //if (txtAlias_Name == "") {
+        //    $("#txtAlias_Name").after('<span style="color:red;background-repeat:no-repeat">Enter The Alias Name</span>')
+        //    Res = false;
+        //}
+        //if (txtAlias_Name != "" && txtAlias_Name.split("").length <2) {
+
+        //    $("#txtAlias_Name").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Alias Name Could not be less than 2 characters</span>');
+        //    Res = false;
+        //}
+        if (ddlState == "" || ddlState==0) {
+            $("#ddlState").after('<span style="color:red;background-repeat:no-repeat">Enter The State</span>')
+            Res = false;
+        }
+       
+        if (txtEmail_Id == "") {
+            $("#txtEmail_Id").after('<span style="color:red;background-repeat:no-repeat">Enter The Email Id</span>')
+            Res = false;
+        }
+        if (ddlGroup_Id == "" || ddlGroup_Id==0) {
+            $("#ddlGroup_Id").after('<span style="color:red;background-repeat:no-repeat">Enter The Group Name</span>')
+            Res = false;
+        }
+        if (ddlCity == "City" || ddlCity == 0) {
+            $("#ddlCity").after('<span style="color:red;background-repeat:no-repeat">Enter The Cityn Name</span>')
+            Res = false;
+        }
+       
+        //if (txtOpening_Balance == "") {
+        //    $("#txtOpening_Balance").after('<span style="color:red;background-repeat:no-repeat">Enter The Opening Balance</span>')
+        //    Res = false;
+        //}
+       
+        if (txtPin_Code == "") {
+            $("#txtPin_Code").after('<span style="color:red;background-repeat:no-repeat">Enter The Pin Code</span>')
+            Res = false;
+        }
+       
+        if (ddlMaintainRecord_BillbyBill == "") {
+            $("#ddlMaintainRecord_BillbyBill").after('<span style="color:red;background-repeat:no-repeat">Enter The MaintainRecord BillbyBill</span>')
+            Res = false;
+        }
+        //if (txtCreditPeriodTime == "") {
+        //    $("#txtCreditPeriodTime").after('<span style="color:red;background-repeat:no-repeat">Enter The CreditPeriod Time</span>')
+        //    Res = false;
+        //}
+       
+        if (Res == true)
+        {
+            $(".submitCustomer").submit();
+        }
+    }
+
+
+    $('#txtEmail_Id').blur(function () {
+        $('#txtEmail_Id').parent().find('span').remove();
+        var txtEmailId = $('#txtEmail_Id').val();
+        var filter = "/^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/";
+        var filter = /^([\w-\.]+)@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        debugger;
+        if (filter.test(txtEmailId)) {
+
+            var email = $('#txtEmail_Id').val();
+            var Id = $('#Id').val();
+            var TagName = $('#Tagname').val();
+            //alert(email);
+          
+            $.getJSON("@Url.Action("IsEmailExists", "Customer")", { Tagname: TagName, Email_Id: email, Id: Id }, function (data) {
+                if(data==true)
+                {
+                    $('#errorEmail').text('Email Id is All Ready Exists..')
+                    $('#txtEmail_Id').val(' ');
+                }
+                else {
+                    $('#errorEmail').text(' ')
+                }
+            });
+            return true;
+        }
+        else {
+
+            $("#txtEmail_Id").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Please enter correct email address</span>');
+            $('#txtEmail_Id').val('');
+            return false;
+        }
+
+    });
+
+    
+    $('#txtPin_Code').blur(function () {
+        $('#txtPin_Code').parent().find('span').remove();
+        var mob = /^[1-9]{1}[0-9]{5}$/;
+        if (mob.test($.trim($("#txtPin_Code").val())) == false) {
+            // alert("Please enter valid mobile number.");
+            $("#txtPin_Code").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Please enter valid Pin Code.</span>');
+            $("#txtPin_Code").val("");
+            $("#txtPin_Code").focus();
+            return false;
+        }
+
+    });
+
+    $('#txtMobile').blur(function () {
+        $('#txtMobile').parent().find('span').remove();
+        var mob = /^[1-9]{1}[0-9]{9}$/;
+        if (mob.test($.trim($("#txtMobile").val())) == false) {
+           // alert("Please enter valid mobile number.");
+            $("#txtMobile").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Please enter valid mobile number.</span>');
+            $("#txtMobile").val("");
+            $("#txtMobile").focus();
+            return false;
+        }
+
+    });
+
+    $('#txtPhone_Number').blur(function () {
+        $('#txtPhone_Number').parent().find('span').remove();
+        var a = $("#txtPhone_Number").val();
+        
+        var filter = /^[0-9-+]+$/;
+        var numbers = a.split("").length;
+        if (10 <= numbers && numbers <= 14 && filter.test(a)) {
+            return true;
+        }
+        
+    else {
+            $("#txtPhone_Number").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Please enter valid Phone number.</span>');
+            $("#txtPhone_Number").val("");
+            $("#txtPhone_Number").focus();
+        return false;
+        
+    }
+
+       
+
+    });
+    
+    $('#txtCreditPeriodTime').keypress(function (e) {
+        lenMobileNo = $('#txtCreditPeriodTime').val().length;
+        $('#txtCreditPeriodTime').parent().find('span').remove();
+        if (lenMobileNo <= 100) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+
+                $("#txtCreditPeriodTime").after('<span class="error" style="color:red; background-repeat:no-repeat" id="spnname">Enter the Number</span>');
+                return false;
+
+            }
+        }
+
+
+    });
+  
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#form1").submit(function (event) {
+
+            var dataString;
+            event.preventDefault();
+            var action = $("#form1").attr("action");
+            if ($("#form1").attr("enctype") == "multipart/form-data") {
+                dataString = new FormData($("#form1").get(0));
+                contentType = false;
+                processData = false;
+            }
+
+            else {
+
+            }
+
+            var f = fn_validateform('form1');
+
+            if (f == true) {
+                $.ajax({
+                    type: "POST",
+                    url: action,
+                    data: dataString,
+                    dataType: "json",
+                    contentType: contentType,
+                    processData: processData,
+                    success: function (data) {
+
+                        $('#content').load('@Url.Action("Index", "Customer", new { Tagname = @ViewBag.Tagname })');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+
+                    }
+                });
+            }
+            else {
+                event.preventDefault();
+            }
+
+        });
+
+
+
+        @*$('#txtEmail_Id').focusout(function () {
+         var email = $('#txtEmail_Id').val();
+         var tagname = $('#Tagname').val();
+         var Id = $('#Id').val();
+
+         $.getJSON('@Url.Action("IsEmailExists", "Customer", new {Tagname="",Email_Id="ae",Id="0" })')
+     });*@
+
+    });
+
+
+
+</script>
+@*@using (Ajax.BeginForm("Create", "Customer", new { area = "AccountsMaster" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }, new {@id="form1" }))*@
+
+@using (Html.BeginForm("Create", "Customer", new { @area = "AccountsMaster" },FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    
+ 
+    
+    <div>
+
+     <div class="row">
+         <div class="col-lg-3">
+         </div>
+       <div class="col-lg-6">
+          <div class="panel panel-danger">
+
+              <div class="panel-heading" style="background-color: #C4538A;color:white"><span>@ViewBag.Tagname</span> </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3">
+
+                                <div>
+                                    <div id="imgTest">
+                                        <img src="@src" class="img-responsive img-thumbnail mangaeimg" />
+                                    </div>
+                                </div>
+
+                                <div class="editor-field topmrgn5px">
+                                    <input type="hidden" name="File" id="ImageName" />
+                                    <input type="file" name="file1" id="file1" onchange="encodeImageFileAsURL(this.id);" />
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="col-md-9">
+                                <div class="col-md-12">
+                                    <div class="editor-label">
+                                        <input type="hidden" name="Tagname" value="@ViewBag.Tagname" id="Tagname" />
+                                       
+
+                                        @Html.Label("Code")
+                                        @Html.HiddenFor(x => x.Id)
+                                    </div>
+
+                                    @Html.TextBoxFor(x => x.Code, new { id = "txtCode", maxlength = "49", minlength = "2", @placeholder = "Code", @class = "form-control", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(x => x.Code, null, new { @style = "color:red;" })
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="editor-label">
+
+                                        @Html.Label("Name")<span style="color:red">*</span>
+
+                                    </div>
+
+                                    @Html.TextBoxFor(x => x.Name, new { id = "TxtName", maxlength = "150", required = true, minlength = "2", @placeholder = "Name", @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.Name, null, new { @style = "color:red;" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            
+                            <div class="col-md-6">
+                                <div class="editor-label">
+
+                                    @Html.Label("Alias Name")
+
+                                </div>
+
+                                @Html.TextBoxFor(x => x.Alias_Name, new { id = "txtAlias_Name", maxlength = "20", minlength = "2", @placeholder = "Alias Name", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Alias_Name, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-6">
+
+                                @Html.Label("Address")<span style="color:red">*</span>
+                                @Html.TextAreaFor(x => x.Address.address, new { id = "txtaddress", required = true, maxlength = "300", minlength = "2", @placeholder = "Address", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Address.address, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-6">
+
+                                @Html.Label("Country")<span style="color:red">*</span>
+                               @Html.DropDownListFor(x => x.Address.Country_Id, ViewBag.CountryList as SelectList, "Select Country", new { id = "ddlCountry", @class = "form-control", required = true })
+                                 @Html.ValidationMessageFor(x => x.Address.Country_Id, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("State")<span style="color:red">*</span>
+                                @Html.DropDownListFor(x => x.Address.State_Id, ViewBag.StateList as SelectList, "Select State", new { id = "ddlState", @class = "form-control", required = true })
+                                
+                                @Html.ValidationMessageFor(x => x.Address.State_Id, null, new { @style = "color:red;" })
+                                
+                            </div>
+                            <div class="col-md-6">
+                               @Html.Label("City")<span style="color:red">*</span>
+                                @Html.DropDownListFor(x => x.Address.City_Id, ViewBag.CityList as SelectList, "Select City", new { id = "ddlCity", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Address.City_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Pincode")<span style="color:red">*</span>
+                                @Html.TextBoxFor(x => x.Address.Pin_Code, new { id = "txtPin_Code", maxlength = "6", minlength = "2", @placeholder = "Pin Code", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Address.Pin_Code, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Mobile No")<span style="color:red">*</span>
+                               @Html.TextBoxFor(x => x.Address.ContactInfo.Mobile, new { id = "txtMobile", @placeholder = "Mobile", maxlength = "10", minlength = "10", @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Address.ContactInfo.Mobile, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Email Id")<span style="color:red">*</span>
+                                @Html.TextBoxFor(x => x.Address.ContactInfo.Email_Id, new {@id="txtEmail_Id",  maxlength = "100", required = true, @placeholder = "Email Id", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Address.ContactInfo.Email_Id, null, new {@id="errorEmail", @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                              @Html.Label("Group Name")<span style="color:red">*</span>
+                                @Html.DropDownListFor(x => x.Group_Id, ViewBag.GroupName as SelectList, "Select Group", new { id = "ddlGroup_Id", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => Model.Group_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("PAN No")
+                                @Html.TextBoxFor(x => x.Account_Detail.PANNumber, new { id = "txtPANNumber", required = true, maxlength = "30", minlength = "6", @placeholder = "Pan No", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Account_Detail.PANNumber, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Account No")
+                               @Html.TextBoxFor(x => x.Account_Detail.AccountNumber, new { id = "txtAccountNumber", maxlength = "20", minlength = "2", @placeholder = "Account No", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Account_Detail.AccountNumber, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Bank Name")
+                                @Html.TextBoxFor(x => x.Account_Detail.Bank_Name, new { id = "txtBank_Name", maxlength = "150", minlength = "2", @placeholder = "Bank Name", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Account_Detail.Bank_Name, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Branch Name")
+                               @Html.TextBoxFor(x => x.Account_Detail.BranchName, new { id = "txtBranchName", maxlength = "150", minlength = "2", @placeholder = "Branch Name", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Account_Detail.BranchName, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("IFSC Code")
+                               @Html.TextBoxFor(x => x.Account_Detail.IFSC_Code, new { id = "txtIFSC_Code", maxlength = "50", minlength = "2", @placeholder = "IFSC Code", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Account_Detail.IFSC_Code, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Opening Bal")
+                               @Html.TextBoxFor(x => x.Opening_Balance, null, new { id = "txtOpening_Balance", maxlength = "15", minlength = "1", @placeholder = "Opening Balance", @class = "form-control decimal" })
+                            @Html.ValidationMessageFor(x => Model.Opening_Balance, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Maintain Bill By Bill")
+                               @Html.DropDownListFor(M => M.MaintainRecord_BillbyBill, new SelectList(new List<object> { new { value = 0, test = "True" }, new { value = 1, test = "False" } }, "value", "test"), new { id = "ddlMaintainRecord_BillbyBill", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.MaintainRecord_BillbyBill, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Credit Period Time")
+                                @Html.TextBoxFor(x => x.CreditPeriodTime, null, new { id = "txtCreditPeriodTime", maxlength = "5", @placeholder = "CreditPeriod Time", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.CreditPeriodTime, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-12 topmrgn5px">
+                            <button type="submit" onclick="fn_validateform('form1');" class=" btn btn-primary ">Save </button>
+                            @Html.ActionLink("Cancel", "Index", "Customer", new { Tagname = @ViewBag.Tagname }, new { @class = "btn btn-default" })
+                           
+                             </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+         <div class="col-lg-3">
+         </div>
+        </div>
+    </div>
+}
+

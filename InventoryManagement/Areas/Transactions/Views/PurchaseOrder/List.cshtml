@@ -1,0 +1,129 @@
+﻿@model List<ViewModel.Transactions.PurchaseOrdeList>
+@{
+    var grid = new WebGrid(Model, canPage: true, canSort: true, rowsPerPage: 20, ajaxUpdateContainerId: "gridcontent", selectionFieldName: "selectedRow");
+    grid.Pager(WebGridPagerModes.All);
+    
+}
+
+
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+        <div class="row">
+
+            <div class="col-md-6">
+                <i class="fa fa-list"></i>
+                <span>Purchase Order  </span>
+
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div align="right">
+                    @Ajax.ActionLink("New", "Create", "PurchaseOrder", new { Id = 0, area = "Transactions" }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default btn-xs btn-flat hgt" })
+
+                    <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                    <input type="text" placeholder="Search Here" class="hgt" />
+                    <button class="btn btn-default btn-xs btn-flat hgt fa fa-search"></button>
+                    <button class="btn btn-default btn-xs btn-flat hgt fa fa-refresh"></button>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+    
+
+    <div class="panel-body" >
+
+        <div class="row">
+        <div class="col-md-8" id="gridcontent" style="min-height:450px;border:solid silver 1px;">
+        @grid.GetHtml(tableStyle: "gTable table table-responsive",
+
+        columns: grid.Columns(
+                                         grid.Column("S.No", format: item => item.WebGrid.Rows.IndexOf(item) + 1),
+                                   grid.Column("Order_No", "Order No"),
+                //  grid.Column("Supplier_Name", "Supplier Name"),
+                //  grid.Column("Address", "Address"),
+                //  grid.Column("Contact_No", "Contact No"),
+                             grid.Column(columnName: "Amount", header: "Amount", format: @<i class="fa fa-rupee">&nbsp;&nbsp; @item.Amount</i>),
+                                                                grid.Column("Order_Date", "Order Date"),
+                //grid.Column("Sales_Person_Name", "Sales Person"),
+                                                                 grid.Column("Request_Delivery_Date", "Delivery Date"),
+                //grid.Column("Remarks", "Remarks"),
+
+
+                                              grid.Column("Action", format: (item) => item.Status == "PENDING" ? new HtmlString(
+                                     @Ajax.ActionLink(" ", "Create", "PurchaseOrder", new { area = "Transactions", Id = item.Id }, new AjaxOptions
+                                     {
+                                         UpdateTargetId = "content",
+                                         HttpMethod = "GET",
+                                         InsertionMode = InsertionMode.Replace,
+                                     }, new { @Class = "btn btn-default fa fa-pencil", @title = "Edit" }).ToString() +
+                                                                                           @Ajax.ActionLink(" ", "Delete", "PurchaseOrder", new { area = "Transactions", Id = item.Id }, new AjaxOptions
+                                     {
+                                         UpdateTargetId = "content",
+                                         HttpMethod = "GET",
+                                         InsertionMode = InsertionMode.Replace,
+                                     }, new { @Class = "btn btn-default fa fa-trash-o", @title = "Delete" }).ToString()
+                                     ) : new HtmlString(" ")),
+
+                                                    grid.Column("Approve", format: (item) => item.Status == "PENDING" ? new HtmlString(
+
+                                                    @Ajax.ActionLink("Approve", "ApproveOrderList", "PurchaseOrder", new { area = "Transactions", Id = item.Id }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "content", LoadingElementId = "Loader", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" }).ToString()
+                                                                    ) : new HtmlString("<text><img height='20' width='20' src='../Themes/img/primary-button-ok.png' alt=\"Image\"/></text>"))
+                                               )) 
+     
+
+            </div>
+
+            <div class="col-md-4" id="ViewPurOdr">
+
+                @{Html.RenderAction("ViewPurodr", "PurchaseOrder", new { @area="Transactions",Id=-1});}
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('table tbody tr').click(function () {
+     
+     var selectedId = $(this).find('td:eq(0)').text();
+   
+ 
+        $.ajax({
+            url: '@Url.Action("ViewPurodr", "PurchaseOrder")',
+            data: { 'Id': selectedId },
+            type: "get",
+            cache: false,
+            success: function (savingStatus) {
+              
+                $('#ViewPurOdr').html(savingStatus);
+             
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+               
+            }
+     });
+    });
+</script>
+<style>
+    .gTable tr:hover {
+        background-color: skyblue;
+    }
+</style>
+

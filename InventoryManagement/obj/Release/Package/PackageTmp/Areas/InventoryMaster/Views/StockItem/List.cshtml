@@ -1,0 +1,142 @@
+﻿@model List<ViewModel.Stock.StockItem>
+ @{
+  var grid = new WebGrid(Model, canPage: true, canSort: true, rowsPerPage: 20, selectionFieldName: "selectedRow", ajaxUpdateContainerId:"gridcontent");
+  grid.Pager(WebGridPagerModes.All);
+  
+  
+ }
+
+
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+        <div class="row">
+
+            <div class="col-md-6">
+                <i class="fa fa-list"></i>
+                <span>Item Master</span>
+
+
+            </div>
+
+            <div class="col-md-6">
+                <div align="right">
+                    @Ajax.ActionLink("New", "Create", "StockItem", new { area = "InventoryMaster", Id = 0 }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default btn-xs btn-flat hgt", })
+
+
+                    <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                    <input type="text" placeholder="Search Here" class="hgt" />
+                    <button class="btn btn-default btn-xs btn-flat hgt fa fa-search"></button>
+                    <button class="btn btn-default btn-xs btn-flat hgt fa fa-refresh"></button>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+    <div class="panel-body" >
+    
+
+        <div class="row">
+            <div class="col-md-9" id="gridcontent" style="min-height:450px;border:solid silver 1px;">
+                @grid.GetHtml(tableStyle: "table table-striped table-bordered table-hover table-responsive topmrgn5px",
+        columns: grid.Columns(
+
+                  grid.Column("S.No", format: (item) => item.WebGrid.Rows.IndexOf(item) + 1),
+        grid.Column("Name", "Name"),
+      //  grid.Column("Alias_Name", "Alias Name"),
+        grid.Column("GroupName", "Group"),
+        grid.Column("CategoryName", "Category"),
+        grid.Column("UnitName", "Unit"),
+        //grid.Column("Min_Qty", "Min Qty"),
+        //grid.Column("Prefix_SerialNo", "Prefix"),
+      //  grid.Column("Start_From", "Starting From"),
+       grid.Column("Remarks", "Remarks"),
+      //  grid.Column(format: (item) =>
+      //  {
+      //      if (item.Image_Path != "")
+      //      {
+      //          return Html.Raw(string.Format("<text><img src=\"{0}\" alt=\"Image\" width='50px' height='50px'/></text>", Url.Content(@item.Image_Path)));
+      //      }
+      //      else
+      //      {
+      //          return Html.Raw(string.Format("<text><img src=\"{0}\" alt=\"Image\" width='50px' height='50px'/></text>", Url.Content("/Themes/img/demo_img.gif")));
+      //      }
+      //  }
+      //),
+
+
+
+
+
+        grid.Column("Action", format: (item) => new HtmlString(
+
+        @Ajax.ActionLink(" ", "Create", "StockItem", new { area = "InventoryMaster", Id = item.Id }, new AjaxOptions
+        {
+            UpdateTargetId = "content",
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+        }, new { @Class = "btn btn-default fa fa-pencil", @title = "Edit" }).ToString() +
+
+              
+
+        @Ajax.ActionLink(" ", "Delete", "StockItem", new { area = "InventoryMaster", item.Id }, new AjaxOptions
+         {
+             UpdateTargetId = "content",
+             HttpMethod = "GET",
+             InsertionMode = InsertionMode.Replace,
+         }, new { @Class = "btn btn-default  fa fa-trash-o", @title = "Delete" }).ToString()
+       ))
+
+       ))
+            </div>
+         
+            <div class="col-md-3" id="ViewStock">
+
+              
+                    @{Html.RenderAction("ViewStockItem", "StockItem", new {Id=-1 });}
+                
+
+              
+            </div>
+        </div>
+
+   
+
+
+
+     
+    </div>
+</div>
+
+<script>
+    $('table tbody tr').click(function () {
+
+      
+
+        var selectedId = $(this).find('td:eq(0)').text();
+
+           $.ajax({
+            url: '@Url.Action("ViewStockItem", "StockItem")',
+               data: { 'Id': selectedId },
+            type: "get",
+            cache: false,
+            success: function (savingStatus) {
+                $('#ViewStock').html(savingStatus);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $('#lblCommentsNotification').text("Error encountered while saving the comments.");
+            }
+        });
+    });
+</script>

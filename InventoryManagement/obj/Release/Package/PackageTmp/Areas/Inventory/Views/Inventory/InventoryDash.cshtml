@@ -1,0 +1,1090 @@
+﻿@{
+    //ViewBag.Title = "InventoryDash";
+    Layout = "~/Areas/Inventory/Views/Shared/_ContentLayout.cshtml";
+}
+
+<script type="text/javascript">
+    function Generate() {
+        var Para1 = $('#Report option:selected').val();
+        var group = "";
+        var frmdt = "";
+        var todt = "";
+        if ($('#GroupBy').is(':visible')) {
+            group = $('#GroupBy option:selected').val();
+
+        }
+        if ($('#date').is(':visible')) {
+            frmdt = $('#frmdt').val();
+            todt = $('#todt').val();
+        }
+
+        // alert(Para1); alert(group); alert(frmdt); alert(todt);
+        var url = '@Url.Action("Content", "InventoryReport")?para=' + Para1 + '&group=' + group + '&FromDate=' + frmdt + '&ToDate=' + todt;
+        //  alert(url);
+        $("#frm").attr("src", url);
+
+    }
+    $(document).ready(function () {
+        $('#frmdt').datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#todt').datepicker({ dateFormat: 'dd/mm/yy' });
+        Toggle();
+
+        $('#Report').change(function () {
+            Toggle();
+        });
+    });
+
+    function Toggle() {
+        if ($('#Report').val() == "Supplier" || $('#Report').val() == "Unit") {
+            $('#GroupBy').hide();
+            $('#lbl').hide();
+        }
+        else {
+            $('#GroupBy').show();
+            $('#lbl').show();
+        }
+
+        if ($('#Report').val() == "Return" || $('#Report').val() == "Purchase") {
+            $('#date').show();
+        }
+        else {
+
+            $('#date').hide();
+        }
+    }
+
+</script>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-6">
+                <!-- START widget-->
+                <div class="panel widget bg-red">
+                    <div class="row row-table">
+                        <a href="@Url.Action("Index", "Customer", new { area = "AccountsMaster", Tagname = "Supplier" })">
+                            <div class="col-xs-4 text-center bg-red pv-lg">
+                                <em class="fa fa-edit fa-2x"></em>
+                            </div>
+                            <div class="col-xs-8 pv-lg boxicon">
+                                <div class="text-uppercase">(3)</div>
+
+
+                                <small>Supplier</small>
+
+
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+                <!-- START widget-->
+                <div class="panel widget bg-purple">
+                    <div class="row row-table">
+                        <a href="@Url.Action("Index", "Units", new { area = "Masters" }, null)">
+                            <div class="col-xs-4 text-center bg-purple pv-lg">
+                                <em class="fa fa-tags fa-2x"></em>
+                            </div>
+                            <div class="col-xs-8 pv-lg boxicon">
+                                <div class="text-uppercase">(4)</div>
+
+
+                                <small>Units</small>
+
+
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+                <!-- START widget-->
+                <div class="panel widget bg-blue">
+                    <div class="row row-table">
+                        <a href="@Url.Action("Index", "StockMaster", new { area = "Transactions" })">
+                            <div class="col-xs-4 text-center bg-blue pv-lg">
+                                <em class="fa fa-list fa-2x"></em>
+                            </div>
+                            <div class="col-xs-8 pv-lg boxicon">
+                                <div class="text-uppercase">(4)</div>
+
+
+                                <small>Stock</small>
+
+
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-6">
+                <!-- START widget-->
+                <div class="panel widget bg-teal">
+                    <div class="row row-table">
+                        <a href="@Url.Action("Index", "Purchase", new { area = "Transactions" })">
+                            <div class="col-xs-4 text-center bg-teal pv-lg">
+                                <em class="fa fa-comments-o fa-2x"></em>
+                            </div>
+                            <div class="col-xs-8 pv-lg boxicon">
+                                <div class="text-uppercase">(7)</div>
+
+
+                                <small>Purchase</small>
+
+
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <!-- START widget-->
+                <div class="panel widget bg-green">
+                    <div class="row row-table">
+                        <a href="@Url.Action("Index", "Report", new { area = "CommonReport" })">
+                            <div class="col-xs-4 text-center bg-green pv-lg">
+                                <em class="fa fa-comments-o fa-2x"></em>
+                            </div>
+                            <div class="col-xs-8 pv-lg">
+                                <div class="text-uppercase boxicon">(7)</div>
+
+
+                                <small class="boxicon">Report</small>
+
+
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6">
+                <!-- START widget-->
+                <div class="panel widget bg-blue">
+                    <div class="row row-table">
+                        <a href="@Url.Action("Index", "Customer", new { area = "AccountsMaster", Tagname = "Supplier" })">
+                            <div class="col-xs-4 text-center bg-blue pv-lg">
+                                <em class="fa fa-edit fa-2x"></em>
+                            </div>
+                            <div class="col-xs-8 pv-lg boxicon">
+                                <div class="text-uppercase">(3)</div>
+
+
+                                <small>Supplier</small>
+
+
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+                <!-- START widget-->
+                <div class="panel widget bg-fuchsia">
+                    <div class="row row-table">
+                        <a href="@Url.Action("Index", "Units", new { area = "Masters" }, null)">
+                            <div class="col-xs-4 text-center bg-fuchsia pv-lg">
+                                <em class="fa fa-tags fa-2x"></em>
+                            </div>
+                            <div class="col-xs-8 pv-lg boxicon">
+                                <div class="text-uppercase">(4)</div>
+
+
+                                <small>Units</small>
+
+
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+                <!-- START widget-->
+                <div class="panel widget bg-aqua">
+                    <div class="row row-table">
+                        <a href="@Url.Action("Index", "StockMaster", new { area = "Transactions" })">
+                            <div class="col-xs-4 text-center bg-aqua pv-lg">
+                                <em class="fa fa-list fa-2x"></em>
+                            </div>
+                            <div class="col-xs-8 pv-lg boxicon">
+                                <div class="text-uppercase">(4)</div>
+
+
+                                <small>Stock</small>
+
+
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    
+     <div class="col-md-8">
+      @Html.Action("Graph", "Inventory", new { @area = "Inventory" })
+     </div>
+
+    </div>
+
+<div class="row">
+    <div class="col-md-6">
+        @Html.Action("PieChart", "Inventory", new { @area = "Inventory" })
+    </div>
+    <div class="col-md-6">
+        <div class="row" style="margin-bottom: 0px;">
+            <div class="col-md-12">
+                <div class="tabs widget">
+                    <ul class="nav nav-tabs widget">
+                        <li >
+                            <a data-toggle="tab" href="#list-tab">
+                                <span class="menu-icon"><i class="fa fa-user"></i></span>
+                                Request By Admin
+                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#home-tab">
+                                <span class="menu-icon"><i class="fa fa-comments"></i></span>
+                                Arrived Visitors
+                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#posts-tab">
+                                <span class="menu-icon"><i class="fa fa-rocket"></i></span>
+                                Departured Visitors
+                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                    <div class="tab-content">
+                        <div id="list-tab" class="tab-pane active">
+                            <div class="content-list content-image menu-action-right">
+
+                                <div class="mCustomScrollBox mCS-light" id="mCSB_6" style="position: relative; height: 100%; max-width: 100%; max-height: 300px; overflow-y:scroll">
+
+                                    <ul class="list-wrapper pd-lr-15">
+
+                                        
+                                        <li class="bggray">
+                                           
+                                            <div class="menu-text">
+                                                <label>Gabriella Montagna,</label><i class="fa fa-phone">&nbsp;7274587456</i>
+                                                <p>due to some urgent work in flat no. 2 of building no. 501</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+                                                    <span class="menu-date">1 hour Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                           
+                                        </li>
+
+                                        <li>
+                                           
+                                            <div class="menu-text">
+                                                <label>Jonathan Fuzzy,</label><i class="fa fa-phone">&nbsp;8774587454</i>
+                                                <p>for maintenance purpose of building no.501  along with 5 memebers</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">3 hours Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                           
+                                        </li>
+                                        <li class="bggray">
+                                            
+                                            <div class="menu-text">
+                                                <label>Kim Kardiosun,</label><i class="fa fa-phone">&nbsp;9674587450</i>
+                                                <p>for maintenance purpose of building no.501  along with 5 memebers</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">5 hours Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                          
+                                        </li>
+
+                                        <li>
+                                           
+                                            <div class="menu-text">
+                                                <label>Rikudou Sennin,</label><i class="fa fa-phone">&nbsp;8404587450</i>
+                                                <p>for maintenance purpose of building no.501  along with 5 memebers</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">5 hours Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                           
+                                        </li>
+                                        <li class="bggray">
+                                           
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            
+                                        </li>
+                                        <li>
+                                            
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                       
+                                        </li>
+                                        <li class="bggray">
+                                           
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                          
+                                        </li>
+                                        <li>
+                                          
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            
+                                        </li>
+                                        <li class="bggray">
+                                           
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                           
+                                        </li>
+                                        <li>
+                                           
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                           
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+                                <div class="closing text-center">
+                                    <a href="#">See All Recent Reviews <i class="fa fa-angle-double-right"></i></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="home-tab" class="tab-pane">
+                            <div class="content-list content-image menu-action-right">
+
+                                <div class="mCustomScrollBox mCS-light" id="mCSB_6" style="position: relative; height: 100%; max-width: 100%; max-height: 300px; overflow-y:scroll">
+
+                                    <ul class="list-wrapper pd-lr-15">
+
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-7.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Gabriella Montagna,</label><i class="fa fa-phone">&nbsp;7274587456</i>
+                                                <p>due to some urgent work in flat no. 2 of building no. 501</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+                                                    <span class="menu-date">1 hour Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-6.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Jonathan Fuzzy,</label><i class="fa fa-phone">&nbsp;8774587454</i>
+                                                <p>for maintenance purpose of building no.501  along with 5 memebers</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">3 hours Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Kim Kardiosun,</label><i class="fa fa-phone">&nbsp;9674587450</i>
+                                                <p>for maintenance purpose of building no.501  along with 5 memebers</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">5 hours Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-5.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Rikudou Sennin,</label><i class="fa fa-phone">&nbsp;8404587450</i>
+                                                <p>for maintenance purpose of building no.501  along with 5 memebers</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">5 hours Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    in <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+                                <div class="closing text-center">
+                                    <a href="#">See All Recent Reviews <i class="fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="posts-tab" class="tab-pane sidebar-widget">
+                            <div class="content-list content-image menu-action-right">
+
+                                <div class="mCustomScrollBox mCS-light" id="mCSB_6" style="position: relative; height: 100%; overflow-y:scroll; max-width: 100%; max-height: 300px;">
+
+                                    <ul class="list-wrapper pd-lr-15">
+
+
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-8.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-7.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Gabriella Montagna,</label><i class="fa fa-phone">&nbsp;7274587456</i>
+                                                <p>due to some urgent work in flat no. 2 of building no. 501</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+                                                    <span class="menu-date">1 hour Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-6.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Jonathan Fuzzy,</label><i class="fa fa-phone">&nbsp;8774587454</i>
+                                                <p>for maintenance purpose of building no.501  along with 5 memebers</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+
+                                                    <span class="menu-date">3 hours Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Kim Kardiosun,</label><i class="fa fa-phone">&nbsp;9674587450</i>
+                                                <p>for maintenance purpose of building no.501  along with 5 memebers</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+
+                                                    <span class="menu-date">5 hours Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-5.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Rikudou Sennin,</label><i class="fa fa-phone">&nbsp;8404587450</i>
+                                                <p>for maintenance purpose of building no.501  along with 5 memebers</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+
+                                                    <span class="menu-date">5 hours Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="bggray">
+                                            <div class="menu-icon">
+                                                <img src="/img/avatar/avatar-10.jpg">
+                                            </div>
+                                            <div class="menu-text">
+                                                <label>Goerge Bruno Marz,</label><i class="fa fa-phone">&nbsp;9874587456</i>
+                                                <p>want to meet Ms. Mansi Sharma for meeting purpose at flat no. 201 of building no. 502</p>
+
+                                            </div>
+                                            <div class="menu-text">
+                                                <div class="menu-info">
+                                                    Out <a href="#">Time</a> -
+
+                                                    <span class="menu-date">12 Minutes Ago </span> -
+
+
+                                                </div>
+                                            </div>
+                                            <div class="menu-action">
+                                                <div class="menu-action-icon vd_red" data-original-title="Reject" data-rel="tooltip-bottom">
+                                                    <i class="fa fa-cog"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+
+                                </div>
+                                <div class="closing text-center">
+                                    <a href="#">See All Recent Reviews <i class="fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div> <!-- tabs-widget -->
+            </div>
+            <!-- col-md-12 -->
+        </div>
+    </div>
+   
+</div>
+
+
+<div class="row">
+     <div class="col-md-12">
+        
+        @Html.Action("Charts", "Inventory", new { @area = "Inventory" })
+    </div>
+</div>
+
+
+<style>
+    .boxicon {
+     font-size:12px; color:white;
+    }
+    tabs .nav-tabs > li > a {
+        margin: 0;
+        color: #FFF;
+        border-left: 1px solid rgba(255,255,255,0.2) !important;
+        border-right: 1px solid rgba(0,0,0,0.15) !important;
+        border-top: none;
+        border-bottom: none;
+        line-height: auto;
+        height: 36px;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+
+    .nav li a {
+        padding: 7px 15px;
+    }
+
+    .nav-tabs > li > a {
+        margin-right: 2px;
+        line-height: 1.42857143;
+        border: 1px solid transparent;
+        border-radius: 4px 4px 0 0;
+    }
+
+    .nav > li > a {
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+    }
+    .tabs .nav-tabs {
+        background-color: #f85d2c;
+        border-bottom: none;
+    }
+        .tabs .nav-tabs > li > a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+        .tabs .nav-tabs > li > a {
+           color:white;
+        }
+
+</style>

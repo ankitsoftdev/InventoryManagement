@@ -1,0 +1,159 @@
+﻿@model ViewModel.Ledger.PurchaseMaster
+@{
+    string src = null;
+    if (Model.Image_Path != null)
+    {
+        src = Model.Image_Path;
+    }
+    else
+    {
+        src = "/Themes/img/demo_img.gif";
+    }
+    Layout = "";
+}
+<div>
+
+
+
+
+    <div class="panel panel-danger managepnl">
+
+        <div class="panel-heading" style="background-color: #C4538A;color:white"><span>View Details</span> </div>
+
+
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div id="imgTest">
+                        <img src="@src" class="img-responsive img-thumbnail mangaeimg" />
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-responsive topmrgn5px">
+                        <tr>
+                            <td>
+                                @Html.Label("Order No")
+
+                                @Html.HiddenFor(x => x.Id)
+
+                            </td>
+                            <td>
+
+                                <span>@Model.Challan_Number</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                @Html.Label("Supplier Name")
+                            </td>
+                            <td>
+                                <span>@Model.Supplier_Name</span>
+                            </td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td>
+                                @Html.Label("Contact No")
+                            </td>
+                            <td>
+                                <span>@Model.ContactNo</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.Label("Email")
+                            </td>
+                            <td>
+                                <span>@Model.EmailId</span>
+                            </td>
+                        </tr> 
+                    </table>
+                </div>
+            </div>
+
+            <table class="table table-responsive  topmrgn5px">
+                
+                <tr>
+                    <td>
+                        @Html.Label("Supplier Name")
+                    </td>
+                    <td>
+                        <span>@Model.Supplier_Name</span>
+                    </td>
+                </tr> 
+                <tr>
+                    <td>
+                        @Html.Label("Remarks")
+                    </td>
+                    <td>
+                        <span>@Model.Remarks</span>
+                    </td>
+                </tr>
+            </table>
+
+            <hr style="border:solid silver 1px;" />
+            <div align="center"><h4><label>Order Details</label></h4></div>
+            <table id="tblItem" class="table table-striped table-bordered table-hover">
+
+                <thead>
+                    <tr>
+                        <th>
+                            <label> Item Name</label>
+                        </th>
+
+
+                        <th>
+                            <label>Quantity</label>
+                        </th>
+
+                        <th>
+                            <label>Rate</label>
+                        </th>
+                        <th>
+                            <label>Per</label>
+                        </th>
+                        <th>
+                            <label>Amount</label>
+                        </th>
+                    </tr> 
+                </thead>
+                <tbody> 
+
+                    @{
+
+
+                        int i = 0;
+                        foreach (var m in Model.ItemDetails)
+                        { 
+                            <tr>
+                                <td> 
+                                    @m.ItemName 
+                                </td> 
+                                <td> 
+                                    @m.Qty
+                                </td>
+                                <td>
+                                    @m.Rate 
+                                </td>
+                                <td>
+                                    @m.Unit_Name 
+                                </td>
+                                <td>
+                                    @m.Total_Amount 
+                                </td> 
+                            </tr>
+                            i++;
+                        } 
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

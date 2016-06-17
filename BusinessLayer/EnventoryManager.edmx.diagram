@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="834fdf3723ac4b9f8388f4af6fc4adbd" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Billing_Info" Width="1.5" PointX="5.25" PointY="117.375" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Branch_Master" Width="1.5" PointX="10.25" PointY="83.5" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.City_Master" Width="1.5" PointX="10.25" PointY="77.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Company_Master" Width="1.5" PointX="3" PointY="76.625" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Contact_Info" Width="1.5" PointX="5.25" PointY="122.875" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Country_State" Width="1.5" PointX="0.75" PointY="74.875" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Customer" Width="1.5" PointX="5.25" PointY="126.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Delivery_Note" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Delivery_Note_Tra" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Emp_Common_Master" Width="1.5" PointX="5.25" PointY="36.25" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.FinancialYear" Width="1.5" PointX="5.25" PointY="77.125" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.GoDown_Master" Width="1.5" PointX="5.25" PointY="103.625" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.GoDown_Region" Width="1.5" PointX="5.25" PointY="18" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Ledger_Group" Width="1.5" PointX="5.25" PointY="108.625" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Ledger_Master" Width="1.5" PointX="5.25" PointY="133.875" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.LedgerGroupTemp1" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Login_Master" Width="1.5" PointX="5.25" PointY="51.125" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Payment_Info" Width="1.5" PointX="5.25" PointY="81.5" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Purchase_Order" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Purchase_Order_Tra" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Purchase_Return" Width="1.5" PointX="7.5" PointY="72.25" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Purchase_Return_Tra" Width="1.5" PointX="9.75" PointY="72.375" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Quation_Master" Width="1.5" PointX="5.25" PointY="55.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Quation_Master_Tra" Width="1.5" PointX="7.5" PointY="56.5" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Receipt_Note" Width="1.5" PointX="6.75" PointY="5.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Role_Master" Width="1.5" PointX="5.25" PointY="94.875" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Sales_Order" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Sales_Order_Tra" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Sales_Return" Width="1.5" PointX="7.5" PointY="26.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Sales_Return_Tra" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Stock_Category" Width="1.5" PointX="5.25" PointY="22.5" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Stock_Group" Width="1.5" PointX="5.25" PointY="113.125" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Stock_Item" Width="1.5" PointX="5.25" PointY="61.375" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Stock_Master" Width="1.5" PointX="5.25" PointY="45.875" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Supplier" Width="1.5" PointX="5.25" PointY="87.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Tagging_Master" Width="1.5" PointX="10.75" PointY="5.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Tagging_Master_Assign" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Tagging_Master_Assign_Tra" Width="1.5" PointX="6.75" PointY="11.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Tax_Deduction_Master" Width="1.5" PointX="5.25" PointY="98.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Tax_Master" Width="1.5" PointX="5.25" PointY="41.25" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.UnitMaster" Width="1.5" PointX="5.25" PointY="141.25" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_bill" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_branch" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_country_branch" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_state_branch" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_citymaster" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_country_citymaster" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_state_citymaster" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_contactinfo" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_customer" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_empcommon" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_financialyear" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_godown" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_godownregion" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_ledger" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_ledgergroup" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_login" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_Payment" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_quation" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_role" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_stockgrp" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_stockitem" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_stockmaster" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_subcategory" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_supplier" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_taxdeduction" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_taxmaster" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_unit" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_country_company" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_state_company" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_purchasret_purchasemastertra" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_quation_tra" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Purchase_Master" Width="1.5" PointX="5.25" PointY="69.875" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_purchasemaster" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_purchase_purchasemaster" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Purchase_Master_Tra" Width="1.5" PointX="7.5" PointY="66.75" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_pur_purtra" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Purchase_Master_TaxDetails" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Sales_Master_TaxDetails" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Sales_Master_Tra" Width="1.5" PointX="7.875" PointY="147.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Receipt_Note_Tra" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Payment_Info_Tra" Width="1.5" PointX="7.5" PointY="82.5" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_Paymenttra" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Sales_Master" Width="1.5" PointX="5.25" PointY="28.875" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_salesmaster" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_sales_sales" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_sales_salestra" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Receipt_Info" Width="1.5" PointX="5.25" PointY="147.125" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Receipt_Info_Tra" Width="1.5" PointX="7.5" PointY="86.625" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_company_receipt" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_receipttra" />
+        <EntityTypeShape EntityType="INVENTORY_DBModel.Advance_Info" Width="1.5" PointX="7.5" PointY="135.75" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_coustomer_adv" />
+        <AssociationConnector Association="INVENTORY_DBModel.fk_receipttra1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

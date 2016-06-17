@@ -1,0 +1,1550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="INVENTORY_DBModelStoreContainer" CdmEntityContainer="INVENTORY_DBEntities">
+    <EntitySetMapping Name="Billing_Info">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Billing_Info">
+        <MappingFragment StoreEntitySet="Billing_Info">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Billing_Date" ColumnName="Billing_Date" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Tag_Type" ColumnName="Tag_Type" />
+          <ScalarProperty Name="Transport" ColumnName="Transport" />
+          <ScalarProperty Name="Discount_Amount" ColumnName="Discount_Amount" />
+          <ScalarProperty Name="Tax_Amount" ColumnName="Tax_Amount" />
+          <ScalarProperty Name="Billing_Amount" ColumnName="Billing_Amount" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="Bill_VC_No" ColumnName="Bill_VC_No" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branch_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Branch_Master">
+        <MappingFragment StoreEntitySet="Branch_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Pin_Code" ColumnName="Pin_Code" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="City_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.City_Master">
+        <MappingFragment StoreEntitySet="City_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Longitute" ColumnName="Longitute" />
+          <ScalarProperty Name="Latitute" ColumnName="Latitute" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Pin_Code" ColumnName="Pin_Code" />
+          <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Company_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Company_Master">
+        <MappingFragment StoreEntitySet="Company_Master">
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+          <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="Pin_Code" ColumnName="Pin_Code" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="Pan_No" ColumnName="Pan_No" />
+          <ScalarProperty Name="Tin_No" ColumnName="Tin_No" />
+          <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
+          <ScalarProperty Name="Phoe_No" ColumnName="Phoe_No" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contact_Info">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Contact_Info">
+        <MappingFragment StoreEntitySet="Contact_Info">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Country_State">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Country_State">
+        <MappingFragment StoreEntitySet="Country_State">
+          <ScalarProperty Name="Longitute" ColumnName="Longitute" />
+          <ScalarProperty Name="Latitute" ColumnName="Latitute" />
+          <ScalarProperty Name="Tag_Id" ColumnName="Tag_Id" />
+          <ScalarProperty Name="Is_Visible" ColumnName="Is_Visible" />
+          <ScalarProperty Name="Display_Name" ColumnName="Display_Name" />
+          <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Image_Url" ColumnName="Image_Url" />
+          <ScalarProperty Name="Credit_Period_Time" ColumnName="Credit_Period_Time" />
+          <ScalarProperty Name="Mnt_Bill_By_Bill" ColumnName="Mnt_Bill_By_Bill" />
+          <ScalarProperty Name="Opeaning_Bal" ColumnName="Opeaning_Bal" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Pin_Code" ColumnName="Pin_Code" />
+          <ScalarProperty Name="Pan_No" ColumnName="Pan_No" />
+          <ScalarProperty Name="Contact_Person_Contact" ColumnName="Contact_Person_Contact" />
+          <ScalarProperty Name="Contact_Person_Email" ColumnName="Contact_Person_Email" />
+          <ScalarProperty Name="Contact_Person" ColumnName="Contact_Person" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Delivery_Note">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Delivery_Note">
+        <MappingFragment StoreEntitySet="Delivery_Note">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Sales_Order_Id" ColumnName="Sales_Order_Id" />
+          <ScalarProperty Name="Delivery_Note_No" ColumnName="Delivery_Note_No" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Delivery_Note_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Delivery_Note_Tra">
+        <MappingFragment StoreEntitySet="Delivery_Note_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Pur_Tra_Id" ColumnName="Pur_Tra_Id" />
+          <ScalarProperty Name="Delivered_Quantity" ColumnName="Delivered_Quantity" />
+          <ScalarProperty Name="Order_Quantity" ColumnName="Order_Quantity" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Delivery_Note_Id" ColumnName="Delivery_Note_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emp_Common_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Emp_Common_Master">
+        <MappingFragment StoreEntitySet="Emp_Common_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Is_Maternity" ColumnName="Is_Maternity" />
+          <ScalarProperty Name="Without_Pay" ColumnName="Without_Pay" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Comp_Leave" ColumnName="Comp_Leave" />
+          <ScalarProperty Name="Ot_Apply" ColumnName="Ot_Apply" />
+          <ScalarProperty Name="Disp_Name" ColumnName="Disp_Name" />
+          <ScalarProperty Name="Tag_Type" ColumnName="Tag_Type" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinancialYears">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.FinancialYear">
+        <MappingFragment StoreEntitySet="FinancialYear">
+          <ScalarProperty Name="Is_Default" ColumnName="Is_Default" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="To_Date" ColumnName="To_Date" />
+          <ScalarProperty Name="From_Date" ColumnName="From_Date" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoDown_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.GoDown_Master">
+        <MappingFragment StoreEntitySet="GoDown_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+          <ScalarProperty Name="Under_Id" ColumnName="Under_Id" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoDown_Region">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.GoDown_Region">
+        <MappingFragment StoreEntitySet="GoDown_Region">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Under_Id" ColumnName="Under_Id" />
+          <ScalarProperty Name="GoDown_Id" ColumnName="GoDown_Id" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ledger_Group">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Ledger_Group">
+        <MappingFragment StoreEntitySet="Ledger_Group">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Nature" ColumnName="Nature" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Under_Group" ColumnName="Under_Group" />
+          <ScalarProperty Name="Short_Name" ColumnName="Short_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ledger_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Ledger_Master">
+        <MappingFragment StoreEntitySet="Ledger_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Image_Url" ColumnName="Image_Url" />
+          <ScalarProperty Name="Credit_Period_Time" ColumnName="Credit_Period_Time" />
+          <ScalarProperty Name="Mnt_Bill_By_Bill" ColumnName="Mnt_Bill_By_Bill" />
+          <ScalarProperty Name="Opeaning_Bal" ColumnName="Opeaning_Bal" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+          <ScalarProperty Name="Pin_Code" ColumnName="Pin_Code" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Pan_No" ColumnName="Pan_No" />
+          <ScalarProperty Name="Contact_Person_ContactNo" ColumnName="Contact_Person_ContactNo" />
+          <ScalarProperty Name="Contact_Person_Email" ColumnName="Contact_Person_Email" />
+          <ScalarProperty Name="Contact_Person" ColumnName="Contact_Person" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LedgerGroupTemp1">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.LedgerGroupTemp1">
+        <MappingFragment StoreEntitySet="LedgerGroupTemp1">
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="Primary" ColumnName="Primary" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Login_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Login_Master">
+        <MappingFragment StoreEntitySet="Login_Master">
+          <ScalarProperty Name="Is_Loged" ColumnName="Is_Loged" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Token_Id" ColumnName="Token_Id" />
+          <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+          <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payment_Info">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Payment_Info">
+        <MappingFragment StoreEntitySet="Payment_Info">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Bill_By_Bill" ColumnName="Bill_By_Bill" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Cheque_No" ColumnName="Cheque_No" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
+          <ScalarProperty Name="IFSC_Code" ColumnName="IFSC_Code" />
+          <ScalarProperty Name="Bank_Name" ColumnName="Bank_Name" />
+          <ScalarProperty Name="Account_No" ColumnName="Account_No" />
+          <ScalarProperty Name="Tax_Amount" ColumnName="Tax_Amount" />
+          <ScalarProperty Name="Payment_Type" ColumnName="Payment_Type" />
+          <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="VC_No" ColumnName="VC_No" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchase_Order">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Purchase_Order">
+        <MappingFragment StoreEntitySet="Purchase_Order">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Is_Receipt_Note" ColumnName="Is_Receipt_Note" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Request_Delivery_Date" ColumnName="Request_Delivery_Date" />
+          <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+          <ScalarProperty Name="Posting_Date" ColumnName="Posting_Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+          <ScalarProperty Name="Sales_Person" ColumnName="Sales_Person" />
+          <ScalarProperty Name="Pur_Order_VC_No" ColumnName="Pur_Order_VC_No" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchase_Order_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Purchase_Order_Tra">
+        <MappingFragment StoreEntitySet="Purchase_Order_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Invoice_Quantity" ColumnName="Invoice_Quantity" />
+          <ScalarProperty Name="Oreder_Quantity" ColumnName="Oreder_Quantity" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Pur_Order_Id" ColumnName="Pur_Order_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchase_Return">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Purchase_Return">
+        <MappingFragment StoreEntitySet="Purchase_Return">
+          <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Return_Type" ColumnName="Return_Type" />
+          <ScalarProperty Name="Discount_Amount" ColumnName="Discount_Amount" />
+          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+          <ScalarProperty Name="PurRet_VC_No" ColumnName="PurRet_VC_No" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="Purchase_Id" ColumnName="Purchase_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchase_Return_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Purchase_Return_Tra">
+        <MappingFragment StoreEntitySet="Purchase_Return_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Tax_Id" ColumnName="Tax_Id" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Sale_Serial_No" ColumnName="Sale_Serial_No" />
+          <ScalarProperty Name="Purchase_Serial_No" ColumnName="Purchase_Serial_No" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="PurRet_Id" ColumnName="PurRet_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quation_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Quation_Master">
+        <MappingFragment StoreEntitySet="Quation_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Fncl_Year_Id" ColumnName="Fncl_Year_Id" />
+          <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
+          <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
+          <ScalarProperty Name="Tag_Type" ColumnName="Tag_Type" />
+          <ScalarProperty Name="Quation_Type" ColumnName="Quation_Type" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Quation_VC_No" ColumnName="Quation_VC_No" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quation_Master_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Quation_Master_Tra">
+        <MappingFragment StoreEntitySet="Quation_Master_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Final_Rate" ColumnName="Final_Rate" />
+          <ScalarProperty Name="Quat_Rate" ColumnName="Quat_Rate" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Quation_Id" ColumnName="Quation_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receipt_Note">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Receipt_Note">
+        <MappingFragment StoreEntitySet="Receipt_Note">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Receipt_Date" ColumnName="Receipt_Date" />
+          <ScalarProperty Name="Purchase_Order_No" ColumnName="Purchase_Order_No" />
+          <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+          <ScalarProperty Name="Purchase_Order_Id" ColumnName="Purchase_Order_Id" />
+          <ScalarProperty Name="Receipt_Note_No" ColumnName="Receipt_Note_No" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Role_Master">
+        <MappingFragment StoreEntitySet="Role_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales_Order">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Sales_Order">
+        <MappingFragment StoreEntitySet="Sales_Order">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Is_DeliveryNote" ColumnName="Is_DeliveryNote" />
+          <ScalarProperty Name="Refered_Id" ColumnName="Refered_Id" />
+          <ScalarProperty Name="Refered_Type" ColumnName="Refered_Type" />
+          <ScalarProperty Name="Is_Refered" ColumnName="Is_Refered" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Request_Delivery_Date" ColumnName="Request_Delivery_Date" />
+          <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+          <ScalarProperty Name="Posting_Date" ColumnName="Posting_Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Sales_Person" ColumnName="Sales_Person" />
+          <ScalarProperty Name="Sales_Order_VC_No" ColumnName="Sales_Order_VC_No" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales_Order_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Sales_Order_Tra">
+        <MappingFragment StoreEntitySet="Sales_Order_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Invoice_Quantity" ColumnName="Invoice_Quantity" />
+          <ScalarProperty Name="Oreder_Quantity" ColumnName="Oreder_Quantity" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Sales_Order_Id" ColumnName="Sales_Order_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales_Return">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Sales_Return">
+        <MappingFragment StoreEntitySet="Sales_Return">
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Return_Type" ColumnName="Return_Type" />
+          <ScalarProperty Name="Discount_Amount" ColumnName="Discount_Amount" />
+          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+          <ScalarProperty Name="Fncl_Year_Id" ColumnName="Fncl_Year_Id" />
+          <ScalarProperty Name="SalesRet_VC_No" ColumnName="SalesRet_VC_No" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="Sales_Id" ColumnName="Sales_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales_Return_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Sales_Return_Tra">
+        <MappingFragment StoreEntitySet="Sales_Return_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Sale_Serial_No" ColumnName="Sale_Serial_No" />
+          <ScalarProperty Name="Tax_Id" ColumnName="Tax_Id" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="SalesRet_Id" ColumnName="SalesRet_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stock_Category">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Stock_Category">
+        <MappingFragment StoreEntitySet="Stock_Category">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Under_Category" ColumnName="Under_Category" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stock_Group">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Stock_Group">
+        <MappingFragment StoreEntitySet="Stock_Group">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Under_Group" ColumnName="Under_Group" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stock_Item">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Stock_Item">
+        <MappingFragment StoreEntitySet="Stock_Item">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Is_Auto" ColumnName="Is_Auto" />
+          <ScalarProperty Name="Image_Url" ColumnName="Image_Url" />
+          <ScalarProperty Name="Min_Qty" ColumnName="Min_Qty" />
+          <ScalarProperty Name="Starting_SerialNo" ColumnName="Starting_SerialNo" />
+          <ScalarProperty Name="Prefix_SerialNo" ColumnName="Prefix_SerialNo" />
+          <ScalarProperty Name="Sufix_SerialNo" ColumnName="Sufix_SerialNo" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stock_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Stock_Master">
+        <MappingFragment StoreEntitySet="Stock_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Min_Sale_Rate" ColumnName="Min_Sale_Rate" />
+          <ScalarProperty Name="Selling_Rate" ColumnName="Selling_Rate" />
+          <ScalarProperty Name="Max_Pur_Rate" ColumnName="Max_Pur_Rate" />
+          <ScalarProperty Name="Purchasing_Rate" ColumnName="Purchasing_Rate" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="GoDown_Id" ColumnName="GoDown_Id" />
+          <ScalarProperty Name="Fncl_Year_Id" ColumnName="Fncl_Year_Id" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Image_Url" ColumnName="Image_Url" />
+          <ScalarProperty Name="Credit_Period_Time" ColumnName="Credit_Period_Time" />
+          <ScalarProperty Name="Mnt_Bill_By_Bill" ColumnName="Mnt_Bill_By_Bill" />
+          <ScalarProperty Name="Opeaning_Bal" ColumnName="Opeaning_Bal" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Pin_Code" ColumnName="Pin_Code" />
+          <ScalarProperty Name="Pan_No" ColumnName="Pan_No" />
+          <ScalarProperty Name="Contact_Person_Contact" ColumnName="Contact_Person_Contact" />
+          <ScalarProperty Name="Contact_Person_Email" ColumnName="Contact_Person_Email" />
+          <ScalarProperty Name="Contact_Person" ColumnName="Contact_Person" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tagging_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Tagging_Master">
+        <MappingFragment StoreEntitySet="Tagging_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Card_No" ColumnName="Card_No" />
+          <ScalarProperty Name="Serial_No" ColumnName="Serial_No" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tagging_Master_Assign">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Tagging_Master_Assign">
+        <MappingFragment StoreEntitySet="Tagging_Master_Assign">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Tag_Id" ColumnName="Tag_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tagging_Master_Assign_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Tagging_Master_Assign_Tra">
+        <MappingFragment StoreEntitySet="Tagging_Master_Assign_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="New_Item_Id" ColumnName="New_Item_Id" />
+          <ScalarProperty Name="Pre_Item_Id" ColumnName="Pre_Item_Id" />
+          <ScalarProperty Name="Tag_Tra_Id" ColumnName="Tag_Tra_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tax_Deduction_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Tax_Deduction_Master">
+        <MappingFragment StoreEntitySet="Tax_Deduction_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Rate_Type" ColumnName="Rate_Type" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tax_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Tax_Master">
+        <MappingFragment StoreEntitySet="Tax_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Nature" ColumnName="Nature" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitMasters">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.UnitMaster">
+        <MappingFragment StoreEntitySet="UnitMaster">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Ratio2" ColumnName="Ratio2" />
+          <ScalarProperty Name="Ratio1" ColumnName="Ratio1" />
+          <ScalarProperty Name="No_of_Decimal" ColumnName="No_of_Decimal" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="Unit_Volume" ColumnName="Unit_Volume" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetdatafromPurchaseTra" FunctionName="INVENTORY_DBModel.Store.GetdatafromPurchaseTra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.GetdatafromPurchaseTra_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Pur_Id" ColumnName="Pur_Id" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Tax_Id" ColumnName="Tax_Id" />
+          <ScalarProperty Name="GoDown_Id" ColumnName="GoDown_Id" />
+          <ScalarProperty Name="Purchase_Serial_No" ColumnName="Purchase_Serial_No" />
+          <ScalarProperty Name="Sale_Serial_No" ColumnName="Sale_Serial_No" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetIItemlist" FunctionName="INVENTORY_DBModel.Store.GetIItemlist">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.GetIItemlist_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Is_Auto" ColumnName="Is_Auto" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetPurchaseTra" FunctionName="INVENTORY_DBModel.Store.GetPurchaseTra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.GetPurchaseTra_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Product_Code" ColumnName="Product_Code" />
+          <ScalarProperty Name="Sales_Serial" ColumnName="Sales_Serial" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetUnitNameAndAmount" FunctionName="INVENTORY_DBModel.Store.GetUnitNameAndAmount">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.GetUnitNameAndAmount_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Selling_Rate" ColumnName="Selling_Rate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_Challan_Details" FunctionName="INVENTORY_DBModel.Store.Pr_Challan_Details" />
+    <FunctionImportMapping FunctionImportName="Pr_CommonList" FunctionName="INVENTORY_DBModel.Store.Pr_CommonList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_CommonList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Under_Name" ColumnName="Under_Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_CreateDashBoardData" FunctionName="INVENTORY_DBModel.Store.Pr_CreateDashBoardData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_CreateDashBoardData_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TagName" ColumnName="TagName" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_DeleteCommonTblRcrd" FunctionName="INVENTORY_DBModel.Store.Pr_DeleteCommonTblRcrd" />
+    <FunctionImportMapping FunctionImportName="Pr_DeleteStock_Item" FunctionName="INVENTORY_DBModel.Store.Pr_DeleteStock_Item" />
+    <FunctionImportMapping FunctionImportName="Pr_Delivery_Note_Tra" FunctionName="INVENTORY_DBModel.Store.Pr_Delivery_Note_Tra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_Delivery_Note_Tra_Result">
+          <ScalarProperty Name="Sales_Tra_Id" ColumnName="Sales_Tra_Id" />
+          <ScalarProperty Name="Order_No" ColumnName="Order_No" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Oreder_Quantity" ColumnName="Oreder_Quantity" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PurTra_Id" ColumnName="PurTra_Id" />
+          <ScalarProperty Name="Sales_Serial_No" ColumnName="Sales_Serial_No" />
+          <ScalarProperty Name="Purchase_Serial_No" ColumnName="Purchase_Serial_No" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_DeliveryNoteList" FunctionName="INVENTORY_DBModel.Store.Pr_DeliveryNoteList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_DeliveryNoteList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sales_Order_Id" ColumnName="Sales_Order_Id" />
+          <ScalarProperty Name="Sales_Order_No" ColumnName="Sales_Order_No" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Delivery_Note_No" ColumnName="Delivery_Note_No" />
+          <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+          <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_PaymentList" FunctionName="INVENTORY_DBModel.Store.Pr_PaymentList" />
+    <FunctionImportMapping FunctionImportName="Pr_Purchase_Order_List" FunctionName="INVENTORY_DBModel.Store.Pr_Purchase_Order_List">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_Purchase_Order_List_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+          <ScalarProperty Name="Order_No" ColumnName="Order_No" />
+          <ScalarProperty Name="Request_Delivery_Date" ColumnName="Request_Delivery_Date" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Sales_Person" ColumnName="Sales_Person" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_PurchaseList" FunctionName="INVENTORY_DBModel.Store.Pr_PurchaseList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_PurchaseList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Chalan_No" ColumnName="Chalan_No" />
+          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+          <ScalarProperty Name="Discount_Amount" ColumnName="Discount_Amount" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Is_Bill_Gen" ColumnName="Is_Bill_Gen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_Receipt_Note_Tra" FunctionName="INVENTORY_DBModel.Store.Pr_Receipt_Note_Tra">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_Receipt_Note_Tra_Result">
+          <ScalarProperty Name="Purchase_Tra_Id" ColumnName="Purchase_Tra_Id" />
+          <ScalarProperty Name="Order_No" ColumnName="Order_No" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Oreder_Quantity" ColumnName="Oreder_Quantity" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PurTra_Id" ColumnName="PurTra_Id" />
+          <ScalarProperty Name="Sales_Serial_No" ColumnName="Sales_Serial_No" />
+          <ScalarProperty Name="Purchase_Serial_No" ColumnName="Purchase_Serial_No" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_ReceiptNoteList" FunctionName="INVENTORY_DBModel.Store.Pr_ReceiptNoteList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_ReceiptNoteList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Purchae_Order_Id" ColumnName="Purchae_Order_Id" />
+          <ScalarProperty Name="Purchase_Order_No" ColumnName="Purchase_Order_No" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+          <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Receipt_Note_No" ColumnName="Receipt_Note_No" />
+          <ScalarProperty Name="Receipt_Date" ColumnName="Receipt_Date" />
+          <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_RegionList" FunctionName="INVENTORY_DBModel.Store.Pr_RegionList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_RegionList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Under_Name" ColumnName="Under_Name" />
+          <ScalarProperty Name="GoDwon_Name" ColumnName="GoDwon_Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_Sales_Order_List" FunctionName="INVENTORY_DBModel.Store.Pr_Sales_Order_List">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_Sales_Order_List_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+          <ScalarProperty Name="Order_No" ColumnName="Order_No" />
+          <ScalarProperty Name="Request_Delivery_Date" ColumnName="Request_Delivery_Date" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Sales_Person" ColumnName="Sales_Person" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_SalesList" FunctionName="INVENTORY_DBModel.Store.Pr_SalesList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_SalesList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Chalan_No" ColumnName="Chalan_No" />
+          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+          <ScalarProperty Name="Discount_Amount" ColumnName="Discount_Amount" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Is_Bill_Gen" ColumnName="Is_Bill_Gen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_StockMasterList" FunctionName="INVENTORY_DBModel.Store.Pr_StockMasterList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_StockMasterList_Result">
+          <ScalarProperty Name="Stock_Id" ColumnName="Stock_Id" />
+          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Selling_Rate" ColumnName="Selling_Rate" />
+          <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
+          <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+          <ScalarProperty Name="Unit_Name" ColumnName="Unit_Name" />
+          <ScalarProperty Name="No_of_Decimal" ColumnName="No_of_Decimal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Customerinfo" FunctionName="INVENTORY_DBModel.Store.sp_Customerinfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.sp_Customerinfo_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Image_Url" ColumnName="Image_Url" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Pan_No" ColumnName="Pan_No" />
+          <ScalarProperty Name="Pin_Code" ColumnName="Pin_Code" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+          <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+          <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="Opeaning_Bal" ColumnName="Opeaning_Bal" />
+          <ScalarProperty Name="Mnt_Bill_By_Bill" ColumnName="Mnt_Bill_By_Bill" />
+          <ScalarProperty Name="Credit_Period_Time" ColumnName="Credit_Period_Time" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_DashSalePurc" FunctionName="INVENTORY_DBModel.Store.SP_DashSalePurc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.SP_DashSalePurc_Result">
+          <ScalarProperty Name="Months" ColumnName="Months" />
+          <ScalarProperty Name="TotalPurchase" ColumnName="TotalPurchase" />
+          <ScalarProperty Name="TotalSale" ColumnName="TotalSale" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_Purchase_Order_List" FunctionName="INVENTORY_DBModel.Store.SP_Purchase_Order_List">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.SP_Purchase_Order_List_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+          <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+          <ScalarProperty Name="Order_No" ColumnName="Order_No" />
+          <ScalarProperty Name="Request_Delivery_Date" ColumnName="Request_Delivery_Date" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Sales_Person" ColumnName="Sales_Person" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_PurchaseData" FunctionName="INVENTORY_DBModel.Store.Sp_PurchaseData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Sp_PurchaseData_Result">
+          <ScalarProperty Name="Pur_Id" ColumnName="Pur_Id" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Tax_Id" ColumnName="Tax_Id" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_SalesPurYearly" FunctionName="INVENTORY_DBModel.Store.SP_SalesPurYearly" />
+    <FunctionImportMapping FunctionImportName="Sp_StockItemInfo" FunctionName="INVENTORY_DBModel.Store.Sp_StockItemInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Sp_StockItemInfo_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+          <ScalarProperty Name="Unit_Id" ColumnName="Unit_Id" />
+          <ScalarProperty Name="Image_Url" ColumnName="Image_Url" />
+          <ScalarProperty Name="Min_Qty" ColumnName="Min_Qty" />
+          <ScalarProperty Name="Start_From" ColumnName="Start_From" />
+          <ScalarProperty Name="Prefix_SerialNo" ColumnName="Prefix_SerialNo" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_Supplierinfo" FunctionName="INVENTORY_DBModel.Store.Sp_Supplierinfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Sp_Supplierinfo_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Alias_Name" ColumnName="Alias_Name" />
+          <ScalarProperty Name="Image_Url" ColumnName="Image_Url" />
+          <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Pan_No" ColumnName="Pan_No" />
+          <ScalarProperty Name="Pin_Code" ColumnName="Pin_Code" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="Opeaning_Bal" ColumnName="Opeaning_Bal" />
+          <ScalarProperty Name="Mnt_Bill_By_Bill" ColumnName="Mnt_Bill_By_Bill" />
+          <ScalarProperty Name="Credit_Period_Time" ColumnName="Credit_Period_Time" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateQtyAndIsActive_PurchaseTra" FunctionName="INVENTORY_DBModel.Store.UpdateQtyAndIsActive_PurchaseTra" />
+    <EntitySetMapping Name="Purchase_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Purchase_Master">
+        <MappingFragment StoreEntitySet="Purchase_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Is_Bill_Gen" ColumnName="Is_Bill_Gen" />
+          <ScalarProperty Name="Refered_Id" ColumnName="Refered_Id" />
+          <ScalarProperty Name="Refered_Type" ColumnName="Refered_Type" />
+          <ScalarProperty Name="Is_Refered" ColumnName="Is_Refered" />
+          <ScalarProperty Name="Bal_Amount" ColumnName="Bal_Amount" />
+          <ScalarProperty Name="Paid_Amount" ColumnName="Paid_Amount" />
+          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+          <ScalarProperty Name="Tax_Amount" ColumnName="Tax_Amount" />
+          <ScalarProperty Name="Discount_Amount" ColumnName="Discount_Amount" />
+          <ScalarProperty Name="Fncl_Year_Id" ColumnName="Fncl_Year_Id" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="Supplier_Id" ColumnName="Supplier_Id" />
+          <ScalarProperty Name="Pur_VC_No" ColumnName="Pur_VC_No" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchase_Master_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Purchase_Master_Tra">
+        <MappingFragment StoreEntitySet="Purchase_Master_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Sale_Serial_No" ColumnName="Sale_Serial_No" />
+          <ScalarProperty Name="Purchase_Serial_No" ColumnName="Purchase_Serial_No" />
+          <ScalarProperty Name="GoDown_Id" ColumnName="GoDown_Id" />
+          <ScalarProperty Name="Tax_Id" ColumnName="Tax_Id" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Pur_Id" ColumnName="Pur_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchase_Master_TaxDetails">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Purchase_Master_TaxDetails">
+        <MappingFragment StoreEntitySet="Purchase_Master_TaxDetails">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Tax_Amount" ColumnName="Tax_Amount" />
+          <ScalarProperty Name="Tax_Rate" ColumnName="Tax_Rate" />
+          <ScalarProperty Name="Tax_Id" ColumnName="Tax_Id" />
+          <ScalarProperty Name="Pur_VC_No" ColumnName="Pur_VC_No" />
+          <ScalarProperty Name="Pur_Id" ColumnName="Pur_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales_Master_TaxDetails">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Sales_Master_TaxDetails">
+        <MappingFragment StoreEntitySet="Sales_Master_TaxDetails">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Tax_Amount" ColumnName="Tax_Amount" />
+          <ScalarProperty Name="Tax_Rate" ColumnName="Tax_Rate" />
+          <ScalarProperty Name="Tax_Id" ColumnName="Tax_Id" />
+          <ScalarProperty Name="Sales_VC_No" ColumnName="Sales_VC_No" />
+          <ScalarProperty Name="Sales_Id" ColumnName="Sales_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales_Master_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Sales_Master_Tra">
+        <MappingFragment StoreEntitySet="Sales_Master_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Sale_Serial_No" ColumnName="Sale_Serial_No" />
+          <ScalarProperty Name="GoDown_Id" ColumnName="GoDown_Id" />
+          <ScalarProperty Name="Tax_Id" ColumnName="Tax_Id" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Sales_Id" ColumnName="Sales_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetMaxId" FunctionName="INVENTORY_DBModel.Store.GetMaxId" />
+    <FunctionImportMapping FunctionImportName="PR_GetPendingBillList" FunctionName="INVENTORY_DBModel.Store.PR_GetPendingBillList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.PR_GetPendingBillList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VC_No" ColumnName="VC_No" />
+          <ScalarProperty Name="Bill_Amount" ColumnName="Bill_Amount" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Paid_Amount" ColumnName="Paid_Amount" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_UpdateDeliveryNote" FunctionName="INVENTORY_DBModel.Store.Pr_UpdateDeliveryNote" />
+    <FunctionImportMapping FunctionImportName="Pr_UpdatePayment" FunctionName="INVENTORY_DBModel.Store.Pr_UpdatePayment" />
+    <FunctionImportMapping FunctionImportName="Pr_UpdatePurchaseOrder" FunctionName="INVENTORY_DBModel.Store.Pr_UpdatePurchaseOrder" />
+    <FunctionImportMapping FunctionImportName="Pr_UpdateQuationkMaster" FunctionName="INVENTORY_DBModel.Store.Pr_UpdateQuationkMaster" />
+    <FunctionImportMapping FunctionImportName="Pr_UpdateReceiptNote" FunctionName="INVENTORY_DBModel.Store.Pr_UpdateReceiptNote" />
+    <FunctionImportMapping FunctionImportName="Pr_UpdateSalesOrder" FunctionName="INVENTORY_DBModel.Store.Pr_UpdateSalesOrder" />
+    <FunctionImportMapping FunctionImportName="sp_OpeningBalData" FunctionName="INVENTORY_DBModel.Store.sp_OpeningBalData" />
+    <FunctionImportMapping FunctionImportName="Update_stock_and_Tra" FunctionName="INVENTORY_DBModel.Store.Update_stock_and_Tra" />
+    <EntitySetMapping Name="Receipt_Note_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Receipt_Note_Tra">
+        <MappingFragment StoreEntitySet="Receipt_Note_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Pur_Tra_Id" ColumnName="Pur_Tra_Id" />
+          <ScalarProperty Name="Received_Quantity" ColumnName="Received_Quantity" />
+          <ScalarProperty Name="Order_Quantity" ColumnName="Order_Quantity" />
+          <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+          <ScalarProperty Name="Receipt_Note_Id" ColumnName="Receipt_Note_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payment_Info_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Payment_Info_Tra">
+        <MappingFragment StoreEntitySet="Payment_Info_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Tag_Type" ColumnName="Tag_Type" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Purchas_Id" ColumnName="Purchas_Id" />
+          <ScalarProperty Name="Payment_Id" ColumnName="Payment_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales_Master">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Sales_Master">
+        <MappingFragment StoreEntitySet="Sales_Master">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Refered_Id" ColumnName="Refered_Id" />
+          <ScalarProperty Name="Refered_Type" ColumnName="Refered_Type" />
+          <ScalarProperty Name="Is_Refered" ColumnName="Is_Refered" />
+          <ScalarProperty Name="Bal_Amount" ColumnName="Bal_Amount" />
+          <ScalarProperty Name="Receipt_Amount" ColumnName="Receipt_Amount" />
+          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+          <ScalarProperty Name="Tax_Amount" ColumnName="Tax_Amount" />
+          <ScalarProperty Name="Discount_Amount" ColumnName="Discount_Amount" />
+          <ScalarProperty Name="Fncl_Year_Id" ColumnName="Fncl_Year_Id" />
+          <ScalarProperty Name="Is_Bill_Gen" ColumnName="Is_Bill_Gen" />
+          <ScalarProperty Name="Sales_VC_No" ColumnName="Sales_VC_No" />
+          <ScalarProperty Name="DATE" ColumnName="DATE" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receipt_Info">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Receipt_Info">
+        <MappingFragment StoreEntitySet="Receipt_Info">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Bill_By_Bill" ColumnName="Bill_By_Bill" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Cheque_No" ColumnName="Cheque_No" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Receipt_Date" ColumnName="Receipt_Date" />
+          <ScalarProperty Name="IFSC_Code" ColumnName="IFSC_Code" />
+          <ScalarProperty Name="Bank_Name" ColumnName="Bank_Name" />
+          <ScalarProperty Name="Account_No" ColumnName="Account_No" />
+          <ScalarProperty Name="Tax_Amount" ColumnName="Tax_Amount" />
+          <ScalarProperty Name="Receipt_Type" ColumnName="Receipt_Type" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="VC_No" ColumnName="VC_No" />
+          <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receipt_Info_Tra">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Receipt_Info_Tra">
+        <MappingFragment StoreEntitySet="Receipt_Info_Tra">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Tag_Type" ColumnName="Tag_Type" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Sales_Id" ColumnName="Sales_Id" />
+          <ScalarProperty Name="Receipt_Id" ColumnName="Receipt_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Pr_UpdateReceipt" FunctionName="INVENTORY_DBModel.Store.Pr_UpdateReceipt" />
+    <EntitySetMapping Name="Advance_Info">
+      <EntityTypeMapping TypeName="INVENTORY_DBModel.Advance_Info">
+        <MappingFragment StoreEntitySet="Advance_Info">
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="Modified_Date" ColumnName="Modified_Date" />
+          <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+          <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="Tag_Type" ColumnName="Tag_Type" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Pr_PurchaseReturnTra" FunctionName="INVENTORY_DBModel.Store.Pr_PurchaseReturnTra" />
+    <FunctionImportMapping FunctionImportName="Pr_SalesReturnTra" FunctionName="INVENTORY_DBModel.Store.Pr_SalesReturnTra" />
+    <FunctionImportMapping FunctionImportName="Pr_GetPendingBal" FunctionName="INVENTORY_DBModel.Store.Pr_GetPendingBal">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_GetPendingBal_Result">
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Advance" ColumnName="Advance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_DashOrderQuats" FunctionName="INVENTORY_DBModel.Store.Pr_DashOrderQuats">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_DashOrderQuats_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_ManageStock" FunctionName="INVENTORY_DBModel.Store.SP_ManageStock">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.SP_ManageStock_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+          <ScalarProperty Name="Min_Qty" ColumnName="Min_Qty" />
+          <ScalarProperty Name="Total_Qty" ColumnName="Total_Qty" />
+          <ScalarProperty Name="Selling_Rate" ColumnName="Selling_Rate" />
+          <ScalarProperty Name="Purchase_Rate" ColumnName="Purchase_Rate" />
+          <ScalarProperty Name="ManageStock" ColumnName="ManageStock" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Pr_QuationList" FunctionName="INVENTORY_DBModel.Store.Pr_QuationList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="INVENTORY_DBModel.Pr_QuationList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
+          <ScalarProperty Name="Quation_Date" ColumnName="Quation_Date" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
+          <ScalarProperty Name="Fncl_Year_Id" ColumnName="Fncl_Year_Id" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Is_Approved" ColumnName="Is_Approved" />
+          <ScalarProperty Name="Quation_Chalan_No" ColumnName="Quation_Chalan_No" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Quation_Type" ColumnName="Quation_Type" />
+          <ScalarProperty Name="Tag_Type" ColumnName="Tag_Type" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

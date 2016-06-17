@@ -1,0 +1,180 @@
+﻿@model List<ViewModel.Common.Unit>
+ @{
+     var grid = new WebGrid(Model, canPage: true, canSort: true, selectionFieldName: "selectedRow", rowsPerPage: 20, ajaxUpdateContainerId: "gridcontent");
+     grid.Pager(WebGridPagerModes.All);        
+  }
+
+<script>
+
+    var RowId = 0;
+    function OpenDelModal(Id)
+    {
+        RowId = Id;
+        $('#DeleteCmnModal').modal({backdrop:'static'});
+    }
+
+  
+    function Delete()
+    {
+        $.ajax({
+            url: '@Url.Action("DeleteUnit", "Units")',
+            type: 'Get',
+            datatype: 'json',
+            data: { Id: RowId },
+            success: function (data) {
+
+                @*$('#content').load("@Url.Action("List", "Units", new { area = "Masters" })");*@
+                $('#content').html(data);
+                $('#DeleteCmnModal').modal('hide');
+            },
+
+        error: function () {
+        alert('Error');
+        }
+     });
+      
+   }
+
+    function Search()
+    {
+        var data = $('#searchtxt').val().trim();
+        
+        $('#content').load("@Url.Action("List", "Units", new { area = "Masters" })?search=" + data);
+    }
+</script>
+
+<div class="panel">
+<div class="panel-heading  bg-margenta">
+    <div class="row">
+
+        <div class="col-md-6">
+            <i class="fa fa-list"></i>
+            <span>Unit Master</span>
+
+        </div>
+
+        <div class="col-md-6">
+            <div align="right">
+                @Ajax.ActionLink("New", "Create", "Units", new { area = "Masters", Id = 0 }, new AjaxOptions
+             {
+                 UpdateTargetId = "content",
+                 HttpMethod = "GET",
+                 InsertionMode = InsertionMode.Replace,
+             }, new { @Class = "btn btn-default btn-xs btn-flat hgt", })
+
+
+                <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                <input type="text" placeholder="Search Here" class="hgt" id="searchtxt" />
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-search" id="searchbtn" onclick="Search();"></button>
+                @Ajax.ActionLink(" ", "List", "Units", new { @area = "Masters" }, new AjaxOptions { UpdateTargetId = "content", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default btn-xs btn-flat hgt fa fa-refresh" })
+              
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+  <div class="panel-body" id="gridcontent">
+        @grid.GetHtml(tableStyle: "table  table-responsive table-striped table-bordered table-hover topmrgn5px",
+        columns:grid.Columns(
+        grid.Column("S.No", format:item=>item.WebGrid.Rows.IndexOf(item)+1),
+        grid.Column("Name", "Name"),
+        grid.Column("AliasName", " Alias Name"),
+        grid.Column("No_of_Decimal", "No of Decimal"),
+        grid.Column("Remarks", "Remarks"),
+      
+      
+       grid.Column(header:"Action",format:(item)=>new HtmlString(
+
+       @Ajax.ActionLink(" ", "Create", "Units", new { area = "Masters", Id = item.Id }, new AjaxOptions
+       {
+
+      UpdateTargetId = "content", HttpMethod = "GET",  InsertionMode = InsertionMode.Replace,
+      }, new { @Class = "btn btn-default fa fa-pencil",@title="Edit" }).ToString()+
+              
+     @Ajax.ActionLink(" ", " ", " ", null, new AjaxOptions
+    {
+       UpdateTargetId = "DeleteCmnModal", HttpMethod = "GET", InsertionMode = InsertionMode.Replace,
+    }, new { @Class = "btn btn-default fa fa-trash-o", @title = "Delete", @onclick = "OpenDelModal('"+item.Id+"')" }).ToString()
+                     
+     ))
+                  
+        
+        ))
+
+        @*<table class="table  table-responsive table-striped table-bordered table-hover topmrgn5px">
+            <tr>
+                <td>
+                    Ledger Name
+                </td>
+                <td>
+                    Alias Name
+                </td>
+
+                <td>
+                    Remarks
+                </td>
+
+                <td colspan="2">Action</td>
+            </tr>
+            @if (Model.Count != 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(x => item.Name)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.AliasName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(x => item.Remarks)
+                        </td>
+
+                        <td>
+                            @Ajax.ActionLink(" ", "Create", "Units", new { area = "Masters", Id = item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "fa fa-pencil", })
+
+
+                        </td>
+                        <td>
+                            @Ajax.ActionLink(" ", "Create", "Units", new { area = "Masters", item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "fa fa-trash-o", })
+                        </td>
+                    </tr>
+                }
+
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">
+                        No Records found..
+                    </td>
+                </tr>
+            }
+
+
+        </table>*@
+    </div>
+
+</div>
+
+

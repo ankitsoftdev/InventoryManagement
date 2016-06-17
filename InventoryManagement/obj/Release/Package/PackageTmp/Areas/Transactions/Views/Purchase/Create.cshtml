@@ -1,0 +1,416 @@
+﻿@model ViewModel.Ledger.PurchaseMaster
+@{
+    var flag=TempData["PurchaseOrderDetails"]==null?"false":"true";
+}
+@*<script src="~/Themes/Scripts/jquery-ui-1.8.24.min.js"></script>*@
+@*<link href="~/Themes/Content/jquery-ui-1.9.0.custom.css" rel="stylesheet" />
+<script src="~/Themes/Scripts/jquery-ui-1.9.0.min.js"></script>*@
+
+
+@*<script src="~/Themes/Scripts/jquery-2.1.3.min.js"></script>*@
+<script>
+    $(function () {
+       
+        // AutoComplete();
+        
+        $("#Supplier_Id").customselect();
+        
+        if ($('#hdnflag').val() == 'true') {
+            
+            $(".custom-select").children().unbind('click')
+        }
+    });
+    function AutoComplete(id, url) {
+        $('#Supplier_Name').autocomplete({
+            source: function (request, response) {
+                var autocompleteUrl = '@Url.Action("GetSupplier", "Purchase", new { @area = "Transactions" })?searchText=' + request.term;
+                $.ajax({
+                    url: autocompleteUrl,
+                    type: 'GET',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (json) {
+                        response($.map(json, function (data, id) {
+                            //alert(data);
+                            return {
+
+                                label: data.Name,
+                                Name: data.Name,
+                                //Email: data.Email,
+                                //Address: data.Address,
+                                Id: data.Id,
+                            };
+                        }));
+                    },
+                    //error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    //  //  console.log('some error occured', textStatus, errorThrown);
+                    //}
+                });
+            },
+
+            minLength: 1,
+            select: function (event, ui) {
+                $('#Supplier_Name').val(ui.item.label)
+                $('#Supplier_Id').val(ui.item.Id)
+               // GetValuesByCode(ui.item);
+                return false;
+            }
+        });
+    }
+</script>
+@using (Ajax.BeginForm("Create", "Purchase", new { area = "Transactions" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+         
+             <div class="col-lg-12">
+                 <div class="panel">
+
+                     <div class="panel-heading bg-margenta"><span>Purchase Master</span> </div>
+
+                     <div class="panel-body">
+                         <input type="hidden" id="hdnflag" value="@flag" />
+
+                         <div class="row">
+                             <div class="col-md-3">
+                                 <div class="editor-label">
+                                     @Html.Label("Name")
+                                     @Html.HiddenFor(x => x.Id)
+                                     @Html.HiddenFor(x=>x.orderId)
+                                     <div class="editor-field">
+                                         @*@Html.DropDownListFor(x => x.Supplier_Id, new SelectList(Model.TaxList, "Id", "Name", Model.Supplier_Id), "Cash", new { @class = "form-control" })*@
+                                         @*@Html.TextBox("Supplier_Name", null, new { @placeholder = "Supplier Name", @class = "form-control", @id = "Supplier_Name" })*@
+                                         @Html.DropDownListFor(x => x.Supplier_Id, new SelectList(Model.TaxList, "Id", "Name", Model.Supplier_Id), new { @class = "custom-select form-control" })
+                                        @* @Html.HiddenFor(x => x.Supplier_Id)*@
+                                         @Html.ValidationMessageFor(x => Model.Supplier_Id, null, new { @style = "color:red;" })
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-3">
+                                 <div class="editor-label">
+
+                                     @Html.Label("Challan No")
+
+                                 </div>
+                                 <div class="editor-field">
+                                     @Html.TextBoxFor(x => Model.Challan_Number, new { @placeholder = "Challan Number", @class = "form-control", @readonly = "readonly" })
+
+
+                                     @Html.ValidationMessageFor(x => Model.Challan_Number, null, new { @style = "color:red;" })
+                                 </div>
+                             </div>
+                             <div class="col-md-3">
+                                 <div class="editor-label">
+                                     @Html.Label("Purchase Date")
+                                 </div>
+                                 <div class="editor-field">
+
+                                     @Html.TextBoxFor(x => Model.Purchase_Date, new { @class = "form-control", @Value = Model.Purchase_Date.ToString("yyyy-MM-dd"), required = true })
+                                     @Html.ValidationMessageFor(x => x.Purchase_Date, null, new { @style = "color:red;" })
+                                 </div>
+                             </div>
+                             <div class="col-md-3">
+                                 <div class="editor-label">
+                                     @Html.Label("Remarks")
+                                 </div>
+                                 <div class="editor-field">
+
+                                     @Html.TextBoxFor(x => Model.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+                                     @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+                                 </div>
+                             </div>
+                         </div> 
+                         <div class="row topmrgn5px">
+                             <div class="col-md-12">
+                                 @*@{ Html.RenderPartial("ItemList" ,"Purchase",Model.purchase_tra);}*@
+                                 @*@{Html.RenderPartial("ItemList", Model.purchase_tra);}*@
+                                 @Html.Partial("ItemList", Model.purchase_tra, new ViewDataDictionary
+                            {
+                                TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "purchase_tra" }
+                            })
+                                 
+                             </div>
+
+                         </div>
+
+                         
+
+                          <div class="row">
+                              <div class="col-md-8 offset">
+                                
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="" align="center">
+                                      <label> Total :- &nbsp;&nbsp; <span id="Discount_Amount"></span></label>   
+                                       @Html.HiddenFor(x => x.Discount)
+                                  </div>
+                              </div>
+                             <div class="col-md-12">
+                                 <div> 
+                                    
+                                     <span class="pull-right" id="GrTotal" style="font-weight:bold;">                                        
+                                         
+                                     </span>
+                                     
+                                   
+                                    
+
+                                 </div> 
+                                 <button type="submit" class="btn btn-primary " onclick="Validation(); return ValidationForTax();">Save </button>
+                                 @Html.ActionLink("Cancel", "Index", "Purchase", new { @class = "btn btn-default" })
+
+                             </div>
+
+                             </div>
+                         
+                     </div>
+
+                 </div>
+             </div>
+        
+         </div>
+    
+}
+
+<script>
+ 
+    $(function () {
+        var disc =@Model.Discount
+         
+        $('#Discount_Amount').html(disc);
+        //fn_Show(0);
+        fn_LoadItemList();
+        //fn_Addrow();
+        //  fn_GetGrandTotalAmount();
+      //  fn_CalGrandTotal();
+
+        $('#Purchase_Date').datepicker({ dateFormat: 'dd-mm-yy' });
+
+        @*$('#TaxId').change(function () {
+          
+            $.getJSON("@Url.Action("GetTaxRate", "Tax", new {area="Masters" })", { Id: $('#TaxId').val() }, function (data) {
+              
+                $('#Tax_Rate').val(data);
+                fn_CalTaxAmt();
+            });
+          
+          
+        });*@
+
+       
+    });
+    function GetTaxRates(item) {
+        
+        var row = $(item).parent().parent();
+        var txtid = $(row).find('td:eq(0) select').val();
+        
+        $.getJSON("@Url.Action("GetTaxRate", "Tax", new {area="Masters" })", { Id: txtid }, function (data) {
+           
+            $(row).find('td:eq(1) input').val(data);
+            fn_CalTaxAmt(row);
+        });
+           
+    }
+    function myFunction(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var ItemId = tr.find('td:eq(0) select').val();
+        
+        if (ItemId != 0) {
+
+            $(".decimal").on("keypress keyup blur", function (event) {
+
+
+                //this.value = this.value.replace(/[^0-9\.]/g,'');
+                $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+                if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            });
+        }
+        else {
+            alert('First Select Item Please !')
+            tr.find('td:eq(0) select').focus();
+        }
+    }
+    var arr = new Array();
+    function fn_Append(i, tr) {
+        arr = { Item_Id: 'Item_Id', GoDownId: 'GoDownId', Qty: 'Qty', Rate: 'Rate', Unit_Name: 'Unit_Name', Total_Amount: 'Total_Amount', Status: 'Status', Id: "Id" };
+        var j = 0;
+        $.each(arr, function (item, k) {
+            var control = j == 0 ? 'td:eq(' + j + ') select' : j == 1 ? 'td:eq(' + j + ') select': j == 3 ? 'td:eq(' + j + ') input' : 'td:eq(' + j + ') input';
+            var name = j == 0 ? item : j == 1 ? item : j == 2 ? item : j == 3 ? item : j == 4 ? item : item;
+
+            $(tr).find(control).attr('name', 'listpurchase_tra[' + i + '].' + name);
+            $(tr).find(control).attr('id', 'listpurchase_tra[' + i + '].' + name);
+
+            j++;
+        })
+      //  fn_GetGrandTotalAmount(obj);
+    }
+    // Get Max Id
+  
+    
+    function fn_LoadItemList() {
+        //debugger;
+        //alert('hi');
+        var len = $("#tblItem tbody tr").length - 1
+        for (var i = 0; i < len; i++) {
+            if (i < len) {
+                $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(7) a').attr("class", "btn-sm btn vd_btn vd_bg-red fa fa-times");
+                $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(7) a').text('Delete');
+            }
+
+
+
+        }
+
+    }
+
+    @*--------------*@
+
+
+  
+        
+
+    function fn_CalGrandTotal()
+    {
+        
+        var t = 0.00;
+        $('#tblItem tbody tr').each(function (index, item) {
+          //  var st = $(this).find('#listpurchase_tra[' + index + '].Status').val();
+          
+            //if (st == 'True' || st=='true' || st==true) {
+            var tm = $(this).find('td:eq(5) input[type=text]').val();
+          
+                t = parseFloat(t) + parseFloat(tm);
+            //}
+
+        });
+        
+        return t;
+      
+    }
+
+    
+
+    //------Add Tax
+    function fn_Show(Tag)
+    {
+       
+        if (Tag == 1) {
+             
+            $('#TaxDetails').show();
+            //$('#DisCountDetails').hide();
+        }
+        else if(Tag==2)
+        {
+           // $('#TaxDetails').hide();
+            $('#DisCountDetails').show();
+        }
+        else
+        {
+            $('#TaxDetails').hide();
+            $('#DisCountDetails').hide();
+        }
+    }
+    function fn_CalTaxAmt(item)
+    {
+       
+        // var taxrate = $('#Tax_Rate').val();
+        var taxrate = $(item).find('td:eq(1) input').val();        
+        var Gtotal = fn_CalGrandTotal();        
+        var taxamt = (parseFloat(taxrate) * parseFloat(Gtotal)) / 100;
+         $(item).find('td:eq(2) input').val(parseFloat((parseFloat(Gtotal)* parseFloat(taxrate))/100))
+         Gtotal = parseFloat($('#purchase_tra_Grand_Total').val()) + parseFloat(taxamt);
+        
+        
+        // $('#Tax_Amount').val(taxamt != isNaN ? taxamt : 0.00);
+            $(item).find('td:eq(2)').val(taxamt != isNaN ? taxamt : 0.00);
+
+       
+
+         $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+         $('#purchase_tra_Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+           
+
+            $('#totalTax').val()
+
+    }
+    function fn_DelTaxDetails()
+    {
+         
+        var taxrate = $('#Tax_Rate').val();
+        var Gtotal = fn_CalGrandTotal();
+
+        var taxamt = (parseFloat(taxrate) * parseFloat(Gtotal)) / 100;
+        if ($('#Discount_Rate').val() > 0) {
+            Gtotal = parseFloat($('#Grand_Total').val()) - parseFloat(taxamt);
+        }
+       
+        $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+        $('#Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+        $('#Tax_Amount').val(0.00);
+        $('#Tax_Rate').val(0.00);
+        $('#TaxId').val(0);
+        $('#TaxDetails').hide();
+        fn_CalDiscountByRate()
+    }
+    function fn_CalDiscountByRate() {
+      //  debugger;
+      
+       // alert(Tag);
+        var Disrate = 0.0;
+        var Disamt = 0.0;
+        var Gtotal = fn_CalGrandTotal();
+         Disrate = parseFloat($('#Discount_Rate').val());
+         Disamt = (parseFloat(Disrate) * parseFloat(Gtotal)) / 100;
+         Gtotal = parseFloat(Gtotal) - parseFloat(Disamt);
+        $('#Discount_Rate').val(Disrate != isNaN ? Disrate : 0.00);
+        $('#Discount').val(Disamt != isNaN ? Disamt : 0.00);
+        $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+        $('#Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+
+    }
+    function fn_CalDiscountByAmount() {
+        //  debugger;
+
+        // alert(Tag);
+        var Disrate = 0.0;
+        var Disamt = 0.0;
+        var Gtotal = fn_CalGrandTotal();
+        Disamt = parseFloat($('#Discount').val());
+        Disrate = Disamt * 100 / parseFloat(Gtotal);
+        Gtotal = parseFloat(Gtotal) - parseFloat(Disamt);
+        $('#Discount_Rate').val(Disrate != isNaN ? Disrate : 0.00);
+        $('#Discount').val(Disamt != isNaN ? Disamt : 0.00);
+        $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+        $('#Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+
+    }
+    function fn_DelDiscount()
+    {
+        var Disrate = 0.0;
+        var Disamt = 0.0;
+        var Gtotal = fn_CalGrandTotal();
+        Disrate = parseFloat($('#Discount_Rate').val());
+        Disamt = (parseFloat(Disrate) * parseFloat(Gtotal)) / 100;
+       
+        if ($('#Tax_Rate').val() >= 1)
+        {
+            Gtotal = parseFloat($('#Grand_Total').val()) - parseFloat(Disamt);
+        }
+     
+        
+        $('#Discount_Rate').val(0.00);
+        $('#Discount').val(0.00);
+        $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+        $('#Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+        $('#DisCountDetails').hide();
+        fn_CalTaxAmt();
+    }
+
+  
+
+</script>

@@ -1,0 +1,381 @@
+﻿@model ViewModel.Transactions.SalesOrderInfo
+
+
+@using (Ajax.BeginForm("SalesOrderByQuation", "SalesOrder", new { area = "Transactions" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+
+        <div class="col-lg-9">
+            <div class="panel">
+
+                <div class="panel-heading bg-margenta"><span>Sales Order</span> </div>
+
+                <div class="panel-body">
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Order No")
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(x => x.Order_No, new { @placeholder = "Order No", @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(x => Model.Order_No, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Name")
+                                @Html.HiddenFor(x => x.Id)
+                                @Html.HiddenFor(x=>x.Quation_Id)
+                                @Html.HiddenFor(x=>x.Customer_Id)
+                                <div class="editor-field">
+                                   
+                                    @Html.TextBoxFor(x => x.Customer_Name, new { @class = "form-control",@readonly="readonly" })
+                                  
+                                   
+                                    @Html.ValidationMessageFor(x => x.Customer_Name, null, new { @style = "color:red;" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Email Id")
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(x => x.Email, new { @placeholder = "Email", @class = "form-control", @readonly = "readonly" })
+                                @*@Html.TextBox("Email", null,new { @placeholder = "Email", @class = "form-control", required = true })*@
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Contact No")
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(x => x.Contact_No, new { @placeholder = "Contact No", @class = "form-control", @readonly = "readonly" })
+                                @*@Html.TextBox("Contact_No", null, new { @placeholder = "Contact No", @class = "form-control", required = true })*@
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Posting Date")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextBoxFor(x => x.Posting_Date, new { @placeholder = "yyyy-mm-dd", @Value = Model.Posting_Date.ToString("yyyy-MM-dd"), @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Posting_Date, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Order Date")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextBoxFor(x => x.Order_Date, new { @placeholder = "yyyy-mm-dd", @Value = Model.Order_Date.ToString("yyyy-MM-dd"), @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Order_Date, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Document Date")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextBoxFor(x => x.Document_Date, new { @placeholder = "yyyy-mm-dd", @Value = Model.Document_Date.ToString("yyyy-MM-dd"), @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Document_Date, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Delivery Request Date")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextBoxFor(x => x.Request_Delivery_Date, new { @placeholder = "yyyy-mm-dd", @Value = Model.Request_Delivery_Date.ToString("yyyy-MM-dd"), @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Posting_Date, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Sales Person")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.DropDownListFor(x => x.Sales_Person, new SelectList(Model.SelsPersonList, "Id", "Name", Model.Sales_Person), "Sales Person", new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(x => x.Sales_Person, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("External Document No")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextBoxFor(x => x.External_DocumentNo, new { @placeholder = "External Document No", @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.External_DocumentNo, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="editor-label">
+                                @Html.Label("Remarks")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextAreaFor(x => Model.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row topmrgn5px">
+                        <div class="col-md-12">
+                            @{
+                     Html.RenderAction("OrderDetailsByQuationId", "SalesOrder", new { QuationId=Model.Quation_Id });}
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <button type="submit" class="btn btn-primary ">Save </button>
+                            @Html.ActionLink("Cancel", "Index", "Quation", new {area="Transactions", @class = "btn btn-default" })
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3">
+
+           @{
+    Html.RenderAction("MasterDetails", "StockMaster", new { ItemId = 0 });}
+
+        </div>
+    </div>
+
+}
+
+<script>
+    $(function () {
+        // fn_Show(0);
+        fn_LoadItemList();
+        //  fn_GetGrandTotalAmount();
+        //  fn_CalGrandTotal();
+
+        $('#Document_Date').datepicker({ dateFormat: 'yy-mm-dd' });
+        $('#Request_Delivery_Date').datepicker({ dateFormat: 'yy-mm-dd' });
+        $('#Order_Date').datepicker({ dateFormat: 'yy-mm-dd' });
+        $('#Posting_Date').datepicker({ dateFormat: 'yy-mm-dd' });
+
+        $('#Customer_Id').change(function () {
+            GetCustomer();
+        });
+
+    });
+
+    function myFunction(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var ItemId = tr.find('td:eq(0) select').val();
+
+        if (ItemId != 0) {
+
+            $(".decimal").on("keypress keyup blur", function (event) {
+
+
+                //this.value = this.value.replace(/[^0-9\.]/g,'');
+                $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+                if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            });
+        }
+        else {
+            alert('First Select Item Please !')
+            tr.find('td:eq(0) select').focus();
+        }
+    }
+    var arr = new Array();
+    function fn_Append(i, tr) {
+        arr = { Item_Id: 'Item_Id', Oreder_Quantity: 'Oreder_Quantity', Rate: 'Rate', Unit_Name: 'Unit_Name', Amount: 'Amount', Ship_Quantity: 'Ship_Quantity', Invoice_Quantity: 'Invoice_Quantity', Remarks: 'Remarks', Status: 'Status', Id: "Id" };
+        var j = 0;
+        $.each(arr, function (item, k) {
+            var control = j == 0 ? 'td:eq(' + j + ') select' : j == 1 ? 'td:eq(' + j + ') input' : 'td:eq(' + j + ') input';
+            var name = j == 0 ? item : j == 1 ? item : j == 2 ? item : j == 3 ? item : j == 4 ? item : item;
+
+            $(tr).find(control).attr('name', 'OrderDetails[' + i + '].' + name);
+            $(tr).find(control).attr('id', 'OrderDetails[' + i + '].' + name);
+
+            j++;
+        })
+        //  fn_GetGrandTotalAmount(obj);
+    }
+
+    function fn_Addrow(obj) {
+
+        if ($(obj).text() == "Add") {
+
+
+            $("#tblItem tbody").append($("#tblItem tbody tr:last").clone());
+            $("#tblItem tbody tr:last").find('td:nth-child(1) select').val(0);
+            $("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').val('');
+            $("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').attr('class', 'form-control decimal');
+            $("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val('');
+            $("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val('');
+            $("#tblItem tbody tr:last").find('td:nth-child(4) input[type=text]').val('');
+            $("#tblItem tbody tr:last").find('td:nth-child(5) input[type=text]').val('');
+            $(obj).attr("class", "btn-sm btn vd_btn vd_bg-red fa fa-times")
+
+            $(obj).text("Delete")
+            $("#tblItem tbody tr:last").find('td:nth-child(8) input[type=hidden]').val(true);
+            $("#tblItem tbody tr").each(function (i, item) {
+                fn_Append(i, this);
+            })
+        }
+
+        else {
+
+
+            $(obj).parent().parent().hide();
+            var tr = $(obj).parent().parent();
+            tr.find('td:eq(8) input[type=hidden]').val(false)
+
+
+        }
+
+        fn_GetGrandTotalAmount(obj);
+    }
+    function fn_LoadItemList() {
+
+        var len = $("#tblItem tbody tr").length - 1
+        for (var i = 0; i < len; i++) {
+            if (i < len) {
+                $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(9) a').attr("class", "btn-sm btn vd_btn vd_bg-red fa fa-times");
+                $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(9) a').text('Delete');
+            }
+
+
+
+        }
+
+    }
+
+    @*--------------*@
+
+
+    function GetUnitName(obj) {
+        var tr = $(obj).parent().parent();
+        var ItemId = tr.find('td:eq(0) select').val();
+
+        //if (ItemId != "") {
+        $.getJSON("@Url.Action("GetUnitName", "Purchase")", { Id: ItemId }, function (data) {
+
+            tr.find('td:eq(3) input[type=text]').val(data.UnitName)
+
+        });
+
+    }
+
+    function GetCustomer()
+    {
+
+        var CustomerId = $('#Customer_Id').val();
+
+        $.getJSON("@Url.Action("GetCustomerDetails", "SalesOrder")", { CustomerId: CustomerId }, function (data) {
+
+
+
+            $('#Contact_No').val(data.Address.ContactInfo.Mobile);
+            $('#Email').val(data.Address.ContactInfo.Email_Id);
+
+
+        });
+    }
+    function fn_GetTotalAmount(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var qty = tr.find('td:eq(1) input[type=text]').val();
+
+        var amount = tr.find('td:eq(2) input[type=text]').val();
+      
+
+        tr.find('td:eq(4) input[type=text]').val(qty * amount);
+        fn_GetGrandTotalAmount(obj);
+    }
+    function fn_CalGrandTotal()
+    {
+
+        var t = 0.00;
+        $('#tblItem tbody tr').each(function (index, item) {
+
+
+
+            var tm = $(this).find('td:eq(4) input[type=text]').val();
+
+            t = parseFloat(t) + parseFloat(tm);
+
+
+        });
+
+        return t;
+
+    }
+
+    function fn_GetGrandTotalAmount(obj) {
+
+        var tr = $(obj).parent().parent();
+        var total = 0.00;
+        var TotalQty = 0.00
+        var t = 0.00;
+
+
+        $('#tblItem tbody tr').each(function (i, item1) {
+
+
+
+            if ($(item1).find('#OrderDetails[' + i + '].Status').val() == 'True' || $(item1).find('#OrderDetails[' + i + '].Status').val() == 'true')
+            {
+
+
+                var perrowatotalamout = $(item1).find('td:eq(4) input[type=text]').val();
+                total = parseFloat(total) + parseFloat(perrowatotalamout);
+            }
+            var perrowatotalamout = $(item1).find('td:eq(4) input[type=text]').val();
+            total = parseFloat(total) + parseFloat(perrowatotalamout);
+        });
+
+        $('#GrTotal').text(total != isNaN ? total : 0.00);
+        $('#Amount').val(total != isNaN ? total : 0.0);
+
+    }
+
+    //------Add Tax
+
+
+
+
+
+
+
+</script>

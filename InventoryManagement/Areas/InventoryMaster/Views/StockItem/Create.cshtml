@@ -1,0 +1,228 @@
+﻿@model ViewModel.Stock.StockItem
+           @{
+               
+               string src = null;
+               if(Model.Image_Path!=null)
+               {
+                   src = Model.Image_Path;
+               }
+               else
+               {
+                   src = "/Themes/img/demo_img.gif";
+               }
+              
+           }
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+<script type="text/javascript">
+
+ 
+
+    $(function () {
+        $("#form1").submit(function (event) {
+
+            var dataString;
+            event.preventDefault();
+            var action = $("#form1").attr("action");
+            if ($("#form1").attr("enctype") == "multipart/form-data") {
+                dataString = new FormData($("#form1").get(0));
+                contentType = false;
+                processData = false;
+            } else {
+
+            }
+
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: dataString,
+                dataType: "json",
+                contentType: contentType,
+                processData: processData,
+                success: function (data) {
+                  
+                    $('#content').load('@Url.Action("Index", "StockItem")');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+        });
+
+
+
+    });
+
+
+    function encodeImageFileAsURL(id) {
+       
+        var filesSelected = document.getElementById(id).files;
+        if (filesSelected.length > 0) {
+            var fileToLoad = filesSelected[0];
+
+            var fileReader = new FileReader();
+
+            fileReader.onload = function (fileLoadedEvent) {
+                var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+                var newImage = document.createElement('img');
+                newImage.src = srcData;
+                // alert(srcData);
+
+                document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                //alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                // console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                $('#ImageName').val(srcData);
+            }
+            fileReader.readAsDataURL(fileToLoad);
+        }
+    }
+</script>
+
+
+
+@*@using (Ajax.BeginForm("Create", "StockItem", new { area = "InventoryMaster" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }, new { @id = "form2" }))*@
+@using (Html.BeginForm("Create", "StockItem", new { @area = "InventoryMaster" }, FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+
+{
+    @Html.ValidationSummary(true)
+
+
+
+    <div>
+
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-danger">
+
+                    <div class="panel-heading" style="background-color: #C4538A;color:white"><span>Item Master</span> </div>
+
+                    
+                    <div class="panel-body">
+                        <div class="row">
+
+                            <div class="col-md-3">
+
+                                <div>
+                                    <div id="imgTest">
+                                        <img src="@src" class="img-responsive img-thumbnail mangaeimg" />
+                                    </div>
+                                </div>
+                                
+                                <div class="editor-field topmrgn5px">
+                                    <input type="hidden" name="File" id="ImageName" />
+                                    <input type="file" name="file1" id="file1" onchange="encodeImageFileAsURL(this.id);" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="col-md-12">
+                                    <div class="editor-label">
+
+                                        @Html.Label("Code")
+                                        @Html.HiddenFor(x => x.Id)
+                                    </div>
+
+                                    @Html.TextBoxFor(m => m.Item_Code, new { @placeholder = "Code", @class = "form-control", @readonly = "readonly", required = true, minlength = "2", maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.Item_Code, null, new { @style = "color:red;" })
+                                </div>
+
+                                <div class="col-md-12">
+
+                                    @Html.Label("Name")<span style="color:red">*</span>
+                                    @Html.TextBoxFor(m => m.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.Name, null, new { @style = "color:red;" })
+                                </div>
+                            </div>
+                            </div>
+
+                        <div class="row">
+
+                            
+                            <div class="col-md-6">
+                                @Html.Label("Alias Name")
+                                @Html.TextBoxFor(m => m.Alias_Name, new { @placeholder = "Alias Name", @class = "form-control", required = true, minlength = "2", maxlength = "200" })
+                                @Html.ValidationMessageFor(m => m.Alias_Name, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Group")<span style="color:red">*</span>
+                                @Html.DropDownListFor(x => x.Group_Id, new SelectList(Model.GroupList, "Id", "Name", Model.Group_Id), "Select Group", new { @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Group_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Category")<span style="color:red">*</span>
+                                @Html.DropDownListFor(x => x.Category_Id, new SelectList(Model.CategoryList, "Id", "Name", Model.Category_Id), "Select Group", new { @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Category_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Unit")<span style="color:red">*</span>
+                                @Html.DropDownListFor(x => x.Unit_Id, new SelectList(Model.UnitList, "Id", "Name", Model.Unit_Id), "Select Unit", new { @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Unit_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Prefix SerialNo")<span style="color:red">*</span>
+                                @Html.TextBoxFor(m => m.Prefix_SerialNo, new { @placeholder = "Prefix Serial No", @class = "form-control", required = true, minlength = "2", maxlength = "20" })
+                                @Html.ValidationMessageFor(x => x.Prefix_SerialNo, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Starting From")<span style="color:red">*</span>
+                                @Html.TextBoxFor(m => m.Start_From, new { @placeholder = "Start From", @class = "form-control", required = true, digit = true })
+                                @Html.ValidationMessageFor(x => x.Start_From, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Min Qty Alert")<span style="color:red">*</span>
+                                @Html.TextBoxFor(m => m.Min_Qty, new { @placeholder = "Min Qty", @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Min_Qty, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Auto No")
+                                @Html.DropDownListFor(x => x.Is_Auto_SerialNo, new SelectList(new List<object> { new { Id = "true", Name = "YES" }, new { Id = "false", Name = "NO" } }, "Id", "Name", Model.Is_Auto_SerialNo), "Select Auto", new { @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Prefix_SerialNo, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Remarks")
+                                @Html.TextAreaFor(m => m.Remarks, new { @placeholder = "Remarks", @class = "form-control", minlength = "2", maxlength = "200" })
+                                @Html.ValidationMessageFor(m => m.Remarks, null, new { @style = "color:red;" })
+
+                            </div>
+
+                            <div class="col-md-12 topmrgn5px">
+                                <button type="submit" class=" btn btn-primary">Save </button>
+                                @Html.ActionLink("Cancel", "Index", "StockItem", new { @class = "btn btn-default" })
+
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .mangaeimg {
+       max-height:120px;min-height:120px;max-width:120px;min-width:120px;
+    }
+</style>

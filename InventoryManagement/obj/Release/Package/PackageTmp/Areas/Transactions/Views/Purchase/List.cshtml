@@ -1,0 +1,127 @@
+﻿@model List<ViewModel.Ledger.PurchaseList>
+@{
+    var grid = new WebGrid(Model, canPage: true, canSort: true, rowsPerPage: 20,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+    grid.Pager(WebGridPagerModes.All);
+    var i = 1;
+}
+
+
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+
+        <div class="row">
+
+            <div class="col-md-6">
+               <i class="fa fa-list"></i>
+                <span>Purchase Master</span>
+
+              
+            </div>
+
+            <div class="col-md-6">
+                <div align="right">
+                    @Ajax.ActionLink("New", "Create", "Purchase", new { area = "Transactions", Id = 0 }, new AjaxOptions
+                            {
+                                LoadingElementId = "Loader",
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default btn-xs btn-flat hgt", })
+                    <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                    <input type="text" placeholder="Search Here" class="hgt" />
+                    <button class="btn btn-default btn-xs btn-flat hgt fa fa-search"></button>
+                    <button class="btn btn-default btn-xs btn-flat hgt fa fa-refresh"></button>
+                </div>
+            </div>
+
+
+
+           
+        </div>
+
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8 " id="gridContent" style="min-height:450px;border:solid silver 1px;">
+
+
+                @grid.GetHtml(tableStyle: "gTable table table-responsive",
+
+        columns: grid.Columns(
+                 //new WebGridColumn() { Header = "", Format = (item) =>  
+                 //return new HtmlString(  string.Format("<input type="+"hidden"+" value="+"Poll"+" id="+"Mode"+" />"   ) ),     
+                 grid.Column(header:"S.No",format:(item)=> new HtmlString(  string.Format("<span>"+ i++ +"</span> <input type=hidden value= "+item.Id+">"))),  
+        // grid.Column("S.No", format: (item) => i++),  
+        grid.Column("Challan_No", "  Challan No"), 
+        grid.Column("Purchase_Date", "Purchase Date"),
+        grid.Column("Amount", "Total Amount"),
+        grid.Column("Discount", "Discount",style:"fa-rupee"),
+        grid.Column(header: "Action", format: (item) => !item.Is_Challan_Gen ? new HtmlString(
+
+                         Ajax.ActionLink(" ", "Create", "Purchase", new { area = "Transactions", Id = item.Id }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "GET", InsertionMode = InsertionMode.Replace, }, new { @Class = "btn fa fa-pencil", }).ToString() +
+
+                Ajax.ActionLink(" ", "DeletePurchase", "Purchase", new { area = "Transactions", item.Id }, new AjaxOptions
+                {
+                    UpdateTargetId = "content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    OnSuccess = "return Confirm('Are You Sure To Delete This Record!')"
+                }, new { @Class = "btn fa fa-crosshairs", }).ToString() + 
+
+                                             Ajax.ActionLink(" ", "GenChallan", "Purchase", new { area = "Transactions", item.Id }, new AjaxOptions
+                                  {
+                                      UpdateTargetId = "content",
+                                      HttpMethod = "GET",
+                                      InsertionMode = InsertionMode.Replace,
+                                      OnSuccess = "return Confirm('Are You Sure To Delete This Record!')"
+                                  }, new { @Class = "btn fa fa-list-alt", }).ToString()
+                      
+
+        ) : new HtmlString(
+        @Ajax.ActionLink(" ", "ViewDetails", "Purchase", new { area = "Transactions", item.Id }, new AjaxOptions
+        {
+            UpdateTargetId = "content",
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+        }, new { @Class = "btn fa fa-eye", }).ToString()
+       )
+       )
+       ))
+            </div>
+            <div class="col-md-4" id="viewPurchseItem">
+               @{Html.RenderAction("_ViewPurcaseItem", "Purchase", new { area = "Transactions", Id = Model.Count > 1 ? Model[0].Id : 0, ChalanNo = "" });}
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+    <script>
+        $('table tbody tr').click(function () {
+            var chalanno = $(this).find('td:eq(1)').text();
+            var Id = $(this).find('td:eq(0) input').val();
+            $.ajax({
+
+                url: "@Url.Action("_ViewPurcaseItem", "Purchase")",
+                data: {Id:Id, ChalanNo: chalanno },
+                type: "GET",
+                cache: false,
+                success: function (data) {
+                    $('#viewPurchseItem').html(data);
+                    console.log(JSON.stringify(data));
+                },
+                error: function () {
+                    alert("Error");
+                }
+            })
+        }) 
+    </script>
+<style>
+    .table tbody tr:hover {
+        background-color: skyblue;
+    }
+</style>

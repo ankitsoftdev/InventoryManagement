@@ -1,0 +1,135 @@
+﻿@model ViewModel.Common.Tax
+
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(function () {
+
+       
+        fn_SetDevault();
+       
+
+        $(".decimal").on("keypress keyup blur", function (event) {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
+        $('#Rate_Type').change(function () {
+            fn_SetDevault();
+         
+        });
+    });
+
+    function fn_SetDevault()
+    {
+        if ($('#Rate_Type').val() == 2) {
+            $('#RateType').text("Amount");
+        }
+        else {
+            $('#RateType').text("Rate in(%)");
+        }
+    }
+</script>
+
+@using (Ajax.BeginForm("Create", "Tax", new { area = "Masters" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new {@id="form1" }))
+{
+    @Html.ValidationSummary(true)
+
+
+    
+    
+    <div>
+
+     <div class="row">
+         <div class="col-lg-3">
+         </div>
+       <div class="col-lg-6">
+          <div class="panel panel-danger">
+
+              <div class="panel-heading" style="background-color: #C4538A;color:white"><span>Tax Deduction Master</span> </div>
+
+                    <div class="panel-body">
+
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                            <div class="editor-label">
+
+                                @Html.Label("Code")
+                                @Html.HiddenFor(x => x.Id)
+                           </div>
+                              
+                                @Html.TextBoxFor(x => x.Code, new { @placeholder = "Tax Code", @class = "form-control", @readonly = "readonly", required = true, minlength = "2", maxlength = "100" })
+                                @Html.ValidationMessageFor(x => x.Code, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-12">
+
+                            @Html.Label("Name")<span style="color:red">*</span>
+                                @Html.TextBoxFor(x => x.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "100" })
+                                @Html.ValidationMessageFor(x => x.Name, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12">
+
+                                @Html.Label("Alias")<span style="color:red">*</span>
+                                @Html.TextBoxFor(x => x.Alias, new { @placeholder = "Alias", @class = "form-control", minlength = "2", maxlength = "100" })
+                                @Html.ValidationMessageFor(x => x.Alias, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Dedution/Addtion Type")<span style="color:red">*</span>
+                                @Html.DropDownListFor(x => x.Type_Id, new SelectList(new List<object> { new { Id = 1, Name = "DEDUCTION" }, new { Id = 2, Name = "ADDTION" } }, "Id", "Name", Model.Type_Id), "Select", new { @class = "form-control decimal", required = true })
+                                @*@Html.TextBoxFor(x => x.Type, new { @placeholder = "Deduction or Addition Type", @class = "form-control decimal", required = true, min = "0" })*@
+                                @Html.ValidationMessageFor(x => x.Type_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Rate Type")<span style="color:red">*</span>
+                                @*@Html.TextBoxFor(x => x.Rate_Type, new { @placeholder = "Deduction or Addition Type", @class = "form-control decimal", required = true, min = "0" })*@
+                                @Html.DropDownListFor(x => x.Rate_Type, new SelectList(new List<object> { new { Id = 1, Name = "PERCENT" }, new { Id = 2, Name = "AMOUNT" } }, "Id", "Name", Model.Rate_Type), "Select", new { @class = "form-control decimal", required = true })
+                                @Html.ValidationMessageFor(x => x.Rate_Type, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Rate in(%)", new { @id = "RateType" })<span style="color:red">*</span>
+                                @Html.TextBoxFor(x => x.Rate, new { @placeholder = "Rate", @class = "form-control decimal", required = true, min = "0" })
+
+                                @Html.ValidationMessageFor(x => x.Rate, null, new { @style = "color:red;" })
+                                
+                            </div>
+                       
+                            <div class="col-md-12">
+                                @Html.Label("Remarks")
+                                @Html.TextAreaFor(x => x.Remarks, new { @placeholder = "Remarks", @class = "form-control",maxlength="200" })
+
+                                @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+
+                            </div>
+
+                            <div class="col-md-12 topmrgn5px">
+
+                                <button type="submit" class="btn btn-primary" onclick="fn_ValidateForm('form1');">Save </button>
+                                @Html.ActionLink("Cancel", "Index", "Tax", new { @class = "btn btn-default" })
+                                
+                                
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+         <div class="col-lg-3">
+         </div>
+        </div>
+    </div>
+}
+

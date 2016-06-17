@@ -1,0 +1,290 @@
+﻿@model ViewModel.Transactions.PaymentInfo
+
+<h5><b>Bill Adjustment Details</b></h5>
+<table id="tblItem" class="table table-responsive table-striped table-bordered table-hover">
+    <thead>
+
+        <tr>
+            <td>
+               #
+            </td>
+
+            <td>
+                Agst Ref
+            </td>
+
+            <td>
+              Bill Amt.
+            </td>
+            <td>
+               Bal Amt.
+            </td>
+            <td>
+                Paid Amt.
+            </td>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @{
+
+            //if (Model.ItemDetails.Count >= 0)
+            //{
+            int i = 0;
+            foreach (var m in Model.BillList)
+            {
+
+                <tr>
+
+
+                    <td>@Html.HiddenFor(x => x.BillList[i].Pur_Id)@Html.CheckBoxFor(x => x.BillList[i].Status, new { @onchange = "GetPaidAmount(this);" })</td>
+
+                    <td>
+                        @*@Html.LabelFor(x=>x.BillList[i])*@
+                        @Html.TextBoxFor(x => x.BillList[i].VC_No, new { @readonly = "readonly" })
+                    </td>
+                    <td>
+
+                        @Html.TextBoxFor(x => x.BillList[i].Bill_Amount, new { @readonly = "readonly" })
+                    </td>
+                    <td>
+                       
+                        @Html.TextBoxFor(x => x.BillList[i].Balance, new { @readonly = "readonly" })
+                    </td>
+
+                   
+                    <td>
+                        @Html.TextBoxFor(x => x.BillList[i].PaidBalance, new { @onchange = "fn_SetPaidAmount(this);" })
+                      
+
+
+                    </td>
+                </tr>
+                i++;
+            }
+
+
+
+        }
+
+
+    </tbody>
+</table>
+
+
+
+
+    <script>
+        $(function () {
+
+            var Amt = fn_CalBillTotal();
+           
+            $('#BillAmount').text(isNaN(Amt) ? 0.00 : Amt);
+        });
+        function GetPaidAmount(obj)
+        {
+            // alert(obj);
+            var ptmamount = parseFloat(isNaN($('#Amount').val())?0:$('#Amount').val());
+            var billamt = fn_CalBillTotal();
+            var disp = 0.0;
+            var tr = $(obj).parent().parent();
+          
+            if (ptmamount > 0)
+            {
+                if (ptmamount > billamt) {
+
+                    if (tr.find('td:eq(0) input[type="checkbox"]').is(':checked')) {
+                        var amount = parseFloat(isNaN(tr.find('td:eq(3) input').val()) ? 0 : tr.find('td:eq(3) input').val());
+                        disp = amount + billamt;
+                        if (ptmamount > disp)
+                        {
+                           
+                            var cntbill = parseFloat(isNaN(tr.find('td:eq(2) input').val()) ? 0 : tr.find('td:eq(2) input').val());
+                            // alert(disp + "," + cntbill);
+                            if (disp >= cntbill) {
+                                tr.find('td:eq(4) input').val(cntbill);
+                            }
+                            else {
+                                tr.find('td:eq(4) input').val(disp);
+                            }
+
+                        }
+
+
+                        else {
+                            disp = ptmamount - billamt;
+
+                            tr.find('td:eq(4) input').val(disp);
+                        }
+
+                    }
+
+                    else {
+                        tr.find('td:eq(4) input').val(0)
+                    }
+
+                    billamt = fn_CalBillTotal();
+                    $('#BillAmount').text(isNaN(billamt) ? 0.00 : billamt);
+                }
+                else
+                {
+                    alert("Bill Adjustment Amount not Grater than Payment Amount  !");
+                    tr.find('td:eq(0) input[type="checkbox"]').prop('checked', false);
+                    tr.find('td:eq(4) input').val(0);
+                }
+            }
+
+          
+
+            else
+            {
+                alert("Before Bill Adjustment Enter the Payment Amount  !");
+                tr.find('td:eq(0) input[type="checkbox"]').prop('checked', false);
+                tr.find('td:eq(4) input').val(0);
+            }
+
+            // for check the all Bill Status
+
+             fn_CheckBill();
+           
+        }
+
+        //function fn_CalBillTotal()
+        //{
+        //    fn_CheckBillAmount();
+        //    var t = 0.00;
+        //    $('#tblItem tbody tr').each(function (index, item) {
+
+
+        //        if ($(this).find('td:eq(0) input[type=checkbox]:checked') == true)
+        //        {
+        //            var tm = $(this).find('td:eq(4) input[type=text]').val();
+                   
+
+        //            t = parseFloat(isNaN(t)?0.0:t) + parseFloat(isNaN(tm)?0.0:tm);
+        //        }
+        //    });
+          
+        //      return t;
+         
+
+        //}
+
+        function fn_SetPaidAmount(obj)
+        {
+            var billamt = fn_CalBillTotal();
+          //  alert(billamt);
+            var tr = $(obj).parent().parent();
+         
+            var BalAmt = parseFloat(isNaN(tr.find('td:eq(3) input').val()) ? 0 : tr.find('td:eq(3) input').val());
+            var PaidAmt = parseFloat(isNaN(tr.find('td:eq(4) input').val()) ? 0 : tr.find('td:eq(4) input').val());
+            var TmAmt = parseFloat(isNaN($('#Amount').val()) ? 0 : $('#Amount').val());
+            if (PaidAmt > 0)
+            {
+                if (PaidAmt <= BalAmt)
+                {
+                    tr.find('td:eq(4) input').val(PaidAmt);
+                    tr.find('td:eq(0) input[type="checkbox"]').prop('checked', true);
+                }
+              else  if (PaidAmt > BalAmt)
+                {
+
+                    alert("Paid Amt not be Greater than  Bal. Amount")
+                    tr.find('td:eq(4) input').val(0);
+                    tr.find('td:eq(0) input[type="checkbox"]').prop('checked', false);
+
+                }
+
+
+                billamt = fn_CalBillTotal();
+                //alert(billamt);
+                if (billamt > TmAmt)
+                {
+
+                    tr.find('td:eq(0) input[type="checkbox"]').prop('checked', false);
+                    tr.find('td:eq(4) input').val(0);
+                }
+                billamt = fn_CalBillTotal();
+                $('#BillAmount').text(isNaN(billamt) ? 0.00 : billamt);
+
+                // for check the All bill Status 
+
+                fn_CheckBill();
+            }
+            else
+            {
+                tr.find('td:eq(0) input[type="checkbox"]').prop('checked', false);
+                tr.find('td:eq(4) input').val(0);
+            }
+        }
+
+        function fn_CalBillTotal()
+        {
+            var t = 0.00;
+            $('#tblItem tbody').find('tr').each(function () {
+                var row = $(this);
+                if (row.find('td:eq(0) input[type="checkbox"]').is(':checked'))
+                {
+                    var tm = row.find('td:eq(4) input[type=text]').val();
+                    t = parseFloat(isNaN(t) ? 0.0 : t) + parseFloat(isNaN(tm) ? 0.0 : tm);
+                }
+            });
+
+            return t;
+        }
+
+        function fn_CheckBill()
+        {
+           // alert("hi");
+            var totalrow = 0;
+            var checkdrow = 0;
+            var TmAmt = parseFloat(isNaN($('#Amount').val()) ? 0 : $('#Amount').val());
+            var t = 0.00;
+
+            $('#tblItem tbody').find('tr').each(function ()
+            {
+                var row = $(this);
+                totalrow++;
+                if (row.find('td:eq(0) input[type="checkbox"]').is(':checked'))
+                {
+                    var tm = row.find('td:eq(4) input[type=text]').val();
+                    t = parseFloat(isNaN(t) ? 0.0 : t) + parseFloat(isNaN(tm) ? 0.0 : tm);
+                    checkdrow++;
+                }
+            }
+            );
+
+            if (totalrow == checkdrow && checkdrow !=0)
+            {
+                if(TmAmt>t)
+                {
+                    var disp = TmAmt - t;
+                    
+                    var r = "BillList[i].Status";
+                    var row = "<tr>";
+                    var row = "<tr>";
+                    row += "<td><input type='hidden' name=BillList[" + totalrow + "].Pur_Id value='0' /><input type='checkbox' name=BillList[" + totalrow + "].Status value='true' checked /></td>";
+                    row += "<td><input type='text' name=BillList[" + totalrow + "].VC_No value='New Advance' /></td>";
+                    row += "<td><input type='text' name=BillList[" + totalrow + "].Bill_Amount value='0' readonly /></td>";
+                    row += "<td><input type='text' name=BillList[" + totalrow + "].Balance value='0'/ readonly ></td>";
+                    row += "<td><input type='text' name=BillList[" + totalrow + "].PaidBalance value=" + disp + " readonly /></td>";
+                    row += "</tr>";
+                    $('#tblItem tbody').append(row);
+                    
+                    //$("#tblItem tbody").append($("#tblItem tbody tr:last").clone());
+
+                    //$("#tblItem tbody tr:last").find('td:nth-child(1) input[type="checkbox"]').prop('checked', true);;
+                    //$("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').val('New ref');
+                    //$("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').attr('readonly', false);
+                    //$("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val('0.00');
+                    //$("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').attr('readonly', false);
+                    //$("#tblItem tbody tr:last").find('td:nth-child(4) input[type=text]').val('0.00');
+                    //$("#tblItem tbody tr:last").find('td:nth-child(4) input[type=text]').attr('readonly', false);
+                    //$("#tblItem tbody tr:last").find('td:nth-child(5) input[type=text]').val(disp);
+                    //$("#tblItem tbody tr:last").find('td:nth-child(5) input[type=text]').attr('readonly', true);
+               
+                }
+            }
+        }
+    </script>

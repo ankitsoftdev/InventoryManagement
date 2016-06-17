@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ViewModel.Transactions.QuationList>
+
+
+
+<table class="table table-reponsive table-bordered">
+   
+     <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quation No</th>
+            <th>Contact No</th>
+            <th>Address</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    @foreach(var item in Model)
+    {
+        <tbody>
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Quation_Chalan_No</td>
+                <td>@item.Contact_No</td>
+                <td>@item.Address</td>
+                <td>Na</td>
+            </tr>
+        </tbody>
+    }
+
+</table>

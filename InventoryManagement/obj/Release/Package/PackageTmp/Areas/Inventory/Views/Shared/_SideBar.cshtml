@@ -1,0 +1,85 @@
+﻿
+
+<li class="active">
+    <a href="@Url.Action("Index", "DashBoard", new {area="DashBoard" })">
+        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+    </a>
+</li>
+
+<li class="treeview" id="scrollspy-components">
+    <a href="#">
+        <i class="fa fa-laptop"></i>
+        <span>Master</span>
+        <i class="fa pull-right fa-angle-left"></i>
+    </a>
+    <ul class="nav treeview-menu" style="display: none;">
+
+        <li class=""><a href="@Url.Action("Index", "Units", new { area = "Masters" })">Units</a></li>
+
+        <li class=""><a href="@Url.Action("Index", "Ledger", new { area = "Masters" })">Ledger Group</a></li>
+
+
+        <li class=""><a href="@Url.Action("Index", "FinancialYear", new { area = "Masters" })">Financial Year</a></li>
+        <li class=""><a href="@Url.Action("Index", "Tax", new { area = "Masters" })">Tax Master</a></li>
+    </ul>
+</li>
+
+<li class="treeview" id="scrollspy-components">
+    <a href="#">
+        <i class="fa fa-laptop"></i>
+        <span>Accounts Master</span>
+        <i class="fa pull-right fa-angle-left"></i>
+    </a>
+    <ul class="nav treeview-menu" style="display: none;">
+
+        <li class=""><a href="@Url.Action("Index", "Customer", new { area = "AccountsMaster", Tagname = "Supplier" })">Supplier</a></li>
+        <li class=""><a href="@Url.Action("Index", "Customer", new { area = "AccountsMaster", Tagname = "Customers" })">Customers</a></li>
+
+
+    </ul>
+</li>
+<li class="treeview" id="scrollspy-components">
+    <a href="#">
+        <i class="fa fa-laptop"></i>
+        <span>Inventory Masters</span>
+        <i class="fa pull-right fa-angle-left"></i>
+    </a>
+    <ul class="nav treeview-menu" style="display: none;">
+        <li class=""><a href="@Url.Action("Index", "StockGroup", new { area = "InventoryMaster" })">Stock Group</a></li>
+
+        <li class=""><a href="@Url.Action("Index", "Category", new { area = "InventoryMaster" })">Stock Category</a></li>
+        <li class=""><a href="@Url.Action("Index", "StockItem", new { area = "InventoryMaster" })">Stock</a></li>
+    </ul>
+</li>
+<li class="treeview" id="scrollspy-components">
+    <a href="#">
+        <i class="fa fa-laptop"></i>
+        <span>Transaction</span>
+        <i class="fa pull-right fa-angle-left"></i>
+    </a>
+    <ul class="nav treeview-menu" style="display: none;">
+        <li class=""><a href="@Url.Action("Index", "StockMaster", new { area = "Transactions" })">Stock Master</a></li>
+        <li class=""><a href="@Url.Action("Index", "Purchase", new { area = "Transactions" })">Purchage</a></li>
+        <li class=""><a href="#">Purchage Return</a></li>
+        <li class=""><a href="@Url.Action("Index", "Sales", new { area = "Transactions" })">Sales</a></li>
+        <li class=""><a href="#">Sales Return</a></li>
+        <li class=""><a href="@Url.Action("Index", "Payment", new { area = "Transactions",Tag="SUPPLIER" })">Supplier Payment</a></li>
+        <li class=""><a href="@Url.Action("Index", "Payment", new { area = "Transactions",Tag = "CUSTOMER" })">Customers Receive</a></li>
+    </ul>
+</li>
+<li class="treeview" id="scrollspy-components">
+    <a href="#">
+        <i class="fa fa-laptop"></i>
+        <span>Report</span>
+        <i class="fa pull-right fa-angle-left"></i>
+    </a>
+    <ul class="nav treeview-menu" style="display: none;">
+        <li class=""><a href="@Url.Action("Index", "Report", new { area = "CommonReport" })">Report</a></li>
+
+    </ul>
+</li>
+
+
+
+
+

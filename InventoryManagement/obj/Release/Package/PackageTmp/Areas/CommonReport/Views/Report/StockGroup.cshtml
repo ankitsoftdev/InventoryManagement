@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "StockGroup";
+    Layout = ViewBag.layout;
+}
+
+
+<script>
+    function StockGroupInfoReport() {
+
+        var Path = "@Url.Action("StockGroupReports", "Report", new { area = "CommonReport" })?ReportType=" + $('#ddlStockGroupInfoReportinfo').val()
+        window.open(Path);
+    }
+</script>
+<div align="right">
+    <br />
+    @Html.DropDownList("ddlStockGroupInfoReportinfo", new SelectList(
+        new List<object> {
+            new {test="PDF",value="PDF"},
+            new {test="Excel",value="Excel"},
+            new {test="Word",value="Word"}
+        },
+   "test",
+   "value"
+   ), new { style = "width:100px;" })
+
+
+    <input type="button" onclick="StockGroupInfoReport();" class="btn btn-xs btn-flat btn-primary " id="butDailySaleReport" value="Generate Reports" />
+</div>
+<div>
+    @Html.Action("StockGroupList")
+</div>

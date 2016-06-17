@@ -1,0 +1,131 @@
+﻿    @model ViewModel.LadgerGroup.LedgerGroup
+
+
+@*<link href="~/Themes/Content/jquery-ui-1.9.0.custom.css" rel="stylesheet" />
+<script src="~/Themes/Scripts/jquery-ui-1.9.0.min.js"></script>*@
+
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<script>
+    $(function () {
+        $("#Ledger_UnderId").customselect();
+        //AutoComplete();
+    });
+    function AutoComplete(id, url) {
+        $('#Group').autocomplete({
+            source: function (request, response) {
+                var autocompleteUrl = '@Url.Action("GetLedger", "LedgerGroup", new { @area = "Masters" })?searchText=' + request.term;
+                $.ajax({
+                    url: autocompleteUrl,
+                    type: 'GET',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (json) {
+                        response($.map(json, function (data, id) {
+                            //alert(data);
+                            return {
+                                
+                                label: data.Name,
+                                Name: data.Name,
+                                //Email: data.Email,
+                                //Address: data.Address,
+                                Id: data.Id,
+                            };
+                        }));
+                    },
+                    //error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    //  //  console.log('some error occured', textStatus, errorThrown);
+                    //}
+                });
+            },
+
+            minLength: 1,
+            select: function (event, ui) {
+                $('#Group').val(ui.item.label)
+           
+                $('#Ledger_UnderId').val(ui.item.Id);
+               // GetValuesByCode(ui.item);
+                return false;
+            }
+        });
+    }
+    
+</script>
+@using (Ajax.BeginForm("Create", "LedgerGroup", new { area = "Masters" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new { @id = "form1" }))
+{
+    @Html.ValidationSummary(true)
+
+
+    
+    
+    <div>
+
+     <div class="row">
+         <div class="col-lg-3">
+         </div>
+       <div class="col-lg-6">
+          <div class="panel panel-danger">
+
+              <div class="panel-heading" style="background-color: #C4538A;color:white"><span>Ledger Group</span> </div>
+
+                    <div class="panel-body">
+
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                            <div class="editor-label">
+
+                                @Html.Label("Name")<span style="color:red">*</span>
+                                @Html.HiddenFor(x => x.Ledger.Id)
+                           </div>
+                              
+                                @Html.TextBoxFor(m => m.Ledger.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "50" })
+                                @Html.ValidationMessageFor(m => m.Ledger.Name, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-12">
+
+                                @Html.Label("Alias Name")
+                                @Html.TextBoxFor(m => m.Ledger.Alias_Name, new { @placeholder = "Alias Name", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Ledger.Alias_Name, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Under Group")
+                                @Html.DropDownListFor(m => m.Ledger.UnderId, new SelectList(Model.Ledger.ListUnder, "Id", "Name", Model.Ledger.UnderId), "Under Group", new {required = true, @class = "custom-select form-control"})
+                                
+                                @Html.ValidationMessageFor(m =>m.Ledger.UnderId, null, new { @style = "color:red;" })
+                                
+                            </div>
+
+                            <div class="col-md-12">
+                                @Html.Label("Remarks")
+                                @Html.TextBoxFor(m => m.Ledger.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+
+                                @Html.ValidationMessageFor(m => m.Ledger.Remarks, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-12 topmrgn5px">
+
+                                <button type="submit" class="btn btn-primary" onclick="fn_ValidateForm('form1');">Save </button>
+                                @Html.ActionLink("Cancel", "Index", "LedgerGroup", new { @class = "btn btn-default" })
+                                
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+         <div class="col-lg-3">
+         </div>
+        </div>
+    </div>
+}
+

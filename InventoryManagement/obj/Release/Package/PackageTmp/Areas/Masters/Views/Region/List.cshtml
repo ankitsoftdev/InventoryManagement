@@ -1,0 +1,102 @@
+﻿@model List<ViewModel.Common.RegionInfo>
+@{
+    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 2,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridcontent");
+    grid.Pager(WebGridPagerModes.All);
+}
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+        <div class="row">
+
+            <div class="col-md-9">
+                <i class="fa fa-list"></i>
+                <span>GoDown Region</span>
+
+
+            </div>
+
+            <div class="col-md-3">
+                @Ajax.ActionLink("New", "Create", "Region", new { area = "Masters", Id = 0 }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default btn-xs btn-flat hgt", })
+
+
+                <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                <input type="text" placeholder="Search Here" class="hgt" />
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-search"></button>
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-refresh"></button>
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+    
+        <div class="panel-body" id="gridcontent">
+            @grid.GetHtml(tableStyle: "table table-striped table-bordered table-hover table-responsive topmrgn5px",
+                    //headerStyle: "header",
+                    //alternatingRowStyle: "alt",
+                    //selectedRowStyle: "select",
+            columns: grid.Columns(
+                        grid.Column("S.No", format: item => item.WebGrid.Rows.IndexOf(item) + 1),
+                              grid.Column("Name", format: (item) => item.GetSelectLink((item.Name).ToString())),
+
+                                                          grid.Column("Alias_Name", " Alias"),
+                                                          grid.Column("Under_Name", " Under"),
+                                                          grid.Column("Remarks", " Remarks"),
+                                                          grid.Column("GoDown_Name", " GoDown"),
+                                                          grid.Column("Action", format: (item) =>
+                                                                new HtmlString(
+                                           Ajax.ActionLink(" ", "Create", "Region", new { area = "Masters", Id = item.Id }, new AjaxOptions
+                                     {
+
+                                         UpdateTargetId = "content",
+                                         HttpMethod = "GET",
+                                         InsertionMode = InsertionMode.Replace,
+                                     }, new { @Class = "btn btn-default fa fa-pencil" ,@title = "Edit" }).ToString() +
+                                            @Ajax.ActionLink(" ", "Create", "Region", new { area = "Masters", item.Id }, new AjaxOptions
+                                     {
+
+                                         UpdateTargetId = "content",
+                                         HttpMethod = "GET",
+                                         InsertionMode = InsertionMode.Replace,
+                                     }, new { @Class = "btn btn-default  fa fa-trash-o", @title = "Delete" }).ToString()
+          )
+                                                           )
+
+     ))
+
+        </div>
+    </div>
+
+    <style>
+            /*.select {
+            background-color:;
+        }*/
+
+            table th; {
+                background-color: #b8e0f7;
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #999999;
+                color: black;
+            }
+
+            table th a {
+                color: black;
+            }
+
+
+            .table tfoot {
+                text-align: center;
+            }
+    </style>

@@ -1,0 +1,370 @@
+﻿@model ViewModel.Transactions.DeliveryNoteInfo
+
+
+@using (Ajax.BeginForm("Create", "DeliveryNote", new { area = "Transactions" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new { @id = "form1" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+
+        <div class="col-lg-9">
+            <div class="panel">
+
+                <div class="panel-heading bg-margenta"><span>Delivery Note</span> </div>
+
+                <div class="panel-body">
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Delivery Note No")
+                                @Html.HiddenFor(x => x.Id)
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(x => x.Delivery_Note_No, new {  @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(x => Model.Delivery_Note_No, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Customer Name")
+                                @*@Html.HiddenFor(x => x.Sales_Order_Id)*@
+                                <div class="editor-field">
+                                    @Html.DropDownListFor(x => x.Customer_Id, new SelectList(Model.CustomerList, "Id", "Name", Model.Customer_Id), "Customer Name", new { @required = true, @class = "custom-select form-control" })
+                                    @Html.ValidationMessageFor(x => x.Customer_Id, null, new { @style = "color:red;" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Sales Order No")
+                              @Html.HiddenFor(x => x.Sales_Order_No);
+                                <div class="editor-field">
+                                    @Html.DropDownListFor(x => x.Sales_Order_Id, new SelectList(Model.SalesOrderList, "Id", "Name", Model.Sales_Order_Id), "Select Order No", new { @required = true, @class = "custom-select form-control" })
+                                    @Html.ValidationMessageFor(x => x.Sales_Order_Id, null, new { @style = "color:red;" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Delivery Date")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextBoxFor(x => x.Delivery_Date, new { @placeholder = "yyyy-mm-dd", @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Delivery_Date, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+
+                     
+                   
+                        <div class="col-md-6">
+                            <div class="editor-label">
+                                @Html.Label("Remarks")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextAreaFor(x => Model.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row topmrgn5px">
+                        <div class="col-md-12" id="DeliveryNoteDetailsList">
+                            @{
+                     Html.RenderAction("DeliveryNoteDetailsList", "DeliveryNote", new { Id = Model.Id });}
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<div>
+                                <label> Grand Total</label>
+                                <span class="pull-right" id="GrTotal" style="font-weight:bold;">
+
+                                    @Html.DisplayFor(x => x.Amount)
+                                </span>
+                                @Html.HiddenFor(x => Model.Amount)
+
+                            </div>*@ 
+                            <button type="submit" class="btn btn-primary" onclick="fn_ValidateForm('form1');">Save </button>
+                            @Html.ActionLink("Cancel", "Index", "DeliveryNote", new { @class = "btn btn-default" })
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3" id="MasterDetails">
+
+            @{
+    Html.RenderAction("MasterDetails", "DeliveryNote", new { CustomerId = 0 });}
+
+        </div>
+    </div>
+
+}
+
+<script>
+    $(function () {
+      
+        fn_LoadItemList();
+      
+        GetCustomer();
+        $('#Delivery_Date').datepicker({ dateFormat: 'yy-mm-dd' });
+     
+        $('#Customer_Id').customselect()
+        $('#Customer_Id').change(function () {
+            fn_BindSalesOrder();
+        });
+
+        $('#Sales_Order_Id').change(function ()
+        {
+            if ($('#Sales_Order_Id').val() > 0)
+            {
+            
+                $('#Sales_Order_No').val($('#Sales_Order_Id option:selected').text());
+               
+                fn_GetDeliveryDetails();
+                GetCustomer();
+                
+            }
+            
+        });
+        $('#Delivery_Date').change(function () {
+            var DelveryDate=new Date($('#Delivery_Date').val());
+            var Order_Date = new Date($('#Order_Date').val());
+            $('#Delivery_Date').datepicker({ dateFormat: 'yy-mm-dd' });
+            var startDate = $.Delivery_Date.parseDate('mm/dd/yy', $('#Order_Date').val());
+           // console.log(Order_Date);
+          //  alert(startDate);
+            if (Order_Date == 'Invalid Date') {
+              
+                alert("Select Order Ngggo!");
+                $('#Sales_Order_Id').focus();
+            }
+            else
+            {
+                if (DelveryDate >= Order_Date) {
+                    alert($('#Delivery_Date').val());
+                }
+            }
+        });
+
+    });
+
+    function myFunction(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var ItemId = tr.find('td:eq(0) select').val();
+
+        if (ItemId != 0) {
+
+            $(".decimal").on("keypress keyup blur", function (event) {
+
+
+                //this.value = this.value.replace(/[^0-9\.]/g,'');
+                $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+                if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            });
+        }
+        else {
+            alert('First Select Item Please !')
+            tr.find('td:eq(0) select').focus();
+        }
+    }
+    var arr = new Array();
+    function fn_Append(i, tr) {
+        arr = { Item_Id: 'Item_Id', Oreder_Quantity: 'Oreder_Quantity', Rate: 'Rate', Unit_Name: 'Unit_Name', Amount: 'Amount', Ship_Quantity: 'Ship_Quantity', Invoice_Quantity: 'Invoice_Quantity', Remarks: 'Remarks', Status: 'Status', Id: "Id" };
+        var j = 0;
+        $.each(arr, function (item, k) {
+            var control = j == 0 ? 'td:eq(' + j + ') select' : j == 1 ? 'td:eq(' + j + ') input' : 'td:eq(' + j + ') input';
+            var name = j == 0 ? item : j == 1 ? item : j == 2 ? item : j == 3 ? item : j == 4 ? item : item;
+
+            $(tr).find(control).attr('name', 'OrderDetails[' + i + '].' + name);
+            $(tr).find(control).attr('id', 'OrderDetails[' + i + '].' + name);
+
+            j++;
+        })
+      //  fn_GetGrandTotalAmount(obj);
+    }
+
+    function fn_Addrow(obj) {
+
+        if ($(obj).text() == "Add") {
+
+
+             $("#tblItem tbody").append($("#tblItem tbody tr:last").clone());
+            $("#tblItem tbody tr:last").find('td:nth-child(1) select').val(0);
+             $("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').val('');
+             $("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').attr('class', 'form-control decimal');
+             $("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val('');
+             $("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val('');
+             $("#tblItem tbody tr:last").find('td:nth-child(4) input[type=text]').val('');
+             $("#tblItem tbody tr:last").find('td:nth-child(5) input[type=text]').val('');
+            $(obj).attr("class", "btn-sm btn vd_btn vd_bg-red fa fa-times")
+
+            $(obj).text("Delete")
+            $("#tblItem tbody tr:last").find('td:nth-child(8) input[type=hidden]').val(true);
+            $("#tblItem tbody tr").each(function (i, item) {
+                fn_Append(i, this);
+            })
+        }
+
+        else {
+
+
+            $(obj).parent().parent().hide();
+            var tr = $(obj).parent().parent();
+            tr.find('td:eq(8) input[type=hidden]').val(false)
+
+
+        }
+
+        fn_GetGrandTotalAmount(obj);
+    }
+    function fn_LoadItemList() {
+
+        var len = $("#tblItem tbody tr").length - 1
+        for (var i = 0; i < len; i++) {
+            if (i < len) {
+                $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(9) a').attr("class", "btn-sm btn vd_btn vd_bg-red fa fa-times");
+                $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(9) a').text('Delete');
+            }
+
+
+
+        }
+
+    }
+
+    @*--------------*@
+
+
+   
+   
+   
+    function GetCustomer()
+    {
+
+        var CustomerId = $('#Customer_Id').val();
+        var OrderId = $('#Sales_Order_Id').val();
+
+        $.get("@Url.Action("MasterDetails", "DeliveryNote")", { CustomerId: CustomerId, OrderId: OrderId }, function (data) {
+            $('#MasterDetails').html(data);
+
+        });
+    }
+    function fn_GetTotalAmount(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var qty = tr.find('td:eq(1) input[type=text]').val();
+
+            var amount = tr.find('td:eq(2) input[type=text]').val();
+         
+
+            tr.find('td:eq(4) input[type=text]').val(qty * amount);
+            fn_GetGrandTotalAmount(obj);
+    }
+    function fn_CalGrandTotal()
+    {
+
+        var t = 0.00;
+        $('#tblItem tbody tr').each(function (index, item) {
+
+
+
+            var tm = $(this).find('td:eq(4) input[type=text]').val();
+
+                t = parseFloat(t) + parseFloat(tm);
+
+        });
+       
+        return t;
+
+    }
+
+    function fn_GetGrandTotalAmount(obj) {
+
+        var tr = $(obj).parent().parent();
+        var total = 0.00;
+        var TotalQty = 0.00
+        var t = 0.00;
+
+
+        $('#tblItem tbody tr').each(function (i, item1) {
+
+
+
+            if ($(item1).find('#OrderDetails[' + i + '].Status').val() == 'True' || $(item1).find('#OrderDetails[' + i + '].Status').val() == 'true')
+            {
+
+
+                var perrowatotalamout = $(item1).find('td:eq(5) input[type=text]').val();
+                total = parseFloat(total) + parseFloat(perrowatotalamout);
+            }
+            var perrowatotalamout = $(item1).find('td:eq(5) input[type=text]').val();
+            total = isNaN(parseFloat(total)) ? 0.00 : parseFloat(total) + (isNaN(parseFloat(perrowatotalamout)) ? 0.00 : parseFloat(perrowatotalamout));
+        });
+
+        $('#GrTotal').text(isNaN(total) ? 0.00 : total);
+        $('#Grand_Total').val(isNaN(total) ? 0.00 : total);
+
+    }
+
+    //------Add Tax
+
+
+   
+    function fn_BindSalesOrder()
+    {
+        var CustomerId = $('#Customer_Id').val();
+      
+        $.getJSON("@Url.Action("BindSalesOrderNo", "DeliveryNote")", { CustomerId: CustomerId }, function (data) {
+            $("#Sales_Order_Id").empty();
+            $('#Sales_Order_Id').append("<option>Select Order No</option>");
+            for (var i = 0; i < data.length; i++) {
+               
+                $('#Sales_Order_Id').append("<option value=" + data[i].Id + ">" + data[i].Name + "</option>");
+            
+            }
+           
+           
+        });
+        
+   
+    }
+  
+
+    function fn_GetDeliveryDetails()
+    {
+        var CustomerId = $('#Customer_Id').val();
+        var OrderId = $('#Sales_Order_Id').val();
+       // alert(OrderId);
+        $.get("@Url.Action("DeliveryNoteDetailsList", "DeliveryNote")", { Id: 0, OrderId: OrderId }, function (data) {
+            $("#DeliveryNoteDetailsList").empty();
+            $("#DeliveryNoteDetailsList").html(data);
+            //console.log(data);
+            var amt = isNaN(fn_CalGrandTotal()) ? 0.00 : fn_CalGrandTotal();
+          
+            $('#GrTotal').text(amt);
+            $('#Amount').val(amt);
+           
+        });
+        
+       
+    }
+
+
+</script>

@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = ViewBag.layout;
+}
+
+<div class="row">
+    <div class="col-lg-12">
+
+
+        <div class="col-lg-2 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-red">
+                <div class="row row-table">
+                    <a href="@Url.Action("Unit", "Report", new { area = "CommonReport" }, null)">
+                        <div class="col-xs-4 text-center bg-red pv-lg">
+                            <em class="fa fa-edit fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="text-uppercase">(3)</div>
+
+
+                            <small style="font-size:14px; color:black">Units Info</small>
+
+
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-purple">
+                <div class="row row-table">
+                    <a href="@Url.Action("LedgerGroup", "Report", new { area = "CommonReport" }, null)">
+                        <div class="col-xs-4 text-center bg-purple pv-lg">
+                            <em class="fa fa-tags fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="text-uppercase">(4)</div>
+
+
+                            <small style="font-size:14px; color:black">Ledger Group</small>
+
+
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-green">
+                <div class="row row-table">
+                    <a href="@Url.Action("FinancialYear", "Report", new { area = "CommonReport" }, null)">
+                        <div class="col-xs-4 text-center bg-green pv-lg">
+                            <em class="fa fa-list fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="text-uppercase">(4)</div>
+
+
+                            <small style="font-size:14px; color:black">Financial Year</small>
+
+
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-teal">
+                <div class="row row-table">
+                    <a href="@Url.Action("Tax", "Report", new { area = "CommonReport" }, null)">
+                        <div class="col-xs-4 text-center bg-teal pv-lg">
+                            <em class="fa fa-comments-o fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="text-uppercase">(7)</div>
+
+
+                            <small style="font-size:14px; color:black">Tax Master</small>
+
+
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-green">
+                <div class="row row-table">
+                    <a href="@Url.Action("Supplier", "Report", new { area = "CommonReport", TagName = "Supplier" }, null)">
+                        <div class="col-xs-4 text-center bg-green pv-lg">
+                            <em class="fa fa-list fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="text-uppercase">(4)</div>
+
+
+                            <small style="font-size:14px; color:black">Supplier Info</small>
+
+
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-purple">
+                <div class="row row-table">
+                    <a href="@Url.Action("Supplier", "Report", new { area = "CommonReport", TagName = "Customers" }, null)">
+                        <div class="col-xs-4 text-center bg-green pv-lg">
+                            <em class="fa fa-list fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="text-uppercase">(4)</div>
+
+
+                            <small style="font-size:14px; color:black">Customers Info</small>
+
+
+
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-6">
+            <!-- START widget-->
+            <div class="panel widget bg-purple">
+                <div class="row row-table">
+                    <a href="@Url.Action("StockGroup", "Report", new { area = "CommonReport" }, null)">
+                        <div class="col-xs-4 text-center bg-green pv-lg">
+                            <em class="fa fa-list fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="text-uppercase">(4)</div>
+
+
+                            <small style="font-size:14px; color:black">Stock Group</small>
+
+
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-6">
+            
+            <div class="panel widget bg-purple">
+                <div class="row row-table">
+                    <a href="@Url.Action("Index", "InventoryReport5599", new { area = "Inventory" }, null)">
+                        <div class="col-xs-4 text-center bg-green pv-lg">
+                            <em class="fa fa-list fa-3x"></em>
+                        </div>
+                        <div class="col-xs-8 pv-lg">
+                            <div class="text-uppercase">(4)</div>
+
+
+                            <small style="font-size:14px; color:black">Stock Master</small>
+
+
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

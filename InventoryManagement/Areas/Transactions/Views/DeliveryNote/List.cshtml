@@ -1,0 +1,110 @@
+﻿@model List<ViewModel.Transactions.DeliveryNoteList>
+@{
+    var grid = new WebGrid(Model, canPage: true, canSort: true, rowsPerPage: 20, ajaxUpdateContainerId: "gridcontent", selectionFieldName: "selectedRow");
+    grid.Pager(WebGridPagerModes.All);
+}
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+        <div class="row">
+
+            <div class="col-md-9">
+                <i class="fa fa-list"></i>
+                <span>Delivery Note</span>
+
+            </div>
+
+            <div class="col-md-3">
+                @Ajax.ActionLink("New", "Create", "DeliveryNote", new { Id = 0, area = "Transactions" }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default btn-xs btn-flat hgt" })
+
+                <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                <input type="text" placeholder="Search Here" class="hgt" />
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-search"></button>
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-refresh"></button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="panel-body" id="gridcontent">
+        <div class="row">
+            <div class="col-md-8" id="gridcontent" style="min-height:450px;border:solid silver 1px;">
+                @grid.GetHtml(tableStyle: "gTable table table-responsive",
+        columns: grid.Columns(
+
+                  grid.Column("Sales_Order_No", "Order No"),
+                //grid.Column("Customer_Name", "Customer Name"),
+
+                //  grid.Column("Contact_No", "Contact No"),
+
+                //   grid.Column("Delivery_Note_No", "Delivery Note No"),
+                   grid.Column("Order_Date", "Order Date"),
+
+                   grid.Column("Delivery_Date", "Delivery Date"),
+                          //grid.Column("Remarks", "Remarks"),
+        grid.Column("Action", format: (item) => new HtmlString(
+                                    @Ajax.ActionLink(" ", "Create", "DeliveryNote", new { area = "Transactions", Id = item.Id }, new AjaxOptions
+       {
+           UpdateTargetId = "content",
+           HttpMethod = "GET",
+           InsertionMode = InsertionMode.Replace,
+       }, new { @Class = "btn btn-default fa fa-pencil", @title = "Edit" }).ToString() +
+                                                    @Ajax.ActionLink(" ", "Delete", "SalesOrder", new { area = "Transactions", Id = item.Id }, new AjaxOptions
+       {
+           UpdateTargetId = "content",
+           HttpMethod = "GET",
+           InsertionMode = InsertionMode.Replace,
+       }, new { @Class = "btn btn-default fa fa-trash-o", @title = "Delete" }).ToString()
+       ))
+       ))
+
+            </div>
+            <div class="col-md-4" id="ViewDelivery">
+
+                @{Html.RenderAction("ViewDelivery", "DeliveryNote", new { @area = "Transactions", Id = -1 });}
+
+
+            </div>
+            </div>
+
+        </div>
+
+</div>
+
+
+<script>
+
+            $('table tbody tr').click(function () {
+
+                var selectedId = $(this).find('td:eq(0)').text();
+
+
+                $.ajax({
+                    url: '@Url.Action("ViewDelivery", "DeliveryNote")',
+                    data: { 'Id': selectedId },
+                    type: "get",
+                    cache: false,
+                    success: function (savingStatus) {
+
+                        $('#ViewDelivery').html(savingStatus);
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+
+                    }
+                });
+            });
+</script>
+<style>
+    .gTable tr:hover {
+        background-color: skyblue;
+    }
+</style>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Tax";
+    Layout = ViewBag.layout;
+}
+
+<script>
+    function TaxInfoReport() {
+
+        var Path = "@Url.Action("TaxListReport", "Report", new { area = "CommonReport" })?ReportType=" + $('#ddlTaxinfo').val()
+        window.open(Path);
+    }
+</script>
+<div align="right">
+    <br />
+    @Html.DropDownList("ddlTaxinfo", new SelectList(
+        new List<object> {
+            new {test="PDF",value="PDF"},
+            new {test="Excel",value="Excel"},
+            new {test="Word",value="Word"}
+        },
+   "test",
+   "value"
+   ), new { style = "width:100px;" })
+
+
+    <input type="button" onclick="TaxInfoReport();" class="btn btn-xs btn-flat btn-primary " id="butDailySaleReport" value="Generate Reports" />
+</div>
+<div>
+    @Html.Action("TaxList")
+</div>
+

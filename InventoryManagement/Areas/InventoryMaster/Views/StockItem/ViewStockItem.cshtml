@@ -1,0 +1,195 @@
+﻿@model ViewModel.Stock.StockItem
+@{
+
+    string src = null;
+    if (Model.Image_Path != null)
+    {
+        src = Model.Image_Path;
+    }
+    else
+    {
+        src = "/Themes/img/demo_img.gif";
+    }
+
+}
+
+<script type="text/javascript">
+
+    function encodeImageFileAsURL(id) {
+
+
+        var filesSelected = document.getElementById(id).files;
+        if (filesSelected.length > 0) {
+            var fileToLoad = filesSelected[0];
+
+            var fileReader = new FileReader();
+
+            fileReader.onload = function (fileLoadedEvent) {
+                var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+                var newImage = document.createElement('img');
+                newImage.src = srcData;
+                // alert(srcData);
+
+                document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                //alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                // console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                $('#ImageName').val(srcData);
+            }
+            fileReader.readAsDataURL(fileToLoad);
+        }
+    }
+
+    $(function () {
+        $("#form1").submit(function (event) {
+
+            var dataString;
+            event.preventDefault();
+            var action = $("#form1").attr("action");
+            if ($("#form1").attr("enctype") == "multipart/form-data") {
+                dataString = new FormData($("#form1").get(0));
+                contentType = false;
+                processData = false;
+            } else {
+
+            }
+
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: dataString,
+                dataType: "json",
+                contentType: contentType,
+                processData: processData,
+                success: function (data) {
+
+                    $('#content').load('@Url.Action("Index", "StockItem")');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                }
+            });
+        });
+
+
+
+    });
+
+
+    function encodeImageFileAsURL(id) {
+
+        var filesSelected = document.getElementById(id).files;
+        if (filesSelected.length > 0) {
+            var fileToLoad = filesSelected[0];
+
+            var fileReader = new FileReader();
+
+            fileReader.onload = function (fileLoadedEvent) {
+                var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+                var newImage = document.createElement('img');
+                newImage.src = srcData;
+                // alert(srcData);
+
+                document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                //alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                // console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                $('#ImageName').val(srcData);
+            }
+            fileReader.readAsDataURL(fileToLoad);
+        }
+    }
+</script>
+
+
+
+@*@using (Ajax.BeginForm("Create", "StockItem", new { area = "InventoryMaster" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }, new { @id = "form2" }))*@
+@using (Html.BeginForm("Create", "StockItem", new { @area = "InventoryMaster" }, FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+
+
+    <div>
+
+      
+            
+            
+        <div class="panel panel-danger" style="min-height:450px;">
+
+            <div class="panel-heading" style="background-color: #C4538A;color:white"><span>View Details</span> </div>
+
+
+            <div class="panel-body">
+
+                <div>
+                    <div id="imgTest">
+                        <img src="@src" class="img-responsive img-thumbnail" style="max-height:120px;min-height:120px;max-width:120px;min-width:120px;" />
+                    </div>
+                </div>
+                <table class="table table-responsive table-bordered topmrgn5px">
+                    <tr>
+                        <td>
+                            @Html.Label("Code")
+                            @Html.HiddenFor(x => x.Id)
+                        </td>
+                        <td>
+
+                            <span>@Model.Item_Code</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            @Html.Label("Alias Name")
+                        </td>
+                        <td>
+                            <span>@Model.Alias_Name</span>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>
+                            @Html.Label("Prefix SerialNo")
+                        </td>
+                        <td>
+                            <span>@Model.Prefix_SerialNo</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.Label("Starting From")
+                        </td>
+                        <td>
+                            <span>@Model.Start_From</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.Label("Min Qty Alert")
+                        </td>
+                        <td>
+                            <span>@Model.Min_Qty</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            @Html.Label("Remarks")
+                        </td>
+                        <td>
+                            <span>@Model.Remarks</span>
+                        </td>
+                    </tr>
+                </table>
+               
+
+
+            </div>
+
+        </div>
+          
+    </div>
+}

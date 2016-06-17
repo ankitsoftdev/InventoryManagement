@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{147AC307-6BC8-4975-83AF-52288A8A4023}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServiceLayer</RootNamespace>
+    <AssemblyName>ServiceLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountsMaster\CustomerServicesLayer.cs" />
+    <Compile Include="CommonReport\ReportServices.cs" />
+    <Compile Include="Common\CommonServiceLayer.cs" />
+    <Compile Include="Common\CustomFilter.cs" />
+    <Compile Include="Dashboard\DashboardSLayer.cs" />
+    <Compile Include="InventoryMaster\StockCategoryServiceLayer.cs" />
+    <Compile Include="InventoryMaster\StockGroupServicelayer.cs" />
+    <Compile Include="InventoryMaster\StockServiceLayer.cs" />
+    <Compile Include="Masters\CityServicesLayer.cs" />
+    <Compile Include="Masters\FinancialYearServiceLayer.cs" />
+    <Compile Include="Masters\GoDownServiceLayer.cs" />
+    <Compile Include="Masters\LedgerGroupServiceLayer.cs" />
+    <Compile Include="Masters\LedgerMasterServiceLayer.cs" />
+    <Compile Include="Masters\RegionServiceLayer.cs" />
+    <Compile Include="Masters\TaxServiceLayer.cs" />
+    <Compile Include="Masters\UnitsServiceLayer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transactions\DeliveryNoteServiceLayer.cs" />
+    <Compile Include="Transactions\PaymentServiceLayer.cs" />
+    <Compile Include="Transactions\PurchaseOrderServiceLayer.cs" />
+    <Compile Include="Transactions\PurchaseReturnServiceLayer.cs" />
+    <Compile Include="Transactions\PurchaseServiceLayer.cs" />
+    <Compile Include="Transactions\QuationServiceLayer.cs" />
+    <Compile Include="Transactions\ReceiptNoteServiceLayer.cs" />
+    <Compile Include="Transactions\ReceiptServiceLayer.cs" />
+    <Compile Include="Transactions\SalesOrderServiceLayer.cs" />
+    <Compile Include="Transactions\SalesReturnServiceLayer.cs" />
+    <Compile Include="Transactions\SalesServiceLayer.cs" />
+    <Compile Include="Transactions\StockMasterServiceLayer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\HDMEntity.csproj">
+      <Project>{449d409a-e245-47c0-8755-bc037fae2eaf}</Project>
+      <Name>HDMEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{aa53406f-8bbb-4027-a0f5-e39a8b018960}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CRService\" />
+    <Folder Include="Finance\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

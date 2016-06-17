@@ -1,0 +1,141 @@
+﻿@model List<ViewModel.Common.FinancialYear>
+@{
+    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 20,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridcontent");
+    grid.Pager(WebGridPagerModes.All);
+}
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+        <div class="row">
+
+            <div class="col-md-9">
+                <i class="fa fa-list"></i>
+                <span>Financial Year</span>
+
+
+            </div>
+
+            <div class="col-md-3">
+                @Ajax.ActionLink("New", "Create", "FinancialYear", new { area = "Masters", Id = 0 }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default btn-xs btn-flat hgt", })
+
+
+                <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                <input type="text" placeholder="Search Here" class="hgt" />
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-search"></button>
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-refresh"></button>
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+   
+
+        <div class="panel-body" id="gridcontent">
+
+            @grid.GetHtml(tableStyle: "table table-striped table-bordered table-hover table-responsive topmrgn5px",
+        columns: grid.Columns(
+        grid.Column("Name", "Name"),
+                                   
+         grid.Column("FromPeriod", "From Period"),
+          grid.Column("ToPeriod", "To Period"),
+                     grid.Column("Remarks", "Remarks"),
+          grid.Column( "Action", format: (item) => new HtmlString(
+
+               @Ajax.ActionLink(" ", "Create", "FinancialYear", new { area = "Masters", Id = item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default fa fa-pencil", @title = "Edit" }).ToString() +
+                              @Ajax.ActionLink(" ", "Create", "FinancialYear", new { area = "Masters", item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default fa fa-trash-o", @title = "Delete" }).ToString()
+
+         ))
+
+
+        ))
+
+            @*<table class="table table-striped table-bordered table-hover table-responsive topmrgn5px">
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            From Period
+                        </td>
+
+                        <td>
+                            To Period
+                        </td>
+
+                        <td colspan="2">Action</td>
+                    </tr>
+                    @if (Model.Count != 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(x => item.Name)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => item.FromPeriod)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(x => item.ToPeriod)
+                                </td>
+
+                                <td>
+                                    @Ajax.ActionLink(" ", "Create", "FinancialYear", new { area = "Masters", Id = item.Id }, new AjaxOptions
+                                    {
+
+                                        UpdateTargetId = "content",
+                                        HttpMethod = "GET",
+                                        InsertionMode = InsertionMode.Replace,
+                                    }, new { @Class = "fa fa-pencil", })
+                                </td>
+                                <td>
+                                    @Ajax.ActionLink(" ", "Create", "FinancialYear", new { area = "Masters", item.Id }, new AjaxOptions
+                                    {
+
+                                        UpdateTargetId = "content",
+                                        HttpMethod = "GET",
+                                        InsertionMode = InsertionMode.Replace,
+                                    }, new { @Class = "fa fa-trash-o", })
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">
+                                No Records found..
+                            </td>
+                        </tr>
+                    }
+
+
+                </table>*@
+        </div>
+    </div>

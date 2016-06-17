@@ -1,0 +1,198 @@
+﻿@model List<ViewModel.Common.List_Common>
+
+@{
+    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 20,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridcontent");
+    grid.Pager(WebGridPagerModes.All);
+}
+
+<div class="panel">
+    <div class="panel-heading  bg-margenta">
+        <div class="row">
+
+            <div class="col-md-9">
+                <i class="fa fa-list"></i>
+                <span>Item Group Master</span>
+
+
+            </div>
+
+            <div class="col-md-3">
+                @Ajax.ActionLink("New", "Create", "StockGroup", new { area = "InventoryMaster", Id = 0 }, new AjaxOptions
+  {
+      UpdateTargetId = "content",
+      HttpMethod = "GET",
+      InsertionMode = InsertionMode.Replace,
+  }, new { @Class = "btn btn-default btn-xs btn-flat hgt" })
+
+
+                <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                <input type="text" placeholder="Search Here" class="hgt" />
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-search"></button>
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-refresh"></button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+<div class="panel-body" id="gridcontent">
+     @grid.GetHtml(tableStyle: "table table-striped table-bordered table-hover table-responsive topmrgn5px",
+      
+      columns: grid.Columns(
+                grid.Column("S.No", format: (item) => item.WebGrid.Rows.IndexOf(item)+1),
+               grid.Column("Name", "Name"),
+                                                     
+                                                         grid.Column("Alias_Name", " Alias"),
+                                                         grid.Column("Under_Name", " Under"),
+                                                           grid.Column("Action", format: (item) =>
+                                                                new HtmlString(
+                         Ajax.ActionLink(" ", "Create", "StockGroup", new { area = "InventoryMaster", Id = item.Id }, new AjaxOptions
+                                     {
+
+                                         UpdateTargetId = "content",
+                                         HttpMethod = "GET",
+                                         InsertionMode = InsertionMode.Replace,
+                                     }, new { @Class = "btn btn-default fa fa-pencil", @title = "Edit" }).ToString() +
+                          @Ajax.ActionLink(" ", "Create", "StockGroup", new { area = "InventoryMaster", item.Id }, new AjaxOptions
+                                     {
+
+                                         UpdateTargetId = "content",
+                                         HttpMethod = "GET",
+                                         InsertionMode = InsertionMode.Replace,
+                                     }, new { @Class = "btn btn-default  fa fa-trash-o",@title="Delete" }).ToString() 
+          )
+                                                           )
+
+     ))
+        @*<table class="table table-striped table-bordered table-hover table-responsive topmrgn5px">
+            <tr>
+                <td>
+                    Group Name
+                </td>
+                <td>
+                    Alias Name
+                </td>
+
+                <td>
+                    Under Group
+                </td>
+
+                <td colspan="2">
+                    Action
+                </td>
+            </tr>
+            @if (Model.Count != 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(x => item.Name)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => item.Alias_Name)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(x => item.Under_Name)
+                        </td>
+
+                        <td>
+                            @Ajax.ActionLink(" ", "Create", "StockGroup", new { area = "InventoryMaster", Id = item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "fa fa-pencil" })
+                        </td>
+                        <td>
+                            @Ajax.ActionLink(" ", "Create", "StockGroup", new { area = "InventoryMaster", item.Id }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "fa fa-trash-o" })
+                        </td>
+                    </tr>
+                }
+
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">
+                        No Records found..
+                    </td>
+                </tr>
+            }
+
+        </table>*@
+    </div>
+
+</div>
+
+@*<style type="text/css">
+    .webGrid {
+        margin: 4px;
+        border-collapse: collapse;
+        width: 500px;
+        background-color: #B4CFC3;
+    }
+
+    .header {
+        background-color: #C1D4E6;
+        font-weight: bold;
+        color: #FFF;
+    }
+
+    .webGrid th, .webGrid td {
+        border: 1px solid #C0C0C0;
+        padding: 5px;
+    }
+
+    .alt {
+        background-color: #E4E9F5;
+        color: #000;
+    }
+
+    .gridHead a:hover {
+        text-decoration: underline;
+    }
+
+    .description {
+        width: auto;
+    }
+
+    .select {
+        background-color: #71857C;
+    }
+</style>*@
+
+<style>
+    .select {
+        background-color: #71857C;
+    }
+        table th; {
+        background-color: #b8e0f7;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #999999;
+        color: black;
+    }
+
+    table th a{
+       
+        color: black;
+    }
+  
+   
+    .table tfoot {
+        text-align: center;
+    }
+</style>

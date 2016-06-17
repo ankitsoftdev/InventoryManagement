@@ -1,0 +1,147 @@
+﻿@model List<ViewModel.Ledger.Challan_Details>
+           <script>
+    function PurchageReturn() {
+        var Name = 0
+        $("#butNReturn").hide();
+        $("#butNSave").show();
+        $("#thReturn").show();
+        $('#tbPurchage tbody').find('tr').each(function (index, val) {
+            $(this).append("<td><input  type='text' onchange='ReturnQty(this);' Name='[" + Name + "].ReturnQuantity' class = 'form-control' id='txtqut'/></td>")
+            
+            Name++;
+        });
+    }
+    function ReturnQty(txt)
+    {
+        var Qty = $(txt).parents('tr').find("#txtQuantity").val();
+      //  alert(Qty)
+        if (Qty < $(txt).val())
+        {
+            $('#Mymmodal').modal({ backdrop: 'static' });
+            $(txt).val("")
+        }
+        
+    }
+    //$('#From').blur(function () {
+    //    alert('Work out how to set StartTime On Model here');
+    //});
+</script>
+@using (Ajax.BeginForm("SalesReturn", "Sales", new AjaxOptions
+{
+    UpdateTargetId ="content",
+    InsertionMode =InsertionMode .Replace ,
+    HttpMethod ="Post"
+}))
+{ 
+<div>
+    <label> Challan No :</label> @Model.FirstOrDefault().Challan_Number
+    <br />
+    <label> Supplier :</label> @Model.FirstOrDefault().Supplier_Name
+    <br />
+    <label>Purchase Date :</label>@Model.FirstOrDefault().Purchase_Date
+    <br />
+    <button type="button" onclick="PurchageReturn();" id="butNReturn" class="btn btn-xs  btn-default pull-left btn-flat">PurchageReturn</button>
+    <button type="submit" style="display:none" id="butNSave" class="btn btn-xs  btn-default pull-left btn-flat">Save</button>
+    @Html.ActionLink("Back", "Index", "Purchase", new { @class = "fa fa-arrow-circle-left btn btn-danger" })
+</div>
+<table id="tbPurchage" class="table table-striped table-bordered table-hover">
+    <thead>
+
+        <tr>
+            <th>
+                <label> Item Name</label>
+            </th>
+
+            <th>
+                <label>Quantity</label>
+            </th>
+
+            <th>
+                <label>Rate</label>
+            </th>
+            <th>
+                <label>Per</label>
+            </th>
+            <th>
+                <label>Amount</label>
+            </th>
+            <th id="thReturn" style="display:none">Return Quantity</th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+
+
+
+        @for (int i = 0; i < Model.Count();i++)
+        {
+
+            <tr>
+
+                <td>
+                    @Html.HiddenFor(x => Model[i].SupplierId)
+                    @Html.HiddenFor(x => Model[i].ItemId)
+                    @Html.DisplayFor(x => Model[i].Item_Name)
+                    @Html.HiddenFor(x => Model[i].Item_Name)
+                    @Html.HiddenFor(x => Model[i].Challan_Number)
+                    @Html.HiddenFor(x => Model[i].Supplier_Name)
+                    @Html.HiddenFor(x => Model[i].Purchase_Date)
+                    @*@Html.HiddenFor(x => Model[i].Purchase_Date)*@
+
+                </td>
+                <td>
+                    @Html.DisplayFor(x => Model[i].Qty)
+                    @Html.HiddenFor(x => Model[i].Qty, new { id = "txtQuantity" })
+                </td>
+                <td>
+                    @Html.DisplayFor(x => Model[i].Rate)
+                    @Html.HiddenFor(x => Model[i].Rate)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(x => Model[i].Unit_Name)
+                    @Html.HiddenFor(x => Model[i].Unit_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => Model[i].Total_Amount)
+                    @Html.HiddenFor(x => Model[i].Total_Amount)
+
+                </td>
+
+            </tr>
+
+        }
+
+
+
+
+
+
+
+
+
+    </tbody>
+</table>
+    
+}
+<div class="modal fade modal-sm" id="Mymmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:lightgray;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-check-square-o"></i>&nbsp;Message</h4>
+            </div>
+            <div class="modal-body">
+
+                <p>Enter Quantity  Greater than  Return Quantity</p>
+            </div>
+            <div class="modal-footer">
+
+
+                <button type="button" class="btn btn-xs btn-flat btn-default" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>

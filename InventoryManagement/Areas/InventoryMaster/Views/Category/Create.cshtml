@@ -1,0 +1,100 @@
+﻿@model ViewModel.Category.StockCategory
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(function () {
+        $("#Category_underGroup").customselect();
+    });
+    $("#Category_Name").blur(function () {
+
+        $.getJSON("@Url.Action("IsNameExists", "Category")", { Id: $("#Category_Id").val(), Name: $("#Category_Name").val() }, function (data) {
+            if(data==true)
+            {
+                $('#errorCategory_Name').text("Name is All Ready Exists!")
+                $("#Category_Name").focus();
+            }
+        });
+    });
+</script>
+@using (Ajax.BeginForm("Create", "Category", new { area = "InventoryMaster" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new {@id="form3" }))
+{
+    @Html.ValidationSummary(true)
+
+
+    
+    
+    
+    
+    
+
+     <div class="row">
+
+         <div class="col-lg-3">
+         </div>
+
+       <div class="col-lg-6">
+          <div class="panel panel-danger">
+
+              <div class="panel-heading" style="background-color: #C4538A;color:white"><span>Item Category</span> </div>
+
+                    <div class="panel-body">
+
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                            <div class="editor-label">
+
+                                    @Html.Label("Name")<span style="color:red">*</span>
+                           </div>
+                                @Html.HiddenFor(m => m.Category.Id)
+                                @Html.TextBoxFor(m => m.Category.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "50" })
+                                @Html.ValidationMessageFor(m => m.Category.Name, null, new { @id = "errorCategory_Name", @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-12">
+
+                                @Html.Label("Alias Name")
+                                @Html.TextBoxFor(m => m.Category.Alias_Name, new { @placeholder = "Alias Name", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Category.Alias_Name, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Under Category")
+                                @Html.DropDownListFor(m => m.Category.UnderId, new SelectList(Model.Category.ListUnder, "Id", "Name", Model.Category.UnderId), "Under Category", new { @class = "custom-select form-control", @id = "Category_underGroup" })
+                                @*@Html.TextBoxFor(Model => Model.Category.underGroup, new { @placeholder = "Under Category", @class = "form-control" })*@
+                                @*@Html.TextBox("Category", null, new { @placeholder = "Category", @class = "form-control" })*@
+                                @*@Html.HiddenFor(x => x.Category.underGroup)*@
+                                @Html.ValidationMessageFor(m => Model.Category.UnderId, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-12">
+                                @Html.Label("Remarks")
+                                @Html.TextBoxFor(m => m.Category.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+
+                                @Html.ValidationMessageFor(m => m.Category.Alias_Name, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-12 topmrgn5px">
+
+                                <button type="submit" class="btn btn-primary" onclick="fn_ValidateForm('form1');">Save </button>
+                                @Html.ActionLink("Cancel", "Index", "Category", new { @class = "btn btn-default" })
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+         <div class="col-lg-3">
+         </div>
+       
+     </div>
+    
+}
+

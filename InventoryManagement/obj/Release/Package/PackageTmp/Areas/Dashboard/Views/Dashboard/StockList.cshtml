@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ViewModel.Dashboard.ManageStockInfo>
+
+@{
+    ViewBag.Title = "StockList";
+}
+
+<table class="table table-reponsive table-bordered table-striped table-hover table-wrapper">
+<thead>
+        <tr>
+            <th>Item Code</th>
+            <th>Item Name</th>
+            <th>Purchase Rate</th>
+            <th>Selling Rate</th>
+            <th>Total Quantity</th>
+            <th>Minimum Quantity</th>
+            <th>Item Requirment</th>
+            <th>Status</th>
+        </tr>
+</thead>
+     @foreach(var item in Model)
+      {
+         
+       <tr>
+           <td>@item.Item_Code</td>
+           <td>@item.Name</td>
+           <td>@item.Purchase_Rate</td>
+           <td>@item.Selling_Rate</td>
+           <td>@item.Total_Qty</td>
+           <td>@item.Min_Qty</td>
+           <td>@item.ManageStock</td>
+           <td>@item.Status</td>
+
+       </tr>
+    }
+</table>

@@ -1,0 +1,229 @@
+﻿@model ViewModel.Common.TaxDetails
+
+
+<div>
+    <input type="button" value="Add Tax" onclick="AddTax();" />
+    <table id="TaxDetails" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Tax Type</th>
+                <th>Rate</th>
+                <th>Amount</th>
+                <th></th>
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @{int t = 0;}
+            @foreach (var item in Model.listTaxDetails)
+            {
+                <tr>
+                    <td>
+                        @Html.DropDownListFor(x => Model.listTaxDetails[t].Id, new SelectList(Model.TaxDeductionList, "Value", "Name", Model.listTaxDetails[t].Id), "Select Tax", new { @class = "form-control", onchange = "calc_Tax(this);", @required = "required" })
+                        @*@Html.HiddenFor(x => Model.listTaxDetails[t].Tag_Type)*@
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => Model.listTaxDetails[t].Rate_Type, new { @class = "form-control", onchange = "calc_Tax(this);", @required = "required" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.listTaxDetails[t].Value, new { @class = "form-control",@readonly=true })
+                    </td>
+                    <td><input type="button" value="Remove" onclick="RemoveRowOfTaxDetailtbl(this); calc_Tax(this);" class="btn btn-danger" /></td>
+                    @*<td>
+                        <input type="button" value="Remove" onclick="RemoveRowOfTaxDetailtbl(this); fn_DelTaxDetails(); " class="btn btn-danger" /> 
+                       
+                        <input type="button" value="Remove" onclick="RemoveRowOfTaxDetailtbl(this); CalculateTax();" class="btn btn-danger" /> 
+                    </td>*@
+                </tr>
+                t++;
+            }
+        </tbody>
+    </table>
+    
+        @*<div class="col-lg-9">
+            <div class="col-lg-3">
+                <label> Total Amount :-</label>
+                <span class="pull-right" style="font-weight:bold;">
+                    @Html.HiddenFor(x => x.Grand_Total)
+                    <span id="totaltax"></span>
+                    <span id="Grandtotl"></span>
+                </span>
+
+
+            </div>
+        </div>*@
+     
+    @*<div>
+        <label> Total Amount :-</label>
+        <span class="pull-right" style="font-weight:bold;">
+            @Html.HiddenFor(x => x.Grand_Total)
+            <span id="totaltax"></span>
+            <span id="Grandtotl"></span>
+        </span>
+
+
+    </div>*@
+</div>
+<script>
+    $(function () {
+        //CalculateTax();
+        //var rowlength = $('#TaxDetails tbody tr').length;
+        //for (var i = 1; i < rowlength; i++) {
+        //    $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(3)').append('<input type="button" value="Remove" onclick="RemoveRowOfTaxDetailtbl(this); calc_Tax(this);" class="btn btn-danger" />')
+        //}
+        @*$('#totaltax').html(@Model.listTaxDetails.Select(x => new {x.Rate_Type,x.Value })())*@
+
+        });
+
+    function AddTax() {
+
+            var indx = $('#TaxDetails tbody tr').length;
+
+            $('#TaxDetails tbody').append('<tr><td> <select class="form-control" id="purchase_tra_taxdetails_listTaxDetails_'+indx+'__Id" name="purchase_tra.taxdetails.listTaxDetails['+indx+'].Id" onchange="calc_Tax(this);" required="required"> </select></td>'
+              + '<td><input class="form-control" id="purchase_tra_taxdetails_listTaxDetails_' + indx + '__Rate_Type" name="purchase_tra.taxdetails.listTaxDetails[' + indx + '].Rate_Type" onchange="calc_Tax(this);" type="text" value="" , required = "required"></td>'
+              + '<td><input class="form-control" id="purchase_tra_taxdetails_listTaxDetails_' + indx + '__Value" name="purchase_tra.taxdetails.listTaxDetails[' + indx + '].Value" readonly="True" type="text" value=""> </td>'
+              + '<td><input type="button" value="Remove" onclick="RemoveRowOfTaxDetailtbl(this); calc_Tax(this);" class="btn btn-danger" /></td></tr>')
+
+            $.get("@Url.Action("BindTax", "Purchase", new {area="Transactions" })", function (data) {
+            $('#purchase_tra_taxdetails_listTaxDetails_' + indx + '__Id').html('<option>Select Tax</option>')
+            $.each(data, function (i, index) {
+
+                $('#purchase_tra_taxdetails_listTaxDetails_' + indx + '__Id ').append($('<option></option>').val(index.Value).html(index.Name));
+            })
+
+        })
+    }
+
+
+    function calc_Tax(item) {
+
+        var tr = $(item).parent().parent();
+        var totaTax = 0;
+        var amnt = 0;
+        var tax = 0;
+        var taxCode = '';
+        var taxType = '';
+        var i = 0;
+        var totalAmount = 0;
+        var calculateAmount = 0;
+        var DeductionAmount = 0;
+        var AddtionAmount = 0;
+
+        amnt = $('#GrTotal').html();
+        if ($(tr).find('td:eq(0) select option:selected').text() != 'Select Tax') {
+
+            taxType = $(tr).find('td:eq(0) select').val().split('_')[1];
+            tax = parseFloat($(tr).find('td:eq(0) select').val().split('_')[3]);
+
+            if ($(item).is(':text')) {
+
+                tax = parseFloat($(tr).find('td:eq(1) input').val());
+
+            }
+            taxCode = $(tr).find('td:eq(0) select').val().split('_')[2];
+
+            calculateAmount = taxCode == 'PERCENT' ? ((parseFloat(amnt) * tax) / 100) : tax;
+            if (taxType == 'DEDUCTION') {
+
+                //DeductionAmount += taxCode == 'PERCENT' ? parseFloat(amnt - (parseFloat(amnt) * tax) / 100) : parseFloat(parseFloat(amnt) - parseFloat(tax));
+                DeductionAmount += taxCode == 'PERCENT' ? (parseFloat(amnt) * tax) / 100 : parseFloat(tax);
+
+            }
+            else {
+                AddtionAmount += taxCode == 'PERCENT' ? parseFloat(amnt + (parseFloat(amnt) * tax) / 100) : parseFloat(parseFloat(amnt) + parseFloat(tax));
+
+            }
+
+
+            //$(tr).find('td:eq(1) input[type=text]').val(tax);
+            //$(tr).find('td:eq(2) input').val(calculateAmount);
+            //totaTax += calculateAmount;
+
+            $(tr).find('td:eq(1) input').val(tax);
+            $(tr).find('td:eq(2) input').val(calculateAmount);
+
+        }
+        else {
+            //$(tr).find('td:eq(1) input[type=text]').val('00');
+            //$(tr).find('td:eq(2) input').val('00');
+
+            $(tr).find('td:eq(1) input').val(00);
+            $(tr).find('td:eq(2) input').val(00);
+        }
+        DeductionAmount = 0;
+        AddtionAmount = 0;
+        $('#TaxDetails tbody tr').each(function () {
+            tax = parseFloat($('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select').val().split('_')[3]);
+            taxType = $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select').val().split('_')[1];
+            if (taxType == 'DEDUCTION') {
+
+
+                DeductionAmount += parseFloat($(this).find('td:eq(2) input').val());
+            }
+            else {
+
+                AddtionAmount += parseFloat($(this).find('td:eq(2) input').val());
+            }
+            i++;
+        })
+        //alert("Amnt = " + amnt + "  Deduct = " + DeductionAmount + "  Add " + AddtionAmount);
+        totalAmount = (amnt - DeductionAmount) + AddtionAmount;
+
+        $('#Discount').val(totalAmount);
+        $('#Discount_Amount').html(totalAmount);
+    }
+
+    function RemoveRowOfTaxDetailtbl(item) {
+        var ii = $(item).parent().parent().html();
+        var tr = $(item).parent().parent();
+        $(item).parent().parent().remove();
+        // $('#TaxDetails tbody tr:last').find('td:eq(3) input').remove();
+        // $('#TaxDetails tbody tr:last').find('td:eq(3)').append('<input type="button" value="Add" onclick="AddTax();">')
+
+
+        var i = 0;
+        $('#TaxDetails tbody tr').each(function (item) {
+            $(this).find('td:eq(0) select').attr('name', 'purchase_tra.taxdetails.listTaxDetails[' + i + '].Id');
+            $(this).find('td:eq(0) input[type=hidden]').attr('name', 'purchase_tra.taxdetails.listTaxDetails[' + i + '].Tag_Type');
+            $(this).find('td:eq(1) input').attr('name', 'purchase_tra.taxdetails.listTaxDetails[' + i + '].Rate_Type');
+            $(this).find('td:eq(2) input').attr('name', 'purchase_tra.taxdetails.listTaxDetails[' + i + '].Value');
+            i++;
+        });
+    }
+
+    function ValidationForTax() {
+        alert('validation called')
+        var len = $('#TaxDetails tbody tr').length;
+        
+        $('#TaxDetails tbody tr').each(function () {
+            alert(parseInt($(this).find('td:eq(1) input').val()));
+
+            if ( parseInt($(this).find('td:eq(1) input').val()) == 0 || isNaN($(this).find('td:eq(1) input').val())) {
+                alert($(this).find('td:eq(1) input').val());
+                $(this).find('td:eq(1) input').focus();
+                $('input[type="submit"]').attr('disabled', 'disabled');
+            }
+        })
+
+    }
+
+
+    $('button[type="submit"]').click(function (e) {
+
+        var len = $('#TaxDetails tbody tr').length;
+
+        $('#TaxDetails tbody tr').each(function () {
+
+            if (parseInt($(this).find('td:eq(1) input').val()) == 0 || isNaN($(this).find('td:eq(1) input').val())) {
+                alert($(this).find('td:eq(1) input').val());
+                $(this).find('td:eq(1) input').focus();
+                //$('input[type="submit"]').attr('disabled', 'disabled');
+
+                e.preventDefault();
+
+
+            }
+        })
+
+    })
+</script>

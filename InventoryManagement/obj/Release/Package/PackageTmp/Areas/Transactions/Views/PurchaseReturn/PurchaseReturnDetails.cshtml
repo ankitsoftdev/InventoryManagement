@@ -1,0 +1,165 @@
+﻿@model ViewModel.Transactions.PurchaseReturnInfo
+
+<table id="Additem" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                <label> Item Name</label>
+            </th>
+
+            <th>
+                <input type="hidden" value="0" id="Is_Auto" />
+                <label id="Serialno">Serial No</label>
+            </th>
+
+            @*<th>
+                <label>Rate</label>
+            </th>
+            <th>
+                <label>Per</label>
+            </th>
+            <th>
+                <label>Amount</label>
+            </th>*@
+
+            <th>
+                <label>Action</label>
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+
+                <tr>
+
+                    <td>
+                        @Html.DropDownListFor(x => x.Item_Id, new SelectList(Model.ItemList, "Id", "Name", Model.Item_Id), "Select Item", new { @class = "form-control",  @onchange = "GetUnitName(this);" })
+
+                    </td>
+
+                    <td>
+                        @Html.TextBox("SerialNo", null, new { @class = "form-control", minlength = "1", maxlength = "10", @id = "SerialNo" ,@onfocusout = "fn_CheckSerialNo(this);"})
+
+                    </td>
+                    @*<td>
+                        @Html.TextBoxFor(x => x.Rate, null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @onkeyup = "myFunction(this);", @onfocusout = "fn_GetTotalAmount(this);" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Unit_Name, null, new { @readonly = "readonly", @class = "form-control", minlength = "2", maxlength = "100" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.Amt, null, new { @class = "form-control", minlength = "1", maxlength = "15", @readonly = "readonly" })
+
+                    </td>*@
+
+                    <td>
+                    
+
+                        <a href="#" id="btnItem" name="btnItem" class="add" title="Add" onclick="fn_Addrow2(this);">Add</a>
+                        @*<a href="#" id="d" name="Delete" onclick="fn_Addrow2(this);" title="Remove" class="delete">Delete</a>*@
+                    </td>
+                </tr>
+           
+
+    </tbody>
+</table>
+
+
+<table id="tblItem" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                <label> Item Name</label>
+            </th>
+            <th>
+                <label>Qty</label>
+            </th>
+            <th>
+                <label>Serial No</label>
+            </th>
+
+           
+            @*<th>
+        <label>Per</label>
+    </th>
+    <th>
+        <label>Amount</label>
+    </th>*@
+
+            <th>
+                <label>Action</label>
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+
+
+        @{
+
+            if (Model.ReturnDetails.Count >= 0 && Model.Id>0)
+            {
+            int i = 0;
+            foreach (var m in Model.ReturnDetails)
+            {
+
+                <tr>
+
+
+
+                    <td>
+                        @Html.TextBoxFor(x => x.ReturnDetails[i].Item_Name, null, new { @class = "form-control", minlength = "1", maxlength = "10", @readonly = "readonly" })
+                       @Html.HiddenFor(x => x.ReturnDetails[i].Item_Id)
+                        @*@Html.DropDownListFor(x => x.ReturnDetails[i].Item_Id, new SelectList(Model.ItemList, "Id", "Name", Model.ReturnDetails[i].Item_Id), "Select Item", new { @class = "form-control", required = true, @onchange = "GetUnitName(this);" })*@
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.ReturnDetails[i].Quantity, null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @readonly = "readonly" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.ReturnDetails[i].Sale_Serial_No, null, new { @class = "form-control",@readonly="readonly" })
+
+                    </td>
+                   
+                    @*<td>
+                        @Html.TextBoxFor(x => x.ReturnDetails[i].Unit_Name, null, new { @readonly = "readonly", @class = "form-control", minlength = "2", maxlength = "100" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.ReturnDetails[i].Amount, null, new { @class = "form-control", minlength = "1", maxlength = "15", @readonly = "readonly" })
+
+                    </td>*@
+
+                    <td>
+                        
+                        @Html.HiddenFor(x => x.ReturnDetails[i].Id)
+                       
+                  
+
+                        @*<a href="#" id="btnItem" name="btnItem" class="add" title="Add" onclick="fn_Addrow(this);">Add</a>*@
+                        <a href="#" id="d" name="Delete" onclick="fn_Addrow2(this);" title="Remove" class="delete">Delete</a>
+                    </td>
+                </tr>
+                i++;
+            }
+            }
+
+
+        }
+
+
+
+
+
+    </tbody>
+</table>
+
+
+
+
+

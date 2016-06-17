@@ -1,0 +1,413 @@
+﻿@model ViewModel.Transactions.QuationInfo
+<script>
+ $(function () {
+     $("#Customer_Id").customselect();
+        //AutoComplete();
+    });
+    </script> 
+@using (Ajax.BeginForm("Create", "Quation", new { area = "Transactions" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="panel">
+
+                <div class="panel-heading bg-margenta"><span>Quation Master</span> </div>
+
+                <div class="panel-body">
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Quation No")
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(x => Model.Quation_Chalan_No, new { @placeholder = "Quation No", @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(x => Model.Quation_Chalan_No, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Name")
+                                @Html.HiddenFor(x => x.Id)
+                                <div class="editor-field">
+                                    @Html.DropDownListFor(x => x.Customer_Id, new SelectList(Model.CustomerList, "Id", "Name", Model.Customer_Id), "Customer Name", new { @required = true, @class = "custom-select form-control" })
+                                    @*@Html.TextBoxFor(x => Model.Name, new { @placeholder = "Name", @class = "form-control", required = true })*@
+
+                                    @Html.ValidationMessageFor(x => Model.Name, null, new { @style = "color:red;" })
+                                </div>
+                            </div>
+                        </div>
+                       
+                     
+                        @*<div class="col-md-">
+                            <div class="editor-label">
+                                @Html.Label("Quation Type")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.DropDownListFor(x => x.Tag_Type, new SelectList(new List<object> { new { Id = 1, Name = "TAKE" }, new { Id = 2, Name = "GIVE" } }, "Id", "Name", Model.Tag_Type), new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(x => x.Tag_Type, null, new { @style = "color:red;" })
+                            </div>
+                        </div>*@
+                 
+                     
+                        
+                        <div class="col-md-6">
+                            <div class="editor-label">
+                                @Html.Label("Remarks")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextAreaFor(x => Model.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row topmrgn5px">
+                        <div class="col-md-12">
+                            @{
+                            Html.RenderAction("QuationItemList", "Quation", new { Id = Model.Id });}
+                        </div>
+                    </div>
+
+                    <div class="row topmrgn5px">
+                        <div class="col-md-12">
+                            <div>
+
+
+
+
+
+                                <label> Grand Total</label>
+                                <span class="pull-right" id="GrTotal">
+
+                                    @Html.DisplayFor(x => x.Grand_Total)
+                                </span>
+                                @Html.HiddenFor(x => Model.Grand_Total)
+
+                            </div>
+                            <button type="submit" class="btn btn-primary ">Save </button>
+                            @Html.ActionLink("Cancel", "Index", "Quation", new { @class = "btn btn-default" })
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<script>
+    $(function () {
+       // fn_Show(0);
+        fn_LoadItemList();
+        //  fn_GetGrandTotalAmount();
+      //  fn_CalGrandTotal();
+
+        $('#Purchase_Date').datepicker({ dateFormat: 'dd-mm-yy' });
+
+        $('#TaxId').change(function () {
+
+            $.getJSON("@Url.Action("GetTaxRate", "Tax", new {area="Masters" })", { Id: $('#TaxId').val() }, function (data) {
+
+                $('#Tax_Rate').val(data);
+                fn_CalTaxAmt();
+            });
+
+
+        });
+    });
+
+    function myFunction(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var ItemId = tr.find('td:eq(0) select').val();
+
+        if (ItemId != 0) {
+
+            $(".decimal").on("keypress keyup blur", function (event) {
+
+
+                //this.value = this.value.replace(/[^0-9\.]/g,'');
+                $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+                if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            });
+        }
+        else {
+            alert('First Select Item Please !')
+            tr.find('td:eq(0) select').focus();
+        }
+    }
+    var arr = new Array();
+    function fn_Append(i, tr) {
+        arr = { Item_Id: 'Item_Id', Qty: 'Qty', Quat_Rate: 'Quat_Rate', Unit_Name: 'Unit_Name', Total_Amount: 'Total_Amount', Status: 'Status', Id: "Id" };
+        var j = 0;
+        $.each(arr, function (item, k) {
+            var control = j == 0 ? 'td:eq(' + j + ') select' : j == 1 ? 'td:eq(' + j + ') input' : 'td:eq(' + j + ') input';
+            var name = j == 0 ? item : j == 1 ? item : j == 2 ? item : j == 3 ? item : j == 4 ? item : item;
+
+            $(tr).find(control).attr('name', 'QuationItemList[' + i + '].' + name);
+            $(tr).find(control).attr('id', 'QuationItemList[' + i + '].' + name);
+
+            j++;
+        })
+      //  fn_GetGrandTotalAmount(obj);
+    }
+
+    function fn_Addrow(obj) {
+
+        if ($(obj).text() == "Add") {
+      
+        
+             $("#tblItem tbody").append($("#tblItem tbody tr:last").clone());
+            $("#tblItem tbody tr:last").find('td:nth-child(1) select').val('0');
+             $("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').val('');
+             $("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').attr('class', 'form-control decimal');
+             $("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val('');
+             $("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val('');
+             $("#tblItem tbody tr:last").find('td:nth-child(4) input[type=text]').val('');
+             $("#tblItem tbody tr:last").find('td:nth-child(5) input[type=text]').val('');
+            $(obj).attr("class", "btn-sm btn vd_btn vd_bg-red fa fa-times")
+
+            $(obj).text("Delete")
+            $("#tblItem tbody tr:last").find('td:nth-child(7) input[type=hidden]').val(true);
+            $("#tblItem tbody tr").each(function (i, item) {
+                fn_Append(i, this);
+            })
+        }
+
+        else {
+            
+
+            $(obj).parent().parent().hide();
+            var tr = $(obj).parent().parent();
+            tr.find('td:eq(5) input[type=hidden]').val(false)
+
+          
+        }
+    
+        fn_GetGrandTotalAmount(obj);
+    }
+    function fn_LoadItemList() {
+      
+        var len = $("#tblItem tbody tr").length - 1
+        for (var i = 0; i < len; i++) {
+            if (i < len) {
+                $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(6) a').attr("class", "btn-sm btn vd_btn vd_bg-red fa fa-times");
+                $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(6) a').text('Delete');
+            }
+
+
+
+        }
+
+    }
+
+    @*--------------*@
+
+
+    function GetUnitName(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var ItemId = tr.find('td:eq(0) select').val();
+
+        $.getJSON("@Url.Action("GetUnitName", "Purchase")", { Id: ItemId }, function (data) {
+
+
+            tr.find('td:eq(3) input[type=text]').val(data[0].UnitName)
+
+            });
+    }
+    function fn_GetTotalAmount(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var qty = tr.find('td:eq(1) input[type=text]').val();
+      
+            var amount = tr.find('td:eq(2) input[type=text]').val();
+           // alert(qty + "" + amount);
+
+            tr.find('td:eq(4) input[type=text]').val(qty * amount);
+            fn_GetGrandTotalAmount(obj);
+    }
+    function fn_CalGrandTotal()
+    {
+
+        var t = 0.00;
+        $('#tblItem tbody tr').each(function (index, item) {
+         
+
+         
+            var tm = $(this).find('td:eq(5) input[type=text]').val();
+
+                t = parseFloat(t) + parseFloat(tm);
+         
+
+        });
+
+        return t;
+
+    }
+
+    function fn_GetGrandTotalAmount(obj) {
+
+        var tr = $(obj).parent().parent();
+        var total = 0.00;
+        var TotalQty = 0.00
+        var t = 0.00;
+     
+
+        $('#tblItem tbody tr').each(function (i, item1) {
+
+
+         
+            if ($(item1).find('#QuationItemList[' + i + '].Status').val() == 'True' || $(item1).find('#QuationItemList[' + i + '].Status').val() == 'true')
+            {
+
+            
+                var perrowatotalamout = $(item1).find('td:eq(4) input[type=text]').val();
+                total = parseFloat(total) + parseFloat(perrowatotalamout);
+            }
+            var perrowatotalamout =  $(item1).find('td:eq(4) input[type=text]').val();
+           
+            total = isNaN(parseFloat(total)) ?0.00: parseFloat(total)  + (isNaN(parseFloat(perrowatotalamout))? 0.00: parseFloat(perrowatotalamout)) ;
+        });
+    
+        $('#GrTotal').text(isNaN(total)? 0.00: total );
+        $('#Grand_Total').val(isNaN(total )?0.00:total );
+
+    }
+
+    //------Add Tax
+    function fn_Show(Tag)
+    {
+        if (Tag == 1) {
+            $('#TaxDetails').show();
+           
+        }
+        else if(Tag==2)
+        {
+           
+            $('#DisCountDetails').show();
+        }
+        else
+        {
+            $('#TaxDetails').hide();
+            $('#DisCountDetails').hide();
+        }
+    }
+    function fn_CalTaxAmt()
+    {
+
+        var taxrate = $('#Tax_Rate').val();
+        var Gtotal = fn_CalGrandTotal();
+
+        var taxamt = (parseFloat(taxrate) * parseFloat(Gtotal)) / 100;
+
+            Gtotal = parseFloat($('#Grand_Total').val()) + parseFloat(taxamt);
+
+
+        $('#Tax_Amount').val(taxamt != isNaN ? taxamt : 0.00);
+        $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+        $('#Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+
+    }
+    function fn_DelTaxDetails()
+    {
+        debugger;
+        var taxrate = $('#Tax_Rate').val();
+        var Gtotal = fn_CalGrandTotal();
+
+        var taxamt = (parseFloat(taxrate) * parseFloat(Gtotal)) / 100;
+        if ($('#Discount_Rate').val() > 0) {
+            Gtotal = parseFloat($('#Grand_Total').val()) - parseFloat(taxamt);
+        }
+
+        $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+        $('#Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+        $('#Tax_Amount').val(0.00);
+        $('#Tax_Rate').val(0.00);
+        $('#TaxId').val(0);
+        $('#TaxDetails').hide();
+        fn_CalDiscountByRate()
+    }
+    function fn_CalDiscountByRate() {
+      //  debugger;
+
+       // alert(Tag);
+        var Disrate = 0.0;
+        var Disamt = 0.0;
+        var Gtotal = fn_CalGrandTotal();
+         Disrate = parseFloat($('#Discount_Rate').val());
+         Disamt = (parseFloat(Disrate) * parseFloat(Gtotal)) / 100;
+         Gtotal = parseFloat(Gtotal) - parseFloat(Disamt);
+        $('#Discount_Rate').val(Disrate != isNaN ? Disrate : 0.00);
+        $('#Discount').val(Disamt != isNaN ? Disamt : 0.00);
+        $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+        $('#Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+
+    }
+    function fn_CalDiscountByAmount() {
+        //  debugger;
+
+        // alert(Tag);
+        var Disrate = 0.0;
+        var Disamt = 0.0;
+        var Gtotal = fn_CalGrandTotal();
+        Disamt = parseFloat($('#Discount').val());
+        Disrate = Disamt * 100 / parseFloat(Gtotal);
+        Gtotal = parseFloat(Gtotal) - parseFloat(Disamt);
+        $('#Discount_Rate').val(Disrate != isNaN ? Disrate : 0.00);
+        $('#Discount').val(Disamt != isNaN ? Disamt : 0.00);
+        $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+        $('#Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+
+    }
+    function fn_DelDiscount()
+    {
+        var Disrate = 0.0;
+        var Disamt = 0.0;
+        var Gtotal = fn_CalGrandTotal();
+        Disrate = parseFloat($('#Discount_Rate').val());
+        Disamt = (parseFloat(Disrate) * parseFloat(Gtotal)) / 100;
+
+        if ($('#Tax_Rate').val() >= 1)
+        {
+            Gtotal = parseFloat($('#Grand_Total').val()) - parseFloat(Disamt);
+        }
+
+
+        $('#Discount_Rate').val(0.00);
+        $('#Discount').val(0.00);
+        $('#GrTotal').text(Gtotal != isNaN ? Gtotal : 0.00);
+        $('#Grand_Total').val(Gtotal != isNaN ? Gtotal : 0.0);
+        $('#DisCountDetails').hide();
+        fn_CalTaxAmt();
+    }
+
+</script>

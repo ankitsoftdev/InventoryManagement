@@ -1,0 +1,83 @@
+﻿@model ViewModel.Transactions.SalesOrderInfo
+
+
+<table id="tblItem" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                <label> Item Name</label>
+            </th>
+
+
+            <th>
+                <label>Quantity</label>
+            </th>
+
+            <th>
+                <label>Rate</label>
+            </th>
+            <th>
+                <label>Per</label>
+            </th>
+            <th>
+                <label>Amount</label>
+            </th>
+          
+
+        </tr>
+
+    </thead>
+    <tbody>
+
+
+        @{
+
+           
+            int i = 0;
+            foreach (var m in Model.OrderDetails)
+            {
+
+                <tr>
+
+
+
+                    <td>
+                     @m.Item_Name
+
+                    </td>
+
+                    <td>
+                      @m.Oreder_Quantity
+
+                    </td>
+                    <td>
+                       @m.Rate
+
+                    </td>
+                    <td>
+                     @m.Unit_Name
+
+                    </td>
+                    <td>
+                      @m.Amount
+
+                    </td>
+                  
+                </tr>
+                i++;
+            }
+
+
+
+        }
+
+
+
+
+
+    </tbody>
+</table>
+
+
+
+

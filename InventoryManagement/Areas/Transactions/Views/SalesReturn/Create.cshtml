@@ -1,0 +1,333 @@
+﻿@model ViewModel.Transactions.SalesReturnInfo
+
+
+@using (Ajax.BeginForm("Create", "SalesReturn", new { area = "Transactions" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="panel">
+
+                <div class="panel-heading bg-margenta"><span>Sales Return</span> </div>
+
+                <div class="panel-body">
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <div class="editor-label">
+
+                                @Html.Label("Name")
+                                @Html.HiddenFor(x => x.Id)
+                            </div>
+                            <div class="editor-field">
+                                @Html.DropDownListFor(x => Model.Customer_Id, new SelectList(Model.CustomerList, "Id", "Name", Model.Customer_Id), new { @class = "custom-select form-control" })
+                                @Html.ValidationMessageFor(x => Model.Customer_Id, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+
+                                @Html.Label("VC No")
+
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(x => x.VC_No, new { @placeholder = "VC No", @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(x => Model.VC_No, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Return Date")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextBoxFor(x => x.Return_Date, new { @class = "form-control", @Value = Model.Return_Date.ToString("yyyy-MM-dd"), required = true })
+                                @Html.ValidationMessageFor(x => x.Return_Date, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="editor-label">
+                                @Html.Label("Remarks")
+                            </div>
+                            <div class="editor-field">
+
+                                @Html.TextBoxFor(x => Model.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row topmrgn5px">
+                        <div class="col-md-12">
+                            @{ Html.RenderAction("SalesReturnDetails", "SalesReturn", new { Id = Model.Id });}
+                            @*@Html.Partial("ItemList", Model.sales_tra, new ViewDataDictionary { TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "sales_tra" } })*@
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-8 offset">
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="" align="center">
+                                <label> Total :- &nbsp;&nbsp; <span id="Discount_Amount"></span></label>
+                                @Html.HiddenFor(x => x.Discount)
+                                @*@Html.DisplayFor(x => x.Discount)*@
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div>
+                                <span class="pull-right" id="GrTotal" style="font-weight:bold;">
+
+                                </span>
+
+
+                                @*<label> Grand Total</label>
+                                    <span class="pull-right" id="GrTotal">
+
+                                        @Html.DisplayFor(x => x.Grand_Total)
+                                    </span>
+                                    @Html.HiddenFor(x => Model.Grand_Total)*@
+
+                            </div>
+
+                            <button type="submit" onclick="Validation();" class="btn btn-primary ">Save </button>
+                            @Html.ActionLink("Cancel", "Index", "SalesReturn", new { @class = "btn btn-default" })
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <script>
+        $(function () {
+
+            fn_LoadItemList();
+
+            $('#Return_Date').datepicker({ dateFormat: 'yy-mm-dd' });
+
+            //$(".decimal").on("keypress keyup blur", function (event) {
+            //    //this.value = this.value.replace(/[^0-9\.]/g,'');
+            //    $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            //    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            //        event.preventDefault();
+            //    }
+            //});
+        });
+
+        function GetUnitName(obj)
+        {
+            var tr = $(obj).parent().parent();
+            var ItemId = tr.find('td:eq(0) select').val();
+
+            //if (ItemId != "") {
+            $.getJSON("@Url.Action("GetUnitName", "Purchase")", { Id: ItemId }, function (data) {
+
+            tr.find('td:eq(3) input[type=text]').val(data[0].UnitName)
+
+        });
+
+
+
+        }
+        function myFunction(obj)
+        {
+            var tr = $(obj).parent().parent();
+            var ItemId = tr.find('td:eq(0) select').val();
+
+            if (ItemId != 0) {
+
+                $(".decimal").on("keypress keyup blur", function (event) {
+
+
+                    //this.value = this.value.replace(/[^0-9\.]/g,'');
+                    $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+                    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                });
+            }
+            else {
+                alert('First Select Item Please !')
+                tr.find('td:eq(0) select').focus();
+            }
+        }
+
+        var arr = new Array();
+            function fn_Append(i, tr) {
+                arr = { Item_Id: 'Item_Id', Quantity: 'Quantity',  Rate: 'Rate', Unit_Name: 'Unit_Name', Total_Amount: 'Total_Amount', Id: "Id" };
+                var j = 0;
+                $.each(arr, function (item, k) {
+                    var control = j == 0 ? 'td:eq(' + j + ') select' : j == 3 ? 'td:eq(' + j + ') input' : 'td:eq(' + j + ') input';
+                    var name = j == 0 ? item : j == 1 ? item : j == 2 ? item : j == 3 ? item : j == 4 ? item : j == 5 ? item : j == 6 ? item : item;
+
+                    $(tr).find(control).attr('name', 'ReturnDetails[' + i + '].' + name);
+
+                    j++;
+                })
+
+            }
+
+            function fn_Addrow(obj) {
+
+                if ($(obj).text() == "Add")
+                {
+                    var item= $("#tblItem tbody tr:last").find('td:nth-child(1) select').val();
+                    var Qty= $("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').val();
+                    var Rate= $("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val();
+                  //  alert('item:'+item+',qty'+Qty+',rate'+Rate);
+                    if (item != 0 && Qty > 0 && Rate) {
+                        $("#tblItem tbody").append($("#tblItem tbody tr:last").clone());
+                        $("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').val('');
+                        $("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val('');
+                        $("#tblItem tbody tr:last").find('td:nth-child(4) input[type=text]').val('');
+                        $("#tblItem tbody tr:last").find('td:nth-child(5) input[type=text]').val('');
+                        $("#tblItem tbody tr:last").find('td:nth-child(6) input[type=text]').val('');
+                        $("#tblItem tbody tr:last").find('td:nth-child(7) input[type=text]').val('');
+                        //$(obj).attr("class", "btn-sm btn vd_btn vd_bg-red fa fa-times")
+
+                        //$(obj).text("Delete")
+                        $("#tblItem tbody tr:last").find('td:nth-child(7) input[type=hidden]').val(0);
+                        $("#tblItem tbody tr").each(function (i, item) {
+                            fn_Append(i, this);
+                        })
+                    }
+                    else
+                    {
+                        alert('Please fill the Details');
+                    }
+                }
+                else
+                {
+                    $(obj).parent().parent().remove();
+                    $("#tblItem tbody tr").each(function (i, item) {
+                        fn_Append(i, this);
+                    })
+
+                    $('#tblItem tbody tr:last').find('.add').remove();
+                    $('#tblItem tbody tr:last').find('.delete').remove();
+                    $('#tblItem tbody tr:last').find('td:nth-child(6)').append('<a href="#" id="btnItem" name="btnItem" onclick="fn_Addrow(this);" class="add" title="Add">Add</a>&nbsp;&nbsp;')
+                    $('#tblItem tbody tr:last').find('td:nth-child(6)').append('<a href="#" id="d" name="Delete" onclick="fn_Addrow(this);" title="Remove" class="delete">Delete</a>')
+
+                }
+                fn_GetGrandTotalAmount(obj);
+                fn_LoadItemList();
+            }
+
+            function fn_LoadItemList() {
+
+
+                var len = $("#tblItem tbody tr").length;
+
+
+                for (var i = 0; i < len - 1; i++) {
+                    if (i < len) {
+                        // $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(5) a.add').attr("class", "delete");
+                        // $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(5) a.add').attr("class", "delete");
+                      
+
+                        $('#tblItem tbody tr:eq(' + i + ')').find('.add').remove();
+
+
+
+                    }
+
+
+                }
+
+
+
+
+            }
+
+    @*--------------*@
+
+
+
+    function fn_CheckStockItem(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var avlqty = tr.find('td:eq(1) input[type=text]').val();
+        var Sellqty = tr.find('td:eq(2) input[type=text]').val();
+        if(parseFloat(avlqty)  <  parseFloat(Sellqty))
+        {
+            alert("Stock is Not Availabe");
+            tr.find('td:eq(2) input[type=text]').val(0);
+        }
+
+    }
+
+    function fn_GetGrandTotalAmount(obj)
+    {
+
+            var tr = $(obj).parent().parent();
+            var total = 0.00;
+
+
+
+            $('#tblItem tbody tr').each(function (i, item1) {
+
+                var perrowatotalamout = $(item1).find('td:eq(6) input[type=text]').val();
+                total = parseFloat(total) + parseFloat(perrowatotalamout);
+
+            });
+
+
+            //$('#GrTotal').text(total);
+            //$('#Grand_Total').val(total);
+
+        }
+    function fn_GetTotalAmount(obj) {
+        var tr = $(obj).parent().parent();
+        var qty = tr.find('td:eq(1) input[type=text]').val();
+
+        var amount = tr.find('td:eq(2) input[type=text]').val();
+        // alert(qty + "" + amount);
+
+        tr.find('td:eq(4) input[type=text]').val(qty * amount);
+    }
+    </script>
+    <script>
+    $(function () {
+        var disc =@Model.Discount
+
+        $('#Discount_Amount').html(disc);
+        //AutoComplete();
+        $("#Customer_Id").customselect();
+    });
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+}
+

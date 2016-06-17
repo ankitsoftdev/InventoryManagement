@@ -1,0 +1,418 @@
+﻿@model ViewModel.Transactions.PaymentInfo
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(function ()
+    {
+        HideIt();
+        fn_Hide();
+        $('#Payment_Date').datepicker({ dateFormat: 'yy-mm-dd' });
+        var Id = $('#User_Id').val();
+
+       Fn_LoadPaymentDetails(Id);
+       $('#User_Id').change(function ()
+       {
+           
+           var UserId = $('#User_Id').val();
+       
+           if (UserId > 0)
+           {
+                Fn_LoadPaymentDetails(UserId);
+                Fn_LoadpendingBill(UserId)
+            }
+        });
+
+
+        $('#Amount').focusin(function () {
+
+            @*$.getJSON('@Url.Action("GetBalance","Payment")', { UserId: UserId }, function (data) {
+                $('#Balance').val(data);
+            });*@
+            if ($('#Id').val() != 0)
+            {
+                var bal = parseFloat($('#Balance').val()) + parseFloat($('#Amount').val());
+                $('#Balance').val(bal);
+
+            }
+        });
+        $('#Amount').focusout(function ()
+        {
+
+            var bal = parseFloat($('#Balance').val()) - parseFloat($('#Amount').val());
+            $('#Balance').val(bal);
+            $('#PaidAmount').text(isNaN($('#Amount').val()) ? 0 : $('#Amount').val());
+            if ($('#tblItem tbody tr').length == 0)
+            {
+                Fn_Add_AdvnceBill(isNaN($('#Amount').val()) ? 0 : $('#Amount').val())
+            }
+        });
+
+        $('#BillList').change(function ()
+        {
+      
+            if($('#BillList').val()>0)
+            {
+                $("#tblBill tr td:nth-child(2)").html($('#BillList option:selected').text());
+                
+            }
+        });
+
+        $(".decimal").on("keypress keyup blur", function (event)
+        {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
+        $('#Cheque_No').blur(function ()
+        {
+
+
+            $.getJSON('@Url.Action("GetChequeDetails","Payment")', { Id: $('#Id').val(), Cheque_No: $.trim($('#Cheque_No').val()) }, function (data) {
+                if (data == false) {
+                    $('#errorCheque_No').text('Wrong or Duplicate Cheque No ');
+                    $('#Cheque_No').val(' ');
+                }
+            });
+
+        });
+
+        $('#Payment_Type').change(function ()
+        {
+
+            HideIt();
+        });
+
+    });
+
+    //  Advance payment 
+    function Fn_Add_AdvnceBill(disp)
+    {
+        var totalrow = 0;
+
+        var row = "<tr>";
+        var row = "<tr>";
+        row += "<td><input type='hidden' name=BillList[" + totalrow + "].Pur_Id value='0' /><input type='checkbox' name=BillList[" + totalrow + "].Status value='true' checked /></td>";
+        row += "<td><input type='text' name=BillList[" + totalrow + "].VC_No value='New Advance' /></td>";
+        row += "<td><input type='text' name=BillList[" + totalrow + "].Bill_Amount value='0' readonly /></td>";
+        row += "<td><input type='text' name=BillList[" + totalrow + "].Balance value='0'/ readonly ></td>";
+        row += "<td><input type='text' name=BillList[" + totalrow + "].PaidBalance value=" + disp + " readonly /></td>";
+        row += "</tr>";
+
+        $('#tblItem tbody').append(row);
+
+        $('#BillListDetails').show();
+    }
+    //-------------
+    function Fn_LoadpendingBill(UserId)
+    {
+       // var UserId=$('#User_Id').val();
+        if(UserId>0)
+        {
+            $.get('@Url.Action("PendingBillList", "Payment")', { UserId: UserId }, function (data) {
+
+                $('#BillListDetails').html(data);
+            
+            });
+           
+        }
+        $('#BillListDetails').show();
+    }
+
+    function Fn_LoadPaymentDetails(UserId)
+    {
+      
+       
+        if (UserId > 0)
+        {
+          
+            $.ajax({
+                url : '@Url.Action("paymentdetails","payment")',
+                @*url: '@Url.Action("ViewPayment", "Payment")',*@
+                dataType: "json",
+                data: { UserId: UserId, Tag: '@Model.Tag_Type' },
+                success: function (data) {
+                    $('#PaymentDetails').html(data);
+                }
+            });
+
+            $.getJSON('@Url.Action("GetBalance","Payment")', { UserId: UserId }, function (data) {
+                var d = parseFloat(data) > 0 ? "CR-" + data : "DR-" + data;
+                $('#Balance').text(d);
+            });
+        }
+    }
+
+    function HideIt() {
+        if ($('#Payment_Type').val() == 2) {
+            $('#NeftDetails').hide();
+            $('#ChequeDetails').show();
+        }
+        else if ($('#Payment_Type').val() == 3) {
+            $('#NeftDetails').show();
+            $('#ChequeDetails').hide();
+        }
+        else {
+            $('#ChequeDetails').hide()
+            $('#NeftDetails').hide();
+        }
+    }
+
+    function Fn_FormValidate(e) {
+        var result = true;
+
+
+        if ($('#Payment_Type').val() == 2)
+        {
+            if ($.trim($('#Cheque_No').val()) == '') {
+
+                $('#errorCheque_No').text('Required');
+                result = false;
+            }
+
+            else {
+                $('#errorCheque_No').text(' ');
+                result = true;
+            }
+
+            if ($.trim($('#Bank_Name').val()) == '') {
+
+                $('#errorBank_Name').text('Required');
+                result = false;
+            }
+            else {
+
+                $('#errorBank_Name').text(' ');
+                result = true;
+            }
+
+        }
+        else if ($('#Payment_Type').val() == 3)
+        {
+            if ($.trim($('#IFSC_Code').val()) == '') {
+                $('#errorIFSC_Code').text('Required');
+                result = false;
+            }
+            else {
+                $('#errorIFSC_Code').text('');
+                result = true;
+            }
+
+            if ($.trim($('#Account_No').val()) == '') {
+                $('#errorAccount_No').text('Required');
+                result = false;
+            }
+
+            else {
+                $('#errorAccount_No').text(' ');
+                result = true;
+            }
+
+        }
+        else
+        {
+            result = true;
+            $('#errorIFSC_Code').text('');
+            $('#errorAccount_No').text(' ');
+            $('#errorBank_Name').text(' ');
+            $('#errorCheque_No').text(' ');
+        }
+
+        var Billamt = fn_CalBillTotal();
+        var paidamt=parseFloat(isNaN($('#BillAmount').text())?$('#BillAmount').text():0.00);
+        if (Billamt > paidamt)
+        {
+            alert('Not Allowed bill amt to Paid');
+            e.preventDefault();
+            return false;
+            // result = false;
+        }
+        
+        fn_ValidateForm('form1');
+        //if (result == false)
+        //{
+        //    e.preventDefault();
+        //}
+        return result;
+
+    }
+    function fn_Hide()
+    {
+      var Supplier_Id=  $('#User_Id').val();
+      if (Supplier_Id > 0) {
+          $('#BillListDetails').show();
+      }
+      else {
+          $('#BillListDetails').hide();
+      }
+    }
+</script>
+@using (Ajax.BeginForm("Create", "Payment", new { area = "Transactions" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new { @id = "form1" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel">
+
+                <div class="panel-heading bg-margenta"><span>@Model.Tag_Type</span> </div>
+
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-7" style="min-height:450px;border:solid silver 1px;">
+                         
+
+                            <div class="col-md-12">
+
+                                <div class="editor-label">
+                                    @Html.Label("Payment Date")
+                                </div>
+                                <div class="editor-field">
+
+                                    @Html.TextBoxFor(x => Model.Payment_Date, new {  @Value = Model.Payment_Date.ToString("yyyy-MM-dd"), required = true })
+                                    @Html.ValidationMessageFor(x => x.Payment_Date, null, new { @style = "color:red;" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="editor-label">
+
+                                        @Html.Label("Name")
+                                        @Html.HiddenFor(x => x.Id)
+                                        @Html.HiddenFor(x => x.Tag_Type)
+                                        @Html.DropDownListFor(x => x.User_Id, new SelectList(Model.User_List, "Id", "Name", Model.User_Id), "Select", new { @class = "form-control", required = true })
+                                        @Html.ValidationMessageFor(x => Model.User_Id, null, new { @style = "color:red;" })
+                                        @*<span id="Balance"></span>*@
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="editor-label">
+                                        @Html.Label("Payment Amount")
+                                    </div>
+                                    <div class="editor-field">
+
+                                        @Html.TextBoxFor(x => Model.Amount, new { @placeholder = "0.00", @class = "form-control decimal", required = true, number = true })
+                                        @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                @*<div id="BillListDetails">
+                                   
+                                    @{Html.RenderAction("PendingBillList", "Payment", new { UserId = -1 });}
+                                 
+                                </div>*@
+                            </div>
+             
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="editor-label">
+                                        @Html.Label("Payment Type")
+                                    </div>
+                                    <div class="editor-field">
+
+                                        @Html.DropDownListFor(x => x.Payment_Type, new SelectList(new List<object> { new { Id = 1, Name = "Cash" }, new { Id = 2, Name = "Cheque" }, new { Id = 3, Name = "NEFT" } }, "Id", "Name", Model.Payment_Type), new { @class = "form-control", required = true })
+                                        @*@Html.TextBoxFor(x => Model.Amount, new { @placeholder = "0.00", @class = "form-control decimal" })*@
+                                        @Html.ValidationMessageFor(x => x.Payment_Type, null, new { @style = "color:red;" })
+                                    </div>
+                                </div>
+                            </div>
+                                    <div id="ChequeDetails">
+                                        <div class="col-md-6">
+                                            @Html.Label("Cheque No")
+                                            @Html.TextBoxFor(x => x.Cheque_No, new { @placeholder = "Cheque No", @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.Cheque_No, null, new { @id = "errorCheque_No", @style = "color:red;" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.Label("Bank Name")
+                                            @Html.TextBoxFor(x => x.Bank_Name, new { @placeholder = "Bank Name", @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.Bank_Name, null, new { @id = "errorBank_Name", @style = "color:red;" })
+                                        </div>
+
+                                    </div>
+                                    <div id="NeftDetails">
+                                        <div class="col-md-6">
+                                            @Html.Label("IFSC Code")
+
+                                            @Html.TextBoxFor(x => x.IFSC_Code, new { @placeholder = "IFSC Code", @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.IFSC_Code, null, new { @id = "errorIFSC_Code", @style = "color:red;" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.Label("Account No")
+
+                                            @Html.TextBoxFor(x => x.Account_No, new { @placeholder = "000000000", @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.Account_No, null, new { @id = "errorAccount_No", @style = "color:red;" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="editor-label">
+                                            @Html.Label("Remarks/Narration")
+                                        </div>
+                                        <div class="editor-field">
+
+                                            @Html.TextAreaFor(x => Model.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 topmrgn5px">
+                                        <button type="submit" class="btn btn-primary" onclick="return Fn_FormValidate();">Save </button>
+
+
+                                        @Html.ActionLink("Cancel", "Index", "Payment", new { Tag = Model.Tag_Type }, new { @class = "btn btn-default" })
+                                    </div>
+
+                                </div>
+
+                        <div class="col-lg-5">
+                            <div>
+
+                                <div class="panel panel-danger managepnl">
+
+                                    <div class="panel-heading" style="background-color: #C4538A;color:white"><span>View Details</span> </div>
+
+
+                                    <div class="panel-body">
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                           <label>Total Due</label> :<span id="Balance" class="fa fa-rupee">00.00</span>
+                                                <label>Paid Amt.&nbsp;&nbsp;</label> :
+                                                <span id="PaidAmount" class="fa fa-rupee">@Html.DisplayFor(x=>x.Amount)</span>
+                                                <label>Bill Amt.</label> :<span id="BillAmount" class="fa fa-rupee">.00</span>
+                                            </div>
+                                                <div class="col-md-10" id="BillListDetails">
+
+                                                    @{Html.RenderAction("PendingBillList", "Payment", new { UserId = Model.User_Id,Id=Model.Id });}
+
+                                                </div>
+                                            </div>
+
+                                        <hr style="border:solid silver 1px;" />
+                                        <div align="center"><h4><label>Payment Details</label></h4></div>
+                                        @{
+                                      Html.RenderAction("PaymentDetails", "Payment", new { UserId = Model.User_Id, Tag = "Supplier" });
+                                        }
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+

@@ -1,0 +1,636 @@
+﻿@model ViewModel.Ledger.Purchase_Tra
+
+<table id="tblItem" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                <label> Item Name</label>
+            </th>
+
+            <th>
+                <label>Avl.Qty</label>
+            </th>
+            <th>
+                <label>Quantity</label>
+            </th>
+            <th>
+                <label>Selling Rate</label>
+            </th>
+            <th>
+                <label>Rate</label>
+            </th>
+            <th>
+                <label>Per</label>
+            </th>
+            <th>
+                <label>Amount</label>
+            </th>
+
+            <th>
+                <label>Action</label>
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr>
+
+            <td>
+                @Html.DropDownList("ItemId", new SelectList(Model.ledger_common.itemddlbind, "Id", "Name"), "Select Item", new { @class = "form-control", @onchange = "GetUnitName(this);" })
+                
+            </td>
+            <td>
+                @Html.TextBox("AvailableQty", null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @readonly = "readonly" })
+
+            </td>
+            <td>
+                @Html.TextBox("QUantity", null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @onkeyup = "myFunction(this);", @onchange = "fn_GetTotalAmount(this);" })
+
+            </td>
+            <td>
+                @Html.TextBox("Selling_Rate", null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @readonly = "readonly" })
+
+            </td>
+            <td>
+                @Html.TextBox("Item_Rate", null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @onkeyup = "myFunction(this);", @onfocusout = "fn_GetTotalAmount(this);" })
+
+            </td>
+            <td>
+                @Html.TextBox("Unit_Name", null, new { @readonly = "readonly", @class = "form-control", minlength = "2", maxlength = "100" })
+                @*@Html.HiddenFor(x=>x.ItemDetails[i].Unit_Id)*@
+                @*@Html.DropDownListFor(x => x.ItemDetails[i].Unit_Id, new SelectList(Model.UnitList, "Id", "Name", Model.ItemDetails[i].Unit_Id), new { @class = "form-control", required = true })*@
+            </td>
+            <td>
+                @Html.TextBox("Total_Amount", null, new { @class = "form-control", minlength = "1", maxlength = "15", @readonly = "readonly",value="0" })
+
+            </td>
+            <td>
+                @*@Html.HiddenFor(x => x.ItemDetails[i].Id)
+                    @Html.HiddenFor(x => x.ItemDetails[i].Status)*@
+                <a href="#" id="btnItem" name="btnItem" onclick="fn_AddItemrow(this, $(this).parent().parent().find('td:eq(0) select option:selected').val().split('_')[0]); CalculateTax();">Add</a>
+            </td>
+        </tr>
+
+
+    </tbody>
+</table>
+@*<div>
+    <table id="tblsalesitemlist" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Rate</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+            int i = 0;
+            foreach (var m in Model.listpurchase_tra)
+            {
+                <tr>
+                    <td>@Html.TextBoxFor(x => Model.listpurchase_tra[i].ItemName) @Html.HiddenFor(x => Model.listpurchase_tra[i].Item_Id)</td>
+                    <td>@Html.TextBoxFor(x => Model.listpurchase_tra[i].Rate)@Html.HiddenFor(x=>Model.listpurchase_tra[i].SerialNo)</td>
+                    <td>@Html.TextBoxFor(x => Model.listpurchase_tra[i].Qty)</td>
+                    <td><input type="button" id="btnitemDelete" value="Delete" onclick="deleteRow(this); CalculateTax();" /></td>
+                </tr>
+                i++;
+            }
+            }
+        </tbody>
+    </table>
+</div>*@
+
+<div id="divAddSalesItem">
+   @{
+       int indx = 0;
+       int Sno = 0;
+       if (Model.Id > 0)
+       {
+           foreach (var item in Model.listpurchase_tra.Select(x => new {x.Item_Id,x.ItemName,x.Unit_Name }).Distinct())
+           {
+               <details>
+            <summary>
+                <div class="panel panel-danger">
+                    <div class="panel--heading">
+                        <div class="col-lg-8"><b>@item.ItemName</b></div>
+                        <div class="col-lg-2"><span id="spanQntity_@item.Item_Id"> @Model.listpurchase_tra.Where(X=>X.ItemName==item.ItemName).Sum(P=>P.Qty).ToString("#."+new string('0',0))</span>  @item.Unit_Name</div>
+                        <div class="col-lg-2 pull-right"><span id="spntotal_@item.Item_Id">Rs. @Model.listpurchase_tra.Where(x=>x.ItemName==item.ItemName).Sum(m=>(m.Rate * m.Qty)).ToString()</span></div>
+                    </div>
+                </div>
+            </summary>
+            <table class="table tableIndexing" id="tblItem_@item.Item_Id">
+                <thead><tr><th>S.No</th><th>Rate</th><th>Quantity</th><th>Serial No</th><th></th></tr></thead>
+                <tbody>
+                    @{Sno=0;}
+                  @foreach (var m in Model.listpurchase_tra.Where(x=>x.ItemName==item.ItemName).ToList() )
+	               {
+                        
+                      <tr>
+                          <td><input  type="hidden" name="sales_tra.listpurchase_tra[@indx].Item_Id" value="@m.Item_Id" /><span> @Convert.ToInt32(Sno+1)</span></td>                       
+                          <td><input type="text" name="sales_tra.listpurchase_tra[@indx].Rate" readonly="readonly" style="text-align:right;" value="@m.Rate" /></td>
+                          <td><input type="text" name="sales_tra.listpurchase_tra[@indx].Qty" readonly="readonly" style="text-align:right;" value="@m.Qty" /></td>
+                          <td><input type="text" name="sales_tra.listpurchase_tra[@indx].SerialNo" readonly="readonly"   value="@m.SerialNo" /></td>
+                          <td><input type="button" class="btn btn-danger" id="btnitemDelete" value="Delete" onclick="deleteRow(this); CalculateTax();" />
+                          <input type="hidden" value="@m.Id" />
+                          </td>
+                      </tr>
+                      
+                         indx++;
+                         Sno++;
+                 } 
+                     
+                </tbody>
+            </table>
+        </details>
+           }
+       }
+   }
+
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset">
+
+    </div>
+    <div class="col-md-4">
+        <div class="" align="center">
+
+            <label> Grand Total :- &nbsp; &nbsp; &nbsp;</label>
+            <span id="GrTotal" style="font-weight:bold;">
+
+                @Html.DisplayFor(x => x.Grand_Total)
+            </span>
+            @Html.HiddenFor(x => Model.Grand_Total)
+
+        </div>
+    </div>
+</div>
+<div>
+    
+@* @{Html.RenderAction("_TaxList", "Sales", new { area = "Transactions", ChallanNo = ViewBag.ChalanNo, GTotal = Model.Grand_Total });}*@
+   @{Html.RenderPartial("_TaxList", Model.taxdetails, new ViewDataDictionary { TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "sales_tra.taxdetails" } });}
+    
+</div>
+<script>
+    
+    //function addItem(item) {
+    //    var itemId = $('#tblItem tbody tr:eq(0)').find('td:eq(0) select option:selected').val().split('_')[0];
+    //    var itemName = $('#tblItem tbody tr:eq(0)').find('td:eq(0) select option:selected').text();
+    //    var Qntity = $('#tblItem tbody tr:eq(0)').find('td:eq(2) input').val();
+    //    var rate = $('#tblItem tbody tr:eq(0)').find('td:eq(4) input').val();
+    //    var total = $('#tblItem tbody tr:eq(0)').find('td:eq(6) input').val();
+    //    var len = $('#tblsalesitemlist tbody tr').length;
+    //    var avlQunty = $('#tblItem tbody tr:eq(0)').find('td:eq(1) input').val();
+    //    if (ItemAvailablityCheck(itemId,Qntity, avlQunty))
+    //    {
+        
+    //    if ($('#tblItem tbody tr').find('td:eq(0) select option:selected').val().split('_')[1] == 'False') {
+
+    //        for (var i = 0 ; i < Qntity; i++) {
+
+    //            $('#tblsalesitemlist tbody').append('<tr><td> <input type=text name=sales_tra.listpurchase_tra[' + len + '].ItemName value=' + itemName + ' /><input type=hidden name=sales_tra.listpurchase_tra[' + len + '].Item_Id value=' + itemId + ' /></td>'
+
+    //                    + '<td> <input type=text name=sales_tra.listpurchase_tra[' + len + '].Rate value=' + rate + ' />'
+    //                     + '<td> <input type=text name=sales_tra.listpurchase_tra[' + len + '].Qty value=' + 1 + ' />'
+    //                      + '<td> <input type=button  id=btnitemDelete value= Delete onclick="deleteRow(this); CalculateTax();" /></tr>'
+    //                    )
+    //            len++;
+    //        }
+    //    }
+    //    else {
+
+    //        $('#tblsalesitemlist tbody').append('<tr><td> <input type=text name=sales_tra.listpurchase_tra[' + len + '].ItemName value=' + itemName + ' /><input type=hidden name=sales_tra.listpurchase_tra[' + len + '].Item_Id value=' + itemId + ' /></td>'
+
+    //                   + '<td> <input type=text name=sales_tra.listpurchase_tra[' + len + '].Rate value=' + rate + ' />'
+    //                    + '<td> <input type=text name=sales_tra.listpurchase_tra[' + len + '].Qty value=' + Qntity + ' />'
+    //                     + '<td> <input type=button  id=btnitemDelete value= Delete onclick="deleteRow(this); CalculateTax();" /></tr>'
+    //                   )
+
+    //    }
+    //    var total = 0;
+    //    $('#tblsalesitemlist tbody tr').each(function (item, i) {
+    //        total = total + $(this).find('td:eq(1) input').val() * $(this).find('td:eq(2) input').val();
+
+    //    })
+    //    $('#GrTotal').text(total);
+    //    $('#sales_tra_Grand_Total').val(total);
+
+    //    //total = parseFloat(total) + parseFloat($('#Grand_Total').val());
+    //    //$('#GrTotal').html(total)
+    //    //$('#Grand_Total').val(total);
+    //    //  var itmval = $('#tblItem tbody tr:eq(0)').find('td:eq(0) select option:selected').val()
+    //    //// var itmqnty= $('#tblItem tbody tr:eq(0)').find('td:eq(0) select option:selected').val().split('_')[2];
+    //    //  var itm = String(itmval.substring(0, itmval.lastIndexOf('_', itmval.length)));
+    //    //  var calcAmnt=parseInt( $('#tblItem tbody tr:eq(0)').find('td:eq(0) select option:selected').val().split('_')[2]) - Qntity;
+    //    //  itm += '_' + calcAmnt;
+    //    // $('#tblItem tbody tr:eq(0)').find('td:eq(0) select option:selected').val(itm);
+    //    // $('#tblItem tbody tr:eq(0)').find('td:eq(1) input').val(calcAmnt);
+    //    // $('#hdnItmQntity').val(calcAmnt);
+    //    // console.log(JSON.stringify(calcAmnt))
+    //}
+    //}
+
+
+    function fn_AddItemrow(obj, item_Id) {
+        var arry = new Array();
+
+        var itemId = $('#tblItem tbody tr:eq(0)').find('td:eq(0) select option:selected').val().split('_')[0];
+        var itemName = $('#tblItem tbody tr:eq(0)').find('td:eq(0) select option:selected').text();
+        var Qty = $('#tblItem tbody tr:eq(0)').find('td:eq(2) input').val();
+        var rate = $('#tblItem tbody tr:eq(0)').find('td:eq(4) input').val();
+        var total = $('#tblItem tbody tr:eq(0)').find('td:eq(6) input').val();
+        var len = $('#tblsalesitemlist tbody tr').length;
+        var avlQunty = $('#tblItem tbody tr:eq(0)').find('td:eq(1) input').val();
+        var Unit = $('#tblItem tbody tr').find('td:eq(5) input').val();
+
+        
+        if ($(obj).text() == "Add") {
+
+            if (validateFieldsWhenAdd(itemId, Qty, rate) == true) {
+
+             
+
+            // Get Serial No from PutrchaseTra 
+            if (ItemAvailablityCheck(itemId, Qty, avlQunty)) {
+
+                var serialNo = "";
+                if ($('#tblItem_' + item_Id + ' tbody tr').length > 0) {
+
+                    $('#tblItem_' + item_Id + ' tbody tr').each(function (data) {
+
+                        if ($(this).find('td:eq(0) input[type=hidden]').val() == item_Id) {
+
+                            serialNo += $(this).find('td:eq(3) input[type=text]').val() + ',';
+
+                        }
+                    })
+                }
+
+                //
+
+                
+                if ($('#tblItem_' + item_Id).length == 0)
+
+                    $('#divAddSalesItem').append('<details id="details_'+item_Id+'">'
+                              + '<summary>'
+                              + '<div  class="panel panel-danger" >'
+                              + '<div class="panel--heading">'
+                              + '  <div class="col-lg-8"><b>' + itemName + '</b></div>'
+                              + ' <div class="col-lg-2"><span id=spanQntity_' + item_Id + '>' + Qty + '</span> ' + Unit + '</div>'
+                              + ' <div class="col-lg-2 pull-right">Rs. <span id=spntotal_' + item_Id + '>total</></div>'
+                              + '</div>'
+                              + '</div>'
+                              + '</summary>'
+                              + '<table class="table tableIndexing" id="tblItem_' + itemId + '">'
+                              + '<thead><tr><th>S.No</th> <th>Rate</th><th>Quantity</th><th>Serial No</th<th></th></tr></thead>'
+                              + '<tbody></tbody>'
+                              + '</table>'
+                              + '</details>'
+
+                                  )
+
+
+                var count = $('#tblItem_' + item_Id + ' tbody tr').length - 1;
+                var indx = count + 1;
+                var val = 0;
+
+                var tbllen = $('#tblItem_' + item_Id + ' tbody tr').length;
+                //var updMaxId=maxid.split('-')[0] + '-' + parseInt(maxid.split('-')[1]);
+                if ($('#tblItem tbody tr').find('td:eq(0) select option:selected').val().split('_')[1] == 'False') {
+                    $.getJSON("@Url.Action("GetSerial_no", "Sales", new { area = "Transactions" })", { Id: itemId, qty: Qty, SrNo: serialNo }, function (data) {
+                        $.each(data, function (i, item) {
+
+                            $('#tblItem_' + item_Id + ' tbody').append('<tr><td><span>' + (tbllen + 1) + '</span><input type=hidden name=sales_tra.listpurchase_tra[' + len + '].Item_Id value=' + itemId + ' /></td>'
+
+                                    + '<td> <input type="text" name="sales_tra.listpurchase_tra[' + tbllen + '].Rate" value=' + rate + ' style="text-align:right;" /></td>'
+                                     + '<td> <input type="text" name="sales_tra.listpurchase_tra[' + tbllen + '].Qty" value=' + 1 + ' style="text-align:right;" /> </td>'
+                                      + '<td> <input type="text" name="sales_tra.listpurchase_tra[' + tbllen + '].SerialNo" value=' + item + ' /> </td>'
+                                      + '<td><input type="button" class="btn btn-danger" id="btnitemDelete" value="Delete" onclick="deleteRow(this); CalculateTax();" />'
+                                      + ' <input type="hidden" value=0" />'
+                                      + '</td></tr>'
+                                    )
+                            len++;
+                            tbllen++;
+                            
+                           
+                        }) 
+
+                        var calAmt = 0;
+                        Qty = 0;
+                        $('#tblItem_' + item_Id + ' tbody tr').each(function (item, i) {
+                            calAmt += $(this).find('td:eq(1) input').val() * $(this).find('td:eq(2) input').val();
+                            Qty += parseInt($(this).find('td:eq(2) input').val());
+                        })
+                        $('#spntotal_' + item_Id).text(calAmt);
+                        $('#spanQntity_' + item_Id).text(Qty);
+                        Calc_GrndTotal();
+                        CalculateTax();
+                        Row_Indexing();
+                    })
+
+                    
+
+                }
+                else {
+                    tbllen = $('#tblItem_' + item_Id + ' tbody tr').length;
+                    if ($('#tblItem_' + item_Id + ' tbody tr').length > 0) {
+                        var itm_qty = $('#tblItem_' + item_Id + ' tbody tr').find('td:eq(2) input').val();
+                        $('#tblItem_' + item_Id + ' tbody tr').find('td:eq(2) input').val(parseInt(itm_qty) + parseInt(Qty));
+                    }
+                    else {
+                        $('#tblItem_' + item_Id + ' tbody').append('<tr><td><span>' + (tbllen + 1) + '</span> <input type=hidden name=sales_tra.listpurchase_tra[' + tbllen + '].Item_Id value=' + itemId + ' /></td>'
+
+                              + '<td> <input type=text name=sales_tra.listpurchase_tra[' + tbllen + '].Rate value=' + rate + ' style="text-align:right;" /></td>'
+                               + '<td> <input type=text name=sales_tra.listpurchase_tra[' + tbllen + '].Qty value=' + Qty + ' style="text-align:right;" /></td>'
+                                 + '<td> <input type="text" name="sales_tra.listpurchase_tra[' + tbllen + '].SerialNo" value= "####" /> </td>'
+                                + '<td> <input type=button class="btn btn-danger" id=btnitemDelete value= Delete  onclick="deleteRow(this); CalculateTax();" />'
+                                 + ' <input type="hidden" value=0" />'
+                                      + '</td></tr>'
+                              )
+                    }
+                    Calc_GrndTotal();
+                    Row_Indexing();
+                }
+
+                //var total = 0;
+                //Qty = 0;
+                //$('#tblItem_' + item_Id + ' tbody tr').each(function (item, i) {
+                //    total = total + $(this).find('td:eq(1) input').val() * $(this).find('td:eq(2) input').val();
+                //    Qty += parseInt($(this).find('td:eq(2) input').val());
+                //})
+                
+                //$('#spntotal_' + item_Id).text(total);
+                //$('#spanQntity_' + item_Id).text(Qty);
+                //// gdTotal += parseFloat(parseFloat(Qunty) * parseFloat(Rate)); 
+                
+                ////Calc_GrndTotal();
+            }
+        }
+        }
+    }
+     
+
+
+    function Calc_GrndTotal() {
+        var gtotal = 0;        
+        $('.tableIndexing tbody tr').each(function () {
+           
+            gtotal += parseFloat($(this).find('td:eq(1) input').val()) * parseFloat($(this).find('td:eq(2) input').val());           
+        })
+          
+        $('#GrTotal').html(gtotal);
+        $('#sales_tra_Grand_Total').val(gtotal);
+    }
+    function ItemAvailablityCheck(ItemId, Quantity, AvailQuantity) {
+
+        var total = 0;       
+        var ItemID = 0;
+        var id = 0;
+
+        $('#tblItem_' + ItemId + ' tbody tr').each(function () {
+
+            ItemID = $(this).find('td:eq(0) input[type=hidden]').val();
+            id = parseInt($(this).find('td:eq(4) input[type=hidden]').val());
+             
+            if (ItemId == ItemID && id == 0) {
+                
+                total += parseInt($(this).find('td:eq(2) input[type=text]').val());
+            }
+        })
+        
+        total += parseInt(Quantity);
+        
+        if (total > AvailQuantity) {
+            
+            alert("Item Out of Stock You can't Add More");
+            return false;
+        }
+        return true;
+    }
+
+
+    function deleteRow(item) {
+        var tbl = $(item).parent().parent().parent().parent().attr('id');
+
+        var itemId = $('#tblItem tbody tr').find('td:eq(0) select option:selected').val().split('_')[0];
+        var Dductionamnt = parseFloat($(item).parent().parent().find('td:eq(1) input').val()) * parseFloat($(item).parent().parent().find('td:eq(2) input').val());
+
+        $(item).parent().parent().remove();
+      //  var amnt = $(item).parent().parent().find('td:eq(1) input').val();
+        //$('#GrTotal').html(parseFloat($('#Grand_Total').val()) - parseFloat(amnt));
+        //$('#Grand_Total').val(parseFloat($('#Grand_Total').val()) - parseFloat(amnt));
+       
+        Row_Indexing();
+        var total = 0;
+        var Qty = 0;
+        var count = 1;
+        $('#' + tbl + ' tbody tr').each(function (item, i) {
+            total = total + $(this).find('td:eq(1) input').val() * $(this).find('td:eq(2) input').val();
+            Qty += parseInt($(this).find('td:eq(2) input').val());
+            $(this).find('td:eq(0) span').html(count)
+            count++;
+        })
+         
+        $('#spntotal_' + tbl.split('_')[1]).text(total);
+        $('#spanQntity_' + tbl.split('_')[1]).text(Qty)
+        //$('#GrTotal').text(total);
+        //$('#sales_tra_Grand_Total').val(total);
+        Calc_GrndTotal();
+
+        if ($('#' + tbl + ' tbody tr').length == 0) {
+
+            $('#details_' + tbl.split('_')[1]).remove();
+        }
+    }
+     
+
+
+    function Row_Indexing() {
+        var i = 0;
+        var count = $('.tableIndexing tbody tr').length;
+
+        for (var i = 0; i < count; i++) {
+            //$('#tableIndexing tbody tr:eq(' + i + ')').find('td:eq(0) input[type=text]').attr('name', 'ItemDetails[' + i + '].ItemName');
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(0) input[type=hidden]').attr('name', 'sales_tra.listpurchase_tra[' + i + '].Item_Id');
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(1) input[type=text]').attr('name', 'sales_tra.listpurchase_tra[' + i + '].Rate');
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(2) input[type=text]').attr('name', 'sales_tra.listpurchase_tra[' + i + '].Qty');
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(3) input[type=text]').attr('name', 'sales_tra.listpurchase_tra[' + i + '].SerialNo');
+        }
+        
+    }
+
+    function CalculateTax(item) {
+        //  alert($('#'+item).html());
+        var totaTax = 0;
+        var amnt = 0;
+        var tax = 0;
+        var taxCode = '';
+        var taxType = '';
+        var i = 0;
+        var totalAmount = 0;
+        var calculateAmount = 0;
+        var DeductionAmount = 0;
+        var AddtionAmount = 0;
+        $('#TaxDetails tbody tr').each(function (data) {
+            amnt = $('#GrTotal').html();
+            if ($('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select option:selected').text() != 'Select Tax') {
+
+                taxType = $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select').val().split('_')[1];
+                tax = parseFloat($('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select').val().split('_')[3]);
+                if (item == "txtchange") {
+                    tax = parseFloat($('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(1) input').val());
+
+                }
+                taxCode = $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select').val().split('_')[2];
+
+                calculateAmount = taxCode == 'PERCENT' ? ((parseFloat(amnt) * tax) / 100) : tax;
+                if (taxType == 'DEDUCTION') {
+
+                    //DeductionAmount += taxCode == 'PERCENT' ? parseFloat(amnt - (parseFloat(amnt) * tax) / 100) : parseFloat(parseFloat(amnt) - parseFloat(tax));
+                    DeductionAmount += taxCode == 'PERCENT' ? (parseFloat(amnt) * tax) / 100 : parseFloat(tax);
+
+                }
+                else {
+                    //AddtionAmount += taxCode == 'PERCENT' ? parseFloat(parseFloat(amnt) + (parseFloat(amnt) * tax) / 100) : parseFloat(parseFloat(amnt) + parseFloat(tax));
+                    AddtionAmount += taxCode == 'PERCENT' ?    parseFloat(amnt) * tax / 100 :   parseFloat(tax);
+
+                }
+
+
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(1) input[type=text]').val(tax);
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(2) input').val(calculateAmount);
+                totaTax += calculateAmount;
+
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(1) input').val(tax);
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(2) input').val(calculateAmount);
+            }
+            else {
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(1) input[type=text]').val(0);
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(2) input').val(0);
+            }
+            i++;
+        })
+
+        totalAmount = parseFloat((amnt - DeductionAmount)) + parseFloat(AddtionAmount);
+       // alert("Amount = " + amnt + " DeductionAmount = " + DeductionAmount + " Addition Amount = " + AddtionAmount+" Total = "+totalAmount);
+        $('#Discount').val(totalAmount);
+        $('#Discount_Amount').html(totalAmount);
+      
+        // $('#Grandtotl').html(parseFloat(parseFloat($('#Grand_Total').val()) + totaTax))
+    }
+
+    function GetUnitName(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var ItemId = tr.find('td:eq(0) select').val().split('_')[0];
+        // alert(ItemId);
+        
+        $.getJSON("@Url.Action("GetUnitName", "Sales")", { Id: ItemId }, function (data) {
+              
+                tr.find('td:eq(5) input[type=text]').val(data.Name) 
+           
+    });
+    GetStockItemDetails(obj);
+    }
+
+    function fn_GetTotalAmount(obj) {
+        fn_CheckStockItem(obj)
+
+        var tr = $(obj).parent().parent();
+        var qty = tr.find('td:eq(2) input[type=text]').val();
+        // alert(qty);
+        var amount = tr.find('td:eq(4) input[type=text]').val();
+        // alert(qty + "" + amount);
+
+        tr.find('td:eq(6) input[type=text]').val(qty * amount);
+        fn_GetGrandTotalAmount(obj);
+    }
+
+    
+  
+    function GetStockItemDetails(obj)
+    {
+        var tr = $(obj).parent().parent();
+        var ItemId = tr.find('td:eq(0) select').val().split('_')[0];
+        
+        
+        $.getJSON("@Url.Action("GetStockItemDetails", "Sales")", { Id: ItemId }, function (data) {
+           
+            if (data.length > 0) {
+
+                var count = 0;
+                $('.tableIndexing tbody tr').each(function () {
+
+                    if ($(this).find('td:eq(0) input[type=hidden]').val().split('_')[0] == data[0].Id) {
+
+                        count += parseInt($(this).find('td:eq(2) input').val());
+
+                    }
+                })
+
+                //  tr.find('td:eq(1) input[type=text]').val(data[0].Qty)            
+                //tr.find('td:eq(1) input[type=text]').val(parseInt(data[0].Qty) - count);
+                tr.find('td:eq(1) input[type=text]').val(data[0].Qty);
+                tr.find('td:eq(3) input[type=text]').val(data[0].SellingRate);
+                //tr.find('td:eq(3) input[type=text]').val(data[0].SellingRate);
+            }
+            else {
+
+                tr.find('td:eq(1) input[type=text]').val(0);
+                tr.find('td:eq(3) input[type=text]').val(0);
+            }
+    });
+    }
+    
+    $(function () {        
+        $('#sales_tra_Total_Amount').val(0);        
+    })
+
+    function Validation() {
+
+        if ($('.tableIndexing tbody tr').length > 0) {
+            $('#sales_tra_ItemId').removeAttr('required')
+            $('#sales_tra_QUantity').removeAttr('required', true);
+            $('#sales_tra_Item_Rate').removeAttr('required', true);
+           
+        }
+        else {
+
+            $('#sales_tra_ItemId').attr('required', true);
+            $('#sales_tra_QUantity').attr('required', true);
+            $('#sales_tra_Item_Rate').attr('required', true);
+            
+        }
+    }
+
+    function validateFieldsWhenAdd(itemId, Qty, Rate) {
+
+        //alert("gdId = " + GodownId+ " ItemId = " + itemId + " Qty = " + Qty + " Rate = " + Rate);
+        if (itemId == "" || (Qty == "" || Qty == 0 || isNaN(Qty)) || (Rate == "" || Rate == 0 || isNaN(Rate))) {
+
+            if (itemId == "") {
+
+                $('[name= "sales_tra.ItemId"]').attr('required', true);
+                $('[name= "sales_tra.ItemId"]').focus();
+            }
+
+            else if ((Qty == "" || Qty == 0 || isNaN(Qty))) {
+                $('[name= "sales_tra.QUantity"]').attr('required', true);
+                $('[name= "sales_tra.QUantity"]').focus();
+            }
+            else if ((Rate == "" || Rate == 0 || isNaN(Rate))) {
+
+                $('[name= "sales_tra.Item_Rate"]').attr('required', true);
+                $('[name= "sales_tra.Item_Rate"]').focus();
+            }
+
+
+            return false;
+        }
+        return true;
+    }
+
+</script>

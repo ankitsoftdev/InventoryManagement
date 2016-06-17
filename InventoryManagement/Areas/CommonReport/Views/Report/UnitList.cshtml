@@ -1,0 +1,54 @@
+﻿@model List<ViewModel.CommonReport.UnitReport>
+@{
+   // ViewBag.Title = "Index";
+   
+}
+
+<table class="table table-striped table-bordered table-hover table-responsive topmrgn5px">
+    <tr>
+        <td>
+            Ledger Name
+        </td>
+        <td>
+            Alias Name
+        </td>
+
+        <td>
+            Remarks
+        </td>
+
+      
+    </tr>
+    @if (Model.Count != 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => item.Name)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.AliasName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(x => item.Remarks)
+                </td>
+
+               
+            </tr>
+        }
+
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">
+                No Records found..
+            </td>
+        </tr>
+    }
+
+
+</table>

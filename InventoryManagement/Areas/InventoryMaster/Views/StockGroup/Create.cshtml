@@ -1,0 +1,135 @@
+﻿@model ViewModel.Category.StockGroup
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<script>
+    $(function () {
+        $("#Group_UnderName").customselect();
+        // AutoComplete();
+        $("#Group_Name").blur(function () {
+
+            $.getJSON("@Url.Action("IsNameExists", "StockGroup")", { Id: $("#Group_Id").val(), Name: $("#Group_Name").val() }, function (data) {
+                if(data==true)
+                {
+                    $('#errorGroup_Name').text("Name is All Ready Exists!")
+                    $("#Group_Name").focus();
+                }
+            });
+        });
+    });
+    function AutoComplete(id, url) {
+        $('#Group_UnderName').autocomplete({
+            source: function (request, response) {
+                var autocompleteUrl = '@Url.Action("GetStockGroup", "StockGroup", new { @area = "InventoryMaster" })?searchText=' + request.term;
+                $.ajax({
+                    url: autocompleteUrl,
+                    type: 'GET',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (json) {
+                        response($.map(json, function (data, id) {
+                            alert(data.Name);
+                            return {
+
+                                label: data.Name,
+                                Name: data.Name,
+                                //Email: data.Email,
+                                //Address: data.Address,
+                                Id: data.Id,
+                            };
+                        }));
+                    },
+                    //error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    //  //  console.log('some error occured', textStatus, errorThrown);
+                    //}
+                });
+            },
+
+            minLength: 1,
+            select: function (event, ui) {
+                $('#Group_UnderName').val(ui.item.label)
+                $('#Group_underGroup').val(ui.item.Id)
+               // GetValuesByCode(ui.item);
+                return false;
+            }
+        });
+    }
+</script>
+@using (Ajax.BeginForm("Create", "StockGroup", new { area = "InventoryMaster" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new {@id="form2" }))
+{
+    @Html.ValidationSummary(true)
+
+
+
+    
+    <div>
+
+     <div class="row">
+         <div class="col-lg-3">
+         </div>
+       <div class="col-lg-6">
+          <div class="panel panel-danger">
+
+              <div class="panel-heading" style="background-color: #C4538A;color:white"><span>Item Group</span> </div>
+
+                    <div class="panel-body">
+
+
+                        <div class="row">
+
+                            
+
+                            <div class="col-md-12">
+
+                            @Html.Label("Name")<span style="color:red">*</span>
+                                @Html.HiddenFor(x => x.Group.Id)
+                                @Html.TextBoxFor(Model => Model.Group.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "50" })
+                                @Html.ValidationMessageFor(Model => Model.Group.Name, null, new { @id = "errorGroup_Name", @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Alias Name")
+                              @Html.TextBoxFor(Model => Model.Group.Alias_Name, new { @placeholder = "Alias Name", @class = "form-control" })
+                            @Html.ValidationMessageFor(Model => Model.Group.Alias_Name, null, new { @style = "color:red;" })
+                                
+                            </div>
+                            <div class="col-md-12">
+                               @Html.Label("Under")
+                                @Html.DropDownListFor(m => m.Group.UnderId, ViewBag.Grp as IEnumerable<SelectListItem>, "Select Under Group", new { @class = "custom-select form-control", @id = "Group_UnderName" })
+                                @*@Html.HiddenFor(m => m.Group.UnderName)*@
+
+                                @Html.ValidationMessageFor(Model => Model.Group.UnderId, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Remarks")
+                                @Html.TextBoxFor(Model => Model.Group.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+
+                                @Html.ValidationMessageFor(Model => Model.Group.Alias_Name, null, new { @style = "color:red;" })
+
+                            </div>
+
+                            <div class="col-md-12 topmrgn5px">
+                                <button type="submit" class="fa fa-edit btn btn-primary" onclick="fn_validateform('form2');">Save </button>
+                                @Html.ActionLink("Cancel", "Index", "StockGroup", new { @class = "btn btn-default" })
+                              
+                                
+                                
+                                
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+         <div class="col-lg-3">
+         </div>
+        </div>
+    </div>
+}
+

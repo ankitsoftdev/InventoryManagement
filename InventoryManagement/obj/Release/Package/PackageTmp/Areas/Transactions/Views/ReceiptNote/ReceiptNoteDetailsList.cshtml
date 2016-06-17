@@ -1,0 +1,71 @@
+﻿@model ViewModel.Transactions.ReceiptNoteInfo
+
+<hr style="height:5px ; color:black" />
+
+@{
+    int i = 0;
+    if (Model.Purchase_Order_Id > 0 || Model.Id > 0)
+    {
+        foreach (var S in Model.ReceiptDetails.Select(m => new { Item_Name = m.Item_Name.ToString(), Qty = m.Order_Quantity, Rate = m.Rate, Unit_Name = m.Unit_Name, Amount = m.Amount }).Distinct())
+        {
+            int ii = 0;
+
+            <details>
+
+                <summary>
+                    <div class="panel panel-danger">
+                        <div class="panel--heading">
+                            <div class="col-lg-8"><b>@S.Item_Name.ToString()</b></div>
+                            @*<div class="col-lg-2 ">@S.Qty.ToString().Substring(0,@S.Qty.ToString().IndexOf('.')) @S.Unit_Name</div>*@
+                            <div class="col-lg-2 ">
+                                @if (Model.Id > 0)
+                                {
+                                    @Model.ReceiptDetails.Where(m => m.Item_Name == S.Item_Name).Sum(m => m.Order_Quantity).Value.ToString("#." + new string('0', 0))  @S.Unit_Name
+                                }
+                                else
+                                {
+                                    @Model.ReceiptDetails.Where(m => m.Item_Name == S.Item_Name).FirstOrDefault().Order_Quantity.Value.ToString("#." + new string('0', 0))  @S.Unit_Name
+                                }
+                            </div>
+                            <div class="col-lg-2 pull-right">Rs.@Model.ReceiptDetails.Where(m => m.Item_Name == S.Item_Name).Sum(m => m.Rate).Value.ToString()</div>
+                        </div>
+
+                    </div>
+                </summary>
+                <table class="table table-responsive">
+                    <tr>
+                        <th>SNo.</th>
+                        <th>Puchase Serial No</th>
+
+                        <th>Sales Serial No</th>
+                        <th>Rate</th>
+                        <th>Unit</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    @foreach (var dt in Model.ReceiptDetails.Where(k => k.Item_Name == S.Item_Name.ToString()))
+                    {
+
+                        <tr>
+                            <td>
+                                @(++ii) @Html.HiddenFor(x => x.ReceiptDetails[i].Item_Id) @Html.HiddenFor(x => x.ReceiptDetails[i].Pur_Tra_Id) @Html.HiddenFor(x => x.ReceiptDetails[i].Purchase_SerialNo)@Html.HiddenFor(x => x.ReceiptDetails[i].Rate)@Html.HiddenFor(x => x.ReceiptDetails[i].Status)
+                            </td>
+                            <td>@dt.Purchase_SerialNo </td>
+                            <td>@dt.Sales_Serial_No</td>
+                            <td>@dt.Rate</td>
+                            <td>@dt.Unit_Name</td>
+                            <td><a><i class="glyphicon glyphicon-remove"></i></a></td>
+                        </tr>
+                        i++;
+                    }
+                    @{ii = 0;}
+                </table>
+
+            </details>
+
+                    ii++;
+        }
+
+    }
+
+}

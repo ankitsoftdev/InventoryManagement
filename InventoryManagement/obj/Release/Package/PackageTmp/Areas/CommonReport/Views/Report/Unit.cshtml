@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Unit";
+    Layout = ViewBag.layout;
+}
+<script>
+    //$(document).ready(function () {
+    //    alert('dddd')
+    //    encodeImageFileAsURL("~/Areas/ReportView/Image/Koala.jpg");
+        
+    //});
+    //    function encodeImageFileAsURL(id) {
+
+
+    //        var filesSelected = document.getElementById(id).files;
+    //        if (filesSelected.length > 0) {
+    //            var fileToLoad = filesSelected[0];
+
+    //            var fileReader = new FileReader();
+
+    //            fileReader.onload = function (fileLoadedEvent) {
+    //                var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+    //                var newImage = document.createElement('img');
+    //                newImage.src = srcData;
+    //                // alert(srcData);
+
+    //                document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+    //                //alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+    //                // console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+    //                $('#ImageName').val(srcData);
+    //            }
+    //            fileReader.readAsDataURL(fileToLoad);
+    //        }
+        //}
+
+
+        function UnitInfoReport() {
+
+            var Path = "@Url.Action("UnitReport", "Report", new { area = "CommonReport" })?ReportType=" + $('#ddlUnitinfo').val() 
+            window.open(Path);
+        }
+</script>
+<div align="right">
+    <br />
+    @Html.DropDownList("ddlUnitinfo", new SelectList(
+        new List<object> {
+            new {test="PDF",value="PDF"},
+            new {test="Excel",value="Excel"},
+            new {test="Word",value="Word"}
+        },
+   "test",
+   "value"
+   ), new { style = "width:100px;" })
+
+    <input type="hidden" name="File" id="ImageName" />
+    <input type="button" onclick="UnitInfoReport();" class="btn btn-xs btn-flat btn-primary " id="butDailySaleReport" value="Generate Reports" />
+</div>
+<div>
+    @Html.Action("UnitList")
+</div>

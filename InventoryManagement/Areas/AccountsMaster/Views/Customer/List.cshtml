@@ -1,0 +1,146 @@
+﻿@model List<ViewModel.Ledger.Supplier>
+ @{
+     var grid = new WebGrid(Model, canPage: true, canSort: true, rowsPerPage: 20, ajaxUpdateContainerId: "gridcontent", selectionFieldName: "selectedRow");
+     grid.Pager(WebGridPagerModes.All);
+ }
+
+<script>
+    function PopUp(id) {
+        // alert(id)
+        $("#HinDeleteValue").empty();
+        $("#HinDeleteValue").val(id)
+        $('#Mymmodal').modal({ backdrop: 'static' });
+    }
+
+    function Close() {
+        $('#myModal').modal('hide');
+        if ($('#EMessage').html().trim().length > 0) {
+
+        }
+    };
+    function Deleteit() {
+        var CusId = $("#HinDeleteValue").val();
+        // alert(CusId)
+        $.ajax({
+            url: '@Url.Action("Delete", "Customer")',
+            datatype: 'json',
+            type: 'Get',
+            contentType: "application/json; charset=utf-8",
+            data: { Id: CusId, Tagname: '@ViewBag.Tagname' },
+            success: function (Data) {
+
+                $("#content").empty();
+                $("#content").load("@Url.Action("List", "Customer")", { Tagname: '@ViewBag.Tagname' });
+                $('.close').trigger('click');
+            },
+            error: function (err) {
+                alert('Error')
+            }
+        });
+    }
+
+  
+</script>
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+        <div class="row">
+
+            <div class="col-md-6">
+                <i class="fa fa-list"></i>
+                <span>@ViewBag.Tagname </span>
+
+
+            </div>
+
+            <div class="col-md-6">
+                <div align="right">
+                    @Ajax.ActionLink("New", "Create", "Customer", new { area = "AccountsMaster", Id = 0, Tagname = @ViewBag.Tagname }, new AjaxOptions
+                            {
+
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default btn-xs btn-flat hgt", })
+
+
+
+
+
+
+                    <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                    <input type="text" placeholder="Search Here" class="hgt" />
+                    <button class="btn btn-default btn-xs btn-flat hgt fa fa-search"></button>
+                    <button class="btn btn-default btn-xs btn-flat hgt fa fa-refresh"></button>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9" id="gridcontent" style="min-height:450px;border:solid silver 1px;">
+        @grid.GetHtml(tableStyle: "table table-striped table-bordered table-hover table-responsive topmrgn5px",
+        columns: grid.Columns(
+       grid.Column("Id", "Sno"),
+        grid.Column("Name", "Name"),
+      //  grid.Column("Code", "Code"),
+      //  grid.Column("Alias_Name", "Alias Name"),
+        grid.Column("GroupName", "Group Name"),
+        grid.Column("Opening_Balance", "Opening Balance"),
+      //  grid.Column("CreditPeriodTime", "CreditPeriodTime"),
+      //  grid.Column("Address.address", "Address"),
+      //  grid.Column("Account_Detail.PANNumber", "Pan No"),
+        grid.Column(header: "Action", format: (item) => new HtmlString(
+
+       @Ajax.ActionLink(" ", "Create", "Customer", new { area = "AccountsMaster", Id = item.Id, Tagname = @ViewBag.Tagname }, new AjaxOptions
+       {
+           UpdateTargetId = "content",
+           HttpMethod = "GET",
+           InsertionMode = InsertionMode.Replace,
+       }, new { @Class = "btn btn-default fa fa-pencil", @title = "Edit" }).ToString() +
+       @Ajax.ActionLink(" ", "Delete", "Customer", new { area = "AccountsMaster", Id = item.Id, Tagname = @ViewBag.Tagname }, new AjaxOptions
+       {
+           UpdateTargetId = "content",
+           HttpMethod = "GET",
+           InsertionMode = InsertionMode.Replace,
+       }, new { @Class = "btn btn-default fa fa-trash-o", @title = "Delete" }).ToString()
+       ))
+       ))
+            </div>
+            <div class="col-md-3" id="Viewdata">
+
+
+                @{Html.RenderAction("ViewCustomerSupp", "Customer", new {Id=0, Tagname = @ViewBag.Tagname });}
+
+
+
+            </div>
+        </div>
+        </div>
+        </div>
+<script>
+    $('table tbody tr').click(function () {
+     var selectedId = $(this).find('td:eq(0)').text();
+   
+     
+        $.ajax({
+            url: '@Url.Action("ViewCustomerSupp", "Customer", new { Tagname = @ViewBag.Tagname })',
+            data: { 'Id': selectedId },
+            type: "get",
+            cache: false,
+            success: function (savingStatus) {
+                $('#Viewdata').html(savingStatus);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $('#lblCommentsNotification').text("Error encountered while saving the comments.");
+            }
+        });
+    });
+</script>

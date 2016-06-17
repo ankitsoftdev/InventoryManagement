@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ViewModel.Dashboard.SalerOrderinfo>
+
+
+<table class="table table-reponsive table-bordered">
+<thead>
+        <tr>
+            <th>Customer Name</th>
+          
+            <th>Contact No</th>
+            <th>Order No</th>
+            <th>Order Dated</th>
+            <th>Delivered Dated</th>
+        </tr>
+</thead>
+ @foreach (var item in Model)
+ {
+        <tbody>
+            <tr>
+                <td>@item.Customer_Name</td>
+                <td>@item.Contact_No</td>
+                <td>@item.Order_No</td>
+                <td>@item.Order_Date</td>
+                <td>@item.Request_Delivery_Date</td>
+            </tr>
+       </tbody>
+}
+
+</table>

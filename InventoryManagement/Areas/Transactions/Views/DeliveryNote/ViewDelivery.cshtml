@@ -1,0 +1,109 @@
+﻿@model ViewModel.Transactions.DeliveryNoteInfo
+@{
+
+
+    string src = null;
+    if (Model.Image_Path != null)
+    {
+        src = Model.Image_Path;
+    }
+    else
+    {
+        src = "/Themes/img/demo_img.gif";
+    }
+
+}
+
+<div>
+
+
+
+
+    <div class="panel panel-danger managepnl">
+
+        <div class="panel-heading" style="background-color: #C4538A;color:white"><span>View Details</span> </div>
+
+
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div id="imgTest">
+                        <img src="@src" class="img-responsive img-thumbnail mangaeimg" />
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-responsive topmrgn5px">
+                        <tr>
+                            <td>
+                                @Html.Label("Order No")
+
+                                @Html.HiddenFor(x => x.Id)
+
+                            </td>
+                            <td>
+
+                                <span>@Model.Sales_Order_No</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                @Html.Label("Supplier Name")
+                            </td>
+                            <td>
+                                <span>@Model.Name</span>
+                            </td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td>
+                                @Html.Label("Contact No")
+                            </td>
+                            <td>
+                                <span>@Model.Contact_No</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.Label("Email")
+                            </td>
+                            <td>
+                                <span>@Model.Email</span>
+                            </td>
+                        </tr>
+
+
+
+
+                    </table>
+                </div>
+            </div>
+
+            <table class="table table-responsive  topmrgn5px">
+
+
+
+
+                <tr>
+                    <td>
+                        @Html.Label("Remarks")
+                    </td>
+                    <td>
+                        <span>@Model.Remarks</span>
+                    </td>
+                </tr>
+            </table>
+
+            <hr style="border:solid silver 1px;" />
+            <div align="center"><h4><label>Delivery Details</label></h4></div>
+            @{
+                Html.RenderAction("ViewDeliverynoteDetailsList", "DeliveryNote", new { Id = Model.Id });}
+
+        </div>
+
+    </div>
+
+</div>

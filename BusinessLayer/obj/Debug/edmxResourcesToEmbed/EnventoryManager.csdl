@@ -1,0 +1,2411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="INVENTORY_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="INVENTORY_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Billing_Info" EntityType="INVENTORY_DBModel.Billing_Info" />
+    <EntitySet Name="Branch_Master" EntityType="INVENTORY_DBModel.Branch_Master" />
+    <EntitySet Name="City_Master" EntityType="INVENTORY_DBModel.City_Master" />
+    <EntitySet Name="Company_Master" EntityType="INVENTORY_DBModel.Company_Master" />
+    <EntitySet Name="Contact_Info" EntityType="INVENTORY_DBModel.Contact_Info" />
+    <EntitySet Name="Country_State" EntityType="INVENTORY_DBModel.Country_State" />
+    <EntitySet Name="Customers" EntityType="INVENTORY_DBModel.Customer" />
+    <EntitySet Name="Delivery_Note" EntityType="INVENTORY_DBModel.Delivery_Note" />
+    <EntitySet Name="Delivery_Note_Tra" EntityType="INVENTORY_DBModel.Delivery_Note_Tra" />
+    <EntitySet Name="Emp_Common_Master" EntityType="INVENTORY_DBModel.Emp_Common_Master" />
+    <EntitySet Name="FinancialYears" EntityType="INVENTORY_DBModel.FinancialYear" />
+    <EntitySet Name="GoDown_Master" EntityType="INVENTORY_DBModel.GoDown_Master" />
+    <EntitySet Name="GoDown_Region" EntityType="INVENTORY_DBModel.GoDown_Region" />
+    <EntitySet Name="Ledger_Group" EntityType="INVENTORY_DBModel.Ledger_Group" />
+    <EntitySet Name="Ledger_Master" EntityType="INVENTORY_DBModel.Ledger_Master" />
+    <EntitySet Name="LedgerGroupTemp1" EntityType="INVENTORY_DBModel.LedgerGroupTemp1" />
+    <EntitySet Name="Login_Master" EntityType="INVENTORY_DBModel.Login_Master" />
+    <EntitySet Name="Payment_Info" EntityType="INVENTORY_DBModel.Payment_Info" />
+    <EntitySet Name="Purchase_Order" EntityType="INVENTORY_DBModel.Purchase_Order" />
+    <EntitySet Name="Purchase_Order_Tra" EntityType="INVENTORY_DBModel.Purchase_Order_Tra" />
+    <EntitySet Name="Purchase_Return" EntityType="INVENTORY_DBModel.Purchase_Return" />
+    <EntitySet Name="Purchase_Return_Tra" EntityType="INVENTORY_DBModel.Purchase_Return_Tra" />
+    <EntitySet Name="Quation_Master" EntityType="INVENTORY_DBModel.Quation_Master" />
+    <EntitySet Name="Quation_Master_Tra" EntityType="INVENTORY_DBModel.Quation_Master_Tra" />
+    <EntitySet Name="Receipt_Note" EntityType="INVENTORY_DBModel.Receipt_Note" />
+    <EntitySet Name="Role_Master" EntityType="INVENTORY_DBModel.Role_Master" />
+    <EntitySet Name="Sales_Order" EntityType="INVENTORY_DBModel.Sales_Order" />
+    <EntitySet Name="Sales_Order_Tra" EntityType="INVENTORY_DBModel.Sales_Order_Tra" />
+    <EntitySet Name="Sales_Return" EntityType="INVENTORY_DBModel.Sales_Return" />
+    <EntitySet Name="Sales_Return_Tra" EntityType="INVENTORY_DBModel.Sales_Return_Tra" />
+    <EntitySet Name="Stock_Category" EntityType="INVENTORY_DBModel.Stock_Category" />
+    <EntitySet Name="Stock_Group" EntityType="INVENTORY_DBModel.Stock_Group" />
+    <EntitySet Name="Stock_Item" EntityType="INVENTORY_DBModel.Stock_Item" />
+    <EntitySet Name="Stock_Master" EntityType="INVENTORY_DBModel.Stock_Master" />
+    <EntitySet Name="Suppliers" EntityType="INVENTORY_DBModel.Supplier" />
+    <EntitySet Name="Tagging_Master" EntityType="INVENTORY_DBModel.Tagging_Master" />
+    <EntitySet Name="Tagging_Master_Assign" EntityType="INVENTORY_DBModel.Tagging_Master_Assign" />
+    <EntitySet Name="Tagging_Master_Assign_Tra" EntityType="INVENTORY_DBModel.Tagging_Master_Assign_Tra" />
+    <EntitySet Name="Tax_Deduction_Master" EntityType="INVENTORY_DBModel.Tax_Deduction_Master" />
+    <EntitySet Name="Tax_Master" EntityType="INVENTORY_DBModel.Tax_Master" />
+    <EntitySet Name="UnitMasters" EntityType="INVENTORY_DBModel.UnitMaster" />
+    <AssociationSet Name="fk_company_bill" Association="INVENTORY_DBModel.fk_company_bill">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Billing_Info" EntitySet="Billing_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_branch" Association="INVENTORY_DBModel.fk_company_branch">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Branch_Master" EntitySet="Branch_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_country_branch" Association="INVENTORY_DBModel.fk_country_branch">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="Branch_Master" EntitySet="Branch_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_state_branch" Association="INVENTORY_DBModel.fk_state_branch">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="Branch_Master" EntitySet="Branch_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_citymaster" Association="INVENTORY_DBModel.fk_company_citymaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="City_Master" EntitySet="City_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_country_citymaster" Association="INVENTORY_DBModel.fk_country_citymaster">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="City_Master" EntitySet="City_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_state_citymaster" Association="INVENTORY_DBModel.fk_state_citymaster">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="City_Master" EntitySet="City_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_contactinfo" Association="INVENTORY_DBModel.fk_company_contactinfo">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Contact_Info" EntitySet="Contact_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_customer" Association="INVENTORY_DBModel.fk_company_customer">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_empcommon" Association="INVENTORY_DBModel.fk_company_empcommon">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Emp_Common_Master" EntitySet="Emp_Common_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_financialyear" Association="INVENTORY_DBModel.fk_company_financialyear">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="FinancialYear" EntitySet="FinancialYears" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_godown" Association="INVENTORY_DBModel.fk_company_godown">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="GoDown_Master" EntitySet="GoDown_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_godownregion" Association="INVENTORY_DBModel.fk_company_godownregion">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="GoDown_Region" EntitySet="GoDown_Region" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_ledger" Association="INVENTORY_DBModel.fk_company_ledger">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Ledger_Master" EntitySet="Ledger_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_ledgergroup" Association="INVENTORY_DBModel.fk_company_ledgergroup">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Ledger_Group" EntitySet="Ledger_Group" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_login" Association="INVENTORY_DBModel.fk_company_login">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Login_Master" EntitySet="Login_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_Payment" Association="INVENTORY_DBModel.fk_company_Payment">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Payment_Info" EntitySet="Payment_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_quation" Association="INVENTORY_DBModel.fk_company_quation">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Quation_Master" EntitySet="Quation_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_role" Association="INVENTORY_DBModel.fk_company_role">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Role_Master" EntitySet="Role_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_stockgrp" Association="INVENTORY_DBModel.fk_company_stockgrp">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Stock_Group" EntitySet="Stock_Group" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_stockitem" Association="INVENTORY_DBModel.fk_company_stockitem">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Stock_Item" EntitySet="Stock_Item" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_stockmaster" Association="INVENTORY_DBModel.fk_company_stockmaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Stock_Master" EntitySet="Stock_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_subcategory" Association="INVENTORY_DBModel.fk_company_subcategory">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Stock_Category" EntitySet="Stock_Category" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_supplier" Association="INVENTORY_DBModel.fk_company_supplier">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Supplier" EntitySet="Suppliers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_taxdeduction" Association="INVENTORY_DBModel.fk_company_taxdeduction">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Tax_Deduction_Master" EntitySet="Tax_Deduction_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_taxmaster" Association="INVENTORY_DBModel.fk_company_taxmaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Tax_Master" EntitySet="Tax_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_unit" Association="INVENTORY_DBModel.fk_company_unit">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="UnitMaster" EntitySet="UnitMasters" />
+    </AssociationSet>
+    <AssociationSet Name="fk_country_company" Association="INVENTORY_DBModel.fk_country_company">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="Company_Master" EntitySet="Company_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_state_company" Association="INVENTORY_DBModel.fk_state_company">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="Company_Master" EntitySet="Company_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_purchasret_purchasemastertra" Association="INVENTORY_DBModel.fk_purchasret_purchasemastertra">
+      <End Role="Purchase_Return" EntitySet="Purchase_Return" />
+      <End Role="Purchase_Return_Tra" EntitySet="Purchase_Return_Tra" />
+    </AssociationSet>
+    <AssociationSet Name="fk_quation_tra" Association="INVENTORY_DBModel.fk_quation_tra">
+      <End Role="Quation_Master" EntitySet="Quation_Master" />
+      <End Role="Quation_Master_Tra" EntitySet="Quation_Master_Tra" />
+    </AssociationSet>
+    <FunctionImport Name="GetdatafromPurchaseTra" ReturnType="Collection(INVENTORY_DBModel.GetdatafromPurchaseTra_Result)" />
+    <FunctionImport Name="GetIItemlist" ReturnType="Collection(INVENTORY_DBModel.GetIItemlist_Result)" />
+    <FunctionImport Name="GetPurchaseTra" IsComposable="true" ReturnType="Collection(INVENTORY_DBModel.GetPurchaseTra_Result)">
+      <Parameter Name="OrdQty" Mode="In" Type="Int32" />
+      <Parameter Name="ItemId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUnitNameAndAmount" ReturnType="Collection(INVENTORY_DBModel.GetUnitNameAndAmount_Result)">
+      <Parameter Name="itemId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_Challan_Details">
+      <Parameter Name="Pur_Id" Mode="In" Type="Int64" />
+      <Parameter Name="Tag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_CommonList" ReturnType="Collection(INVENTORY_DBModel.Pr_CommonList_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int64" />
+      <Parameter Name="Tag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_CreateDashBoardData" ReturnType="Collection(INVENTORY_DBModel.Pr_CreateDashBoardData_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_DeleteCommonTblRcrd">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="Tag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_DeleteStock_Item">
+      <Parameter Name="Pur_Id" Mode="In" Type="Int64" />
+      <Parameter Name="Tag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_Delivery_Note_Tra" ReturnType="Collection(INVENTORY_DBModel.Pr_Delivery_Note_Tra_Result)">
+      <Parameter Name="Tag" Mode="In" Type="String" />
+      <Parameter Name="OrderNo" Mode="In" Type="Int64" />
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_DeliveryNoteList" ReturnType="Collection(INVENTORY_DBModel.Pr_DeliveryNoteList_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_PaymentList">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="Tag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_Purchase_Order_List" ReturnType="Collection(INVENTORY_DBModel.Pr_Purchase_Order_List_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_PurchaseList" ReturnType="Collection(INVENTORY_DBModel.Pr_PurchaseList_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_Receipt_Note_Tra" ReturnType="Collection(INVENTORY_DBModel.Pr_Receipt_Note_Tra_Result)">
+      <Parameter Name="Tag" Mode="In" Type="String" />
+      <Parameter Name="Pur_Id" Mode="In" Type="Int64" />
+      <Parameter Name="CompanyId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_ReceiptNoteList" ReturnType="Collection(INVENTORY_DBModel.Pr_ReceiptNoteList_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_RegionList" ReturnType="Collection(INVENTORY_DBModel.Pr_RegionList_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_Sales_Order_List" ReturnType="Collection(INVENTORY_DBModel.Pr_Sales_Order_List_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_SalesList" ReturnType="Collection(INVENTORY_DBModel.Pr_SalesList_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_StockMasterList" ReturnType="Collection(INVENTORY_DBModel.Pr_StockMasterList_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_UpdateStockMaster" />
+    <FunctionImport Name="sp_Customerinfo" ReturnType="Collection(INVENTORY_DBModel.sp_Customerinfo_Result)" />
+    <FunctionImport Name="SP_DashSalePurc" ReturnType="Collection(INVENTORY_DBModel.SP_DashSalePurc_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+      <Parameter Name="StartDt" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDt" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SP_Purchase_Order_List" ReturnType="Collection(INVENTORY_DBModel.SP_Purchase_Order_List_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_PurchaseData" ReturnType="Collection(INVENTORY_DBModel.Sp_PurchaseData_Result)">
+      <Parameter Name="Pur_Id" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SalesPurYearly" ReturnType="Collection(Decimal)">
+      <Parameter Name="Company_Id" Mode="In" Type="Int32" />
+      <Parameter Name="FinancialYrfrm" Mode="In" Type="DateTime" />
+      <Parameter Name="FinancialYrTo" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_StockItemInfo" ReturnType="Collection(INVENTORY_DBModel.Sp_StockItemInfo_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_Supplierinfo" ReturnType="Collection(INVENTORY_DBModel.Sp_Supplierinfo_Result)">
+      <Parameter Name="Tagname" Mode="In" Type="String" />
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateQtyAndIsActive_PurchaseTra">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+      <Parameter Name="Qty" Mode="In" Type="Decimal" />
+      <Parameter Name="isActive" Mode="In" Type="Boolean" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="Purchase_Master" EntityType="INVENTORY_DBModel.Purchase_Master" />
+    <AssociationSet Name="fk_company_purchasemaster" Association="INVENTORY_DBModel.fk_company_purchasemaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Purchase_Master" EntitySet="Purchase_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_purchase_purchasemaster" Association="INVENTORY_DBModel.fk_purchase_purchasemaster">
+      <End Role="Purchase_Master" EntitySet="Purchase_Master" />
+      <End Role="Purchase_Return" EntitySet="Purchase_Return" />
+    </AssociationSet>
+    <EntitySet Name="Purchase_Master_Tra" EntityType="INVENTORY_DBModel.Purchase_Master_Tra" />
+    <AssociationSet Name="fk_pur_purtra" Association="INVENTORY_DBModel.fk_pur_purtra">
+      <End Role="Purchase_Master" EntitySet="Purchase_Master" />
+      <End Role="Purchase_Master_Tra" EntitySet="Purchase_Master_Tra" />
+    </AssociationSet>
+    <EntitySet Name="Purchase_Master_TaxDetails" EntityType="INVENTORY_DBModel.Purchase_Master_TaxDetails" />
+    <EntitySet Name="Sales_Master_TaxDetails" EntityType="INVENTORY_DBModel.Sales_Master_TaxDetails" />
+    <EntitySet Name="Sales_Master_Tra" EntityType="INVENTORY_DBModel.Sales_Master_Tra" />
+    <FunctionImport Name="GetMaxId">
+      <Parameter Name="Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="PR_GetPendingBillList" ReturnType="Collection(INVENTORY_DBModel.PR_GetPendingBillList_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Ptm_Id" Mode="In" Type="Int64" />
+      <Parameter Name="TagType" Mode="In" Type="String" />
+      <Parameter Name="ModeType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_UpdateDeliveryNote">
+      <Parameter Name="Delivery_Note_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_UpdatePayment">
+      <Parameter Name="Pmt_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_UpdatePurchaseOrder">
+      <Parameter Name="Pur_Order_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_UpdateQuationkMaster">
+      <Parameter Name="QuationId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_UpdateReceiptNote">
+      <Parameter Name="Receipt_Note_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_UpdateSalesOrder">
+      <Parameter Name="Sales_Order_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_OpeningBalData">
+      <Parameter Name="TagType" Mode="In" Type="String" />
+      <Parameter Name="Item_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="Update_stock_and_Tra">
+      <Parameter Name="pur_Id" Mode="In" Type="String" />
+      <Parameter Name="Tag" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Receipt_Note_Tra" EntityType="INVENTORY_DBModel.Receipt_Note_Tra" />
+    <EntitySet Name="Payment_Info_Tra" EntityType="INVENTORY_DBModel.Payment_Info_Tra" />
+    <AssociationSet Name="fk_Paymenttra" Association="INVENTORY_DBModel.fk_Paymenttra">
+      <End Role="Payment_Info" EntitySet="Payment_Info" />
+      <End Role="Payment_Info_Tra" EntitySet="Payment_Info_Tra" />
+    </AssociationSet>
+    <EntitySet Name="Sales_Master" EntityType="INVENTORY_DBModel.Sales_Master" />
+    <AssociationSet Name="fk_company_salesmaster" Association="INVENTORY_DBModel.fk_company_salesmaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Sales_Master" EntitySet="Sales_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sales_sales" Association="INVENTORY_DBModel.fk_sales_sales">
+      <End Role="Sales_Master" EntitySet="Sales_Master" />
+      <End Role="Sales_Return" EntitySet="Sales_Return" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sales_salestra" Association="INVENTORY_DBModel.fk_sales_salestra">
+      <End Role="Sales_Master" EntitySet="Sales_Master" />
+      <End Role="Sales_Master_Tra" EntitySet="Sales_Master_Tra" />
+    </AssociationSet>
+    <EntitySet Name="Receipt_Info" EntityType="INVENTORY_DBModel.Receipt_Info" />
+    <EntitySet Name="Receipt_Info_Tra" EntityType="INVENTORY_DBModel.Receipt_Info_Tra" />
+    <AssociationSet Name="fk_company_receipt" Association="INVENTORY_DBModel.fk_company_receipt">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Receipt_Info" EntitySet="Receipt_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_receipttra" Association="INVENTORY_DBModel.fk_receipttra">
+      <End Role="Payment_Info" EntitySet="Payment_Info" />
+      <End Role="Receipt_Info_Tra" EntitySet="Receipt_Info_Tra" />
+    </AssociationSet>
+    <FunctionImport Name="Pr_UpdateReceipt">
+      <Parameter Name="Recpt_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <EntitySet Name="Advance_Info" EntityType="INVENTORY_DBModel.Advance_Info" />
+    <AssociationSet Name="fk_coustomer_adv" Association="INVENTORY_DBModel.fk_coustomer_adv">
+      <End Role="Ledger_Master" EntitySet="Ledger_Master" />
+      <End Role="Advance_Info" EntitySet="Advance_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_receipttra1" Association="INVENTORY_DBModel.fk_receipttra1">
+      <End Role="Receipt_Info" EntitySet="Receipt_Info" />
+      <End Role="Receipt_Info_Tra" EntitySet="Receipt_Info_Tra" />
+    </AssociationSet>
+    <FunctionImport Name="Pr_PurchaseReturnTra">
+      <Parameter Name="PurRet_Id" Mode="In" Type="Int64" />
+      <Parameter Name="Tag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_SalesReturnTra">
+      <Parameter Name="SalesRet_Id" Mode="In" Type="Int64" />
+      <Parameter Name="Tag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_GetPendingBal" ReturnType="Collection(INVENTORY_DBModel.Pr_GetPendingBal_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Tag" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_DashOrderQuats" ReturnType="Collection(INVENTORY_DBModel.Pr_DashOrderQuats_Result)">
+      <Parameter Name="Company_Id" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="SP_ManageStock" ReturnType="Collection(INVENTORY_DBModel.SP_ManageStock_Result)">
+      <Parameter Name="Company_Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Pr_QuationList" ReturnType="Collection(INVENTORY_DBModel.Pr_QuationList_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int64" />
+      <Parameter Name="Tag_Type" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Billing_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Bill_VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="User_Id" Type="Int64" Nullable="false" />
+    <Property Name="Billing_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tax_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Transport" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tag_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Billing_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_bill" FromRole="Billing_Info" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Branch_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Address1" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="City_Id" Type="Int64" />
+    <Property Name="Country_Id" Type="Int64" Nullable="false" />
+    <Property Name="State_Id" Type="Int64" Nullable="false" />
+    <Property Name="Email_Id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_No" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Pin_Code" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_branch" FromRole="Branch_Master" ToRole="Company_Master" />
+    <NavigationProperty Name="Country_State" Relationship="INVENTORY_DBModel.fk_country_branch" FromRole="Branch_Master" ToRole="Country_State" />
+    <NavigationProperty Name="Country_State1" Relationship="INVENTORY_DBModel.fk_state_branch" FromRole="Branch_Master" ToRole="Country_State" />
+  </EntityType>
+  <EntityType Name="City_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Country_Id" Type="Int64" Nullable="false" />
+    <Property Name="State_Id" Type="Int64" Nullable="false" />
+    <Property Name="Pin_Code" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Latitute" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Longitute" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_citymaster" FromRole="City_Master" ToRole="Company_Master" />
+    <NavigationProperty Name="Country_State" Relationship="INVENTORY_DBModel.fk_country_citymaster" FromRole="City_Master" ToRole="Country_State" />
+    <NavigationProperty Name="Country_State1" Relationship="INVENTORY_DBModel.fk_state_citymaster" FromRole="City_Master" ToRole="Country_State" />
+  </EntityType>
+  <EntityType Name="Company_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Phoe_No" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Reg_No" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Tin_No" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Pan_No" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="WebSite" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Pin_Code" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Country_Id" Type="Int64" Nullable="false" />
+    <Property Name="State_Id" Type="Int64" Nullable="false" />
+    <Property Name="City_Id" Type="Int64" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Billing_Info" Relationship="INVENTORY_DBModel.fk_company_bill" FromRole="Company_Master" ToRole="Billing_Info" />
+    <NavigationProperty Name="Branch_Master" Relationship="INVENTORY_DBModel.fk_company_branch" FromRole="Company_Master" ToRole="Branch_Master" />
+    <NavigationProperty Name="City_Master" Relationship="INVENTORY_DBModel.fk_company_citymaster" FromRole="Company_Master" ToRole="City_Master" />
+    <NavigationProperty Name="Contact_Info" Relationship="INVENTORY_DBModel.fk_company_contactinfo" FromRole="Company_Master" ToRole="Contact_Info" />
+    <NavigationProperty Name="Customers" Relationship="INVENTORY_DBModel.fk_company_customer" FromRole="Company_Master" ToRole="Customer" />
+    <NavigationProperty Name="Emp_Common_Master" Relationship="INVENTORY_DBModel.fk_company_empcommon" FromRole="Company_Master" ToRole="Emp_Common_Master" />
+    <NavigationProperty Name="FinancialYears" Relationship="INVENTORY_DBModel.fk_company_financialyear" FromRole="Company_Master" ToRole="FinancialYear" />
+    <NavigationProperty Name="GoDown_Master" Relationship="INVENTORY_DBModel.fk_company_godown" FromRole="Company_Master" ToRole="GoDown_Master" />
+    <NavigationProperty Name="GoDown_Region" Relationship="INVENTORY_DBModel.fk_company_godownregion" FromRole="Company_Master" ToRole="GoDown_Region" />
+    <NavigationProperty Name="Ledger_Master" Relationship="INVENTORY_DBModel.fk_company_ledger" FromRole="Company_Master" ToRole="Ledger_Master" />
+    <NavigationProperty Name="Ledger_Group" Relationship="INVENTORY_DBModel.fk_company_ledgergroup" FromRole="Company_Master" ToRole="Ledger_Group" />
+    <NavigationProperty Name="Login_Master" Relationship="INVENTORY_DBModel.fk_company_login" FromRole="Company_Master" ToRole="Login_Master" />
+    <NavigationProperty Name="Payment_Info" Relationship="INVENTORY_DBModel.fk_company_Payment" FromRole="Company_Master" ToRole="Payment_Info" />
+    <NavigationProperty Name="Quation_Master" Relationship="INVENTORY_DBModel.fk_company_quation" FromRole="Company_Master" ToRole="Quation_Master" />
+    <NavigationProperty Name="Role_Master" Relationship="INVENTORY_DBModel.fk_company_role" FromRole="Company_Master" ToRole="Role_Master" />
+    <NavigationProperty Name="Stock_Group" Relationship="INVENTORY_DBModel.fk_company_stockgrp" FromRole="Company_Master" ToRole="Stock_Group" />
+    <NavigationProperty Name="Stock_Item" Relationship="INVENTORY_DBModel.fk_company_stockitem" FromRole="Company_Master" ToRole="Stock_Item" />
+    <NavigationProperty Name="Stock_Master" Relationship="INVENTORY_DBModel.fk_company_stockmaster" FromRole="Company_Master" ToRole="Stock_Master" />
+    <NavigationProperty Name="Stock_Category" Relationship="INVENTORY_DBModel.fk_company_subcategory" FromRole="Company_Master" ToRole="Stock_Category" />
+    <NavigationProperty Name="Suppliers" Relationship="INVENTORY_DBModel.fk_company_supplier" FromRole="Company_Master" ToRole="Supplier" />
+    <NavigationProperty Name="Tax_Deduction_Master" Relationship="INVENTORY_DBModel.fk_company_taxdeduction" FromRole="Company_Master" ToRole="Tax_Deduction_Master" />
+    <NavigationProperty Name="Tax_Master" Relationship="INVENTORY_DBModel.fk_company_taxmaster" FromRole="Company_Master" ToRole="Tax_Master" />
+    <NavigationProperty Name="UnitMasters" Relationship="INVENTORY_DBModel.fk_company_unit" FromRole="Company_Master" ToRole="UnitMaster" />
+    <NavigationProperty Name="Country_State" Relationship="INVENTORY_DBModel.fk_country_company" FromRole="Company_Master" ToRole="Country_State" />
+    <NavigationProperty Name="Country_State1" Relationship="INVENTORY_DBModel.fk_state_company" FromRole="Company_Master" ToRole="Country_State" />
+    <NavigationProperty Name="Purchase_Master" Relationship="INVENTORY_DBModel.fk_company_purchasemaster" FromRole="Company_Master" ToRole="Purchase_Master" />
+    <NavigationProperty Name="Sales_Master" Relationship="INVENTORY_DBModel.fk_company_salesmaster" FromRole="Company_Master" ToRole="Sales_Master" />
+    <NavigationProperty Name="Receipt_Info" Relationship="INVENTORY_DBModel.fk_company_receipt" FromRole="Company_Master" ToRole="Receipt_Info" />
+  </EntityType>
+  <EntityType Name="Contact_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_contactinfo" FromRole="Contact_Info" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Country_State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Parent_Id" Type="Int64" Nullable="false" />
+    <Property Name="Display_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Visible" Type="Boolean" Nullable="false" />
+    <Property Name="Tag_Id" Type="Int64" Nullable="false" />
+    <Property Name="Latitute" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Longitute" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Branch_Master" Relationship="INVENTORY_DBModel.fk_country_branch" FromRole="Country_State" ToRole="Branch_Master" />
+    <NavigationProperty Name="Branch_Master1" Relationship="INVENTORY_DBModel.fk_state_branch" FromRole="Country_State" ToRole="Branch_Master" />
+    <NavigationProperty Name="City_Master" Relationship="INVENTORY_DBModel.fk_country_citymaster" FromRole="Country_State" ToRole="City_Master" />
+    <NavigationProperty Name="City_Master1" Relationship="INVENTORY_DBModel.fk_state_citymaster" FromRole="Country_State" ToRole="City_Master" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_country_company" FromRole="Country_State" ToRole="Company_Master" />
+    <NavigationProperty Name="Company_Master1" Relationship="INVENTORY_DBModel.fk_state_company" FromRole="Country_State" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email_Id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_No" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person_Contact" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Pan_No" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Pin_Code" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="City_Id" Type="Int64" />
+    <Property Name="Country_Id" Type="Int64" />
+    <Property Name="State_Id" Type="Int64" />
+    <Property Name="Group_Id" Type="Int64" Nullable="false" />
+    <Property Name="Opeaning_Bal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Mnt_Bill_By_Bill" Type="Boolean" Nullable="false" />
+    <Property Name="Credit_Period_Time" Type="Int32" />
+    <Property Name="Image_Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_customer" FromRole="Customer" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Delivery_Note">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int32" Nullable="false" />
+    <Property Name="Delivery_Note_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sales_Order_Id" Type="Int64" Nullable="false" />
+    <Property Name="Customer_Id" Type="Int64" Nullable="false" />
+    <Property Name="Delivery_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Delivery_Note_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Delivery_Note_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Order_Quantity" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Delivered_Quantity" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Pur_Tra_Id" Type="Int64" Nullable="false" />
+    <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Emp_Common_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Tag_Type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Disp_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Ot_Apply" Type="Boolean" Nullable="false" />
+    <Property Name="Comp_Leave" Type="Boolean" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Without_Pay" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Maternity" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_empcommon" FromRole="Emp_Common_Master" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="FinancialYear">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="From_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="To_Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Default" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_financialyear" FromRole="FinancialYear" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="GoDown_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Under_Id" Type="Int64" />
+    <Property Name="City_Id" Type="Int64" />
+    <Property Name="Country_Id" Type="Int64" />
+    <Property Name="State_Id" Type="Int64" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_godown" FromRole="GoDown_Master" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="GoDown_Region">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="GoDown_Id" Type="Int64" Nullable="false" />
+    <Property Name="Under_Id" Type="Int64" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_godownregion" FromRole="GoDown_Region" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Ledger_Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Short_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Under_Group" Type="Int64" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Nature" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_ledgergroup" FromRole="Ledger_Group" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Ledger_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email_Id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_No" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person_ContactNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Pan_No" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Pin_Code" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="City_Id" Type="Int64" />
+    <Property Name="Country_Id" Type="Int64" />
+    <Property Name="State_Id" Type="Int64" />
+    <Property Name="Group_Id" Type="Int64" Nullable="false" />
+    <Property Name="Opeaning_Bal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Mnt_Bill_By_Bill" Type="Boolean" Nullable="false" />
+    <Property Name="Credit_Period_Time" Type="Int32" />
+    <Property Name="Image_Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_ledger" FromRole="Ledger_Master" ToRole="Company_Master" />
+    <NavigationProperty Name="Advance_Info" Relationship="INVENTORY_DBModel.fk_coustomer_adv" FromRole="Ledger_Master" ToRole="Advance_Info" />
+  </EntityType>
+  <EntityType Name="LedgerGroupTemp1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Primary" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Login_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Role_Id" Type="Int64" />
+    <Property Name="Employee_Id" Type="Int64" Nullable="false" />
+    <Property Name="Token_Id" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="User_Password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Loged" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_login" FromRole="Login_Master" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Payment_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Supplier_Id" Type="Int64" Nullable="false" />
+    <Property Name="Payment_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tax_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Account_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bank_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IFSC_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Payment_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Cheque_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Bill_By_Bill" Type="Boolean" Nullable="false" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_Payment" FromRole="Payment_Info" ToRole="Company_Master" />
+    <NavigationProperty Name="Payment_Info_Tra" Relationship="INVENTORY_DBModel.fk_Paymenttra" FromRole="Payment_Info" ToRole="Payment_Info_Tra" />
+    <NavigationProperty Name="Receipt_Info_Tra" Relationship="INVENTORY_DBModel.fk_receipttra" FromRole="Payment_Info" ToRole="Receipt_Info_Tra" />
+  </EntityType>
+  <EntityType Name="Purchase_Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Pur_Order_VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sales_Person" Type="Int64" Nullable="false" />
+    <Property Name="Supplier_Id" Type="Int64" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Posting_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Order_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Request_Delivery_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Receipt_Note" Type="Boolean" Nullable="false" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Order_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pur_Order_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Oreder_Quantity" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Invoice_Quantity" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Return">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Purchase_Id" Type="Int64" Nullable="false" />
+    <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PurRet_VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Total_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Return_Type" Type="Int32" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Purchase_Return_Tra" Relationship="INVENTORY_DBModel.fk_purchasret_purchasemastertra" FromRole="Purchase_Return" ToRole="Purchase_Return_Tra" />
+    <NavigationProperty Name="Purchase_Master" Relationship="INVENTORY_DBModel.fk_purchase_purchasemaster" FromRole="Purchase_Return" ToRole="Purchase_Master" />
+    <Property Name="Supplier_Id" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Return_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PurRet_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Qty" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Purchase_Serial_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sale_Serial_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tax_Id" Type="Int64" Nullable="false" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Purchase_Return" Relationship="INVENTORY_DBModel.fk_purchasret_purchasemastertra" FromRole="Purchase_Return_Tra" ToRole="Purchase_Return" />
+  </EntityType>
+  <EntityType Name="Quation_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Customer_Id" Type="Int64" Nullable="false" />
+    <Property Name="Quation_VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Quation_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tag_Type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Approved" Type="Boolean" Nullable="false" />
+    <Property Name="Approved_By" Type="Int64" Nullable="false" />
+    <Property Name="Fncl_Year_Id" Type="Int64" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_quation" FromRole="Quation_Master" ToRole="Company_Master" />
+    <NavigationProperty Name="Quation_Master_Tra" Relationship="INVENTORY_DBModel.fk_quation_tra" FromRole="Quation_Master" ToRole="Quation_Master_Tra" />
+  </EntityType>
+  <EntityType Name="Quation_Master_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Quation_Id" Type="Int64" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Qty" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Quat_Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Final_Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Quation_Master" Relationship="INVENTORY_DBModel.fk_quation_tra" FromRole="Quation_Master_Tra" ToRole="Quation_Master" />
+  </EntityType>
+  <EntityType Name="Receipt_Note">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Receipt_Note_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Purchase_Order_Id" Type="Int64" Nullable="false" />
+    <Property Name="Supplier_Id" Type="Int64" Nullable="false" />
+    <Property Name="Purchase_Order_No" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Receipt_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Role_Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_role" FromRole="Role_Master" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Sales_Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int32" Nullable="false" />
+    <Property Name="Customer_Id" Type="Int64" />
+    <Property Name="Sales_Order_VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sales_Person" Type="Int64" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Posting_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Order_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Request_Delivery_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Refered" Type="Boolean" Nullable="false" />
+    <Property Name="Refered_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Refered_Id" Type="Int64" />
+    <Property Name="Is_DeliveryNote" Type="Boolean" Nullable="false" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Order_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sales_Order_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Oreder_Quantity" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Invoice_Quantity" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Return">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Sales_Id" Type="Int64" Nullable="false" />
+    <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SalesRet_VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fncl_Year_Id" Type="Int32" Nullable="false" />
+    <Property Name="Total_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Discount_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Return_Type" Type="Int32" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Sales_Master" Relationship="INVENTORY_DBModel.fk_sales_sales" FromRole="Sales_Return" ToRole="Sales_Master" />
+    <Property Name="Customer_Id" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Return_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalesRet_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Qty" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tax_Id" Type="Int64" />
+    <Property Name="Sale_Serial_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stock_Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Under_Category" Type="Int64" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_subcategory" FromRole="Stock_Category" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Stock_Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Under_Group" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_stockgrp" FromRole="Stock_Group" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Stock_Item">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Group_Id" Type="Int64" Nullable="false" />
+    <Property Name="Category_Id" Type="Int64" Nullable="false" />
+    <Property Name="Unit_Id" Type="Int64" Nullable="false" />
+    <Property Name="Sufix_SerialNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Prefix_SerialNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Starting_SerialNo" Type="Int32" Nullable="false" />
+    <Property Name="Min_Qty" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Image_Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Auto" Type="Boolean" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_stockitem" FromRole="Stock_Item" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Stock_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Fncl_Year_Id" Type="Int64" />
+    <Property Name="GoDown_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Qty" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Purchasing_Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Max_Pur_Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Selling_Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Min_Sale_Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_stockmaster" FromRole="Stock_Master" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email_Id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_No" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person_Contact" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Pan_No" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Pin_Code" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="City_Id" Type="Int64" />
+    <Property Name="Country_Id" Type="Int64" />
+    <Property Name="State_Id" Type="Int64" />
+    <Property Name="Group_Id" Type="Int64" Nullable="false" />
+    <Property Name="Opeaning_Bal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Mnt_Bill_By_Bill" Type="Boolean" Nullable="false" />
+    <Property Name="Credit_Period_Time" Type="Int64" />
+    <Property Name="Image_Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_supplier" FromRole="Supplier" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Tagging_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int32" Nullable="false" />
+    <Property Name="Serial_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Card_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tagging_Master_Assign">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Tag_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tagging_Master_Assign_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tag_Tra_Id" Type="Int64" Nullable="false" />
+    <Property Name="Pre_Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="New_Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tax_Deduction_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rate_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_taxdeduction" FromRole="Tax_Deduction_Master" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="Tax_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Nature" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_taxmaster" FromRole="Tax_Master" ToRole="Company_Master" />
+  </EntityType>
+  <EntityType Name="UnitMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Alias_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Unit_Volume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Group_Id" Type="Int64" Nullable="false" />
+    <Property Name="No_of_Decimal" Type="Int32" />
+    <Property Name="Ratio1" Type="Decimal" Precision="20" Scale="5" />
+    <Property Name="Ratio2" Type="Decimal" Precision="20" Scale="5" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_unit" FromRole="UnitMaster" ToRole="Company_Master" />
+  </EntityType>
+  <Association Name="fk_company_bill">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Billing_Info" Role="Billing_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Billing_Info">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_branch">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Branch_Master" Role="Branch_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Branch_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_country_branch">
+    <End Type="INVENTORY_DBModel.Country_State" Role="Country_State" Multiplicity="1" />
+    <End Type="INVENTORY_DBModel.Branch_Master" Role="Branch_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Branch_Master">
+        <PropertyRef Name="Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_state_branch">
+    <End Type="INVENTORY_DBModel.Country_State" Role="Country_State" Multiplicity="1" />
+    <End Type="INVENTORY_DBModel.Branch_Master" Role="Branch_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Branch_Master">
+        <PropertyRef Name="State_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_citymaster">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.City_Master" Role="City_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_country_citymaster">
+    <End Type="INVENTORY_DBModel.Country_State" Role="Country_State" Multiplicity="1" />
+    <End Type="INVENTORY_DBModel.City_Master" Role="City_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City_Master">
+        <PropertyRef Name="Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_state_citymaster">
+    <End Type="INVENTORY_DBModel.Country_State" Role="Country_State" Multiplicity="1" />
+    <End Type="INVENTORY_DBModel.City_Master" Role="City_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City_Master">
+        <PropertyRef Name="State_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_contactinfo">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Contact_Info" Role="Contact_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contact_Info">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_customer">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_empcommon">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Emp_Common_Master" Role="Emp_Common_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Emp_Common_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_financialyear">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.FinancialYear" Role="FinancialYear" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FinancialYear">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_godown">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.GoDown_Master" Role="GoDown_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoDown_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_godownregion">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.GoDown_Region" Role="GoDown_Region" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoDown_Region">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_ledger">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Ledger_Master" Role="Ledger_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ledger_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_ledgergroup">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Ledger_Group" Role="Ledger_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ledger_Group">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_login">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Login_Master" Role="Login_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Login_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_Payment">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Payment_Info" Role="Payment_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment_Info">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_quation">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Quation_Master" Role="Quation_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quation_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_role">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Role_Master" Role="Role_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Role_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_stockgrp">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Stock_Group" Role="Stock_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stock_Group">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_stockitem">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Stock_Item" Role="Stock_Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stock_Item">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_stockmaster">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Stock_Master" Role="Stock_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stock_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_subcategory">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Stock_Category" Role="Stock_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stock_Category">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_supplier">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Supplier" Role="Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_taxdeduction">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Tax_Deduction_Master" Role="Tax_Deduction_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tax_Deduction_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_taxmaster">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Tax_Master" Role="Tax_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tax_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_unit">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.UnitMaster" Role="UnitMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UnitMaster">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_country_company">
+    <End Type="INVENTORY_DBModel.Country_State" Role="Country_State" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company_Master">
+        <PropertyRef Name="Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_state_company">
+    <End Type="INVENTORY_DBModel.Country_State" Role="Country_State" Multiplicity="1" />
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company_Master">
+        <PropertyRef Name="State_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_purchasret_purchasemastertra">
+    <End Type="INVENTORY_DBModel.Purchase_Return" Role="Purchase_Return" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Purchase_Return_Tra" Role="Purchase_Return_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purchase_Return">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Purchase_Return_Tra">
+        <PropertyRef Name="PurRet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_quation_tra">
+    <End Type="INVENTORY_DBModel.Quation_Master" Role="Quation_Master" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Quation_Master_Tra" Role="Quation_Master_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quation_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quation_Master_Tra">
+        <PropertyRef Name="Quation_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetdatafromPurchaseTra_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="Pur_Id" Nullable="true" />
+    <Property Type="Int64" Name="Item_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Qty" Nullable="true" Precision="20" Scale="4" />
+    <Property Type="Decimal" Name="Rate" Nullable="true" Precision="19" />
+    <Property Type="Int64" Name="Tax_Id" Nullable="true" />
+    <Property Type="Int64" Name="GoDown_Id" Nullable="true" />
+    <Property Type="String" Name="Purchase_Serial_No" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Sale_Serial_No" Nullable="false" MaxLength="50" />
+    <Property Type="Int64" Name="Created_By" Nullable="false" />
+    <Property Type="Int64" Name="Modified_By" Nullable="false" />
+    <Property Type="DateTime" Name="Created_Date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Modified_Date" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="Is_Active" Nullable="false" />
+    <Property Type="Boolean" Name="Is_Deleted" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetIItemlist_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="Boolean" Name="Is_Auto" Nullable="false" />
+    <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="38" Scale="4" />
+  </ComplexType>
+  <ComplexType Name="GetPurchaseTra_Result">
+    <Property Type="Int32" Name="Id" Nullable="true" />
+    <Property Type="Int32" Name="Item_Id" Nullable="true" />
+    <Property Type="String" Name="Product_Code" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Sales_Serial" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetUnitNameAndAmount_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="Decimal" Name="Selling_Rate" Nullable="true" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="Pr_CommonList_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Alias_Name" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Under_Name" Nullable="false" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="Pr_CreateDashBoardData_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="TagName" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="Value" Nullable="true" Precision="18" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="Pr_Delivery_Note_Tra_Result">
+    <Property Type="Int64" Name="Sales_Tra_Id" Nullable="false" />
+    <Property Type="Int64" Name="Order_No" Nullable="false" />
+    <Property Type="Int64" Name="Item_Id" Nullable="false" />
+    <Property Type="String" Name="Unit_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Item_Name" Nullable="false" MaxLength="150" />
+    <Property Type="Int64" Name="Unit_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Oreder_Quantity" Nullable="false" Precision="20" Scale="4" />
+    <Property Type="Decimal" Name="Rate" Nullable="false" Precision="19" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="Int32" Name="PurTra_Id" Nullable="false" />
+    <Property Type="String" Name="Sales_Serial_No" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Purchase_Serial_No" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="Pr_DeliveryNoteList_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="Sales_Order_Id" Nullable="false" />
+    <Property Type="String" Name="Sales_Order_No" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="Int64" Name="CustomerID" Nullable="false" />
+    <Property Type="String" Name="Customer_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Email_Id" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Delivery_Note_No" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Delivery_Date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Order_Date" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="Pr_Purchase_Order_List_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+    <Property Type="Int64" Name="Supplier_Id" Nullable="false" />
+    <Property Type="String" Name="Customer_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Email_Id" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="Order_Date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Order_No" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Request_Delivery_Date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="9" />
+    <Property Type="Int64" Name="Sales_Person" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Pr_PurchaseList_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Chalan_No" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="Total_Amount" Nullable="false" Precision="19" />
+    <Property Type="Decimal" Name="Discount_Amount" Nullable="false" Precision="19" />
+    <Property Type="DateTime" Name="DATE" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Alias_Name" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="501" />
+    <Property Type="String" Name="Email_Id" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Is_Bill_Gen" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Pr_Receipt_Note_Tra_Result">
+    <Property Type="Int64" Name="Purchase_Tra_Id" Nullable="false" />
+    <Property Type="Int64" Name="Order_No" Nullable="false" />
+    <Property Type="Int64" Name="Item_Id" Nullable="false" />
+    <Property Type="String" Name="Unit_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Item_Name" Nullable="false" MaxLength="150" />
+    <Property Type="Int64" Name="Unit_Id" Nullable="false" />
+    <Property Type="Decimal" Name="Oreder_Quantity" Nullable="false" Precision="20" Scale="4" />
+    <Property Type="Decimal" Name="Rate" Nullable="false" Precision="19" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="Int32" Name="PurTra_Id" Nullable="false" />
+    <Property Type="String" Name="Sales_Serial_No" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Purchase_Serial_No" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="Pr_ReceiptNoteList_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="Purchae_Order_Id" Nullable="false" />
+    <Property Type="String" Name="Purchase_Order_No" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="Int64" Name="Supplier_Id" Nullable="false" />
+    <Property Type="String" Name="Supplier_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Email_Id" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Receipt_Note_No" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Receipt_Date" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Order_Date" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="Pr_RegionList_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Alias_Name" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Under_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="GoDwon_Name" Nullable="false" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="Pr_Sales_Order_List_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+    <Property Type="Int64" Name="Customer_Id" Nullable="false" />
+    <Property Type="String" Name="Customer_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Email_Id" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="Order_Date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Order_No" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Request_Delivery_Date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="9" />
+    <Property Type="Int64" Name="Sales_Person" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Pr_SalesList_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Chalan_No" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="Total_Amount" Nullable="false" Precision="19" />
+    <Property Type="Decimal" Name="Discount_Amount" Nullable="false" Precision="19" />
+    <Property Type="DateTime" Name="DATE" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Alias_Name" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="501" />
+    <Property Type="String" Name="Email_Id" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Is_Bill_Gen" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Pr_StockMasterList_Result">
+    <Property Type="Int64" Name="Stock_Id" Nullable="false" />
+    <Property Type="String" Name="Item_Name" Nullable="false" MaxLength="150" />
+    <Property Type="Int64" Name="Item_Id" Nullable="false" />
+    <Property Type="String" Name="Item_Code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Alias_Name" Nullable="false" MaxLength="20" />
+    <Property Type="Decimal" Name="Qty" Nullable="false" Precision="20" Scale="4" />
+    <Property Type="Decimal" Name="Rate" Nullable="false" Precision="19" />
+    <Property Type="Decimal" Name="Selling_Rate" Nullable="false" Precision="19" />
+    <Property Type="String" Name="Group_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Category_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Unit_Name" Nullable="false" MaxLength="150" />
+    <Property Type="Int32" Name="No_of_Decimal" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_Customerinfo_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Alias_Name" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Image_Url" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Email_Id" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Pan_No" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Pin_Code" Nullable="true" MaxLength="6" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="300" />
+    <Property Type="Int64" Name="Country_Id" Nullable="true" />
+    <Property Type="Int64" Name="State_Id" Nullable="true" />
+    <Property Type="Int64" Name="City_Id" Nullable="true" />
+    <Property Type="Int64" Name="Group_Id" Nullable="false" />
+    <Property Type="String" Name="CountryName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StateName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="CityName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="150" />
+    <Property Type="Decimal" Name="Opeaning_Bal" Nullable="true" Precision="19" />
+    <Property Type="Boolean" Name="Mnt_Bill_By_Bill" Nullable="false" />
+    <Property Type="Int32" Name="Credit_Period_Time" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_DashSalePurc_Result">
+    <Property Type="String" Name="Months" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="TotalPurchase" Nullable="false" Precision="19" />
+    <Property Type="Decimal" Name="TotalSale" Nullable="false" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="SP_Purchase_Order_List_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+    <Property Type="Int64" Name="Supplier_Id" Nullable="false" />
+    <Property Type="String" Name="Supplier_Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Email_Id" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="Order_Date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Order_No" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Request_Delivery_Date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="9" />
+    <Property Type="Int64" Name="Sales_Person" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_PurchaseData_Result">
+    <Property Type="Int64" Name="Pur_Id" Nullable="true" />
+    <Property Type="Int64" Name="Item_Id" Nullable="false" />
+    <Property Type="String" Name="ItemName" Nullable="false" MaxLength="150" />
+    <Property Type="Decimal" Name="Qty" Nullable="true" Precision="20" Scale="4" />
+    <Property Type="Decimal" Name="Rate" Nullable="true" Precision="19" />
+    <Property Type="Int64" Name="Tax_Id" Nullable="true" />
+    <Property Type="String" Name="SupplierName" Nullable="false" MaxLength="150" />
+    <Property Type="DateTime" Name="DATE" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="Sp_StockItemInfo_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Alias_Name" Nullable="false" MaxLength="20" />
+    <Property Type="Int64" Name="Group_Id" Nullable="false" />
+    <Property Type="Int64" Name="Category_Id" Nullable="false" />
+    <Property Type="Int64" Name="Unit_Id" Nullable="false" />
+    <Property Type="String" Name="Image_Url" Nullable="false" MaxLength="200" />
+    <Property Type="Decimal" Name="Min_Qty" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="Int32" Name="Start_From" Nullable="false" />
+    <Property Type="String" Name="Prefix_SerialNo" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="UnitName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+  </ComplexType>
+  <ComplexType Name="Sp_Supplierinfo_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Alias_Name" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Image_Url" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Email_Id" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Pan_No" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Pin_Code" Nullable="false" MaxLength="6" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="300" />
+    <Property Type="Int64" Name="Group_Id" Nullable="false" />
+    <Property Type="String" Name="CountryName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="StateName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="CityName" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="GroupName" Nullable="false" MaxLength="150" />
+    <Property Type="Decimal" Name="Opeaning_Bal" Nullable="false" Precision="19" />
+    <Property Type="Boolean" Name="Mnt_Bill_By_Bill" Nullable="false" />
+    <Property Type="Int32" Name="Credit_Period_Time" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Purchase_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Pur_VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Supplier_Id" Type="Int64" Nullable="false" />
+    <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Fncl_Year_Id" Type="Int64" Nullable="false" />
+    <Property Name="Discount_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tax_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Paid_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Bal_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Is_Refered" Type="Boolean" Nullable="false" />
+    <Property Name="Refered_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Refered_Id" Type="Int64" />
+    <Property Name="Is_Bill_Gen" Type="Boolean" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_purchasemaster" FromRole="Purchase_Master" ToRole="Company_Master" />
+    <NavigationProperty Name="Purchase_Return" Relationship="INVENTORY_DBModel.fk_purchase_purchasemaster" FromRole="Purchase_Master" ToRole="Purchase_Return" />
+    <NavigationProperty Name="Purchase_Master_Tra" Relationship="INVENTORY_DBModel.fk_pur_purtra" FromRole="Purchase_Master" ToRole="Purchase_Master_Tra" />
+  </EntityType>
+  <Association Name="fk_company_purchasemaster">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Purchase_Master" Role="Purchase_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Purchase_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_purchase_purchasemaster">
+    <End Type="INVENTORY_DBModel.Purchase_Master" Role="Purchase_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Purchase_Return" Role="Purchase_Return" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purchase_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Purchase_Return">
+        <PropertyRef Name="Purchase_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Purchase_Master_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pur_Id" Type="Int64" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Qty" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tax_Id" Type="Int64" />
+    <Property Name="GoDown_Id" Type="Int64" />
+    <Property Name="Purchase_Serial_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sale_Serial_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Purchase_Master" Relationship="INVENTORY_DBModel.fk_pur_purtra" FromRole="Purchase_Master_Tra" ToRole="Purchase_Master" />
+  </EntityType>
+  <Association Name="fk_pur_purtra">
+    <End Type="INVENTORY_DBModel.Purchase_Master" Role="Purchase_Master" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Purchase_Master_Tra" Role="Purchase_Master_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purchase_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Purchase_Master_Tra">
+        <PropertyRef Name="Pur_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Purchase_Master_TaxDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pur_Id" Type="Int64" Nullable="false" />
+    <Property Name="Pur_VC_No" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Tax_Id" Type="Int64" Nullable="false" />
+    <Property Name="Tax_Rate" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Tax_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Master_TaxDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sales_Id" Type="Int64" Nullable="false" />
+    <Property Name="Sales_VC_No" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Tax_Id" Type="Int64" Nullable="false" />
+    <Property Name="Tax_Rate" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Tax_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Master_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sales_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Qty" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tax_Id" Type="Int64" Nullable="false" />
+    <Property Name="GoDown_Id" Type="Int64" />
+    <Property Name="Sale_Serial_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Sales_Master" Relationship="INVENTORY_DBModel.fk_sales_salestra" FromRole="Sales_Master_Tra" ToRole="Sales_Master" />
+  </EntityType>
+  <ComplexType Name="PR_GetPendingBillList_Result">
+    <Property Type="Int32" Name="Id" Nullable="true" />
+    <Property Type="String" Name="VC_No" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="Bill_Amount" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Balance" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="Paid_Amount" Nullable="true" Precision="19" />
+    <Property Type="Boolean" Name="Status" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Receipt_Note_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Receipt_Note_Id" Type="Int64" Nullable="false" />
+    <Property Name="Item_Id" Type="Int64" Nullable="false" />
+    <Property Name="Order_Quantity" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Received_Quantity" Type="Decimal" Precision="20" Scale="4" />
+    <Property Name="Pur_Tra_Id" Type="Int64" Nullable="false" />
+    <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment_Info_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Payment_Id" Type="Int64" Nullable="false" />
+    <Property Name="Purchas_Id" Type="Int64" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tag_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Payment_Info" Relationship="INVENTORY_DBModel.fk_Paymenttra" FromRole="Payment_Info_Tra" ToRole="Payment_Info" />
+  </EntityType>
+  <Association Name="fk_Paymenttra">
+    <End Type="INVENTORY_DBModel.Payment_Info" Role="Payment_Info" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Payment_Info_Tra" Role="Payment_Info_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment_Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment_Info_Tra">
+        <PropertyRef Name="Payment_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Sales_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="Customer_Id" Type="Int64" Nullable="false" />
+    <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Sales_VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Is_Bill_Gen" Type="Boolean" Nullable="false" />
+    <Property Name="Fncl_Year_Id" Type="Int64" Nullable="false" />
+    <Property Name="Discount_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tax_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Total_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Receipt_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Bal_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Is_Refered" Type="Boolean" Nullable="false" />
+    <Property Name="Refered_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Refered_Id" Type="Int64" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_salesmaster" FromRole="Sales_Master" ToRole="Company_Master" />
+    <NavigationProperty Name="Sales_Return" Relationship="INVENTORY_DBModel.fk_sales_sales" FromRole="Sales_Master" ToRole="Sales_Return" />
+    <NavigationProperty Name="Sales_Master_Tra" Relationship="INVENTORY_DBModel.fk_sales_salestra" FromRole="Sales_Master" ToRole="Sales_Master_Tra" />
+  </EntityType>
+  <Association Name="fk_company_salesmaster">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Sales_Master" Role="Sales_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sales_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_sales_sales">
+    <End Type="INVENTORY_DBModel.Sales_Master" Role="Sales_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Sales_Return" Role="Sales_Return" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sales_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sales_Return">
+        <PropertyRef Name="Sales_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_sales_salestra">
+    <End Type="INVENTORY_DBModel.Sales_Master" Role="Sales_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Sales_Master_Tra" Role="Sales_Master_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sales_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sales_Master_Tra">
+        <PropertyRef Name="Sales_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Receipt_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="Company_Id" Type="Int64" Nullable="false" />
+    <Property Name="VC_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Customer_Id" Type="Int64" Nullable="false" />
+    <Property Name="Receipt_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tax_Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Account_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bank_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IFSC_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Receipt_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Cheque_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Bill_By_Bill" Type="Boolean" Nullable="false" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company_Master" Relationship="INVENTORY_DBModel.fk_company_receipt" FromRole="Receipt_Info" ToRole="Company_Master" />
+    <NavigationProperty Name="Receipt_Info_Tra" Relationship="INVENTORY_DBModel.fk_receipttra1" FromRole="Receipt_Info" ToRole="Receipt_Info_Tra" />
+  </EntityType>
+  <EntityType Name="Receipt_Info_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Receipt_Id" Type="Int64" Nullable="false" />
+    <Property Name="Sales_Id" Type="Int64" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tag_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Payment_Info" Relationship="INVENTORY_DBModel.fk_receipttra" FromRole="Receipt_Info_Tra" ToRole="Payment_Info" />
+    <NavigationProperty Name="Receipt_Info" Relationship="INVENTORY_DBModel.fk_receipttra1" FromRole="Receipt_Info_Tra" ToRole="Receipt_Info" />
+  </EntityType>
+  <Association Name="fk_company_receipt">
+    <End Type="INVENTORY_DBModel.Company_Master" Role="Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Receipt_Info" Role="Receipt_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Receipt_Info">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_receipttra">
+    <End Type="INVENTORY_DBModel.Payment_Info" Role="Payment_Info" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Receipt_Info_Tra" Role="Receipt_Info_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment_Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Receipt_Info_Tra">
+        <PropertyRef Name="Receipt_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Advance_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="User_Id" Type="Int64" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tag_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created_By" Type="Int64" Nullable="false" />
+    <Property Name="Modified_By" Type="Int64" Nullable="false" />
+    <Property Name="Created_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Ledger_Master" Relationship="INVENTORY_DBModel.fk_coustomer_adv" FromRole="Advance_Info" ToRole="Ledger_Master" />
+  </EntityType>
+  <Association Name="fk_coustomer_adv">
+    <End Type="INVENTORY_DBModel.Ledger_Master" Role="Ledger_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Advance_Info" Role="Advance_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ledger_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Advance_Info">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_receipttra1">
+    <End Type="INVENTORY_DBModel.Receipt_Info" Role="Receipt_Info" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="INVENTORY_DBModel.Receipt_Info_Tra" Role="Receipt_Info_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receipt_Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Receipt_Info_Tra">
+        <PropertyRef Name="Receipt_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="Pr_GetPendingBal_Result">
+    <Property Type="Decimal" Name="Balance" Nullable="false" Precision="19" />
+    <Property Type="Decimal" Name="Advance" Nullable="false" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="Pr_DashOrderQuats_Result">
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Total" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SP_ManageStock_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Item_Code" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="Min_Qty" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="Decimal" Name="Total_Qty" Nullable="false" Precision="20" Scale="4" />
+    <Property Type="Decimal" Name="Selling_Rate" Nullable="false" Precision="19" />
+    <Property Type="Decimal" Name="Purchase_Rate" Nullable="false" Precision="19" />
+    <Property Type="String" Name="ManageStock" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="12" />
+  </ComplexType>
+  <ComplexType Name="Pr_QuationList_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="Approved_By" Nullable="false" />
+    <Property Type="DateTime" Name="Quation_Date" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="Customer_Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="150" />
+    <Property Type="String" Name="Contact_No" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Alias" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Customer_Code" Nullable="false" MaxLength="50" />
+    <Property Type="Int64" Name="Fncl_Year_Id" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Is_Approved" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="Quation_Chalan_No" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Remarks" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Quation_Type" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Tag_Type" Nullable="false" MaxLength="20" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+    <Property Type="Decimal" Name="Discount" Nullable="false" Precision="19" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,139 @@
+﻿@model ViewModel.Common.FinancialYear
+
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(function () {
+        $('#FromPeriod').datepicker({ dateFormat: 'yy-mm-dd' });
+        $('#ToPeriod').datepicker({ dateFormat: 'yy-mm-dd' });
+    });
+
+    //$("#FromPeriod").blur(function ()
+    //{
+    //   // debugger;
+    //    if ($('#FromPeriod').val() > $('#ToPeriod').val()) {
+    //        alert("Period from not greater then To Period");
+    //        $('#FromPeriod').focus();
+    //    }
+
+    //});
+    //$("#ToPeriod").blur(function () {
+    //    if ($('#FromPeriod').val() > $('#ToPeriod').val()) {
+    //        alert("Period from not greater then To Period");
+    //        $('#ToPeriod').focus();
+    //    }
+    //});
+    //$('#ToPeriod').focusout(function () {
+    //    if( $('#FromPeriod').val() > $('#ToPeriod').val())
+    //    {
+    //        alert("Period from not greater then To Period");
+    //        $('#ToPeriod').focus();
+    //    }
+        
+    //});
+
+    function Fn_Validate()
+    {
+        if ($('#FromPeriod').val().length != 0)
+        {
+            if ($('#ToPeriod').val().length != 0)
+            {
+                if ($('#FromPeriod').val() > $('#ToPeriod').val()) {
+                    alert("Period from not greater then To Period");
+                    $('#ToPeriod').val('');
+                  //  $('#ToPeriod').focus();
+                    return false;
+                }
+                else
+                    return true;
+            }
+            else
+            {
+              //  $('#ToPeriod').focus();
+                return false;
+            }
+        }
+        else
+        {
+           // $('#FromPeriod').focus();
+            return false;
+        }
+    }
+</script>
+@using (Ajax.BeginForm("Create", "FinancialYear", new { area = "Masters" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new {@id="form1" }))
+{
+    @Html.ValidationSummary(true)
+
+
+    
+    
+    <div>
+
+     <div class="row">
+         <div class="col-lg-3">
+         </div>
+       <div class="col-lg-6">
+          <div class="panel panel-danger">
+
+              <div class="panel-heading" style="background-color: #C4538A;color:white"><span>Financial Year</span> </div>
+
+                    <div class="panel-body">
+
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                            <div class="editor-label">
+
+                                @Html.HiddenFor(x => x.Id)
+                                @Html.Label("Name")<span style="color:red">*</span>
+                           </div>
+                              
+                                @Html.TextBoxFor(Model => Model.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "60" })
+                                @Html.ValidationMessageFor(Model => Model.Name, null, new { @style = "color:red;" })
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                                @Html.Label("From Period")<span style="color:red">*</span>
+                                @Html.TextBoxFor(Model => Model.FromPeriod, new { @placeholder = "FromPeriod", @onchange = "Fn_Validate();", @class = "form-control", required = true, @readonly = "readonly" })
+                                @Html.ValidationMessageFor(Model => Model.FromPeriod, null, new { @style = "color:red;" })
+                                
+                            </div>
+
+                            <div class="col-md-12">
+                                @Html.Label("To Period")<span style="color:red">*</span>
+                                @Html.TextBoxFor(Model => Model.ToPeriod, new { @placeholder = "To Period", @onchange = "Fn_Validate();", @class = "form-control", required = true, @readonly = "readonly" })
+
+                                @Html.ValidationMessageFor(Model => Model.ToPeriod, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12">
+
+                                @Html.Label("Remarks")
+                                @Html.TextAreaFor(Model => Model.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.Remarks, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12 topmrgn5px">
+
+                                <button type="submit" class="btn btn-primary" onclick="fn_ValidateForm('form1');">Save </button>
+                                @Html.ActionLink("Cancel", "Index", "FinancialYear", new { @class = "btn btn-default" })
+                                
+                                
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+         <div class="col-lg-3">
+         </div>
+        </div>
+    </div>
+}
+

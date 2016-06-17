@@ -1,0 +1,103 @@
+﻿@model List<ViewModel.Transactions.StockMaster>
+@{
+    var grid = new WebGrid(Model, canPage: true, canSort: true, selectionFieldName: "selectedRow", rowsPerPage: 20, ajaxUpdateContainerId: "gridcontent");
+    grid.Pager(WebGridPagerModes.All);
+}
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+        <div class="row">
+
+            <div class="col-md-9">
+                <i class="fa fa-list"></i>
+                <span>Stock Master</span>
+
+
+            </div>
+
+            <div class="col-md-3">
+                @*@Ajax.ActionLink("New", "Create", "Tax", new { area = "Masters", Id = 0 }, new AjaxOptions
+                {
+
+                    UpdateTargetId = "content",
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                }, new { @Class = "btn btn-default btn-xs btn-flat hgt", })*@
+
+
+                <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                <input type="text" placeholder="Search Here" class="hgt" />
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-search"></button>
+                <button class="btn btn-default btn-xs btn-flat hgt fa fa-refresh"></button>
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <div class="panel-body" id="gridcontent">
+        <div class="row">
+            <div class="col-md-9" id="gridcontent">
+                @grid.GetHtml(tableStyle: "table table-striped table-bordered table-hover table-responsive topmrgn5px",
+                    columns: grid.Columns(grid.Column("Item_Code", "Code"),
+            grid.Column("Name", "Name"),
+            grid.Column("Alias_Name", "Alias Name"),
+             grid.Column("GroupName", "Group Name"),
+            grid.Column("CategoryName", "Category Name"),
+            grid.Column("Qty", "Quantity"),
+                                       grid.Column("UnitName", "Unit Name"),
+                                       grid.Column("Rate", "Purchase Rate")
+
+
+        ))
+
+
+
+
+
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading bg-aqua">
+                        <span>View Details</span>
+                    </div>
+                    <div class="panel-body" style="border:silver 1px;">
+
+                        <table class="table table-bordered table-striped">
+                            <tr><td colspan="2"><label>Stock Master Details</label></td></tr>
+                            <tr><td>Today Total Sales</td><td><span id="Customer_Code">17</span></td></tr>
+                            <tr><td>Today Total Purchase</td><td><span id="Pending_Order">32</span></td></tr>
+                            <tr><td>Take Quation</td><td><span id="Due_Amount"> 19</span></td></tr>
+                            <tr><td>Give</td><td><span id="Bal_Amount">36</span></td></tr>
+
+
+                        </table>
+
+                        <table class="table table-bordered table-striped">
+
+                            <tr><td colspan="2"><label>Item Details</label></td></tr>
+                            <tr>  <td><span>Item Code</span></td><td><span id="StockDetails_Item_Code">101</span></td> </tr>
+                            <tr>  <td><span>Min Qty</span></td><td><span id="StockDetails_Item_Date"> 20</span></td> </tr>
+                            <tr>  <td><span>Avialable Qty</span></td><td><span id="StockDetails_Available_Qty"> 50</span></td> </tr>
+                            <tr>  <td><span>Status</span></td><td><span id="StockDetails_Min_Qty">In Stock</span></td> </tr>
+
+                        </table>
+                        @*@if (Model.StockDetails.Image_Url != null)
+                    {
+                        <img src="@Model.StockDetails.Image_Url" class="img-responsive" style="max-height:120px;min-height:120px;" />
+                    }
+                    else
+                    {
+                        <img src="~/Themes/img/avatar5.png" class="img-responsive" style="max-height:120px;min-height:120px;" />
+                    }*@
+
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>

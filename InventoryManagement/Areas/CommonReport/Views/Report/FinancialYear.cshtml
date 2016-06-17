@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "FinancialYear";
+    Layout = ViewBag.layout;
+}
+
+<script>
+    function ddlFinancialYearReport() {
+
+        var Path = "@Url.Action("FinancialYearReport", "Report", new { area = "CommonReport" })?ReportType=" + $('#ddlFinancialYear').val()
+        window.open(Path);
+    }
+</script>
+<div align="right">
+    <br />
+    @Html.DropDownList("ddlFinancialYear", new SelectList(
+        new List<object> {
+            new {test="PDF",value="PDF"},
+            new {test="Excel",value="Excel"},
+            new {test="Word",value="Word"}
+        },
+   "test",
+   "value"
+   ), new { style = "width:100px;" })
+
+
+    <input type="button" onclick="ddlFinancialYearReport();" class="btn btn-xs btn-flat btn-primary " id="butDailySaleReport" value="Generate Reports" />
+</div>
+<div>
+    @Html.Action("FinancialYearList")
+</div>

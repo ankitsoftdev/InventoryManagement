@@ -1,0 +1,92 @@
+﻿@model ViewModel.Common.RegionInfo
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(function () {
+        $("#GoDown_Id").customselect();
+        $("#Under_Id").customselect();
+    });
+    </script>   
+@using (Ajax.BeginForm("Create", "Region", new { area = "Masters" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new { @id = "form0" }))
+{
+    @Html.ValidationSummary(true)
+
+
+
+
+    <div>
+
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-danger">
+
+                    <div class="panel-heading" style="background-color: #C4538A;color:white"><span>GoDown Region</span> </div>
+
+                    <div class="panel-body">
+
+
+                        <div class="row">
+
+
+
+                            <div class="col-md-12">
+
+                                @Html.Label("Name")<span style="color:red">*</span>
+                                @Html.HiddenFor(x => x.Id)
+                                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "50" })
+                                @Html.ValidationMessageFor(m => m.Name, null, new {  @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Alias Name")
+                                @Html.TextBoxFor(m => m.Alias_Name, new { @placeholder = "Alias Name", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Alias_Name, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("GoDown")<span style="color:red">*</span>
+                                @Html.DropDownListFor(m => m.GoDown_Id, new SelectList(Model.GoDownList, "Id", "Name", Model.GoDown_Id), "Select GoDown", new { @class = "custom-select form-control" })
+                               
+
+                                @Html.ValidationMessageFor(m => m.GoDown_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Under")
+                                @Html.DropDownListFor(m => m.Under_Id, new SelectList(Model.UnderList, "Id", "Name", Model.Under_Id), "Select Under", new { @class = "custom-select form-control"})
+                                @Html.ValidationMessageFor(m => m.Under_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Remarks")
+                                @Html.TextAreaFor(m => m.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+
+                                @Html.ValidationMessageFor(m => m.Remarks, null, new { @style = "color:red;" })
+
+                            </div>
+
+                            <div class="col-md-12 topmrgn5px">
+                                <button type="submit" class="fa fa-edit btn btn-primary" onclick="fn_validateform('form0');">Save </button>
+                                @Html.ActionLink("Cancel", "Index", "Region", new { @class = "btn btn-default" })
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+            </div>
+        </div>
+    </div>
+}

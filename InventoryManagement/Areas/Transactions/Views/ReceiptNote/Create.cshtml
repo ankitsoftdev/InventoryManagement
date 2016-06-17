@@ -1,0 +1,174 @@
+﻿@model ViewModel.Transactions.ReceiptNoteInfo
+@using (Ajax.BeginForm("Create", "ReceiptNote", new { area = "Transactions" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new { @id = "form1" }))
+{
+    @Html.ValidationSummary(true)
+<div class="row">
+
+    <div class="col-lg-9">
+        <div class="panel">
+
+            <div class="panel-heading bg-margenta"><span>Receipt Note</span> </div>
+
+            <div class="panel-body">
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="editor-label">
+                            @Html.Label("Receipt Note No")
+                            @Html.HiddenFor(x => x.Id)
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(x => x.Receipt_Note_No, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(x => Model.Receipt_Note_No, null, new { @style = "color:red;" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="editor-label">
+                            @Html.Label("Supplier Name")
+                            
+                            <div class="editor-field">
+                                @Html.DropDownListFor(x => x.Supplier_Id, new SelectList(Model.SupplierList, "Id", "Name", Model.Supplier_Id), "Supplier Name", new { @required = true, @class = "custom-select form-control" })
+                                @Html.ValidationMessageFor(x => x.Supplier_Id, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="editor-label">
+                            @Html.Label("Purchase Order No")
+                            @Html.HiddenFor(x => x.Purchase_Order_No);
+                            <div class="editor-field">
+                                @Html.DropDownListFor(x => x.Purchase_Order_Id, new SelectList(Model.PurchaseOrderList, "Id", "Name", Model.Purchase_Order_Id), "Select Order No", new { @required = true, @class = "custom-select form-control" })
+                                @Html.ValidationMessageFor(x => x.Purchase_Order_Id, null, new { @style = "color:red;" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="editor-label">
+                            @Html.Label("Receipt Date")
+                        </div>
+                        <div class="editor-field">
+
+                            @Html.TextBoxFor(x => x.Receipt_Date, new { @placeholder = "yyyy-mm-dd", @class = "form-control", required = true })
+                            @Html.ValidationMessageFor(x => x.Receipt_Date, null, new { @style = "color:red;" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <div class="editor-label">
+                            @Html.Label("Remarks")
+                        </div>
+                        <div class="editor-field">
+
+                            @Html.TextAreaFor(x => Model.Remarks, new { @placeholder = "Remarks", @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row topmrgn5px">
+                    <div class="col-md-12" id="ReceiptNoteDetailsList">
+                        @{
+                            Html.RenderAction("ReceiptNoteDetailsList", "ReceiptNote", new { Id = Model.Id });}
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                     
+                        <button type="submit" class="btn btn-primary" onclick="fn_ValidateForm('form1');">Save </button>
+                        @Html.ActionLink("Cancel", "Index", "ReceiptNote", new { @class = "btn btn-default" })
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-3" id="MasterDetails">
+
+      @{Html.RenderAction("MasterDetails", "ReceiptNote", new { SuuplierId = 0 });}
+
+    </div>
+</div>
+
+}
+
+<script>
+
+    $(function () {
+        $('#Receipt_Date').datepicker({ dateFormat: 'yy-mm-dd' });
+
+        $('#Supplier_Id').change(function () {
+            
+         //   $("#Purchase_Order_Id").empty();
+            BindPurcOrder();
+        });
+
+        $('#Purchase_Order_Id').change(function () {
+          
+            if ($('#Purchase_Order_Id').val() > 0) {
+
+                $('#Purchase_Order_No').val($('#Purchase_Order_Id option:selected').text());
+
+                BindSupplierDetails();
+                BindReceiptNoteDetails();
+
+            }
+
+
+         
+        });
+    });
+
+    function BindPurcOrder()
+    {
+        var supid = $('#Supplier_Id option:selected').val();
+      
+        $("#Purchase_Order_Id").empty();
+        $.getJSON('@Url.Action("BindPurchaseOrderNO", "ReceiptNote")', { SupplierId: supid }, function (data) {
+            $("#Purchase_Order_Id").empty();
+          
+            $('#Purchase_Order_Id').append("<option>Select Purchase No</option>");
+
+            for (var i = 0; i <= data.length; i++)
+            {
+                $('#Purchase_Order_Id').append("<option value="+data[i].Id+">"+data[i].Name+"<option>");
+            }
+
+        });
+    }
+
+    function BindSupplierDetails()
+    {
+        var supid = $('#Supplier_Id option:selected').val();
+        var orderid = $('#Purchase_Order_Id option:selected').val();
+        $.get('@Url.Action("MasterDetails", "ReceiptNote")', { SuuplierId: supid, OrderId: orderid }, function (data) {
+
+            
+            $('#MasterDetails').html(data);
+           
+            
+        });
+
+    }
+    function BindReceiptNoteDetails() {
+        var supid = $('#Supplier_Id option:selected').val();
+        var orderid = $('#Purchase_Order_Id option:selected').val();
+        $.get('@Url.Action("ReceiptNoteDetailsList", "ReceiptNote")', { SuuplierId: supid, OrderId: orderid }, function (data) {
+
+
+            $('#ReceiptNoteDetailsList').html(data);
+
+        });
+
+    }
+</script>

@@ -1,0 +1,39 @@
+﻿@{
+    if (ViewBag.Tagname == "Customers")
+    {
+        ViewBag.Title = "Customers Details";
+    }
+    else
+    {
+        ViewBag.Title = "Supplier Details";
+    }
+    Layout = ViewBag.layout;
+}
+
+
+<script>
+    function SupplierInfoReport() {
+
+        var Path = "@Url.Action("SupplierReport", "Report", new { area = "CommonReport" })?ReportType=" + $('#ddlSupplierinfo').val() + "&TagName="+'@ViewBag.Tagname'
+        window.open(Path);
+    }
+</script>
+<div align="right">
+    <br />
+    @Html.DropDownList("ddlSupplierinfo", new SelectList(
+        new List<object> {
+            new {test="PDF",value="PDF"},
+            new {test="Excel",value="Excel"},
+            new {test="Word",value="Word"}
+        },
+   "test",
+   "value"
+   ), new { style = "width:100px;" })
+
+
+    <input type="button" onclick="SupplierInfoReport();" class="btn btn-xs btn-flat btn-primary " id="butDailySaleReport" value="Generate Reports" />
+</div>
+<div>
+    @Html.Action("SupplierList", new { TagName = @ViewBag.TagName })
+</div>
+

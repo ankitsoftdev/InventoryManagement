@@ -1,0 +1,140 @@
+﻿@model List<ViewModel.Transactions.ReceiptInfo>
+@{
+    var grid = new WebGrid(Model, canPage: true, canSort: true, rowsPerPage: 20,
+    selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+    grid.Pager(WebGridPagerModes.All);
+    int row = 0;
+}
+
+<div class="panel">
+
+    <div class="panel-heading  bg-margenta">
+
+        <div class="row">
+
+            <div class="col-md-9">
+                <span>@ViewBag.Tag &nbsp;&nbsp; Receipt List</span>
+            </div>
+
+            <div class="col-md-3">
+                @Ajax.ActionLink("New", "Create", "Receipt", new { area = "Transactions", Tag = ViewBag.Tag, Id = 0 }, new AjaxOptions
+                            {
+                                LoadingElementId = "Loader",
+                                UpdateTargetId = "content",
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                            }, new { @Class = "btn btn-default btn-xs btn-flat hgt", })
+
+                <select class="hgt"><option>Tools</option><option>Import</option><option>Export</option></select>
+                <input type="text" placeholder="Search Here" class="hgt" />
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8" id="gridcontent" style="min-height:450px;border:solid silver 1px;">
+                @grid.GetHtml(tableStyle: "gTable table table-responsive",
+
+             columns: grid.Columns(
+             grid.Column("S.No", format: item => item.WebGrid.Rows.IndexOf(item) + 1),
+
+                                                 grid.Column("Date", format: (item) => item.Receipt_Date.ToString("dd-MM-yyyy")),
+                                                 grid.Column(columnName: "VC_No", header: "Bill No", format: @<text> <input type="hidden" id="Id" name="Id" value='@item.Id' />@item.VC_No</text>),
+             //grid.Column("Name", "Supplier Name"),
+             //grid.Column("Address", "Address"),
+             //grid.Column("Contact_No", "Contact No"),
+                             //grid.Column("Email_Id", "Email Id"),
+             //    grid.Column(columnName: "Amount", header: "Amount", format: @<i class="fa fa-rupee">&nbsp;&nbsp;@item.Amount</i>),
+                       grid.Column(columnName: "Amount", header: "Amount", format: @<i class="fa fa-rupee">&nbsp;&nbsp; @item.Amount</i>),
+
+                             grid.Column(header: "Action", format: (item) => new HtmlString(
+
+                                                          @Ajax.ActionLink(" ", "Create", "Receipt", new { area = "Transactions", Tag = "CUSTOMER", Id = item.Id, }, new AjaxOptions
+                                          {
+                                              UpdateTargetId = "content",
+                                              HttpMethod = "GET",
+                                              InsertionMode = InsertionMode.Replace,
+                                          }, new { @Class = "btn btn-default fa fa-pencil", }).ToString()
+                                          ))
+
+                       //                         @Ajax.ActionLink("Payment Details", "PaymentDetails", "Payment", new { area = "Transactions", UserId = item.Id, Tag = "SUPPLIER" }, new AjaxOptions
+                        //                         {
+
+                       //                             UpdateTargetId = "content",
+                        //                             HttpMethod = "GET",
+                        //                             InsertionMode = InsertionMode.Replace,
+                        //                         }, new { @Class = "btn btn-xs  btn-default pull-left btn-flat", }).ToString()
+
+                       //                   ))
+
+
+                       )
+                      )
+            </div>
+            <div class="col-md-4" id="ViewReceipt">
+
+                @{Html.RenderAction("ViewReceipt", "Receipt", new { @area = "Transactions", Id = -1 });}
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    $('table tbody tr').click(function () {
+
+        var selectedId = $(this).find("input[type='hidden']").val();
+
+
+        $.ajax({
+            url: '@Url.Action("ViewReceipt", "Receipt")',
+            data: { 'Id': selectedId },
+            type: "get",
+            cache: false,
+            success: function (savingStatus) {
+
+                $('#ViewReceipt').html(savingStatus);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+            }
+        });
+    });
+</script>
+<style>
+    .gTable tr:hover {
+        background-color: skyblue;
+    }
+    /*.gTable tr:nth-child(1) {
+        text-align: left;
+
+    }*/
+
+    .gTable tr :nth-child(4) {
+        text-align: right;
+    }
+
+    .amount {
+        text-align: right;
+    }
+</style>
+
+
+
+
+

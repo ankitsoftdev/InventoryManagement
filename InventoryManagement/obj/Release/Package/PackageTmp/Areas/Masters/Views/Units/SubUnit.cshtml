@@ -1,0 +1,53 @@
+﻿@model ViewModel.Common.Unit
+<div class="col-md-12" id="divSubroot">
+    <table id="tblItem" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Alias Name</th>
+                <th colspan="2">Ratio</th>
+                @*<th>Ratio2</th>*@
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                for (int i = 0; i < Model.SubUnitList.Count;i++ )
+                { 
+                <tr>
+                    <td>
+
+                        @Html.TextBoxFor(x => x.SubUnitList[i].Name, new {required=true, style = "width:100%" })
+                      
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.SubUnitList[i].Alias_Name, new {  @style = "width:100%" })
+                      
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.SubUnitList[i].Ratio1, new { required = true, @value = "1", @onkeyup = "fn_CheckNumber(this);", @class = "Number", @style = "width:47%;" })/
+                      
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.SubUnitList[i].Ratio2, new { required = true, @onkeyup = "fn_CheckNumber(this);", @style = "width:47%", @class = "Number" })
+                    </td>
+                    <td>
+                        @Html.HiddenFor(x => x.SubUnitList[i].Id)
+                      
+                        <a href="#" id="btnItem" name="btnItem" onclick="fn_Addrow(this);" class="add" title="Add">Add</a>
+                        <a href="#" id="d" name="Delete" onclick="fn_Addrow(this);" title="Remove" class="delete">Delete</a>
+
+                    </td>
+                    @*<td>
+                        <a href="#" id="d" name="Delete" onclick="fn_Addrow(this);" title="Remove" class="delete btn-sm btn vd_btn vd_bg-red fa fa-times"></a>
+                    </td>*@
+                </tr>
+            }
+            }
+        </tbody>
+    </table>
+
+</div>
+<div class="col-md-12">
+    <span id="spAlert" style="color:red;"></span>
+</div>

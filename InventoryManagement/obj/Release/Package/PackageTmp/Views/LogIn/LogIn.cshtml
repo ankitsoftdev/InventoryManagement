@@ -1,0 +1,45 @@
+﻿@*@model HotelManagementErp_Main.Models.Login*@
+@{
+    ViewBag.Title = "Welcome";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@using (Html.BeginForm("LogIn", "LogIn", FormMethod.Post))
+{
+    @*<input type="hidden" name="Section" value="@ViewBag.Section" />*@
+    <div style="background-color:#1b1a1a;height:100%;">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <fieldset>
+                                <div class="form-group">
+
+                                    <input class="form-control" placeholder="Code" name="code" type="number" autofocus required>
+                                </div>
+                                <div class="form-group">
+
+                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" value="" required>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+                                <div class="success" style="text-align:center;">
+                                    <button type="submit" class="btn btn-outline btn-primary btn-lg btn-block">Log In</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

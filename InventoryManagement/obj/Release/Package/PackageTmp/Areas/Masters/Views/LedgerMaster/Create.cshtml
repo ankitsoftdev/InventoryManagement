@@ -1,0 +1,203 @@
+﻿@model ViewModel.Common.LedgerMasterInfo
+
+
+@*<link href="~/Themes/Content/jquery-ui-1.9.0.custom.css" rel="stylesheet" />
+    <script src="~/Themes/Scripts/jquery-ui-1.9.0.min.js"></script>*@
+
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<script>
+    $(function ()
+    {
+        $("#Group_Id").customselect();
+        $("#Country_Id").customselect();
+
+        $('#State_Id').customselect();
+        $("#City_Id").customselect();
+
+        //AutoComplete();
+        $("#Country_Id").change(function () {
+
+            var CountryId = $("#Country_Id").val();
+          
+            $.getJSON("@Url.Action("ddlBindState", "LedgerMaster")", { CountryId: $("#Country_Id").val() }, function (data) {
+
+            
+                $('#ddlstate').empty();
+              
+                for (var i = 0; i < data.length; i++) {
+                    //$("#State_Id").append("<option value='" + data[i].Id + "' Text='" + data[i].Name + "'></option>");
+                    $('#ddlstate').append('<option value=' + data[i].Id + '>' + data[i].Name + '</option>');
+                }
+              
+            });
+        });
+    
+
+
+        $("#ddlstate").change(function () {
+            $.getJSON("@Url.Action("ddlBindCity", "LedgerMaster")", { StateId: $("#ddlstate").val() }, function (data) {
+                var item;
+
+                $("#ddlcity").empty();
+
+                var items = '<option>City</option>';
+                $.each(data, function (i, _city) {
+                    items += "<option value='" + _city.Id + "'>" + _city.Name + "</option>";
+                });
+                $('#ddlcity').html(items);
+            });
+        });
+
+        $(".decimal").on("keypress keyup blur", function (event) {
+
+
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+    });
+
+
+</script>
+@using (Ajax.BeginForm("Create", "LedgerMaster", new { area = "Masters" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new { @id = "form2" }))
+{
+    @Html.ValidationSummary(true)
+
+
+
+
+    <div>
+
+        <div class="row">
+            @*<div class="col-lg-3">
+            </div>*@
+            <div class="col-lg-9">
+                <div class="panel panel-danger">
+
+                    <div class="panel-heading" style="background-color: #C4538A;color:white"><span>Ledger Master</span> </div>
+
+                    <div class="panel-body">
+
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="editor-label">
+
+                                    @Html.Label("Name")<span style="color:red">*</span>
+                                    @Html.HiddenFor(x => x.Id)
+                                    @*@Html.HiddenFor(x=>x.Code)*@
+                                </div>
+
+                                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "50" })
+                                @Html.ValidationMessageFor(m => m.Name, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-6">
+
+                                @Html.Label("Alias Name")
+                                @Html.TextBoxFor(m => m.Alias_Name, new { @placeholder = "Alias Name", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Alias_Name, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Group")
+                                @Html.DropDownListFor(m => m.Group_Id, new SelectList(Model.GroupList, "Id", "Name", Model.Group_Id), "Select Group", new { required = true, @class = "custom-select form-control" })
+
+                                @Html.ValidationMessageFor(m => m.Group_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Opeaning Balance")
+                                @Html.TextBoxFor(m => m.Opeaning_Bal, new { @placeholder = "Opeaning Bal", @class = "form-control decimal" })
+
+                                @Html.ValidationMessageFor(m => m.Opeaning_Bal, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Naration")
+                                @Html.TextAreaFor(m => m.Remarks, new { @placeholder = "Naration", @class = "form-control",@maxlength="200" })
+
+                                @Html.ValidationMessageFor(m => m.Remarks, null, new { @style = "color:red;" })
+                            </div>
+                        
+                            @*<div class="col-md-6">
+
+                                @Html.Label("Address")
+                                @Html.TextAreaFor(x => x.Address, new { id = "txtaddress", required = true, maxlength = "300", minlength = "2", @placeholder = "Address", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Address, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-6">
+
+                                @Html.Label("Country")@*<span style="color:red">*</span>
+                                @Html.DropDownListFor(x => x.Country_Id, new SelectList(Model.CountryList, "Id", "Name", Model.Country_Id), "Select Country", new { @class = "custom-select form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Country_Id, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("State")@*<span style="color:red">*</span>
+                               
+                                @Html.DropDownListFor(x => x.State_Id, new SelectList(Model.StateList, "Id", "Name", Model.State_Id), "Select State", new { @id = "ddlstate", @class = "custom-select form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.State_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("City")
+                             
+                                @Html.DropDownListFor(x => x.City_Id, new SelectList(Model.CityList, "Id", "Name", Model.City_Id), "Select City", new { @id = "ddlcity", @class = "custom-select form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.City_Id, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Pin Code")@*<span style="color:red">*</span>
+                                @Html.TextBoxFor(x => x.Pin_Code, new { id = "txtPin_Code", maxlength = "6", minlength = "2", @placeholder = "Pin Code", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Pin_Code, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Mobile No")@*<span style="color:red">*</span>
+                                @Html.TextBoxFor(x => x.Contact_No, new { id = "txtMobile", @placeholder = "Mobile", maxlength = "10", minlength = "10", @class = "form-control", required = true })
+                                @Html.ValidationMessageFor(x => x.Contact_No, null, new { @style = "color:red;" })
+
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Email Id")@*<span style="color:red">*</span>
+                                @Html.TextBoxFor(x => x.Email_Id, new { id = "txtEmail_Id", maxlength = "100", required = true, @placeholder = "Email Id", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Email_Id, null, new { @style = "color:red;" })
+
+                            </div>
+
+                            <div class="col-md-6">
+                                @Html.Label("Pan No")
+                                @Html.TextBoxFor(x => x.Pan_No, new { id = "txtPANNumber", required = true, maxlength = "30", minlength = "6", @placeholder = "Pan No", @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.Pan_No, null, new { @style = "color:red;" })
+
+                            </div>*@
+
+                        </div>
+
+                                <div class="col-md-12 topmrgn5px">
+
+                                    <button type="submit" class="btn btn-primary" onclick="fn_ValidateForm('form2');">Save </button>
+                                    @Html.ActionLink("Cancel", "Index", "LedgerMaster", new { @class = "btn btn-default" })
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+            <div class="col-lg-3">
+            </div>
+        </div>
+    </div>
+}
+

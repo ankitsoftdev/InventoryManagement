@@ -1,0 +1,685 @@
+﻿@model ViewModel.Ledger.Purchase_Tra
+@*<table>
+        <tr>
+            <td>
+                <a href="#" id="btnAddTax" name="btnAddTax" onclick="fn_Show(1);" class="pull-right">Tax</a>
+            </td>
+            <td>&nbsp;&nbsp;</td>
+            <td>
+                <a href="#" id="btnAddDiscount" name="btnAddDiscount" onclick="fn_Show(2);" class="pull-right">Discount</a>
+            </td>
+        </tr>
+    </table>*@
+
+<table class="table table-striped table-bordered table-hover" id="tableadditem">
+    <thead>
+        <tr>
+            <th>
+                <label> Item Name</label>
+            </th>
+
+            <th>
+                <label>GoDown/Location</label>
+            </th>
+            <th>
+                <label>Quantity</label>
+            </th>
+
+            <th>
+                <label>Rate</label>
+            </th>
+            <th>
+                <label>Unit</label>
+            </th>
+            <th>
+                <label>Total Amount</label>
+            </th>
+
+            <th>
+                <label>Action</label>
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DropDownList("ItemId", new SelectList(Model.ledger_common.itemddlbind, "Id", "Name"), "Select Item", new { @class = "form-control", @onchange = "GetUnitName(this);" })
+
+            </td>
+            <td>
+                @Html.DropDownList("GoDown_Id", new SelectList(Model.ledger_common.GoDownList, "Id", "Name"), "Select Item", new { @class = "form-control" })
+
+
+            </td>
+            <td>
+                @Html.TextBox("Quntity", null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @onkeyup = "myFunction(this);", @onfocusout = "fn_GetTotalAmount(this);", style = "text-align:right;" })
+
+            </td>
+            <td>
+                @Html.TextBox("Item_Rate", null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @onkeyup = "myFunction(this);", @onfocusout = "fn_GetTotalAmount(this);", style = "text-align:right;"  })
+
+            </td>
+            <td>
+                @Html.TextBox("Unit_Name", null, new { @readonly = "readonly", @class = "form-control", minlength = "2", maxlength = "100", style = "text-align:right;" })
+                @*@Html.HiddenFor(x=>x.listpurchase_tra[i].Unit_Id)*@
+                @*@Html.DropDownListFor(x => x.listpurchase_tra[i].Unit_Id, new SelectList(Model.UnitList, "Id", "Name", Model.listpurchase_tra[i].Unit_Id), new { @class = "form-control", required = true })*@
+            </td>
+            <td>
+                @Html.TextBox("Total_Amount", null, new { @class = "form-control", minlength = "1", maxlength = "15", @readonly = "readonly", style = "text-align:right;" })
+
+            </td>
+            <td>
+                @*<a href="#" id="btnItem" name="btnItem" onclick="fn_Addrow(this); CalculateTax();">Add</a>*@
+                <a href="#" id="btnItem" name="btnItem" onclick="fn_Addrow2(this, $(this).parent().parent().find('td:eq(0) select option:selected').val().split('_')[0]); CalculateTax();">Add</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+  
+
+<div id="itemsDiv">
+     
+   @{ 
+     int indx=0;
+     int Sno=1;
+     if (Model.Id > 0 || Model.Id==0)
+     {
+       foreach (var item in Model.listpurchase_tra.Select(m => new {  m.ItemName ,m.Item_Id,m.Unit_Name }).Distinct())
+       {
+           <details>
+            <summary>
+                <div class="panel panel-danger">
+                    <div class="panel--heading">
+                        <div class="col-lg-8"><b>@item.ItemName</b></div>
+                        <div class="col-lg-2"><span id="spanQntity_@item.Item_Id"> @Model.listpurchase_tra.Where(X=>X.ItemName==item.ItemName).Sum(P=>P.Qty).ToString("#."+new string('0',0))</span>  @item.Unit_Name</div>
+                        <div class="col-lg-2 pull-right"><span id="spntotal_@item.Item_Id">Rs. @Model.listpurchase_tra.Where(x=>x.ItemName==item.ItemName).Sum(m=>m.Rate * m.Qty).ToString()</span></div>
+                    </div>
+                </div>
+            </summary>
+            <table class="table tableIndexing" id="tblItem_@item.Item_Id">
+                <thead><tr><th>S.No</th><th>Godown</th><th>Product Code</th><th>Serial No</th><th>Quantity</th><th>Rate</th><th></th></tr></thead>
+                <tbody>
+                    
+                  @foreach (var m in Model.listpurchase_tra.Where(x=>x.ItemName==item.ItemName).ToList() )
+	               {
+                       
+                        @*<tr> 
+                            <td>@Html.HiddenFor(x => Model.listpurchase_tra[indx].Item_Id) @Sno</td>
+                            <td>@Html.TextBoxFor(x=>Model.listpurchase_tra[indx].GoDownName,new{@readonly=true}) @Html.HiddenFor(x => Model.listpurchase_tra[indx].GoDownId)</td>
+                            
+                            <td>@Html.TextBoxFor(x=>Model.listpurchase_tra[indx].ProductCode,new{@readonly=true})</td>
+                            <td>@Html.TextBoxFor(x=>Model.listpurchase_tra[indx].SerialNo)</td>
+                            <td>@Html.TextBoxFor(x => Model.listpurchase_tra[indx].Qty, new { @readonly = true, @style = "text-align:right;" })</td>
+                            <td>@Html.TextBoxFor(x => Model.listpurchase_tra[indx].Rate, new { @readonly = true, @style = "text-align:right;" })</td>
+                            <td><input type="button" value="Delete" id="btnDeleteRow_' + indx + '" onclick="deleterow(this); CalculateTax();" class="btn btn-danger" /></td>
+                        </tr>*@
+                      <tr>
+                          <td><input type="hidden" name="purchase_tra.listpurchase_tra[@indx].Item_Id" value="@m.Item_Id" /><span>@Sno</span></td>
+                          @*<td><input type="text" name="purchase_tra.listpurchase_tra[@indx].GoDownName" value="@m.GoDownName" readonly="readonly" /><input type="hidden" name="purchase_tra.listpurchase_tra[@indx].GoDownId" value="@m.GoDownId" /></td>*@
+                          <td> @Html.DropDownListFor(x => Model.listpurchase_tra[indx].GoDownId, new SelectList(Model.ledger_common.GoDownList, "Id", "Name", Model.listpurchase_tra[indx].GoDownId) )</td>
+                          <td><input type="text" name="purchase_tra.listpurchase_tra[@indx].ProductCode" value="@m.ProductCode" readonly="readonly" /></td>
+                          <td><input type="text" name="purchase_tra.listpurchase_tra[@indx].SerialNo" readonly="readonly" value="@m.SerialNo" /></td>
+                          <td><input type="text" name="purchase_tra.listpurchase_tra[@indx].Qty" readonly= "readonly" style="text-align:right;" value="@m.Qty" /></td>
+                          <td><input type="text" name="purchase_tra.listpurchase_tra[@indx].Rate" readonly="readonly" style="text-align:right;" value="@m.Rate" /></td>
+                          <td> <input type="button" value="Delete" id="btnDeleteRow_' + indx + '" onclick="deleterow(this); CalculateTax();" class="btn btn-danger" /></td>
+                      </tr>
+                      
+                         indx++;
+                         Sno++;
+                 } 
+                    @{Sno = 1; }
+                </tbody>
+            </table>
+        </details>
+       }    
+     }
+    }
+ 
+     
+</div>
+<div class="row">
+    <div class="col-md-8 offset">
+
+    </div>
+    <div class="col-md-4">
+        <div class="" align="center">
+
+            <label> Grand Total :- &nbsp; &nbsp; &nbsp;</label>
+            <span id="GrTotal" style="font-weight:bold;">
+
+                @Html.DisplayFor(x => x.Grand_Total)
+            </span>
+            @Html.HiddenFor(x => Model.Grand_Total)
+
+        </div>
+    </div>
+</div>
+
+
+<div>
+    @*@{Html.RenderAction("TaxDeductionDetails", "Purchase", new { area = "Transactions",Id=Model.Id });}*@
+    @*@{Html.RenderAction("TaxDeductionDetails", "Purchase", new { area = "Transactions", ChallanNo = ViewBag.ChalanNo,Model});}*@
+    @*@{Html.RenderPartial("TaxDeductionDetails", Model.taxdetails);}*@
+    @Html.Partial("TaxDeductionDetails", Model.taxdetails, new ViewDataDictionary
+                            {
+                                TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "purchase_tra.taxdetails" }
+                            })
+</div>
+
+
+<script>
+    $(function () {
+        $('#purchase_tra_Total_Amount').val('0'); 
+    })
+
+    var maxid;
+    
+    function GetUnitName(obj) {
+        var tr = $(obj).parent().parent();
+        var ItemId = tr.find('td:eq(0) select').val().split('_')[0];
+        //if (ItemId != "") {
+        $.getJSON("@Url.Action("GetUnitName", "Purchase")", { Id: ItemId }, function (data) {
+            
+            tr.find('td:eq(4) input[type=text]').val(data[0].UnitName == "" ? "" : data[0].UnitName)
+            tr.find('td:eq(5) input').val(data[0].Amount == null ? 0 : data[0].Amount);
+        });
+
+        //}
+        //else {
+        //    tr.find('td:eq(4) input[type=text]').val('')
+        //    tr.find('td:eq(5) input').val('00.00');
+        //}
+    }
+    function fn_GetGrandTotalAmount(obj) {
+
+        var tr = $(obj).parent().parent();
+        var total = 0.00;
+        var TotalQty = 0.00
+        var t = 0.00;
+        //  debugger;
+
+        //$('#tblItem tbody tr').each(function (index, item) {
+        //    var st = $(this).find('#listpurchase_tra_' + index + '__Status').val();
+        //    if (st == 'True') {
+        //        var tm = $(this).find('td:eq(4) input[type=text]').val();
+        //        t = parseFloat(t) + parseFloat(tm);
+        //    }
+
+        //});
+
+        $('#tblItem tbody tr').each(function (i, item1) {
+
+
+            // alert(('#listpurchase_tra[' + 0 + '].Status').val());
+            if ($(item1).find('#listpurchase_tra[' + i + '].Status').val() == 'True' || $(item1).find('#listpurchase_tra[' + i + '].Status').val() == 'true') {
+
+                // var tm = $(item1).find('#listpurchase_tra_' + i + '__Total_Amount').val();
+                // var qt = $(item1).find('#listpurchase_tra_' + i + '__Qty').val();
+
+                // total = parseFloat(total) + parseFloat(tm);
+
+                //alert(total);
+                // TotalQty = parseFloat(TotalQty) + parseFloat(qt);
+                //alert(total + ':' + TotalQty);
+
+                //var    Tqt = $(item1).find('td:eq(1) input[type=text]').val()
+                //TotalQty = parseFloat(TotalQty) + parseFloat(Tqt);
+
+
+                //var perrowatotalamout = $(item1).find('td:eq(4) input[type=text]').val();
+                //total = parseFloat(total) + parseFloat(perrowatotalamout);
+                var perrowatotalamout = $(item1).find('td:eq(5) input[type=text]').val();
+                total = parseFloat(total) + parseFloat(perrowatotalamout);
+            }
+            var perrowatotalamout = $(item1).find('td:eq(5) input[type=text]').val();
+            total = parseFloat(total) + parseFloat(perrowatotalamout);
+        });
+        // alert('amt' + total + 'qt' + TotalQty);
+        //$('#GrQty').text(TotalQty);
+        //$('#GrTotal').text(total != isNaN ? total : 0.00);
+        //$('#purchase_tra.Grand_Total').val(total != isNaN ? total : 0.0);
+
+    }
+
+    function fn_GetTotalAmount(obj) {
+        var tr = $(obj).parent().parent();
+        var qty = tr.find('td:eq(2) input[type=text]').val();
+        // alert(qty);
+        var amount = tr.find('td:eq(3) input[type=text]').val();
+        // alert(qty + "" + amount);
+        
+        tr.find('td:eq(5) input[type=text]').val(qty * amount);
+        fn_GetGrandTotalAmount(obj);
+    }
+
+    function CalculateTax(item) {
+        //  alert($('#'+item).html());
+        var totaTax = 0;
+        var amnt = 0;
+        var tax = 0;
+        var taxCode = '';
+        var taxType = '';
+        var i = 0;
+        var totalAmount = 0;
+        var calculateAmount = 0;
+        var DeductionAmount = 0;
+        var AddtionAmount = 0;
+        $('#TaxDetails tbody tr').each(function (data) {
+            amnt = $('#GrTotal').html();
+            if ($('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select option:selected').text() != 'Select Tax') {
+
+                taxType = $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select').val().split('_')[1];
+                tax = parseFloat($('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select').val().split('_')[3]);
+                if (item == "txtchange") {
+                    tax = parseFloat($('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(1) input').val());
+
+                }
+                taxCode = $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(0) select').val().split('_')[2];
+
+                calculateAmount = taxCode == 'PERCENT' ? ((parseFloat(amnt) * tax) / 100) : tax;
+                if (taxType == 'DEDUCTION') {
+
+                    //DeductionAmount += taxCode == 'PERCENT' ? parseFloat(amnt - (parseFloat(amnt) * tax) / 100) : parseFloat(parseFloat(amnt) - parseFloat(tax));
+                    DeductionAmount += taxCode == 'PERCENT' ? (parseFloat(amnt) * tax) / 100 : parseFloat(tax);
+
+                }
+                else {
+                    //   alert("Tax = " + tax + " Amount = " + amnt)
+                    //AddtionAmount += taxCode == 'PERCENT' ? parseFloat(parseFloat(amnt) * tax / 100) : parseFloat(parseFloat(amnt) + parseFloat(tax));
+                    AddtionAmount += taxCode == 'PERCENT' ? parseFloat(amnt) * tax / 100 : parseFloat(tax);
+                }
+
+
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(1) input[type=text]').val(tax);
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(2) input').val(calculateAmount);
+                totaTax += calculateAmount;
+
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(1) input').val(tax);
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(2) input').val(calculateAmount);
+            }
+            else {
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(1) input[type=text]').val(0);
+                $('#TaxDetails tbody tr:eq(' + i + ')').find('td:eq(2) input').val(0);
+            }
+            i++;
+        })
+
+        totalAmount = parseFloat((amnt - DeductionAmount)) + parseFloat(AddtionAmount);
+        console.log(JSON.stringify("AMount =" + amnt + " DEd = " + DeductionAmount + " AddAMnt = " + AddtionAmount + " Total = " + totalAmount))
+        $('#Discount').val(totalAmount);
+        $('#Discount_Amount').html(totalAmount);
+
+        // $('#Grandtotl').html(parseFloat(parseFloat($('#Grand_Total').val()) + totaTax))
+    }
+
+    $('#purchase_tra_ItemId').change(function () {
+        var id = $(this).val();
+        $.getJSON("@Url.Action("GetMaxid", "Purchase", new { area = "Transactions" })", { ItemId: id.split('_')[0] }, function (data) {
+            maxid = data;
+
+        })
+    })
+
+    function deleterow(id) {
+        var tbl = $(id).parent().parent().parent().parent().attr('id');
+
+        var itemId = $('#tableadditem tbody tr').find('td:eq(0) select option:selected').val().split('_')[0];
+        var Dductionamnt = parseFloat($(id).parent().parent().find('td:eq(4) input').val()) * parseFloat($(id).parent().parent().find('td:eq(5) input').val());
+        $(id).parent().parent().remove();
+
+        
+        //indexingTable(tbl);
+        indexingTable();
+        var total = 0;
+        var Qty = 0;
+        var count =1;
+        $('#' + tbl + ' tbody tr').each(function (item, i) {
+            total = total + $(this).find('td:eq(4) input').val() * $(this).find('td:eq(5) input').val();
+            Qty += parseInt($(this).find('td:eq(4) input').val());
+            //$(this).find('td:eq(0):nth-child(2)').html(count + 1)
+            $(this).find('td:eq(0) span').html(count)
+            count++;
+        })
+
+        $('#spntotal_' + tbl.split('_')[1]).text(total);
+        $('#spanQntity_' + tbl.split('_')[1]).text(Qty)
+        //Dductionamnt = parseFloat($('#purchase_tra_Grand_Total').val()) - Dductionamnt;
+        //$('#GrTotal').text(Dductionamnt);
+        //$('#purchase_tra_Grand_Total').val(Dductionamnt);
+
+        Calc_GrndTotal();
+        // $('#tblItem tbody tr').each(function (i, item) {
+
+        //    SetIdName(i, this);
+        //})
+
+        if ($('#' + tbl + ' tbody tr').length == 0) {
+
+            $('#details_' + tbl.split('_')[1]).remove();
+        }
+    }
+
+    function indexingTable() {
+
+        //var count = $('#'+tbl+' tbody tr').length;
+        var count = $('.tableIndexing tbody tr').length;
+
+        for (var i = 0; i < count; i++) {
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(0) input:eq(0)').attr('name', 'purchase_tra.listpurchase_tra[' + i + '].Item_Id');
+            //$('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(0) input[type=text]').attr('name', 'purchase_tra.listpurchase_tra[' + i + '].ItemName');
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(1) input[type=hidden]').attr('name', 'purchase_tra.listpurchase_tra[' + i + '].GoDownId');
+
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(1) input[type=text]').attr('name', 'purchase_tra.listpurchase_tra[' + i + '].GoDownName');
+
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(2) input[type=text]').attr('name', 'purchase_tra.listpurchase_tra[' + i + '].ProductCode');
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(3) input:eq(0)').attr('name', 'purchase_tra.listpurchase_tra[' + i + '].SerialNo');
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(4) input[type=text]').attr('name', 'purchase_tra.listpurchase_tra[' + i + '].Qty');
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(5) input[type=text]').attr('name', 'purchase_tra.listpurchase_tra[' + i + '].Rate');
+
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(6) input[type=button]').attr('id', 'btnDeleteRow_' + i);
+            $('.tableIndexing tbody tr:eq(' + i + ')').find('td:eq(1) select').attr('name', 'purchase_tra.listpurchase_tra[' + i + '].GoDownId');
+        }
+    }
+
+    //function SetIdName(i,tr) {
+    //    var arr = new Array();
+    //    arr = { Item_Id: 'Item_Id', ItemName: 'ItemName', GoDownId: 'GoDownId', GoDownName: 'GoDownName', ProductCode: 'ProductCode', SerialNo: 'SerialNo', Qty: 'Qty', Rate: 'Rate' }
+    //    var j = 0;
+    //    $.each(arr, function (item, k) {
+
+    //        var control = j == 0 ? 'td:eq(' + j + ') input' : j == 1?'td:eq('+j+') input':j==2?'td:eq('+j+') input':j==3?'td:eq('+j+')':j==4?'td:eq('+j+') input':j==5?'td:eq('+j+') input':j==6?'td:eq('+j+') input':j==7?'td:eq('+j+') input':'td:eq('+j+') input'
+
+    //        $(tr).find(control + ':eq(0)').attr('name', 'temDetails[' + i + '].' + item);
+    //        $(tr).find(control + ':eq(1)').attr('name', 'temDetails[' + i + '].' + item);
+    //        $(tr).find(control + ':eq(1)').attr('id', 'temDetails[' + i + '].' + item);
+    //        j++;
+    //    })
+
+    //}
+
+
+
+</script>
+
+<script>
+    //var gdTotal = 0;
+
+    //function addItemsTable() {
+    //    var itemid = $('#tableadditem tbody tr').find('td:eq(0) select option:selected').val().split('_')[0];
+    //    var itemName = $('#tableadditem tbody tr').find('td:eq(0) select option:selected').text();
+    //    var GodownId = $('#tableadditem tbody tr').find('td:eq(1) select option:selected').val();
+    //    var GodownName = $('#tableadditem tbody tr').find('td:eq(1) select option:selected').text();
+    //    var Qntity = $('#tableadditem tbody tr').find('td:eq(2) input').val();
+    //    var Rate = $('#tableadditem tbody tr').find('td:eq(3) input').val();
+    //    var Unit = $('#tableadditem tbody tr').find('td:eq(4) input').val();
+    //    var total = parseFloat(Qntity) * parseFloat(Rate);
+    //    if ($('#tblItem_' + itemid).length == 0) {
+
+    //        $('#itemsDiv').append('<details>'
+    //        + '<summary>'
+    //        + '<div  class="panel panel-danger" >'
+    //        + '<div class="panel--heading">'
+    //        + '  <div class="col-lg-8"><b>' + itemName + '</b></div>'
+    //        + ' <div class="col-lg-2">' + Unit + '</div>'
+    //        + ' <div class="col-lg-2 pull-right">' + total + '</div>'
+    //        + '</div>'
+    //        + '</div>'
+    //        + '</summary>'
+    //        + '<table class="table tableIndexing" id="tblItem_' + itemid + '">'
+    //        + '<thead><tr><th>item Name</th><th>Serial No</th><th>Quantity</th><th>Rate</th></tr></thead>'
+    //        + '<tbody><tr> <td>' + itemName + '</td><td>S-121</td><td>1</td><td>' + Rate + '</td> </tr> </tbody>'
+    //        + '</table>'
+    //        + '</details>'
+
+    //            )
+    //    }
+    //    else {
+    //        alert('#tbl_' + itemid + "  already exists");
+    //    }
+    //}
+
+    function fn_Addrow2(obj, item_Id) {
+
+        var itemNm = $('#tableadditem tbody tr').find('td:eq(0) select option:selected').html();
+        var itemId = $('#tableadditem tbody tr').find('td:eq(0) select option:selected').val().split('_')[0];
+        var godown = $('#tableadditem tbody tr').find('td:eq(1) select option:selected').html();
+        var GoDownId = $('#tableadditem tbody tr').find('td:eq(1) select option:selected').val();
+        var Qunty = parseFloat($('#tableadditem tbody tr').find('td:eq(2) input[type=text]').val());
+        var Rate =parseFloat($('#tableadditem tbody tr').find('td:eq(3) input[type=text]').val());
+        var amount = $('#tableadditem tbody tr').find('td:eq(5) input[type=text]').val();
+        var Unit = $('#tableadditem tbody tr').find('td:eq(4) input').val();
+        //var total = parseFloat(Qunty) * parseFloat(Rate);
+        //  alert("(" + itemId + ") " + itemNm+" godwn= "+godown +" Quntity= "+Qunty+" Rate = "+Rate+" Amount= "+amount );
+         
+        if ($(obj).text() == "Add") {
+
+            if (validateFieldsWhenAdd(itemId, GoDownId, Qunty, Rate) == true) {
+            
+            if ($('#tblItem_' + item_Id).length == 0)
+
+                $('#itemsDiv').append('<details id="details_'+item_Id+'">'
+                          + '<summary>'
+                          + '<div  class="panel panel-danger" >'
+                          + '<div class="panel--heading">'
+                          + '  <div class="col-lg-8"><b>' + itemNm + '</b></div>'
+                            @*<div class="col-lg-2">@Model.listpurchase_tra.Where(X=>X.ItemName==item.ItemName).Sum(P=>P.Qty).ToString("#."+new string('0',0))  @item.Unit_Name</div>
+                        <div class="col-lg-2 pull-right"><span id="spntotal_@item.Item_Id">Rs. @Model.listpurchase_tra.Where(x=>x.ItemName==item.ItemName).Sum(m=>m.Rate).ToString()</span></div>*@
+                          + ' <div class="col-lg-2"><span id=spanQntity_'+item_Id+'>' + Qunty + '</span> ' + Unit + '</div>'
+                          + ' <div class="col-lg-2 pull-right">Rs. <span id=spntotal_' + item_Id + '>total</></div>'
+                          + '</div>'
+                          + '</div>'
+                          + '</summary>'
+                          + '<table class="table tableIndexing" id="tblItem_' + itemId + '">'
+                          + '<thead><tr><th>Sr.No</th><th>Godown</th><th>Product Code</th><th>Serial No</th><th>Quantity</th><th>Rate</th><th></th></tr></thead>'
+                          + '<tbody></tbody>'
+                          + '</table>'
+                          + '</details>'
+
+                              )
+
+            var f = false;
+            var count = $('#tblItem_' + item_Id + ' tbody tr').length - 1;
+            var indx = count + 1;
+            var val = 0;
+            if ($('#tblItem_' + item_Id + ' tbody tr').length > 0) {
+
+                $('#tblItem_' + item_Id + ' tbody tr').each(function (item, i) {
+
+                    val = $(this).find('td:eq(0) input[type=hidden]').val();
+
+                    if (val == itemId) {
+
+                        maxid = $(this).find('td:eq(2) input[type=text]').val();
+                        f = true;
+                    }
+                })
+            }
+            
+            maxid = f == true ? maxid.split('-')[0] + '-' + (parseInt(maxid.split('-')[1]) + 1) : maxid;
+            var rowlen=0;
+            var tbllen = rowlen = $('#tblItem_' + item_Id + ' tbody tr').length;
+              
+            //var updMaxId=maxid.split('-')[0] + '-' + parseInt(maxid.split('-')[1]);
+            if ($('#tableadditem tbody tr').find('td:eq(0) select option:selected').val().split('_')[1] == 'False') {
+               
+                for (var i = 0 ; i < Qunty; i++) {
+
+
+                    //$('#tblItem_' + item_Id + ' tbody').append('<tr><td><input type=hidden name=purchase_tra.listpurchase_tra[' + indx + '].Item_Id value=' + itemId + '></input><span>'+(tbllen+1)+'</span></td><td><input type=hidden name=purchase_tra.listpurchase_tra[' + indx + '].GoDownId value=' + GoDownId + ' /> <input type=text name=purchase_tra.listpurchase_tra[' + indx + '].GoDownName value=' + godown + ' readonly=true /> </td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].ProductCode value=' + maxid.split('-')[0] + '-' + parseInt(parseInt(maxid.split('-')[1]) + parseInt(i)) + ' readonly=true /></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].SerialNo value=' + maxid.split('-')[0] + '-' + parseInt(parseInt(maxid.split('-')[1]) + parseInt(i)) + ' /></td><td ><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Qty value=1 readonly=true style="text-align:right;"></input></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Rate value=' + Rate + ' readonly=true style="text-align:right;"></input></td> <td><input type="button" value="Delete" id="btnDeleteRow_' + indx + '" onclick="deleterow(this); CalculateTax();" class="btn btn-danger" /></td></tr>');
+
+                    $('#tblItem_' + item_Id + ' tbody').append('<tr><td><input type=hidden name=purchase_tra.listpurchase_tra[' + indx + '].Item_Id value=' + itemId + '></input><span>' + (tbllen + 1) + '</span></td><td>  <select name="purchase_tra.listpurchase_tra[' + indx + '].GoDownId" ></select></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].ProductCode value=' + maxid.split('-')[0] + '-' + parseInt(parseInt(maxid.split('-')[1]) + parseInt(i)) + ' readonly=true /></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].SerialNo value=' + maxid.split('-')[0] + '-' + parseInt(parseInt(maxid.split('-')[1]) + parseInt(i)) + ' /></td><td ><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Qty value=1 readonly=true style="text-align:right;"></input></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Rate value=' + Rate + ' readonly=true style="text-align:right;"></input></td> <td><input type="button" value="Delete" id="btnDeleteRow_' + indx + '" onclick="deleterow(this); CalculateTax();" class="btn btn-danger" /></td></tr>');
+
+                    indx++;
+                    tbllen++;
+                }
+                indexingTable();
+                $.getJSON("@Url.Action("BindGodown", "Purchase", new {area="Transactions" })", function (data) {
+                    var ln = $('#tblItem_' + item_Id + ' tbody tr').length;
+                    // alert('roe = '+rowlen + "  len= "+ln)
+                    for (var i = rowlen ; i < ln; i++) {
+                         
+                        for (var j = 0; j < data.length; j++) {
+                             
+                            $('#tblItem_' + item_Id + ' tbody tr:eq('+i+')').find('td:eq(1) select').append($('<option></option>').val(data[j].Id).html(data[j].Name));
+                            $('#tblItem_' + item_Id + ' tbody tr:eq(' + i + ')').find('td:eq(1) select').val(GoDownId);
+                            //$('[name="purchase_tra.listpurchase_tra[' + i + '].GoDownId"]').append($('<option></option>').val(data[j].Id).html(data[j].Name));
+                            //$('[name="purchase_tra.listpurchase_tra[' + i + '].GoDownId"] ').val(GoDownId);
+                        }
+                         
+                    }
+                   
+                })
+                  
+            }
+            else {
+                tbllen = $('#tblItem_' + item_Id + ' tbody tr').length;
+                if ($('#tblItem_' + item_Id + ' tbody tr').length > 0) {
+                    var itm_qty = $('#tblItem_' + item_Id + ' tbody tr').find('td:eq(4) input').val();
+                    $('#tblItem_' + item_Id + ' tbody tr').find('td:eq(4) input').val(parseInt(itm_qty) + parseInt(Qunty));
+                }
+                else {
+
+                    //$('#tblItem_' + item_Id + ' tbody').append('<tr><td><input type=hidden name=purchase_tra.listpurchase_tra[' + indx + '].Item_Id value=' + itemId + '> </input><span>' + (tbllen + 1) + '</span></td> <td><input type=hidden name=purchase_tra.listpurchase_tra[' + indx + '].GoDownId value=' + GoDownId + ' /> <input type=text name=purchase_tra.listpurchase_tra[' + indx + '].GoDownName value=' + godown + ' readonly=true /> </td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].ProductCode value=' + (maxid.split('-')[0] + '-' + (parseInt(maxid.split('-')[1]))) + ' readonly=true /></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].SerialNo value=' + (maxid.split('-')[0] + '-' + (parseInt(maxid.split('-')[1]))) + ' /></td><td ><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Qty value=' + parseFloat(Qunty) + ' readonly=true style="text-align:right;"></input></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Rate value=' + parseFloat(Rate) + ' readonly=true style="text-align:right;"></input></td> <td><input type="button" value="Delete" id="btnDeleteRow_' + indx + '" onclick="deleterow(this);CalculateTax();" class="btn btn-danger" /></td></tr>');
+                   
+
+                    //$('#tblItem_' + item_Id + ' tbody').append('<tr><td><input type=hidden name=purchase_tra.listpurchase_tra[' + indx + '].Item_Id value=' + itemId + '> </input><span>' + (tbllen + 1) + '</span></td> <td><input type=hidden name=purchase_tra.listpurchase_tra[' + indx + '].GoDownId value=' + GoDownId + ' /> <input type=text name=purchase_tra.listpurchase_tra[' + indx + '].GoDownName value=' + godown + ' readonly=true /> </td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].ProductCode value="####" readonly=true /></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].SerialNo value="####" /></td><td ><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Qty value=' + parseFloat(Qunty) + '  readonly="true"  style="text-align:right;"></input></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Rate value=' + parseFloat(Rate) + ' readonly=true style="text-align:right;"></input></td> <td><input type="button" value="Delete" id="btnDeleteRow_' + indx + '" onclick="deleterow(this);CalculateTax();" class="btn btn-danger" /></td></tr>');
+                    $('#tblItem_' + item_Id + ' tbody').append('<tr><td><input type=hidden name=purchase_tra.listpurchase_tra[' + indx + '].Item_Id value=' + itemId + '> </input><span>' + (tbllen + 1) + '</span></td> <td>  <select name="purchase_tra.listpurchase_tra[' + indx + '].GoDownId" ></select> </td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].ProductCode value="####" readonly=true /></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].SerialNo value="####" /></td><td ><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Qty value=' + parseFloat(Qunty) + '  readonly="true"  style="text-align:right;"></input></td><td><input type=text name=purchase_tra.listpurchase_tra[' + indx + '].Rate value=' + parseFloat(Rate) + ' readonly=true style="text-align:right;"></input></td> <td><input type="button" value="Delete" id="btnDeleteRow_' + indx + '" onclick="deleterow(this);CalculateTax();" class="btn btn-danger" /></td></tr>');
+                    indexingTable();
+                    $.getJSON("@Url.Action("BindGodown", "Purchase", new {area="Transactions" })", function (data) {
+                         
+                        var ln = $('.tableIndexing tbody tr').length;
+                        for (var j = 0; j < data.length; j++) {
+                               
+                            $('[name="purchase_tra.listpurchase_tra[' + (ln - 1) + '].GoDownId"]').append($('<option></option>').val(data[j].Id).html(data[j].Name));
+                            $('[name="purchase_tra.listpurchase_tra[' + (ln - 1) + '].GoDownId"] ').val(GoDownId);
+                        } 
+                    })
+                }
+            }
+
+            var total = 0;
+            var Qty = 0;
+            $('#tblItem_' + item_Id + ' tbody tr').each(function (item, i) {
+                total = total + $(this).find('td:eq(4) input').val() * $(this).find('td:eq(5) input').val();
+                Qty += parseInt($(this).find('td:eq(4) input').val());
+            })
+            //console.log("Total=" + JSON.stringify(gdTotal) + "  Amount =" + JSON.stringify(Qunty) + " Rate =" + JSON.stringify(Rate));
+            $('#spntotal_' + item_Id).text(total);
+            $('#spanQntity_' + item_Id).text(Qty);
+            // gdTotal += parseFloat(parseFloat(Qunty) * parseFloat(Rate));
+
+            //$('#GrTotal').text(gdTotal);
+            //$('#purchase_tra_Grand_Total').val(gdTotal);
+            //indexingTable();
+            Calc_GrndTotal();
+        }
+        }
+        else {
+
+
+        }
+    }
+
+    function Calc_GrndTotal() {
+        var gtotal = 0;
+        //var id = 0;
+        //var indx = 0;
+        //var len = $('#tableadditem tbody tr').find('td:eq(0) select option').length;
+
+        //for (var i = 1; i < len; i++) {
+
+
+        //    id = $('#tableadditem tbody tr').find('td:eq(0) select option:eq(' + i + ')').val().split('_')[0];
+        //    console.log(JSON.stringify('itemid= = ' + id));
+
+        //    if ($('#tblItem_' + id).length > 0) {
+        //        //  alert('table length = ' + $('#tblItem_' + id + ' tbody tr').length);
+        //        for (var k = 0; k < $('#tblItem_' + id + ' tbody tr').length ; k++) {
+        //            gtotal += parseFloat($('#tblItem_' + id + ' tbody tr:eq(' + k + ')').find('td:eq(4) input').val()) * parseFloat($('#tblItem_' + id + ' tbody tr:eq(' + k + ')').find('td:eq(5) input').val());
+
+        //        }
+        //        // $('#tblItem_' + id + ' tbody tr').each( function(item, ind) {
+        //        //  //  alert(parseFloat($(this).find('td:eq(4) input').val()) * parseFloat($(this).find('td:eq(5) input').val()));
+
+        //        //    indx++;
+        //        //})
+        //    }
+        //}
+
+        $('.tableIndexing tbody tr').each(function () {
+
+            gtotal += parseFloat($(this).find('td:eq(4) input').val()) * parseFloat($(this).find('td:eq(5) input').val());
+        })
+
+       // alert(gtotal);
+        $('#GrTotal').text(gtotal);
+        $('#purchase_tra_Grand_Total').val(gtotal);
+    }
+
+
+    function Validation() {
+
+        if ($('.tableIndexing tbody tr').length > 0) {
+            $('#purchase_tra_ItemId').removeAttr('required')
+            $('#purchase_tra_Quntity').removeAttr('required', true);
+            $('#purchase_tra_Item_Rate').removeAttr('required', true);
+            $('#purchase_tra_GoDown_Id').removeAttr('required', true);
+        }
+        else {
+            
+            $('#purchase_tra_ItemId').attr('required', true); 
+            $('#purchase_tra_Quntity').attr('required', true);
+            $('#purchase_tra_Item_Rate').attr('required', true); 
+            $('#purchase_tra_GoDown_Id').attr('required', true);
+        }
+    }
+
+    function validateFieldsWhenAdd(itemId, GodownId, Qty, Rate) {
+
+        //alert("gdId = " + GodownId+ " ItemId = " + itemId + " Qty = " + Qty + " Rate = " + Rate);
+        if (itemId == "" || GodownId == "" || (Qty == "" || Qty == 0 || isNaN(Qty)) || (Rate == "" || Rate == 0 || isNaN(Rate))) {
+
+            if (itemId == "") {
+
+                $('[name= "purchase_tra.ItemId"]').attr('required', true);
+                $('[name= "purchase_tra.ItemId"]').focus();
+            }
+            else if (GodownId == "") {
+
+                $('[name= "purchase_tra.GoDown_Id"]').attr('required', true);
+                $('[name= "purchase_tra.GoDown_Id"]').focus();
+            }
+            else if ((Qty == "" || Qty == 0 || isNaN(Qty))) {
+                $('[name= "purchase_tra.Quntity"]').attr('required', true);
+                $('[name= "purchase_tra.Quntity"]').focus();
+            }
+            else if ((Rate == "" || Rate == 0 || isNaN(Rate))) {
+
+                $('[name= "purchase_tra.Item_Rate"]').attr('required', true);
+                $('[name= "purchase_tra.Item_Rate"]').focus();
+            }
+
+
+            return false;
+        }
+        return true;
+    }
+
+</script>
+@*<details>
+        <summary>
+            <div  class="panel panel-danger" >
+                <div class="panel--heading">
+                    <div class="col-lg-8"><b></b></div>
+                    <div class="col-lg-2">Unit Name</div>
+                </div>
+            </div>
+        </summary>
+        <table>
+            <thead><tr><th>item Name</th><th>Serial No</th><th>Quantity</th><th>Rate</th></tr></thead>
+            <tbody><tr> <td>item Name 1</td><td>S-121</td><td>10</td><td>200</td> </tr> </tbody>
+        </table>
+    </details>*@

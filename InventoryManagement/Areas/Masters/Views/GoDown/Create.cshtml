@@ -1,0 +1,165 @@
+﻿@model ViewModel.Common.GoDown_Info
+
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(function () {
+        $("#Group_Id").customselect();
+        $(".decimal").on("keypress keyup blur", function (event) {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+        $("#Country_Id").change(function () {
+
+            var CountryId = $("#Country_Id").val();
+            // alert(CountryId)
+            $.ajax({
+                url: '@Url.Action("ddlBindState", "CountryState", new { area = "Masters" })',
+                datatype: 'json',
+                type: 'Get',
+                contentType: "application/json; charset=utf-8",
+                data: { CountryId: CountryId },
+                success: function (data) {
+
+                    $('#State_Id').find('option').remove();
+
+                    $('#State_Id').append($('<option></option>').val(0).html('Select State'));
+                    $(data).each(function (index, item) { // GETTING ERROR HERE
+                        debugger;
+
+                        $('#State_Id').append($('<option></option>').val(item.Id).html(item.Name));
+                    });
+
+                },
+                error: function (ero) {
+
+                }
+            })
+        });
+
+
+        $("#State_Id").change(function ()
+        {
+            $.getJSON("@Url.Action("ddlBindCity", "CountryState", new { area = "Masters" })", { StateId: $("#State_Id").val() }, function (data) {
+                var item;
+
+                $("#City_Id").empty();
+
+                var items = '<option>City</option>';
+                $.each(data, function (i, _city) {
+                    items += "<option value='" + _city.Id + "'>" + _city.Name + "</option>";
+                });
+                $('#City_Id').html(items);
+            });
+        })
+    });
+</script>
+
+@using (Ajax.BeginForm("Create", "GoDown", new { area = "Masters" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new { @id = "form1" }))
+{
+    @Html.ValidationSummary(true)
+
+
+    
+    
+    <div>
+
+     <div class="row">
+         <div class="col-lg-3">
+         </div>
+       <div class="col-lg-6">
+          <div class="panel panel-danger">
+
+              <div class="panel-heading" style="background-color: #C4538A;color:white"><span>GoDwon/Location</span> </div>
+
+                    <div class="panel-body">
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="editor-label">
+
+                                        @Html.Label("Code")
+                                        @Html.HiddenFor(x => x.Id)
+                                    </div>
+
+                                    @Html.TextBoxFor(m => m.Code, new { @placeholder = "Code", @class = "form-control", @readonly = "readonly", required = true, minlength = "2", maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.Code, null, new { @style = "color:red;" })
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    @Html.Label("Name")<span style="color:red">*</span>
+                                    @Html.TextBoxFor(m => m.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.Name, null, new { @style = "color:red;" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    @Html.Label("Under")
+                                    @Html.DropDownListFor(m => m.Under_Id, new SelectList(Model.GoDownList, "Id", "Name", Model.Under_Id), "Select", new { @class = "custom-select form-control" })
+                                    @Html.ValidationMessageFor(m => m.Under_Id, null, new { @style = "color:red;" })
+
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.Label("Address")<span style="color:red">*</span>
+                                    @Html.TextBoxFor(m => m.Address, new { @placeholder = "Address", @class = "form-control", required = true, minlength = "2", maxlength = "200" })
+                                    @Html.ValidationMessageFor(m => m.Under_Id, null, new { @style = "color:red;" })
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    @Html.Label("Country")<span style="color:red">*</span>
+                                    @Html.DropDownListFor(x => x.Country_Id, new SelectList(Model.CountryList, "Id", "Name", Model.Country_Id), "Select Country", new  {@class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Country_Id, null, new { @style = "color:red;" })
+
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.Label("State")<span style="color:red">*</span>
+                                    @Html.DropDownListFor(x => x.State_Id, new SelectList(Model.StateList, "Id", "Name", Model.State_Id), "Select State", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.State_Id, null, new { @style = "color:red;" })
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    @Html.Label("City")<span style="color:red">*</span>
+                                    @Html.DropDownListFor(x => x.City_Id, new SelectList(Model.CityList, "Id", "Name", Model.City_Id), "Select City", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.City_Id, null, new { @style = "color:red;" })
+
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.Label("Remarks")
+                                    @Html.TextBoxFor(m => m.Remarks, new { @placeholder = "Remarks", @class = "form-control", minlength = "2", maxlength = "200" })
+                                    @Html.ValidationMessageFor(m => m.Remarks, null, new { @style = "color:red;" })
+
+                                </div>
+                            </div>
+                                <div class="col-md-12">
+
+                                    <button type="submit" class="btn btn-primary" onclick="fn_ValidateForm('form1');">Save </button>
+                                    @Html.ActionLink("Cancel", "Index", "GoDown", new { @class = "btn btn-default" })
+
+
+                                </div>
+
+                            </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+         <div class="col-lg-3">
+         </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = ViewBag.layout;
+}
+
+
+
+<div id="body" class="row">
+
+    <div id="content">
+        @{Html.RenderAction("List", "Sales");}
+    </div>
+</div>
+
+

@@ -1,0 +1,103 @@
+﻿@model ViewModel.Ledger.Supplier
+
+@{
+
+    string src = null;
+    if (Model.Image_Path != null)
+    {
+        src = Model.Image_Path;
+    }
+    else
+    {
+        src = "/Themes/img/demo_img.gif";
+    }
+
+}
+
+
+
+
+
+@using (Html.BeginForm("Create", "StockItem", new { @area = "InventoryMaster" }, FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+
+
+    <div>
+
+
+
+
+        <div class="panel panel-danger managepnl">
+
+            <div class="panel-heading" style="background-color: #C4538A;color:white"><span>View Details</span> </div>
+
+
+            <div class="panel-body">
+
+                <div>
+                    <div id="imgTest">
+                        <img src="@src" class="img-responsive img-thumbnail mangaeimg"/>
+                    </div>
+                </div>
+
+                <table class="table table-responsive table-bordered topmrgn5px">
+                    <tr>
+                        <td>
+                            @Html.Label("Code")
+                            @Html.HiddenFor(x => x.Id)
+                        </td>
+                        <td>
+
+                            <span>@Model.Code</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            @Html.Label("Alias Name")
+                        </td>
+                        <td>
+                            <span>@Model.Alias_Name</span>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>
+                            @Html.Label("Cr Time")
+                        </td>
+                        <td>
+                            <span>@Model.CreditPeriodTime</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.Label("PAN No")
+                        </td>
+                        <td>
+                            <span>@Model.Account_Detail.PANNumber</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.Label("Address")
+                        </td>
+                        <td>
+                            <span>@Model.Address.address</span>
+                        </td>
+                    </tr>
+
+
+                </table>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+}

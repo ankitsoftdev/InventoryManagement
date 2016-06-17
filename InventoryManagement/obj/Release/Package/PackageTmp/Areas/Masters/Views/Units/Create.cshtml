@@ -1,0 +1,315 @@
+﻿@model ViewModel.Common.Unit
+<script src="~/Themes/Scripts/jquery.validate.js"></script>
+<script src="~/Themes/Scripts/jquery.validate.unobtrusive.js"></script>
+@using (Ajax.BeginForm("Create", "Units", new { area = "Masters" }, new AjaxOptions { UpdateTargetId = "content", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, OnSuccess = "JavaScript:alert('Working Completed')" }, new { @id = "form2" }))
+{
+    @Html.ValidationSummary(true)
+    
+    <div>
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-8">
+                <div class="panel panel-danger">
+
+                    <div class="panel-heading" style="background-color: #C4538A;color:white"><span>Unit Master</span> </div>
+
+                    <div class="panel-body">
+
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="editor-label">
+
+                                    @Html.Label("Name")<span style="color:red">*</span>
+                                </div>
+                                @Html.HiddenFor(x => x.Id)
+
+                                @Html.TextBoxFor(x => x.Name, new { @placeholder = "Name", @class = "form-control", required = true, minlength = "2", maxlength = "150" })
+                                @Html.ValidationMessageFor(x => x.Name, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-12">
+
+                                @Html.Label("Alias Name")
+                                @Html.TextBoxFor(x => x.AliasName, new { @placeholder = "Alias Name", @class = "form-control", @maxlength = "20" })
+                                @Html.ValidationMessageFor(x => x.AliasName, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-12">
+
+                                @Html.Label("No of Decimal")
+                                @Html.TextBoxFor(x => x.No_of_Decimal, new { @value = "0", @class = "form-control", @maxlength = "5" })
+                                @Html.ValidationMessageFor(x => x.No_of_Decimal, null, new { @style = "color:red;" })
+                            </div>
+                            <div class="col-md-12">
+                                @Html.Label("Add SubUnits")
+                                @Html.CheckBoxFor(x => x.AddSubUnit, new { @id = "AddSubUnit" })
+                                @*<input type="button" value="Add" onclick="AddTax()" />*@
+                            </div>
+                          
+                             <div id="SubUnit">
+                                 @*@{
+                                 Html.RenderAction("SubUnit", "Units", new { Id = Model.Id });
+                                 }*@
+                             </div>
+                            <div class="col-md-12">
+                                @Html.Label("Remarks")
+                                @Html.TextAreaFor(x => x.Remarks, new { @placeholder = "Remarks", @class = "form-control", @maxlength = "200" })
+                                @Html.ValidationMessageFor(x => x.Remarks, null, new { @style = "color:red;" })
+                            </div>
+
+                            <div class="col-md-12 topmrgn5px">
+
+                                <button type="submit" class="btn btn-primary">Save </button>
+                                @Html.ActionLink("Cancel", "Index", "Units", new { @class = "btn btn-default" })
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script>
+    $(function ()
+    {
+
+        $('#No_of_Decimal').keypress(function (e)
+        {
+
+            $('#No_of_Decimal').parent().find('span').remove();
+
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+
+                $('#No_of_Decimal').after("<span style='color:red;'>Digits Only</span>");
+                return false;
+            }
+        });
+
+        $('#AddSubUnit').on('click', function ()
+        {
+            if ($('#AddSubUnit').prop("checked") == true)
+            {
+                fn_BindSubunit();
+            }
+            else
+            {
+                $("#tblItem > tbody").empty();
+                $('#SubUnit').hide();
+            }
+        });
+
+    });
+
+    $(document).ready(function ()
+    {
+        //fn_LoadItemList();
+
+          fn_Hide();
+        $('#spAlert').hide();
+
+    });
+
+    function fn_Hide()
+    {
+       
+        if ($('#AddSubUnit').prop("checked") == true)
+        {
+         
+            fn_BindSubunit();
+           
+        }
+
+        else
+        {
+            $('#SubUnit').hide();
+        }
+       
+        $('#spAlert').hide();
+    }
+    function fn_BindSubunit()
+    {
+         $.get(
+              '@Url.Action("SubUnit")', { Id: '@Model.Id' }, function (data) {
+                  $('#SubUnit').html(data);
+                  fn_LoadItemList();
+                  //$('#SubUnit').show();
+              }
+           );
+
+
+      
+       
+       // fn_LoadItemList();
+        $('#SubUnit').show();
+    }
+
+    function fn_Addrow(obj)
+    {
+
+        if ($(obj).text() == "Add")
+        {
+          
+            $('#spAlert').hide();
+            var Name = $.trim($('#tblItem tbody tr:last').find('td:eq(0) input').val());
+            var AliasName = $.trim($('#tblItem tbody tr:last').find('td:eq(1) input').val());
+              
+            var SubrootUnit = $.trim($('#tblItem tbody tr:last').find('td:eq(3) input').val());;
+           // alert(Name +","+ AliasName +","+ SubrootUnit)
+            if (Name != '' && AliasName != '' && SubrootUnit != '' && parseFloat(SubrootUnit) > 0)
+            {
+
+                    $("#tblItem tbody").append($("#tblItem tbody tr:last").clone());
+                    $("#tblItem tbody tr:last").find('td:nth-child(1) input[type=text]').val('');
+                    $("#tblItem tbody tr:last").find('td:nth-child(2) input[type=text]').val('');
+
+                    $("#tblItem tbody tr:last").find('td:nth-child(3) input[type=text]').val('1');
+                    
+                    $("#tblItem tbody tr:last").find('td:nth-child(4) input[type=text]').val('');
+                    $("#tblItem tbody tr:last").find('td:nth-child(4) input[type=text]').attr('class', 'Number');
+                    $("#tblItem tbody tr:last").find('td:nth-child(4) input[type=text]').val('1');
+                    $("#tblItem tbody tr:last").find('td:nth-child(5) input[type=text]').val('');
+                  //  $(obj).attr("class", "btn-sm btn vd_btn vd_bg-red fa fa-times")
+
+                    //$(obj).text("Delete")
+                   // $("#tblItem tbody tr:last").find('td:nth-child(6) input[type=hidden]').val(true);
+
+                    $("#tblItem tbody tr").each(function (i, item) {
+                        fn_Append(i, this);
+                    })
+                    console.log($(obj).parent().find('.add').remove());
+                }
+                else
+                {
+                $('#spAlert').text('Please fill Details');
+                    $('#spAlert').show();
+                }
+        }
+
+        else
+        {
+
+
+            $(obj).parent().parent().remove();
+           
+          
+            $("#tblItem tbody tr").each(function (i, item) {
+                fn_Append(i, this);
+               
+            });
+            if ($("#tblItem tbody tr").length <= 0)
+            {
+                $('#AddSubUnit').prop('checked', false);
+                $('#spAlert').hide();
+                $('#SubUnit').hide();
+            }
+            
+                $('#tblItem tbody tr:last').find('.add').remove();
+                $('#tblItem tbody tr:last').find('.delete').remove();
+                $('#tblItem tbody tr:last').find('td:nth-child(5)').append('<a href="#" id="btnItem" name="btnItem" onclick="fn_Addrow(this);" class="add" title="Add">Add</a>&nbsp;&nbsp;')
+                $('#tblItem tbody tr:last').find('td:nth-child(5)').append('<a href="#" id="d" name="Delete" onclick="fn_Addrow(this);" title="Remove" class="delete">Delete</a>')
+              
+            
+
+        }
+
+
+       
+    }
+    
+    function fn_CheckNumber(obj)
+    {
+        
+        $(".Number").on("keypress keyup blur", function (event) {
+            $(this).val($(this).val().replace(/[^0-9]/g, ''));
+            if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                event.preventDefault();
+            }
+        });
+    }
+    $(".decimal").on("keypress keyup blur", function (event) {
+        $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+
+    function RemoveRowOfTaxDetailtbl(item)
+    {
+        
+        var rowCount = $('#AddSubroot tbody tr').length;
+        if (rowCount == 1)
+        {
+            $('#AddSubroot tbody tr:last').find('td:eq(0) input').val('');
+            $('#AddSubroot tbody tr:last').find('td:eq(1) input').val('');
+            $('#AddSubroot tbody tr:last').find('td:eq(2)').val('1');
+            $('#AddSubroot tbody tr:last').find('td:eq(3)').val('');
+            $('#AddSubroot tbody tr:last').find('td:eq(3)').attr("placeholder", "00");
+
+        }
+
+        else
+        {
+            var ii = $(item).parent().parent().html();
+            var tr = $(item).parent().parent();
+            $(item).parent().parent().remove();
+            $('#AddSubroot tbody tr:last').find('input[type="button"][value="Add"]').show();
+            $("#AddSubroot tbody tr").each(function (i, item)
+            {
+                fn_Append(i, this);
+            })
+        }
+    }
+    var arr = new Array();
+
+    function fn_Append(i, tr)
+    {
+        arr = {  Name: 'Name', Alias_Name: 'Alias_Name', Ratio1: 'Ratio1', Ratio2: 'Ratio2',  Id: "Id" };
+        var j = 0;
+        $.each(arr, function (item, k) {
+            var control = j == 0 ? 'td:eq(' + j + ') input' : j == 1 ? 'td:eq(' + j + ') input' : 'td:eq(' + j + ') input';
+            var name = j == 0 ? item : j == 1 ? item : j == 2 ? item : j == 3 ? item : j == 4 ? item : item;
+
+            $(tr).find(control).attr('name', 'SubUnitList[' + i + '].' + name);
+            //  $(tr).find(control).attr('id', 'QuationItemList[' + i + '].' + name);
+
+            j++;
+        });
+       
+       
+    }
+    function fn_LoadItemList()
+    {
+        
+        
+        var len = $("#tblItem tbody tr").length;
+    
+     
+            for (var i = 0; i < len - 1; i++) {
+                if (i < len)
+                {
+                   // $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(5) a.add').attr("class", "delete");
+                   // $('#tblItem tbody tr:eq(' + i + ')').find('td:nth-child(5) a.add').attr("class", "delete");
+                    $('#tblItem tbody tr:eq(' + i + ')').find('.add').remove();
+                  
+
+
+                }
+
+
+            }
+        
+       
+       
+      
+    }
+</script>

@@ -1,0 +1,48 @@
+﻿@model List<ViewModel.CommonReport.TaxMaster>
+
+<table class="table table-striped table-bordered table-hover table-responsive topmrgn5px">
+    <tr>
+        <td>
+           Code
+        </td>
+        <td>
+         Name
+        </td>
+        <td>
+            Rate 
+        </td>
+
+    </tr>
+    @if (Model.Count != 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => item.Code)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(x => item.Rate)
+                </td>
+
+               
+            </tr>
+        }
+
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">
+                No Records found..
+            </td>
+        </tr>
+    }
+
+
+</table>

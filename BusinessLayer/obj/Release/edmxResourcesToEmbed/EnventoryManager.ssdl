@@ -1,0 +1,1967 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="INVENTORY_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Advance_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="User_Id" Type="bigint" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Tag_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Billing_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Bill_VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_Id" Type="bigint" Nullable="false" />
+    <Property Name="Billing_Amount" Type="money" />
+    <Property Name="Tax_Amount" Type="money" />
+    <Property Name="Discount_Amount" Type="money" />
+    <Property Name="Transport" Type="money" />
+    <Property Name="Tag_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Billing_Date" Type="datetime" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Branch_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="City_Id" Type="bigint" />
+    <Property Name="Country_Id" Type="bigint" Nullable="false" />
+    <Property Name="State_Id" Type="bigint" Nullable="false" />
+    <Property Name="Email_Id" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Contact_No" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Pin_Code" Type="char" MaxLength="6" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Country_Id" Type="bigint" Nullable="false" />
+    <Property Name="State_Id" Type="bigint" Nullable="false" />
+    <Property Name="Pin_Code" Type="char" MaxLength="6" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Latitute" Type="nvarchar" MaxLength="60" />
+    <Property Name="Longitute" Type="nvarchar" MaxLength="60" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Company_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Phoe_No" Type="nvarchar" MaxLength="15" />
+    <Property Name="Reg_No" Type="nvarchar" MaxLength="30" />
+    <Property Name="Tin_No" Type="nvarchar" MaxLength="30" />
+    <Property Name="Pan_No" Type="nvarchar" MaxLength="15" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="100" />
+    <Property Name="Pin_Code" Type="char" MaxLength="6" />
+    <Property Name="Country_Id" Type="bigint" Nullable="false" />
+    <Property Name="State_Id" Type="bigint" Nullable="false" />
+    <Property Name="City_Id" Type="bigint" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+    <Property Name="Logo" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Contact_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="30" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country_State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Parent_Id" Type="bigint" Nullable="false" />
+    <Property Name="Display_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Is_Visible" Type="bit" Nullable="false" />
+    <Property Name="Tag_Id" Type="bigint" Nullable="false" />
+    <Property Name="Latitute" Type="nvarchar" MaxLength="60" />
+    <Property Name="Longitute" Type="nvarchar" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email_Id" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Contact_No" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Contact_Person" Type="nvarchar" MaxLength="150" />
+    <Property Name="Contact_Person_Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Contact_Person_Contact" Type="nvarchar" MaxLength="15" />
+    <Property Name="Pan_No" Type="nvarchar" MaxLength="30" />
+    <Property Name="Pin_Code" Type="char" MaxLength="6" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="City_Id" Type="bigint" />
+    <Property Name="Country_Id" Type="bigint" />
+    <Property Name="State_Id" Type="bigint" />
+    <Property Name="Group_Id" Type="bigint" Nullable="false" />
+    <Property Name="Opeaning_Bal" Type="money" />
+    <Property Name="Mnt_Bill_By_Bill" Type="bit" Nullable="false" />
+    <Property Name="Credit_Period_Time" Type="int" />
+    <Property Name="Image_Url" Type="nvarchar" MaxLength="200" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Delivery_Note">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Delivery_Note_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sales_Order_Id" Type="bigint" Nullable="false" />
+    <Property Name="Customer_Id" Type="bigint" Nullable="false" />
+    <Property Name="Delivery_Date" Type="datetime" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Delivery_Note_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Delivery_Note_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Order_Quantity" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Delivered_Quantity" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Pur_Tra_Id" Type="bigint" Nullable="false" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Emp_Common_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Tag_Type" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Disp_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Ot_Apply" Type="bit" Nullable="false" />
+    <Property Name="Comp_Leave" Type="bit" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Without_Pay" Type="nvarchar" MaxLength="3" />
+    <Property Name="Is_Maternity" Type="nvarchar" MaxLength="3" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FinancialYear">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="From_Date" Type="date" Nullable="false" />
+    <Property Name="To_Date" Type="date" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+    <Property Name="Is_Default" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoDown_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Under_Id" Type="bigint" />
+    <Property Name="City_Id" Type="bigint" />
+    <Property Name="Country_Id" Type="bigint" />
+    <Property Name="State_Id" Type="bigint" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoDown_Region">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="GoDown_Id" Type="bigint" Nullable="false" />
+    <Property Name="Under_Id" Type="bigint" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ledger_Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Short_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Under_Group" Type="bigint" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Nature" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ledger_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email_Id" Type="nvarchar" MaxLength="100" />
+    <Property Name="Contact_No" Type="nvarchar" MaxLength="15" />
+    <Property Name="Contact_Person" Type="nvarchar" MaxLength="150" />
+    <Property Name="Contact_Person_Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Contact_Person_ContactNo" Type="nvarchar" MaxLength="15" />
+    <Property Name="Pan_No" Type="nvarchar" MaxLength="30" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" />
+    <Property Name="Pin_Code" Type="char" MaxLength="6" />
+    <Property Name="City_Id" Type="bigint" />
+    <Property Name="Country_Id" Type="bigint" />
+    <Property Name="State_Id" Type="bigint" />
+    <Property Name="Group_Id" Type="bigint" Nullable="false" />
+    <Property Name="Opeaning_Bal" Type="money" />
+    <Property Name="Mnt_Bill_By_Bill" Type="bit" Nullable="false" />
+    <Property Name="Credit_Period_Time" Type="int" />
+    <Property Name="Image_Url" Type="nvarchar" MaxLength="200" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LedgerGroupTemp1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Primary" Type="nvarchar" MaxLength="2" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Login_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Role_Id" Type="bigint" />
+    <Property Name="Employee_Id" Type="bigint" Nullable="false" />
+    <Property Name="Token_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="User_Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+    <Property Name="Is_Loged" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Supplier_Id" Type="bigint" Nullable="false" />
+    <Property Name="Payment_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tax_Amount" Type="money" />
+    <Property Name="Account_No" Type="nvarchar" MaxLength="50" />
+    <Property Name="Bank_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="IFSC_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Payment_Date" Type="datetime" Nullable="false" />
+    <Property Name="Balance" Type="money" />
+    <Property Name="Cheque_No" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Bill_By_Bill" Type="bit" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment_Info_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Payment_Id" Type="bigint" Nullable="false" />
+    <Property Name="Purchas_Id" Type="bigint" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Tag_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Pur_VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Supplier_Id" Type="bigint" Nullable="false" />
+    <Property Name="DATE" Type="datetime" Nullable="false" />
+    <Property Name="Fncl_Year_Id" Type="bigint" Nullable="false" />
+    <Property Name="Discount_Amount" Type="money" />
+    <Property Name="Tax_Amount" Type="money" />
+    <Property Name="Total_Amount" Type="money" />
+    <Property Name="Paid_Amount" Type="money" />
+    <Property Name="Bal_Amount" Type="money" />
+    <Property Name="Is_Refered" Type="bit" Nullable="false" />
+    <Property Name="Refered_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Refered_Id" Type="bigint" />
+    <Property Name="Is_Bill_Gen" Type="bit" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Master_TaxDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pur_Id" Type="bigint" Nullable="false" />
+    <Property Name="Pur_VC_No" Type="nvarchar" MaxLength="100" />
+    <Property Name="Tax_Id" Type="bigint" Nullable="false" />
+    <Property Name="Tax_Rate" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Tax_Amount" Type="money" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Master_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pur_Id" Type="bigint" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Qty" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Tax_Id" Type="bigint" />
+    <Property Name="GoDown_Id" Type="bigint" />
+    <Property Name="Purchase_Serial_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sale_Serial_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Pur_Order_VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sales_Person" Type="bigint" Nullable="false" />
+    <Property Name="Supplier_Id" Type="bigint" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Posting_Date" Type="datetime" Nullable="false" />
+    <Property Name="Order_Date" Type="datetime" Nullable="false" />
+    <Property Name="Request_Delivery_Date" Type="datetime" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Is_Receipt_Note" Type="bit" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Order_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pur_Order_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Oreder_Quantity" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Invoice_Quantity" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Return">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Supplier_Id" Type="bigint" Nullable="false" />
+    <Property Name="Purchase_Id" Type="bigint" Nullable="false" />
+    <Property Name="DATE" Type="datetime" Nullable="false" />
+    <Property Name="PurRet_VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Total_Amount" Type="money" />
+    <Property Name="Discount_Amount" Type="money" />
+    <Property Name="Return_Type" Type="int" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchase_Return_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PurRet_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Qty" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Purchase_Serial_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sale_Serial_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Tax_Id" Type="bigint" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quation_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Customer_Id" Type="bigint" Nullable="false" />
+    <Property Name="Quation_VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Discount" Type="money" />
+    <Property Name="Quation_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tag_Type" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Is_Approved" Type="bit" Nullable="false" />
+    <Property Name="Approved_By" Type="bigint" Nullable="false" />
+    <Property Name="Fncl_Year_Id" Type="bigint" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quation_Master_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Quation_Id" Type="bigint" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Qty" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Quat_Rate" Type="money" />
+    <Property Name="Final_Rate" Type="money" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Receipt_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Customer_Id" Type="bigint" Nullable="false" />
+    <Property Name="Receipt_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tax_Amount" Type="money" />
+    <Property Name="Account_No" Type="nvarchar" MaxLength="50" />
+    <Property Name="Bank_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="IFSC_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Receipt_Date" Type="datetime" Nullable="false" />
+    <Property Name="Balance" Type="money" />
+    <Property Name="Cheque_No" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Bill_By_Bill" Type="bit" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Receipt_Info_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Receipt_Id" Type="bigint" Nullable="false" />
+    <Property Name="Sales_Id" Type="bigint" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Tag_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Receipt_Note">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Receipt_Note_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Purchase_Order_Id" Type="bigint" Nullable="false" />
+    <Property Name="Supplier_Id" Type="bigint" Nullable="false" />
+    <Property Name="Purchase_Order_No" Type="nvarchar" MaxLength="100" />
+    <Property Name="Receipt_Date" Type="datetime" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Receipt_Note_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Receipt_Note_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Order_Quantity" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Received_Quantity" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Pur_Tra_Id" Type="bigint" Nullable="false" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Role_Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Customer_Id" Type="bigint" Nullable="false" />
+    <Property Name="DATE" Type="datetime" Nullable="false" />
+    <Property Name="Sales_VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Is_Bill_Gen" Type="bit" Nullable="false" />
+    <Property Name="Fncl_Year_Id" Type="bigint" Nullable="false" />
+    <Property Name="Discount_Amount" Type="money" />
+    <Property Name="Tax_Amount" Type="money" />
+    <Property Name="Total_Amount" Type="money" />
+    <Property Name="Receipt_Amount" Type="money" />
+    <Property Name="Bal_Amount" Type="money" />
+    <Property Name="Is_Refered" Type="bit" Nullable="false" />
+    <Property Name="Refered_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Refered_Id" Type="bigint" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Master_TaxDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sales_Id" Type="bigint" Nullable="false" />
+    <Property Name="Sales_VC_No" Type="nvarchar" MaxLength="100" />
+    <Property Name="Tax_Id" Type="bigint" Nullable="false" />
+    <Property Name="Tax_Rate" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Tax_Amount" Type="money" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Master_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sales_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Qty" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Tax_Id" Type="bigint" Nullable="false" />
+    <Property Name="GoDown_Id" Type="bigint" />
+    <Property Name="Sale_Serial_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Customer_Id" Type="bigint" />
+    <Property Name="Sales_Order_VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sales_Person" Type="bigint" Nullable="false" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Posting_Date" Type="datetime" Nullable="false" />
+    <Property Name="Order_Date" Type="datetime" Nullable="false" />
+    <Property Name="Request_Delivery_Date" Type="datetime" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Is_Refered" Type="bit" Nullable="false" />
+    <Property Name="Refered_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Refered_Id" Type="bigint" />
+    <Property Name="Is_DeliveryNote" Type="bit" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Order_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sales_Order_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Oreder_Quantity" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Invoice_Quantity" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Amount" Type="money" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Return">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Customer_Id" Type="bigint" Nullable="false" />
+    <Property Name="Sales_Id" Type="bigint" Nullable="false" />
+    <Property Name="DATE" Type="datetime" Nullable="false" />
+    <Property Name="SalesRet_VC_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Fncl_Year_Id" Type="int" Nullable="false" />
+    <Property Name="Total_Amount" Type="money" />
+    <Property Name="Discount_Amount" Type="money" />
+    <Property Name="Return_Type" Type="int" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sales_Return_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalesRet_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Qty" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Tax_Id" Type="bigint" />
+    <Property Name="Sale_Serial_No" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stock_Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Under_Category" Type="bigint" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stock_Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Under_Group" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stock_Item">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Group_Id" Type="bigint" Nullable="false" />
+    <Property Name="Category_Id" Type="bigint" Nullable="false" />
+    <Property Name="Unit_Id" Type="bigint" Nullable="false" />
+    <Property Name="Sufix_SerialNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="Prefix_SerialNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="Starting_SerialNo" Type="int" Nullable="false" />
+    <Property Name="Min_Qty" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Image_Url" Type="nvarchar" MaxLength="200" />
+    <Property Name="Is_Auto" Type="bit" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stock_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Fncl_Year_Id" Type="bigint" />
+    <Property Name="GoDown_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Qty" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="Rate" Type="money" />
+    <Property Name="Purchasing_Rate" Type="money" />
+    <Property Name="Max_Pur_Rate" Type="money" />
+    <Property Name="Selling_Rate" Type="money" />
+    <Property Name="Min_Sale_Rate" Type="money" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email_Id" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Contact_No" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Contact_Person" Type="nvarchar" MaxLength="150" />
+    <Property Name="Contact_Person_Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Contact_Person_Contact" Type="nvarchar" MaxLength="15" />
+    <Property Name="Pan_No" Type="nvarchar" MaxLength="30" />
+    <Property Name="Pin_Code" Type="char" MaxLength="6" />
+    <Property Name="Address" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="City_Id" Type="bigint" />
+    <Property Name="Country_Id" Type="bigint" />
+    <Property Name="State_Id" Type="bigint" />
+    <Property Name="Group_Id" Type="bigint" Nullable="false" />
+    <Property Name="Opeaning_Bal" Type="money" />
+    <Property Name="Mnt_Bill_By_Bill" Type="bit" Nullable="false" />
+    <Property Name="Credit_Period_Time" Type="bigint" />
+    <Property Name="Image_Url" Type="nvarchar" MaxLength="200" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tagging_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="int" Nullable="false" />
+    <Property Name="Serial_No" Type="nvarchar" MaxLength="50" />
+    <Property Name="Card_No" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tagging_Master_Assign">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Tag_Id" Type="bigint" Nullable="false" />
+    <Property Name="Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tagging_Master_Assign_Tra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tag_Tra_Id" Type="bigint" Nullable="false" />
+    <Property Name="Pre_Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="New_Item_Id" Type="bigint" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tax_Deduction_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Rate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Rate_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tax_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Rate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Nature" Type="nvarchar" MaxLength="10" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UnitMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Company_Id" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Alias_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Unit_Volume" Type="nvarchar" MaxLength="50" />
+    <Property Name="Group_Id" Type="bigint" Nullable="false" />
+    <Property Name="No_of_Decimal" Type="int" />
+    <Property Name="Ratio1" Type="decimal" Precision="20" Scale="5" />
+    <Property Name="Ratio2" Type="decimal" Precision="20" Scale="5" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created_By" Type="bigint" Nullable="false" />
+    <Property Name="Modified_By" Type="bigint" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+    <Property Name="Modified_Date" Type="datetime" Nullable="false" />
+    <Property Name="Is_Active" Type="bit" Nullable="false" />
+    <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_company_bill">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Billing_Info" Type="Self.Billing_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Billing_Info">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_branch">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Branch_Master" Type="Self.Branch_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Branch_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_citymaster">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="City_Master" Type="Self.City_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_contactinfo">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Contact_Info" Type="Self.Contact_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contact_Info">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_customer">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_empcommon">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Emp_Common_Master" Type="Self.Emp_Common_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Emp_Common_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_financialyear">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FinancialYear">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_godown">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GoDown_Master" Type="Self.GoDown_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoDown_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_godownregion">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GoDown_Region" Type="Self.GoDown_Region" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GoDown_Region">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_ledger">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Ledger_Master" Type="Self.Ledger_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ledger_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_ledgergroup">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Ledger_Group" Type="Self.Ledger_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ledger_Group">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_login">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Login_Master" Type="Self.Login_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Login_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_Payment">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Payment_Info" Type="Self.Payment_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment_Info">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_purchasemaster">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Purchase_Master" Type="Self.Purchase_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Purchase_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_quation">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Quation_Master" Type="Self.Quation_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quation_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_receipt">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Receipt_Info" Type="Self.Receipt_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Receipt_Info">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_role">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Role_Master" Type="Self.Role_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Role_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_salesmaster">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sales_Master" Type="Self.Sales_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sales_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_stockgrp">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Stock_Group" Type="Self.Stock_Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stock_Group">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_stockitem">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Stock_Item" Type="Self.Stock_Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stock_Item">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_stockmaster">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Stock_Master" Type="Self.Stock_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stock_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_subcategory">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Stock_Category" Type="Self.Stock_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stock_Category">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_supplier">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Supplier">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_taxdeduction">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Tax_Deduction_Master" Type="Self.Tax_Deduction_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tax_Deduction_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_taxmaster">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Tax_Master" Type="Self.Tax_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tax_Master">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_company_unit">
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UnitMaster" Type="Self.UnitMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UnitMaster">
+        <PropertyRef Name="Company_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_country_branch">
+    <End Role="Country_State" Type="Self.Country_State" Multiplicity="1" />
+    <End Role="Branch_Master" Type="Self.Branch_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Branch_Master">
+        <PropertyRef Name="Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_country_citymaster">
+    <End Role="Country_State" Type="Self.Country_State" Multiplicity="1" />
+    <End Role="City_Master" Type="Self.City_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City_Master">
+        <PropertyRef Name="Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_country_company">
+    <End Role="Country_State" Type="Self.Country_State" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company_Master">
+        <PropertyRef Name="Country_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_coustomer_adv">
+    <End Role="Ledger_Master" Type="Self.Ledger_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Advance_Info" Type="Self.Advance_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ledger_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Advance_Info">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Paymenttra">
+    <End Role="Payment_Info" Type="Self.Payment_Info" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Payment_Info_Tra" Type="Self.Payment_Info_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment_Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment_Info_Tra">
+        <PropertyRef Name="Payment_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pur_purtra">
+    <End Role="Purchase_Master" Type="Self.Purchase_Master" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Purchase_Master_Tra" Type="Self.Purchase_Master_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purchase_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Purchase_Master_Tra">
+        <PropertyRef Name="Pur_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_purchasret_purchasemastertra">
+    <End Role="Purchase_Return" Type="Self.Purchase_Return" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Purchase_Return_Tra" Type="Self.Purchase_Return_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purchase_Return">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Purchase_Return_Tra">
+        <PropertyRef Name="PurRet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_quation_tra">
+    <End Role="Quation_Master" Type="Self.Quation_Master" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Quation_Master_Tra" Type="Self.Quation_Master_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quation_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quation_Master_Tra">
+        <PropertyRef Name="Quation_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_receipttra">
+    <End Role="Receipt_Info" Type="Self.Receipt_Info" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Receipt_Info_Tra" Type="Self.Receipt_Info_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Receipt_Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Receipt_Info_Tra">
+        <PropertyRef Name="Receipt_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_sales_salestra">
+    <End Role="Sales_Master" Type="Self.Sales_Master" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sales_Master_Tra" Type="Self.Sales_Master_Tra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sales_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sales_Master_Tra">
+        <PropertyRef Name="Sales_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_state_branch">
+    <End Role="Country_State" Type="Self.Country_State" Multiplicity="1" />
+    <End Role="Branch_Master" Type="Self.Branch_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Branch_Master">
+        <PropertyRef Name="State_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_state_citymaster">
+    <End Role="Country_State" Type="Self.Country_State" Multiplicity="1" />
+    <End Role="City_Master" Type="Self.City_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City_Master">
+        <PropertyRef Name="State_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_state_company">
+    <End Role="Country_State" Type="Self.Country_State" Multiplicity="1" />
+    <End Role="Company_Master" Type="Self.Company_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country_State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company_Master">
+        <PropertyRef Name="State_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetdatafromPurchaseTra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetIItemlist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetMaxId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="GetPurchaseTra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrdQty" Type="int" Mode="In" />
+    <Parameter Name="ItemId" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Id" Type="int" />
+          <Property Name="Item_Id" Type="int" />
+          <Property Name="Product_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sales_Serial" Type="nvarchar" MaxLength="50" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="GetStock_MaxId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bigint" />
+  <Function Name="GetUnitNameAndAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="itemId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pr_Challan_Details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Pur_Id" Type="bigint" Mode="In" />
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Pr_CommonList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="bigint" Mode="In" />
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Pr_CreateDashBoardData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pr_DashOrderQuats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Company_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_DeleteCommonTblRcrd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Pr_DeleteStock_Item" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Pur_Id" Type="bigint" Mode="In" />
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Pr_Delivery_Note_Tra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+    <Parameter Name="OrderNo" Type="bigint" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pr_DeliveryNoteList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pr_GetPendingBal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="PR_GetPendingBillList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="Ptm_Id" Type="bigint" Mode="In" />
+    <Parameter Name="TagType" Type="nvarchar" Mode="In" />
+    <Parameter Name="ModeType" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Pr_PaymentList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Pr_Purchase_Order_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pr_PurchaseList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_PurchaseReturnTra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PurRet_Id" Type="bigint" Mode="In" />
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Pr_QuationList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="bigint" Mode="In" />
+    <Parameter Name="Tag_Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Pr_Receipt_Note_Tra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+    <Parameter Name="Pur_Id" Type="bigint" Mode="In" />
+    <Parameter Name="CompanyId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_ReceiptNoteList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pr_RegionList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_Sales_Order_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pr_SalesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Pr_SalesReturnTra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalesRet_Id" Type="bigint" Mode="In" />
+    <Parameter Name="Tag" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Pr_StockMasterList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_UpdateDeliveryNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Delivery_Note_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_UpdatePayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Pmt_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_UpdatePurchaseOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Pur_Order_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_UpdateQuationkMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="QuationId" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_UpdateReceipt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Recpt_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_UpdateReceiptNote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Receipt_Note_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="Pr_UpdateSalesOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Sales_Order_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="sp_Customerinfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_DashSalePurc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+    <Parameter Name="StartDt" Type="datetime" Mode="In" />
+    <Parameter Name="EndDt" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="SP_ManageStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Company_Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_OpeningBalData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TagType" Type="nvarchar" Mode="In" />
+    <Parameter Name="Item_Id" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="SP_Purchase_Order_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_PurchaseData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Pur_Id" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_SalesPurYearly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Company_Id" Type="int" Mode="In" />
+    <Parameter Name="FinancialYrfrm" Type="date" Mode="In" />
+    <Parameter Name="FinancialYrTo" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Sp_StockItemInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_Supplierinfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Tagname" Type="nvarchar" Mode="In" />
+    <Parameter Name="CompanyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Update_stock_and_Tra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pur_Id" Type="varchar" Mode="In" />
+    <Parameter Name="Tag" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateQtyAndIsActive_PurchaseTra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="bigint" Mode="In" />
+    <Parameter Name="Qty" Type="decimal" Mode="In" />
+    <Parameter Name="isActive" Type="bit" Mode="In" />
+    <Parameter Name="isDeleted" Type="bit" Mode="In" />
+  </Function>
+  <EntityContainer Name="INVENTORY_DBModelStoreContainer">
+    <EntitySet Name="Advance_Info" EntityType="Self.Advance_Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Billing_Info" EntityType="Self.Billing_Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branch_Master" EntityType="Self.Branch_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City_Master" EntityType="Self.City_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company_Master" EntityType="Self.Company_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contact_Info" EntityType="Self.Contact_Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country_State" EntityType="Self.Country_State" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Delivery_Note" EntityType="Self.Delivery_Note" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Delivery_Note_Tra" EntityType="Self.Delivery_Note_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Emp_Common_Master" EntityType="Self.Emp_Common_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GoDown_Master" EntityType="Self.GoDown_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GoDown_Region" EntityType="Self.GoDown_Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ledger_Group" EntityType="Self.Ledger_Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ledger_Master" EntityType="Self.Ledger_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LedgerGroupTemp1" EntityType="Self.LedgerGroupTemp1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Login_Master" EntityType="Self.Login_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment_Info" EntityType="Self.Payment_Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment_Info_Tra" EntityType="Self.Payment_Info_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase_Master" EntityType="Self.Purchase_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase_Master_TaxDetails" EntityType="Self.Purchase_Master_TaxDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase_Master_Tra" EntityType="Self.Purchase_Master_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase_Order" EntityType="Self.Purchase_Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase_Order_Tra" EntityType="Self.Purchase_Order_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase_Return" EntityType="Self.Purchase_Return" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase_Return_Tra" EntityType="Self.Purchase_Return_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quation_Master" EntityType="Self.Quation_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quation_Master_Tra" EntityType="Self.Quation_Master_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Receipt_Info" EntityType="Self.Receipt_Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Receipt_Info_Tra" EntityType="Self.Receipt_Info_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Receipt_Note" EntityType="Self.Receipt_Note" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Receipt_Note_Tra" EntityType="Self.Receipt_Note_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role_Master" EntityType="Self.Role_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sales_Master" EntityType="Self.Sales_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sales_Master_TaxDetails" EntityType="Self.Sales_Master_TaxDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sales_Master_Tra" EntityType="Self.Sales_Master_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sales_Order" EntityType="Self.Sales_Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sales_Order_Tra" EntityType="Self.Sales_Order_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sales_Return" EntityType="Self.Sales_Return" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sales_Return_Tra" EntityType="Self.Sales_Return_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stock_Category" EntityType="Self.Stock_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stock_Group" EntityType="Self.Stock_Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stock_Item" EntityType="Self.Stock_Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stock_Master" EntityType="Self.Stock_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tagging_Master" EntityType="Self.Tagging_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tagging_Master_Assign" EntityType="Self.Tagging_Master_Assign" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tagging_Master_Assign_Tra" EntityType="Self.Tagging_Master_Assign_Tra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tax_Deduction_Master" EntityType="Self.Tax_Deduction_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tax_Master" EntityType="Self.Tax_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UnitMaster" EntityType="Self.UnitMaster" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_company_bill" Association="Self.fk_company_bill">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Billing_Info" EntitySet="Billing_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_branch" Association="Self.fk_company_branch">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Branch_Master" EntitySet="Branch_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_citymaster" Association="Self.fk_company_citymaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="City_Master" EntitySet="City_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_contactinfo" Association="Self.fk_company_contactinfo">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Contact_Info" EntitySet="Contact_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_customer" Association="Self.fk_company_customer">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_empcommon" Association="Self.fk_company_empcommon">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Emp_Common_Master" EntitySet="Emp_Common_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_financialyear" Association="Self.fk_company_financialyear">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="FinancialYear" EntitySet="FinancialYear" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_godown" Association="Self.fk_company_godown">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="GoDown_Master" EntitySet="GoDown_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_godownregion" Association="Self.fk_company_godownregion">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="GoDown_Region" EntitySet="GoDown_Region" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_ledger" Association="Self.fk_company_ledger">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Ledger_Master" EntitySet="Ledger_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_ledgergroup" Association="Self.fk_company_ledgergroup">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Ledger_Group" EntitySet="Ledger_Group" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_login" Association="Self.fk_company_login">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Login_Master" EntitySet="Login_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_Payment" Association="Self.fk_company_Payment">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Payment_Info" EntitySet="Payment_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_purchasemaster" Association="Self.fk_company_purchasemaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Purchase_Master" EntitySet="Purchase_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_quation" Association="Self.fk_company_quation">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Quation_Master" EntitySet="Quation_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_receipt" Association="Self.fk_company_receipt">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Receipt_Info" EntitySet="Receipt_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_role" Association="Self.fk_company_role">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Role_Master" EntitySet="Role_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_salesmaster" Association="Self.fk_company_salesmaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Sales_Master" EntitySet="Sales_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_stockgrp" Association="Self.fk_company_stockgrp">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Stock_Group" EntitySet="Stock_Group" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_stockitem" Association="Self.fk_company_stockitem">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Stock_Item" EntitySet="Stock_Item" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_stockmaster" Association="Self.fk_company_stockmaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Stock_Master" EntitySet="Stock_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_subcategory" Association="Self.fk_company_subcategory">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Stock_Category" EntitySet="Stock_Category" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_supplier" Association="Self.fk_company_supplier">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Supplier" EntitySet="Supplier" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_taxdeduction" Association="Self.fk_company_taxdeduction">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Tax_Deduction_Master" EntitySet="Tax_Deduction_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_taxmaster" Association="Self.fk_company_taxmaster">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="Tax_Master" EntitySet="Tax_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_company_unit" Association="Self.fk_company_unit">
+      <End Role="Company_Master" EntitySet="Company_Master" />
+      <End Role="UnitMaster" EntitySet="UnitMaster" />
+    </AssociationSet>
+    <AssociationSet Name="fk_country_branch" Association="Self.fk_country_branch">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="Branch_Master" EntitySet="Branch_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_country_citymaster" Association="Self.fk_country_citymaster">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="City_Master" EntitySet="City_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_country_company" Association="Self.fk_country_company">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="Company_Master" EntitySet="Company_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_coustomer_adv" Association="Self.fk_coustomer_adv">
+      <End Role="Ledger_Master" EntitySet="Ledger_Master" />
+      <End Role="Advance_Info" EntitySet="Advance_Info" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Paymenttra" Association="Self.fk_Paymenttra">
+      <End Role="Payment_Info" EntitySet="Payment_Info" />
+      <End Role="Payment_Info_Tra" EntitySet="Payment_Info_Tra" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pur_purtra" Association="Self.fk_pur_purtra">
+      <End Role="Purchase_Master" EntitySet="Purchase_Master" />
+      <End Role="Purchase_Master_Tra" EntitySet="Purchase_Master_Tra" />
+    </AssociationSet>
+    <AssociationSet Name="fk_purchasret_purchasemastertra" Association="Self.fk_purchasret_purchasemastertra">
+      <End Role="Purchase_Return" EntitySet="Purchase_Return" />
+      <End Role="Purchase_Return_Tra" EntitySet="Purchase_Return_Tra" />
+    </AssociationSet>
+    <AssociationSet Name="fk_quation_tra" Association="Self.fk_quation_tra">
+      <End Role="Quation_Master" EntitySet="Quation_Master" />
+      <End Role="Quation_Master_Tra" EntitySet="Quation_Master_Tra" />
+    </AssociationSet>
+    <AssociationSet Name="fk_receipttra" Association="Self.fk_receipttra">
+      <End Role="Receipt_Info" EntitySet="Receipt_Info" />
+      <End Role="Receipt_Info_Tra" EntitySet="Receipt_Info_Tra" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sales_salestra" Association="Self.fk_sales_salestra">
+      <End Role="Sales_Master" EntitySet="Sales_Master" />
+      <End Role="Sales_Master_Tra" EntitySet="Sales_Master_Tra" />
+    </AssociationSet>
+    <AssociationSet Name="fk_state_branch" Association="Self.fk_state_branch">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="Branch_Master" EntitySet="Branch_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_state_citymaster" Association="Self.fk_state_citymaster">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="City_Master" EntitySet="City_Master" />
+    </AssociationSet>
+    <AssociationSet Name="fk_state_company" Association="Self.fk_state_company">
+      <End Role="Country_State" EntitySet="Country_State" />
+      <End Role="Company_Master" EntitySet="Company_Master" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "LedgerGroup";
+    Layout = ViewBag.layout;
+}
+
+<script>
+    function LedgerGroupReport() {
+
+        var Path = "@Url.Action("LedgerGroupReport", "Report", new { area = "CommonReport" })?ReportType=" + $('#ddlLedgerGroupinfo').val()
+        window.open(Path);
+    }
+</script>
+<div align="right">
+    <br />
+    @Html.DropDownList("ddlLedgerGroupinfo", new SelectList(
+        new List<object> {
+            new {test="PDF",value="PDF"},
+            new {test="Excel",value="Excel"},
+            new {test="Word",value="Word"}
+        },
+   "test",
+   "value"
+   ), new { style = "width:100px;" })
+
+
+    <input type="button" onclick="LedgerGroupReport();" class="btn btn-xs btn-flat btn-primary " id="butDailySaleReport" value="Generate Reports" />
+</div>
+<div>
+    @Html.Action("LedgerGroupList")
+</div>
+
+

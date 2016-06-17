@@ -1,0 +1,72 @@
+﻿@model List<ViewModel.Transactions.ReceiptDetails>
+@*@Html.ActionLink("Back", "Index", "Payment", new { Tag = ViewBag.Tag }, new { @class = "fa fa-arrow-circle-left btn btn-danger" })*@
+
+<table class="table table-striped table-bordered table-hover table-responsive topmrgn5px" id="example">
+    <tr>
+        <td>
+            Date
+        </td>
+        <td>
+            Mode
+        </td>
+
+        <td>Amount</td>
+        @*<td>Tax Amt.</td>
+        <td>Bal. Amt</td>*@
+        @*<td>
+                Action
+            </td>*@
+
+    </tr>
+    @if (Model.Count != 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => item.Receipt_Date)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Receipt_Type)
+                </td>
+
+
+                <td align="right">
+                    @Html.DisplayFor(x => item.Amount)
+                </td>
+
+                @*<td align="right">
+                    @Html.DisplayFor(x => item.Tax_Amount)
+                </td>
+
+                <td align="right">
+                    @Html.DisplayFor(x => item.Balance_Amount)
+                </td>*@
+
+                @*<td>
+                        @Ajax.ActionLink("Edit", "Create", "Payment", new { area = "Transactions", Tag = item.Tag_Type, Id = item.Id }, new AjaxOptions
+                                {
+                                    LoadingElementId = "Loader",
+                                    UpdateTargetId = "content",
+                                    HttpMethod = "GET",
+                                    InsertionMode = InsertionMode.Replace,
+                                }, new { @Class = "btn btn-xs  btn-default pull-left btn-flat", })
+
+
+                    </td>*@
+            </tr>
+        }
+
+    }
+    else
+    {
+        <tr>
+            <td colspan="5">
+                No Records found..
+            </td>
+        </tr>
+    }
+
+
+</table>

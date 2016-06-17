@@ -1,0 +1,43 @@
+﻿@model ViewModel.Transactions.DeliveryNoteMasterInfo
+<div class="panel">
+
+    <div class="panel-heading bg-aqua">
+        <span>View Details</span>
+    </div>
+
+    <div class="panel-body" style="border:silver 1px;">
+
+        <table class="table table-bordered table-striped">
+            <tr><td colspan="2"><label>Customer Details</label></td></tr>
+            <tr><td>Code</td><td><span id="Customer_Code">@Html.DisplayFor(x => x.Customer_Code)</span></td></tr>
+            <tr><td>Name</td><td><span id="Name"> @Html.DisplayFor(x => x.Name)</span></td></tr>
+            <tr><td>Contact No</td><td><span id="Contact_No"> @Html.DisplayFor(x => x.Contact_No)</span></td></tr>
+            <tr><td>Email</td><td><span id="Email"> @Html.DisplayFor(x => x.Email)</span></td></tr>
+            <tr><td>Address</td><td><span id="Address"> @Html.DisplayFor(x => x.Address)</span></td></tr>
+            <tr><td>Order Date</td><td><span id="Order_Date"> @Html.DisplayFor(x => x.Order_Date)</span></td></tr>
+
+
+        </table>
+
+        @*<table class="table table-bordered table-striped">
+
+            <tr><td colspan="2"><label>Availablity</label></td></tr>
+            <tr>  <td><span>Item Code</span></td><td><span id="StockDetails_Item_Code"> @Html.DisplayFor(x => x.StockDetails.Item_Code)</span></td> </tr>
+            <tr>  <td><span>Shipment  Date</span></td><td><span id="StockDetails_Item_Date"> 11/04/2016</span></td> </tr>
+            <tr>  <td><span>Item Availablity</span></td><td><span id="StockDetails_Available_Qty"> @Html.DisplayFor(x => x.StockDetails.Available_Qty)</span></td> </tr>
+            <tr>  <td><span>Min Qty Alert</span></td><td><span id="StockDetails_Min_Qty"> @Html.DisplayFor(x => x.StockDetails.Min_Qty)</span></td> </tr>
+            <tr>  <td><span>Purchasing Rate</span></td><td><span id="StockDetails_Purchase_Rate"> @Html.DisplayFor(x => x.StockDetails.Purchase_Rate)</span></td> </tr>
+            <tr>  <td><span>Selling Rate</span></td><td><span id="StockDetails_Selling_Rate"> @Html.DisplayFor(x => x.StockDetails.Selling_Rate)</span></td> </tr>
+        </table>*@
+        @if (Model.Image_Url != null)
+        {
+            <img src="@Model.Image_Url" class="img-responsive" style="max-height:120px;min-height:120px;" />
+        }
+        else
+        {
+            <img src="~/Themes/img/avatar5.png" class="img-responsive" style="max-height:120px;min-height:120px;" />
+        }
+
+    </div>
+
+</div>

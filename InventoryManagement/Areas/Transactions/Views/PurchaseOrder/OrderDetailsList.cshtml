@@ -1,0 +1,113 @@
+﻿@model ViewModel.Transactions.PurchaseOrderInfo
+
+
+<table id="tblItem" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                <label> Item Name</label>
+            </th>
+
+
+            <th>
+                <label>Quantity</label>
+            </th>
+
+            <th>
+                <label>Rate</label>
+            </th>
+            <th>
+                <label>Per</label>
+            </th>
+            <th>
+                <label>Amount</label>
+            </th>
+            @*<th>
+                    <label>Ship Quantity</label>
+                </th>
+                <th>
+                    <label>Invioce Quantity</label>
+                </th>
+                <th>
+                    <label>Remarks</label>
+                </th>*@
+            <th>
+                <label>Action</label>
+            </th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+
+
+        @{
+
+            //if (Model.ItemDetails.Count >= 0)
+            //{
+            int i = 0;
+            foreach (var m in Model.OrderDetails)
+            {
+
+                <tr>
+
+
+
+                    <td>
+                        @Html.DropDownListFor(x => x.OrderDetails[i].Item_Id, new SelectList(Model.ItemList, "Id", "Name", Model.OrderDetails[i].Item_Id), "Select Item", new { @class = "form-control", required = true, @onchange = "GetUnitName(this);" })
+
+                    </td>
+
+                    <td>
+                        @Html.TextBoxFor(x => x.OrderDetails[i].Oreder_Quantity, null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @onkeyup = "myFunction(this);", @onchange = "fn_GetTotalAmount(this);" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.OrderDetails[i].Rate, null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @onkeyup = "myFunction(this);", @onfocusout = "fn_GetTotalAmount(this);" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.OrderDetails[i].Unit_Name, null, new { @readonly = "readonly", @class = "form-control", minlength = "2", maxlength = "100" })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(x => x.OrderDetails[i].Amount, null, new { @class = "form-control", minlength = "1", maxlength = "15", @readonly = "readonly" })
+
+                    </td>
+                    @*<td>
+                            @Html.TextBoxFor(x => x.OrderDetails[i].Ship_Quantity, null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @onkeyup = "myFunction(this);", @onchange = "fn_GetTotalAmount(this);" })
+
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(x => x.OrderDetails[i].Invoice_Quantity, null, new { @class = "form-control decimal", minlength = "1", maxlength = "10", digits = true, @onkeyup = "myFunction(this);", @onchange = "fn_GetTotalAmount(this);" })
+
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(x => x.OrderDetails[i].Remarks, null, new { @class = "form-control", minlength = "1", maxlength = "150" })
+
+                        </td>*@
+                    <td>
+                        @Html.HiddenFor(x => x.OrderDetails[i].Id)
+                        @Html.HiddenFor(x => x.OrderDetails[i].Status)
+                        @*<a href="#" id="btnItem" name="btnItem" onclick="fn_Addrow(this);">Add</a>*@
+                        <a href="#" id="btnItem" name="btnItem" class="add" title="Add" onclick="fn_Addrow(this);">Add</a>
+                        <a href="#" id="d" name="Delete" onclick="fn_Addrow(this);" title="Remove" class="delete">Delete</a>
+                    </td>
+                </tr>
+                i++;
+            }
+
+
+
+        }
+
+
+
+
+
+    </tbody>
+</table>
+
+
+
+
