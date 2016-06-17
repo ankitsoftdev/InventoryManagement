@@ -41,10 +41,10 @@ namespace DataLayer.Dashboard
 
         public List<DashboardInfo> SelesPurchaseGraph()
         {
-            string end = "2015-04-01";
+       
 
-          
-            return _db.SP_DashSalePurc(1, DateTime.Today, Convert.ToDateTime(end)).Select(_data => new DashboardInfo { Months = _data.Months, TotalPurchase = _data.TotalPurchase, TotalSale = _data.TotalSale }).ToList();
+
+            return _db.SP_DashSalePurc(1, DateTime.Today, DateTime.Today).Select(_data => new DashboardInfo { Months = _data.Months, TotalPurchase = _data.TotalPurchase, TotalSale = _data.TotalSale }).ToList();
         }
 
 
